@@ -13,10 +13,10 @@
 
   <div class="row mb-5">
     <div class="col text-center">
-      <button class="btn text-white px-4 py-2 add-job-btn">+ Add Your New Job</button>
+      <button class="btn text-white px-4 py-2 add-job-btn" (click)="openJobModal()">+ Add Your New Job</button>
     </div>
   </div>
-
+  <app-create-job></app-create-job>
   <div class="row align-items-center">
     <div class="col">
       <h5 class="fw-bold">Open Positions</h5>

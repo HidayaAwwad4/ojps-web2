@@ -1,0 +1,76 @@
+<div class="modal fade show d-block" tabindex="-1" *ngIf="showModal" style="background: rgba(0,0,0,0.5);">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Job</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label>Job Title</label>
+            <input type="text" class="form-control custom-border">
+          </div>
+
+          <div class="mb-3">
+            <label>Description</label>
+            <textarea rows="4" class="form-control custom-border"></textarea>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Location</label>
+              <input type="text" class="form-control custom-border" placeholder="e.g. Nablus, Palestine">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Languages</label>
+              <input type="text" class="form-control custom-border" placeholder="e.g. English - Advanced">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Schedule</label>
+              <input type="text" class="form-control custom-border" placeholder="e.g. Sunday to Thursday">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Salary</label>
+              <input type="text" class="form-control custom-border" placeholder="Hourly/ daily/ monthly">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label>Experience</label>
+              <select class="form-select custom-border">
+                <option selected disabled> - - - - - - - - </option>
+                <option>0-1 years</option>
+                <option>1-3 years</option>
+                <option>3+ years</option>
+              </select>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>Employment</label>
+              <select class="form-select custom-border">
+                <option selected disabled> - - - - - - - - </option>
+                <option>Full-Time</option>
+                <option>Part-Time</option>
+                <option>Contract</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Documents</label>
+            <input type="file" class="form-control custom-border">
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn w-100 text-white" style="background-color: #631B1B;" (click)="closeModal()">Post</button>
+      </div>
+    </div>
+  </div>
+</div>
