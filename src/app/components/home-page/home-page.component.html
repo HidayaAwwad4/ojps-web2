@@ -1,0 +1,22 @@
+<div class="container text-center mt-5">
+  <div class="text-center mt-5">
+    <input
+      type="text"
+      class="form-control rounded-pill text-center custom-search-input mx-auto"
+      placeholder="Search by job title, or keywords to explore the best career opportunities for you."
+      [(ngModel)]="searchText"
+      (input)="onSearchChange()"
+    />
+  </div>
+
+  <p class="mt-4 fs-5">
+    Explore a world of career opportunities and find the perfect job for every stage of your journey.
+  </p>
+</div>
+
+<app-job-category></app-job-category>
+<app-recommended-jobs
+  [jobs]="recommendedJobs"
+  (jobClicked)="handleJobClick($event)"
+></app-recommended-jobs>
+
