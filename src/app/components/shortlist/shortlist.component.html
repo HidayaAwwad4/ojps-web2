@@ -1,0 +1,32 @@
+<div class="container shortlist-container">
+  <div class="d-flex align-items-center mb-5">
+    <i class="bi bi-chevron-left me-3" style="font-size: 1.5rem; cursor: pointer;"></i>
+    <h2 class="text-center flex-grow-1">Shortlist</h2>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table" style="border: 3px solid #631B1B; box-shadow: 2px 2px 4px #631B1B;">
+      <thead class="custom-header">
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Details</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of shortlist; let i = index" style="border: none;">
+        <td style="border: none;">{{ i + 1 }}</td>
+        <td style="border: none;">{{ user.name }}</td>
+        <td style="border: none;">{{ user.email }}</td>
+        <td style="border: none;"><a href="#" style="color: brown;">View</a></td>
+        <td style="border: none;">
+          <i class="bi bi-check2" style="color: limegreen; font-size: 1.2rem;"></i>
+          <i class="bi bi-trash ms-3" style="color: red; font-size: 1.2rem; cursor: pointer;"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
