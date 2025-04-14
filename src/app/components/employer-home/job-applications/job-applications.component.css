@@ -1,0 +1,35 @@
+.job-applications-container{
+  padding: 60px;
+}
+.search-input{
+  border: 3px solid #631B1B;
+  border-radius: 50px;
+  box-shadow: 0 4px 6px rgba(99, 27, 27, 0.4);
+  transition: transform 0.2s ease;
+  height: 50px;
+}
+
+.bg-maroon {
+  background-color: #631B1B;
+}
+
+.profile-card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: 2px solid #631B1B;
+  border-radius: 10px;
+}
+
+.profile-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 3px solid white;
+}
+
+.view-shortlist-btn {
+  background-color: #631B1B;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 30px;
+  font-weight: bold;
+}

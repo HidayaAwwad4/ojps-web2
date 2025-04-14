@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-shortlist',
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   templateUrl: './shortlist.component.html',
   standalone: true,

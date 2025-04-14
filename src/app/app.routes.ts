@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { JobPostingsComponent } from './components/job-postings/job-postings.component';
+import { JobPostingsComponent } from './components/employer-home/job-postings/job-postings.component';
 import {EmployerHomeComponent} from './components/employer-home/employer-home.component';
 import {DashboardAdminComponent} from './components/dashboard-admin/dashboard-admin.component';
 import {ManageEmployersComponent} from './components/dashboard-admin/manage-employers/manage-employers.component';
@@ -13,6 +13,9 @@ import {ForgotPasswordComponent} from './components/forgot-password/forgot-passw
 import {VerifyCodeComponent} from './components/verify-code/verify-code.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import {ChoseUserTypeComponent} from './components/chose-user-type/chose-user-type.component';
+import {ShortlistComponent} from './components/employer-home/shortlist/shortlist.component';
+import {JobApplicationsComponent} from './components/employer-home/job-applications/job-applications.component'
+
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,4 +33,5 @@ export const routes: Routes = [
   { path: 'admin/all-users', component: AllUsersComponent },
   { path: 'admin/job-listings', component: JobListingsComponent },
   {path: 'employer/shortlist', component: ShortlistComponent},
+  {path: 'employer/job-applications', component: JobApplicationsComponent},
 ];
