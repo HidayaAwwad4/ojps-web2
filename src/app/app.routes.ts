@@ -1,21 +1,20 @@
 import { Routes } from '@angular/router';
-import { JobPostingsComponent } from './components/employer-home/job-postings/job-postings.component';
-import {EmployerHomeComponent} from './components/employer-home/employer-home.component';
-import {DashboardAdminComponent} from './components/dashboard-admin/dashboard-admin.component';
-import {ManageEmployersComponent} from './components/dashboard-admin/manage-employers/manage-employers.component';
-import {AllUsersComponent} from './components/dashboard-admin/all-users/all-users.component';
-import {JobListingsComponent} from './components/dashboard-admin/job-listings/job-listings.component';
-import {HomepageComponent} from './components/home-page/home-page.component';
-import {ShortlistComponent} from './components/shortlist/shortlist.component';
-import {SignUpComponent} from './components/sign-up/sign-up.component';
-import {LoginComponent}from './components/login/login.component';
-import {ForgotPasswordComponent} from './components/forgot-password/forgot-password.component';
-import {VerifyCodeComponent} from './components/verify-code/verify-code.component';
-import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import {ChoseUserTypeComponent} from './components/chose-user-type/chose-user-type.component';
-import {ShortlistComponent} from './components/employer-home/shortlist/shortlist.component';
-import {JobApplicationsComponent} from './components/employer-home/job-applications/job-applications.component'
-import {JobDetailsComponent} from './components/job-details/job-details.component';
+import { JobPostingsComponent } from './components/employer/job-postings/job-postings.component';
+import {EmployerHomeComponent} from './components/employer/employer-home/employer-home.component';
+import {DashboardAdminComponent} from './components/admin/dashboard-admin/dashboard-admin.component';
+import {ManageEmployersComponent} from './components/admin/manage-employers/manage-employers.component';
+import {AllUsersComponent} from './components/admin/all-users/all-users.component';
+import {JobListingsComponent} from './components/admin/job-listings/job-listings.component';
+import {HomepageComponent} from './components/job-seeker/home-page/home-page.component';
+import {SignUpComponent} from './components/auth/sign-up/sign-up.component';
+import {LoginComponent}from './components/auth/login/login.component';
+import {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component';
+import {VerifyCodeComponent} from './components/auth/verify-code/verify-code.component';
+import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
+import {ChoseUserTypeComponent} from './components/auth/chose-user-type/chose-user-type.component';
+import {ShortlistComponent} from './components/employer/shortlist/shortlist.component';
+import {JobApplicationsComponent} from './components/employer/job-applications/job-applications.component'
+import {JobDetailsComponent} from './components/employer/job-details/job-details.component';
 
 
 export const routes: Routes = [
