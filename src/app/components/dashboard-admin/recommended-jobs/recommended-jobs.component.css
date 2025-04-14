@@ -1,0 +1,33 @@
+.recommended-jobs {
+  margin-top: 118px;
+  width: 255px;
+  min-width: 250px;
+  background: #631B1B;
+  padding: 15px;
+  border-radius: 8px;
+  height: fit-content;
+}
+
+.job-box {
+  background: #631B1B;
+  border-left: 5px solid #B51D1E;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 14px;
+  line-height: 1.6;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .recommended-jobs {
+    width: 100%;
+    min-width: unset;
+    margin-top: 20px;
+  }
+}
