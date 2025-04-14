@@ -8,11 +8,11 @@
     <table class="table" style="border: 3px solid #631B1B; box-shadow: 2px 2px 4px #631B1B;">
       <thead class="custom-header">
       <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Details</th>
-        <th>Action</th>
+        <th class="table-th">#</th>
+        <th class="table-th">Name</th>
+        <th class="table-th">Email</th>
+        <th class="table-th">Details</th>
+        <th class="table-th">Action</th>
       </tr>
       </thead>
       <tbody>
@@ -20,7 +20,7 @@
         <td style="border: none;">{{ i + 1 }}</td>
         <td style="border: none;">{{ user.name }}</td>
         <td style="border: none;">{{ user.email }}</td>
-        <td style="border: none;"><a href="#" style="color: brown;">View</a></td>
+        <td style="border: none;"><a href="#" style="color: brown; text-decoration: none;">View</a></td>
         <td style="border: none;">
           <i class="bi bi-check2" style="color: limegreen; font-size: 1.2rem;"></i>
           <i class="bi bi-trash ms-3" style="color: red; font-size: 1.2rem; cursor: pointer;"></i>

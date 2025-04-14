@@ -4,7 +4,7 @@ import { StatCardsComponent } from "./stat-cards/stat-cards.component";
 import { JobOverviewComponent } from "./job-overview/job-overview.component";
 import { JobTableComponent } from "./job-table/job-table.component";
 import { RecommendedJobsComponent } from "./recommended-jobs/recommended-jobs.component";
-import { FooterComponent } from "./footer/footer.component";
+import { FooterComponent } from "../footer/footer.component";
 import { NgClass, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 

@@ -8,6 +8,7 @@ import {NgClass, NgForOf} from '@angular/common';
     NgClass
   ],
   templateUrl: './footer.component.html',
+  standalone: true,
   styleUrl: './footer.component.css'
 })
 export class FooterComponent {
