@@ -14,8 +14,13 @@ export class JobCardComponent {
   @Input() job: any;
   @Output() closeJob = new EventEmitter<void>();
 
-  onCloseClick() {
+  onCloseClick(event: Event) {
+    event.stopPropagation();
     this.closeJob.emit();
+  }
+
+  onDeleteClick(event: Event) {
+    event.stopPropagation();
   }
 
 }

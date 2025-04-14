@@ -16,7 +16,7 @@ export class EmployerHomeComponent {
   constructor(private jobModalService: JobModalService) {}
 
   openJobModal() {
-    this.jobModalService.openCreateJobModal(); // يتأكد إنه بيبعث الإشارة
+    this.jobModalService.openCreateJobModal();
   }
   jobs = [
     {
