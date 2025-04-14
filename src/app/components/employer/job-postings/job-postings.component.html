@@ -1,0 +1,32 @@
+<div class="job-postings-container">
+  <div>
+    <i class="bi bi-chevron-left me-3" routerLink="/employer-home" style="font-size: 1.5rem; cursor: pointer;"></i>
+    <h1 class="text-center">Job Postings</h1>
+  </div>
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn add-job" (click)="openJobModal()">
+      <i class="bi bi-plus-lg" ></i> Add New Job
+    </button>
+  </div>
+  <app-create-job></app-create-job>
+  <div class="border-bottom border-3 my-5" style="border-color: #631B1B;">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedTab === 'open'" (click)="selectedTab = 'open'">Open Positions</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="selectedTab === 'closed'" (click)="selectedTab = 'closed'">Closed Positions</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="row g-5">
+    <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let job of filteredJobs">
+      <app-job-card
+        [job]="job"
+        (closeJob)="closeJob(job)"
+      ></app-job-card>
+
+    </div>
+  </div>
+</div>
