@@ -1,9 +1,12 @@
-<div class="job-card position-relative p-3 h-100 d-flex flex-column justify-content-between">
-  <button
+<div
+  class="job-card position-relative p-3 h-100 d-flex flex-column justify-content-between"
+  [routerLink]="['/job-details']">
+
+<button
     *ngIf="job.status === 'open'"
     class="btn btn-sm position-absolute top-0 end-0 m-2 px-3 py-1 rounded-pill shadow"
     style="background-color: #631B1B; color: white; font-size: 0.75rem; z-index: 2;"
-    (click)="onCloseClick()">
+    (click)="onCloseClick($event)">
     Close
   </button>
   <img [src]="job.image" alt="Company Logo" class="mb-3 job-img" />
@@ -13,8 +16,11 @@
     <p class="salary">{{ job.salary }}</p>
   </div>
   <div class="d-flex justify-content-between">
-    <button class="btn btn-outline-dark btn-sm w-100 me-2" [routerLink]="['/employer/job-applications']">Applicants</button>
-    <button class="btn btn-outline-danger btn-sm w-100">Delete</button>
+    <button class="btn btn-outline-dark btn-sm w-100 me-2"
+            [routerLink]="['/employer/job-applications']"
+            (click)="$event.stopPropagation()">Applicants</button>
+    <button class="btn btn-outline-danger btn-sm w-100"
+            (click)="onDeleteClick($event)">Delete</button>
   </div>
 
 </div>
