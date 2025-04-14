@@ -1,0 +1,30 @@
+<div class="container mt-4 position-relative">
+  <h5 class="mb-4">Recommended Jobs for You</h5>
+
+  <button class="carousel-arrow left-arrow" (click)="scrollLeft()">
+    ‹
+  </button>
+  <button class="carousel-arrow right-arrow" (click)="scrollRight()">
+    ›
+  </button>
+
+  <div class="row g-3 flex-nowrap overflow-auto jobs-carousel" #carousel>
+    <div class="col-auto job-card-container"
+         *ngFor="let job of jobs"
+         (click)="onJobClick(job)"
+         style="cursor: pointer;">
+
+    <div class="card job-card">
+        <img [src]="job.logo" alt="Company Logo" class="job-image" />
+        <div class="card-body">
+          <h6 class="card-title fw-bold">{{ job.title }}</h6>
+          <p class="card-text small text-muted">{{ job.description }}</p>
+        </div>
+      <div class="card-footer custom-rate-text">
+        ${{ job.rate }} per hour
+      </div>
+
+    </div>
+    </div>
+  </div>
+</div>

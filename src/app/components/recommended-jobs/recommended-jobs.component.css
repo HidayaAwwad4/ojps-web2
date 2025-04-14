@@ -1,0 +1,62 @@
+.jobs-carousel {
+  scroll-behavior: smooth;
+  padding: 10px 30px;
+}
+
+.card.job-card {
+  border: 3px solid #631b1b;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+
+}
+
+.card.job-card:hover {
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+}
+
+.job-image {
+  width: 90%;
+  height: 180px;
+  background-color: #f9f9f9;
+  padding: 3px;
+  border-radius: 12px;
+  margin-left:11px;
+  margin-top: 10px;
+}
+
+.carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+}
+
+.left-arrow {
+  left: -10px;
+}
+.right-arrow {
+  right: -10px;
+}
+.job-card-container {
+  max-width: 250px;
+}
+
+.custom-rate-text {
+  color: #0b0b0b;
+  font-weight: bold;
+}
+.mb-4 {
+  margin-left: 35px;}

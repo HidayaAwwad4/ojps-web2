@@ -1,15 +1,23 @@
 import { Component } from '@angular/core';
-import {JobCardComponent} from "../job-postings/job-card/job-card.component"
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import { JobModalService } from '../../servies/job-modal.service';
+import {JobCardComponent} from "../job-postings/job-card/job-card.component";
+import {CreateJobComponent} from '../create-job/create-job.component';
+import console from 'node:console';
 @Component({
   selector: 'app-employer-home',
   standalone:true,
-  imports: [JobCardComponent, NgForOf, RouterLink],
+  imports: [JobCardComponent, NgForOf, RouterLink, CreateJobComponent],
   templateUrl: './employer-home.component.html',
   styleUrl: './employer-home.component.css'
 })
 export class EmployerHomeComponent {
+  constructor(private jobModalService: JobModalService) {}
+
+  openJobModal() {
+    this.jobModalService.openCreateJobModal(); // يتأكد إنه بيبعث الإشارة
+  }
   jobs = [
     {
       image: 'assets/adham.jpg',
@@ -40,4 +48,5 @@ export class EmployerHomeComponent {
       status: 'open'
     }
   ];
+  protected readonly console = console;
 }
