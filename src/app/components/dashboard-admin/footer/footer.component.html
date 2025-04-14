@@ -1,0 +1,20 @@
+<footer class="footer mt-auto py-4">
+  <div class="container">
+    <div class="row text-center text-md-start">
+      <div *ngFor="let section of footerSections" class="footer-column col-md-3 mb-4">
+        <h5 class="text-white heading-5">{{section.title}}</h5>
+        <ul class="unOrderFooter">
+          <li class="listFooter" *ngFor="let link of section.links">
+            <a href="#" class="text-decoration-none text-white linkFooterSection">{{link}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="social-icons text-center my-4">
+      <a *ngFor="let social of socialMedia" [href]="social.url" class="text-white mx-2 social-media">
+        <i class="bi" [ngClass]="social.icon"></i>
+      </a>
+    </div>
+    <p class="text-center text-white mb-0">&copy; 2025 (Online Job Portal System). All rights reserved</p>
+  </div>
+</footer>

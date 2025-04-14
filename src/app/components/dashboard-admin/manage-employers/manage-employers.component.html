@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-start align-items-center mb-4">
+    <button class="btn btn-outline-back me-3" (click)="goBack()">
+      <i class="bi bi-arrow-left-circle"></i>
+    </button>
+    <h3 class="text-center flex-grow-1 mb-4 manage-title">Manage Employers</h3>
+  </div>
+
+  <div class="mb-3 search-wrapper position-relative">
+    <input type="text" class="form-control ps-5 search-input"
+           placeholder="Search in employer name"
+           [(ngModel)]="searchTerm" />
+    <i class="bi bi-search position-absolute icon-search-inside"></i>
+  </div>
+
+  <div class="table-responsive mb-4">
+    <table class="table tableDashBoard text-center align-middle">
+      <thead>
+      <tr>
+        <th class="table-th">#</th>
+        <th class="table-th">Employer name</th>
+        <th class="table-th">Email</th>
+        <th class="table-th">Status</th>
+        <th class="table-th">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let employer of filteredEmployers(); let i = index">
+        <td class="table-td">{{ i + 1 }}</td>
+        <td class="table-td">{{ employer.name }}</td>
+        <td class="table-td">{{ employer.email }}</td>
+        <td class="table-td"
+            [ngClass]="{
+                'text-danger': employer.status === 'pending',
+                'text-success': employer.status === 'approved'
+              }">
+          {{ employer.status === 'approved' ? 'Approved' : 'Pending' }}
+        </td>
+        <td class="table-td">
+          <div class="action-buttons">
+            <button
+              class="btn btn-sm btn-outline-success"
+              (click)="openConfirmModal(employer, 'approve')"
+              [disabled]="employer.status === 'approved'">
+              <i class="bi bi-check-circle-fill icon-manageEmployers"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="openConfirmModal(employer, 'remove')">
+              <i class="bi bi-x-circle-fill icon-manageEmployers"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content custom-modal text-white">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmModalLabel">Confirm Action</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Are you sure you want to {{ actionType }} <strong>{{ selectedEmployer?.name }}</strong>?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="confirmAction()" data-bs-dismiss="modal">Yes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

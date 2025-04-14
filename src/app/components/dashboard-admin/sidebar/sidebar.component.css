@@ -1,0 +1,14 @@
+.button-aside {
+  color: #ffffff;
+  white-space: normal;
+  text-align: left;
+  font-weight: 500;
+}
+.button-aside:hover {
+  background-color: #B51D1E;
+}
+.btn-close-sidebar {
+  background: transparent;
+  border: none;
+  z-index: 1050;
+}
