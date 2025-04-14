@@ -16,7 +16,6 @@ import {ShortlistComponent} from './components/employer/shortlist/shortlist.comp
 import {JobApplicationsComponent} from './components/employer/job-applications/job-applications.component'
 import {JobDetailsComponent} from './components/employer/job-details/job-details.component';
 
-
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -26,6 +25,7 @@ export const routes: Routes = [
   { path: 'verify-code', component: VerifyCodeComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'home-page', component: HomepageComponent },
+  { path: 'job-applications', component: JobApplicationsComponent},
   { path: 'employer-home', component: EmployerHomeComponent },
   { path: 'employer/job-postings', component: JobPostingsComponent },
   { path: 'dashboard-admin', component: DashboardAdminComponent },

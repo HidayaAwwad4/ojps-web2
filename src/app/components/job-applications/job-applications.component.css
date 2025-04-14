@@ -1,0 +1,99 @@
+.container1 {
+  padding: 60px;
+  border-radius: 10px;
+}
+
+.nav-tabs {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.nav-tabs .nav-item {
+  flex: 1;
+}
+
+.nav-tabs .nav-link {
+  color: #631B1B;
+  background: #ffffff;
+  text-align: center;
+  display: block;
+  padding: 10px 0;
+}
+
+.nav-tabs .nav-link.active {
+  background: #631B1B;
+  color: #ffffff;
+}
+
+.job-img,
+.job-image {
+  width: 90%;
+  height: 180px;
+  object-fit: cover;
+  background-color: #f9f9f9;
+  padding: 3px;
+  border-radius: 12px;
+  margin-left: 11px;
+  margin-top: 10px;
+}
+
+.salary,
+.custom-rate-text {
+  font-weight: bold;
+  color: #631B1B;
+}
+
+.jobs-carousel {
+  scroll-behavior: smooth;
+  padding: 10px 30px;
+}
+
+.card.job-card {
+  border: 3px solid #631b1b;
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  transition: 0.3s ease;
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+}
+
+.card.job-card:hover {
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+}
+
+.job-card-container {
+  max-width: 250px;
+}
+
+.mb-4 {
+  margin-left: 35px;
+}
+
+.status-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  z-index: 5;
+  color: white;
+}
+
+.badge-applied {
+  background-color:white;
+  border: 2px solid #631b1b;
+  color:#631b1b;
+}
+
+.badge-interviewing {
+  background-color: #28502b;
+
+}
+
+.badge-rejected {
+  background-color: #631B1B;
+}
+
