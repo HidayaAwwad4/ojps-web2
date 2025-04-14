@@ -1,13 +1,14 @@
 import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-recommended-jobs',
   templateUrl: './recommended-jobs.component.html',
   styleUrls: ['./recommended-jobs.component.css'],
   imports: [
-    NgForOf
-  ],
+    NgForOf,
+    RouterLink],
   standalone: true
 })
 export class RecommendedJobsComponent {

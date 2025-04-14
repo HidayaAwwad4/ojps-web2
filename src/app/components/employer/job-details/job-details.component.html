@@ -33,14 +33,15 @@
       </div>
     </div>
 
-    <div class="mb-4">
+
+    <div class="mb-5">
       <h6>Description</h6>
       <textarea *ngIf="isEditMode" [(ngModel)]="jobDetails.description" class="form-control" rows="5"></textarea>
       <p *ngIf="!isEditMode">{{ jobDetails.description }}</p>
     </div>
 
-    <div class="custom-box p-3 mb-3">
-      <div class="info-row">
+    <div class="custom-box p-4">
+      <div class="info-row my-3">
         <span>Experience</span>
         <span class="fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.experienceRequired" class="form-control" />
@@ -48,7 +49,7 @@
         </span>
       </div>
       <hr>
-      <div class="info-row">
+      <div class="info-row my-3">
         <span>Languages</span>
         <span class="fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.languages" class="form-control" />
@@ -56,7 +57,7 @@
         </span>
       </div>
       <hr>
-      <div class="info-row">
+      <div class="info-row my-3">
         <span>Employment</span>
         <span class="fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employmentType" class="form-control" />
@@ -64,7 +65,7 @@
         </span>
       </div>
       <hr>
-      <div class="info-row">
+      <div class="info-row my-3">
         <span>Schedule</span>
         <span class="fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.schedule" class="form-control" />
@@ -72,28 +73,29 @@
         </span>
       </div>
       <hr>
-      <div class="info-row">
+      <div class="info-row my-3">
         <span>Salary</span>
         <span class="text-danger fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.salary" class="form-control" />
           <span *ngIf="!isEditMode">{{ jobDetails.salary }}</span>
         </span>
       </div>
-    </div>
+      <hr>
 
-
-    <div *ngIf="isEditMode">
-      <div class="form-group mb-3">
-        <label for="documentUpload" class="form-label">Upload New Document</label>
-        <input type="file" class="form-control" (change)="onFileChange($event)" id="documentUpload" />
+      <div *ngIf="isEditMode">
+        <div class="form-group my-3">
+          <label for="documentUpload" class="form-label">Upload New Document</label>
+          <input type="file" class="form-control" (change)="onFileChange($event)" id="documentUpload" />
+        </div>
+        <button *ngIf="jobDetails.document" class="btn btn-danger w-100 mb-3" (click)="removeDocument()">
+          Remove Current Document
+        </button>
       </div>
-      <button *ngIf="jobDetails.document" class="btn btn-danger w-100 mb-3" (click)="removeDocument()">
-        Remove Current Document
+
+      <button *ngIf="!isEditMode" class="btn custom-gray-btn w-100 my-3">
+        <i class="bi bi-download me-2"></i> Download Documents
       </button>
     </div>
 
-    <button *ngIf="!isEditMode" class="btn custom-gray-btn w-100 mb-3">
-      <i class="bi bi-download me-2"></i> Download Documents
-    </button>
   </div>
 </div>
