@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -8,17 +8,25 @@ import {FormsModule} from '@angular/forms';
   imports: [
     NgClass,
     NgIf,
-    RouterLink,
     FormsModule
   ],
   templateUrl: './job-details.component.html',
   standalone: true,
   styleUrl: './job-details.component.css'
 })
-export class JobDetailsComponent {
+export class JobDetailsComponent implements OnInit {
   role: 'employer' | 'job-seeker' = 'employer';
   isEditMode = false;
   isSaved = false;
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.queryParams.subscribe(params => {
+      if (params['role'] === 'employer' || params['role'] === 'job-seeker') {
+        this.role = params['role'];
+      }
+    });
+  }
   jobDetails = {
     title: 'Front End Web Developer',
     companyName: 'ADHAM',

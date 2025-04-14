@@ -14,7 +14,7 @@
          (click)="onJobClick(job)"
          style="cursor: pointer;">
 
-    <div class="card job-card">
+    <div class="card job-card" [routerLink]="['/job-details']" [queryParams]="{ role: 'job-seeker' }">
         <img [src]="job.logo" alt="Company Logo" class="job-image" />
         <div class="card-body">
           <h6 class="card-title fw-bold">{{ job.title }}</h6>

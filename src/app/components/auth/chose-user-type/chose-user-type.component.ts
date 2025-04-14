@@ -7,6 +7,7 @@ import {RouterLink} from '@angular/router';
     RouterLink
   ],
   templateUrl: './chose-user-type.component.html',
+  standalone: true,
   styleUrl: './chose-user-type.component.css'
 })
 export class ChoseUserTypeComponent {
