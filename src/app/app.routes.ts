@@ -1,12 +1,13 @@
 import { Routes } from '@angular/router';
-import { JobPostingsComponent } from './components/job-postings/job-postings.component';
+import { JobPostingsComponent } from './components/employer-home/job-postings/job-postings.component';
 import {EmployerHomeComponent} from './components/employer-home/employer-home.component';
 import {DashboardAdminComponent} from './components/dashboard-admin/dashboard-admin.component';
 import {ManageEmployersComponent} from './components/dashboard-admin/manage-employers/manage-employers.component';
 import {AllUsersComponent} from './components/dashboard-admin/all-users/all-users.component';
 import {JobListingsComponent} from './components/dashboard-admin/job-listings/job-listings.component';
 import {HomepageComponent} from './components/home-page/home-page.component';
-import {ShortlistComponent} from './components/shortlist/shortlist.component';
+import {ShortlistComponent} from './components/employer-home/shortlist/shortlist.component';
+import {JobApplicationsComponent} from './components/employer-home/job-applications/job-applications.component'
 
 export const routes: Routes = [
   { path: 'home-page', component: HomepageComponent },
@@ -17,4 +18,5 @@ export const routes: Routes = [
   { path: 'admin/all-users', component: AllUsersComponent },
   { path: 'admin/job-listings', component: JobListingsComponent },
   {path: 'employer/shortlist', component: ShortlistComponent},
+  {path: 'employer/job-applications', component: JobApplicationsComponent},
 ];

@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import { JobModalService } from '../../servies/job-modal.service';
-import {JobCardComponent} from "../job-postings/job-card/job-card.component";
-import {CreateJobComponent} from '../create-job/create-job.component';
+import {JobCardComponent} from "./job-card/job-card.component";
+import {CreateJobComponent} from './create-job/create-job.component';
 import console from 'node:console';
 @Component({
   selector: 'app-employer-home',
@@ -31,14 +31,14 @@ export class EmployerHomeComponent {
       title: 'UI/UX Designer',
       description: 'Focus on crafting intuitive and visually appealing user interfaces.',
       salary: '$700 - $900 Salary/Month',
-      status: 'closed'
+      status: 'open'
     },
     {
       image: 'assets/adham.jpg',
       title: 'Mobile App Developer',
       description: 'Build and maintain cross-platform mobile applications.',
       salary: '$750 - $950 Salary/Month',
-      status: 'closed'
+      status: 'open'
     },
     {
       image: 'assets/adham.jpg',
