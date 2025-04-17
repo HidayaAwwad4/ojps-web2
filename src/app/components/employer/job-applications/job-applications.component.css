@@ -8,7 +8,9 @@
   transition: transform 0.2s ease;
   height: 50px;
 }
-
+.profile-card:hover {
+  transform: translateY(-3px);
+}
 .bg-maroon {
   background-color: #631B1B;
 }

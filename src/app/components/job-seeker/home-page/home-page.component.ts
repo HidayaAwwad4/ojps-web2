@@ -1,23 +1,30 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { JobCategoriesComponent } from '../job-category/job-category.component';
-import { RecommendedJobsComponent } from '../recommended-jobs/recommended-jobs.component';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import {FormsModule} from '@angular/forms';
+import {RecommendedJobsComponent} from '../recommended-jobs/recommended-jobs.component';
+import {JobCategoriesComponent} from '../job-category/job-category.component';
 
 @Component({
   selector: 'app-homepage',
-  standalone: true,
-  imports: [FormsModule, JobCategoriesComponent, RecommendedJobsComponent],
   templateUrl: './home-page.component.html',
+  imports: [
+    FormsModule,
+    RecommendedJobsComponent,
+    JobCategoriesComponent
+  ],
   styleUrls: ['./home-page.component.css']
 })
 export class HomepageComponent {
   searchText: string = '';
 
-  @Output() searchChanged = new EventEmitter<string>();
+  constructor(private router: Router) {}
 
-  onSearchChange() {
-    this.searchChanged.emit(this.searchText);
+  navigateToCategory(category: string) {
+    this.router.navigate(['/categories-page', category]);
   }
+
+
+  onSearchChange() {}
 
   recommendedJobs = [
     {
@@ -64,10 +71,7 @@ export class HomepageComponent {
     }
   ];
 
-
   handleJobClick(job: any) {
     console.log('Clicked job:', job);
   }
 }
-
-

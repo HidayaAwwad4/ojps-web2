@@ -2,13 +2,16 @@ import { Component } from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
 
 @Component({
-  selector: 'app-job-applications',
+  selector: 'app-applications-status',
+  imports: [
+    NgForOf,
+    NgClass
+  ],
+  templateUrl: './applications-status.component.html',
   standalone: true,
-  imports: [NgForOf, NgClass],
-  templateUrl: './job-applications.component.html',
-  styleUrls: ['./job-applications.component.css']
+  styleUrl: './applications-status.component.css'
 })
-export class JobApplicationsComponent {
+export class ApplicationsStatusComponent {
   selectedTab: string = 'applied';
 
   jobs = [

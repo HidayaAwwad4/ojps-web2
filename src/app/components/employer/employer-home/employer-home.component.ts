@@ -48,5 +48,5 @@ export class EmployerHomeComponent {
       status: 'open'
     }
   ];
-  protected readonly console = console;
+
 }

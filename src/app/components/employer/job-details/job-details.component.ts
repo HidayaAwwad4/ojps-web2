@@ -8,7 +8,8 @@ import {FormsModule} from '@angular/forms';
   imports: [
     NgClass,
     NgIf,
-    FormsModule
+    FormsModule,
+    RouterLink
   ],
   templateUrl: './job-details.component.html',
   standalone: true,

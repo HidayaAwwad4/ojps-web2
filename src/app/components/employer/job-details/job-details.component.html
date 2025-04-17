@@ -1,5 +1,7 @@
 <div class="job-details-card position-relative">
-  <i class="bi bi-chevron-left me-3" style="font-size: 1.5rem; cursor: pointer;" (click)="goBack()"></i>
+  <i class="fa-solid fa-arrow-left text-dark me-2"
+     style="font-size: 1.8rem; cursor: pointer; color: #631b1b !important;"
+     (click)="goBack()"></i>
   <div class="container">
     <div class="d-flex justify-content-between align-items-start my-3">
       <div>
@@ -26,7 +28,7 @@
           <button class="btn btn-light border" (click)="toggleSave()">
             <i [ngClass]="isSaved ? 'bi bi-bookmark-fill text-custom-red' : 'bi bi-bookmark text-dark'"></i>
           </button>
-          <button class="btn custom-btn text-white">
+          <button class="btn custom-btn text-white" [routerLink]="['/application-review']">
             Apply Now
           </button>
         </div>

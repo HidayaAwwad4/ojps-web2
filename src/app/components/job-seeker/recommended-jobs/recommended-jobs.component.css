@@ -60,3 +60,7 @@
 }
 .mb-4 {
   margin-left: 35px;}
+
+.job-card:hover {
+  transform: translateY(-3px);
+}
