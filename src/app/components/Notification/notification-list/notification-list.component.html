@@ -1,0 +1,19 @@
+<div class="container mt-4">
+  <div class="d-flex align-items-center justify-content-center position-relative mb-4">
+
+    <button class="btn btn-link position-absolute start-0" (click)="goBack()">
+      <i class="bi bi-arrow-left fs-5"></i>
+    </button>
+
+    <h2 class="mb-0">Notifications</h2>
+  </div>
+
+  <div *ngFor="let section of groupedNotifications">
+    <h5 class="text-muted mt-4">{{ section.title }}</h5>
+    <div class="row">
+      <div class="col-12 mb-2" *ngFor="let notification of section.items">
+        <app-notification-item [notification]="notification"></app-notification-item>
+      </div>
+    </div>
+  </div>
+</div>

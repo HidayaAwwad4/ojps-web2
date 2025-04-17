@@ -1,0 +1,17 @@
+
+
+<div class="container py-4">
+  <button class="btn btn-link position-absolute start-0" (click)="goBack()">
+    <i class="bi bi-arrow-left fs-5"></i>
+  </button>
+  <h3 class="fw-bold text-center">Monthly Reports</h3>
+  <p class="text-center text-muted">Check How Many People Applied And How Your Jobs Are Doing</p>
+
+  <div class="d-flex justify-content-center flex-wrap my-4">
+    <app-stats-box [value]="100" label="Applications Received"></app-stats-box>
+    <app-stats-box [value]="100" label="Applications Saved"></app-stats-box>
+  </div>
+
+ <app-line-chart-employer></app-line-chart-employer>
+</div>
+

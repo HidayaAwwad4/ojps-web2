@@ -18,6 +18,12 @@ import {JobDetailsComponent} from './components/employer/job-details/job-details
 import {ApplicationsStatusComponent} from './components/job-seeker/applications-status/applications-status.component';
 import {CategoriesPageComponent} from './components/job-seeker/categories-page/categories-page.component';
 import {ApplicationReviewComponent} from './components/job-seeker/application-review/application-review.component';
+import {
+  EmployerNotificationComponent
+} from './components/Notification/employer-notification/employer-notification.component';
+import {SeekerNotificationComponent} from './components/Notification/seeker-notification/seeker-notification.component';
+import {EmployerReportsComponent} from './components/Reports/employer-reports/employer-reports.component';
+import {AdminReportsComponent} from './components/Reports/admin-reports/admin-reports.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -40,4 +46,8 @@ export const routes: Routes = [
   { path: 'applications-status', component: ApplicationsStatusComponent },
   {path: 'categories-page', component: CategoriesPageComponent},
   {path: 'application-review', component: ApplicationReviewComponent},
+  {path: 'employer-notification', component: EmployerNotificationComponent},
+  {path: 'seeker-notification', component: SeekerNotificationComponent},
+  {path: 'employer-reports', component: EmployerReportsComponent},
+  {path: 'admin-reports', component: AdminReportsComponent},
 ];

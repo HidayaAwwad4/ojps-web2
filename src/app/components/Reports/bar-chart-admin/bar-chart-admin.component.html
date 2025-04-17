@@ -1,0 +1,20 @@
+
+
+
+<div class="Bar-chart">
+  <h6 class="text-center mb-3">Most Active Categories</h6>
+  <div *ngIf="isBrowser">
+    <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            chartType="bar">
+    </canvas>
+  </div>
+</div>
+
+
+
+
+
+
+
