@@ -1,0 +1,10 @@
+canvas {
+  max-width: 100%;
+}
+
+.Bar-chart{
+  border: 1px solid #631b1b;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px #953f3f;
+  padding: 10px;
+}
