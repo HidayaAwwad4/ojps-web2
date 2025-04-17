@@ -24,12 +24,16 @@ import {
 import {SeekerNotificationComponent} from './components/Notification/seeker-notification/seeker-notification.component';
 import {EmployerReportsComponent} from './components/Reports/employer-reports/employer-reports.component';
 import {AdminReportsComponent} from './components/Reports/admin-reports/admin-reports.component';
+import {SignUpEmployerComponent} from './components/auth/sign-up-employer/sign-up-employer.component';
+import {JobFieldCategoriesComponent} from './components/auth/job-field-categories/job-field-categories.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
+  {path: 'signup-employer',component:SignUpEmployerComponent },
   { path: 'type', component: ChoseUserTypeComponent },
   { path: 'login', component: LoginComponent },
+  {path: 'field', component: JobFieldCategoriesComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-code', component: VerifyCodeComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
