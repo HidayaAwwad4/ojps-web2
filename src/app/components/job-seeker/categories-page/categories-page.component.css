@@ -1,0 +1,96 @@
+.categories-container{
+  padding: 60px;
+}
+.card.job-card {
+  border: 3px solid #631b1b;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+  transition: 0.3s ease;
+
+  margin: auto;
+  padding: 0 10px;
+}
+
+.job-card-container {
+  max-width: 100%;
+  padding: 0 20px;
+}
+.job-card:hover {
+  transform: translateY(-3px);
+}
+.row {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.col {
+  margin-bottom: 15px;
+}
+.custom {
+  color: #631b1b !important;
+}
+
+.job-image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #631b1b;
+  margin-top:8px;
+}
+
+.job-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.bookmark-icon {
+  position: absolute;
+  top: 6px;
+  left: 200px;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  color: #631b1b !important;
+}
+
+
+.custom-rate-text {
+  color: #0b0b0b;
+  font-weight: bold;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+.custom-rate-text {
+  color: #0b0b0b;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.apply-btn {
+  background-color: #631b1b;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 80px;
+  height: 30px;
+}
+
+.apply-btn:hover {
+  background-color: #631b1b
+}

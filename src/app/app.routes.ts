@@ -13,8 +13,11 @@ import {VerifyCodeComponent} from './components/auth/verify-code/verify-code.com
 import { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';
 import {ChoseUserTypeComponent} from './components/auth/chose-user-type/chose-user-type.component';
 import {ShortlistComponent} from './components/employer/shortlist/shortlist.component';
-import {JobApplicationsComponent} from './components/employer/job-applications/job-applications.component'
+import {JobApplicationsComponent} from './components/employer/job-applications/job-applications.component';
 import {JobDetailsComponent} from './components/employer/job-details/job-details.component';
+import {ApplicationsStatusComponent} from './components/job-seeker/applications-status/applications-status.component';
+import {CategoriesPageComponent} from './components/job-seeker/categories-page/categories-page.component';
+import {ApplicationReviewComponent} from './components/job-seeker/application-review/application-review.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,7 +28,6 @@ export const routes: Routes = [
   { path: 'verify-code', component: VerifyCodeComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'home-page', component: HomepageComponent },
-  { path: 'job-applications', component: JobApplicationsComponent},
   { path: 'employer-home', component: EmployerHomeComponent },
   { path: 'employer/job-postings', component: JobPostingsComponent },
   { path: 'dashboard-admin', component: DashboardAdminComponent },
@@ -35,4 +37,7 @@ export const routes: Routes = [
   {path: 'employer/shortlist', component: ShortlistComponent},
   {path: 'employer/job-applications', component: JobApplicationsComponent},
   {path: 'job-details', component: JobDetailsComponent},
+  { path: 'applications-status', component: ApplicationsStatusComponent },
+  {path: 'categories-page', component: CategoriesPageComponent},
+  {path: 'application-review', component: ApplicationReviewComponent},
 ];
