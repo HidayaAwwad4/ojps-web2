@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {Router, RouterLink} from '@angular/router';
-import { NgClass, NgForOf } from '@angular/common';
+import {NgClass, NgForOf, NgStyle} from '@angular/common';
 
 @Component({
   selector: 'app-categories-page',
@@ -8,7 +8,8 @@ import { NgClass, NgForOf } from '@angular/common';
   imports: [
     NgClass,
     NgForOf,
-    RouterLink
+    RouterLink,
+    NgStyle
   ],
   standalone: true,
   styleUrls: ['./categories-page.component.css']

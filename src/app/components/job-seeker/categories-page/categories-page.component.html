@@ -4,7 +4,6 @@
      (click)="goBack()"></i>
 
 
-
 <div class="job-card-container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 g-3">
   <div class="col" *ngFor="let job of jobs">
@@ -12,7 +11,11 @@
         <i
           class="bi position-absolute m-2 bookmark-icon"
           [ngClass]="job.saved ? 'bi-bookmark-fill custom' : 'bi-bookmark bookmark-pink'"
-          style="font-size: 1.3rem; cursor: pointer;"
+          [ngStyle]="{
+            fontSize: '1.3rem',
+            cursor: 'pointer',
+            color: job.saved ? '' : '#631b1b'
+          }"
           (click)="toggleSave($event, job)"
         ></i>
 
