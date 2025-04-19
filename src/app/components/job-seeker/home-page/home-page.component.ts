@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {RecommendedJobsComponent} from '../recommended-jobs/recommended-jobs.component';
 import {JobCategoriesComponent} from '../job-category/job-category.component';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-homepage',
@@ -10,7 +11,8 @@ import {JobCategoriesComponent} from '../job-category/job-category.component';
   imports: [
     FormsModule,
     RecommendedJobsComponent,
-    JobCategoriesComponent
+    JobCategoriesComponent,
+    NavbarComponent
   ],
   styleUrls: ['./home-page.component.css']
 })

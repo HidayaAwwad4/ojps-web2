@@ -21,12 +21,17 @@ import {ApplicationReviewComponent} from './components/job-seeker/application-re
 import {
   EmployerNotificationComponent
 } from './components/Notification/employer-notification/employer-notification.component';
+import {ResumeManagementComponent} from './components/job-seeker/resume-management/resume-management.component';
+import {CandidateViewComponent} from './components/employer/candidate-view/candidate-view.component';
 import {SeekerNotificationComponent} from './components/Notification/seeker-notification/seeker-notification.component';
 import {EmployerReportsComponent} from './components/Reports/employer-reports/employer-reports.component';
 import {AdminReportsComponent} from './components/Reports/admin-reports/admin-reports.component';
 import {SignUpEmployerComponent} from './components/auth/sign-up-employer/sign-up-employer.component';
 import {JobFieldCategoriesComponent} from './components/auth/job-field-categories/job-field-categories.component';
-
+import {JobSeekerProfilePageComponent} from './components/job-seeker/profile-page/profile-page.component';
+import {AdminProfilePageComponent} from './components/admin/profile-page/profile-page.component';
+import {EmployerProfilePageComponent} from './components/employer/profile-page/profile-page.component';
+import {EditProfilePageComponent} from './components/shared/edit-profile-page/edit-profile-page.component';
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -54,4 +59,10 @@ export const routes: Routes = [
   {path: 'seeker-notification', component: SeekerNotificationComponent},
   {path: 'employer-reports', component: EmployerReportsComponent},
   {path: 'admin-reports', component: AdminReportsComponent},
+  { path: 'jobseeker-profile', component: JobSeekerProfilePageComponent },
+  { path: 'employer-profile', component: EmployerProfilePageComponent },
+  { path: 'edit-profile', component: EditProfilePageComponent },
+  { path: 'admin-profile', component: AdminProfilePageComponent },
+  { path: 'candidate-view', component: CandidateViewComponent},
+  { path: 'resume-management', component: ResumeManagementComponent },
 ];

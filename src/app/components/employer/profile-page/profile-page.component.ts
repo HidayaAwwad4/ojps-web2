@@ -1,24 +1,24 @@
 import { Component } from '@angular/core';
-import {NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
-import { JobModalService } from '../../../servies/job-modal.service';
-import {JobCardComponent} from "../job-card/job-card.component";
-import {CreateJobComponent} from '../create-job/create-job.component';
-import console from 'node:console';
+import { NgForOf } from '@angular/common';
+import { JobCardComponent } from '../job-card/job-card.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
-@Component({
-  selector: 'app-employer-home',
-  standalone:true,
-  imports: [JobCardComponent, NgForOf, RouterLink, CreateJobComponent,NavbarComponent],
-  templateUrl: './employer-home.component.html',
-  styleUrl: './employer-home.component.css'
-})
-export class EmployerHomeComponent {
-  constructor(private jobModalService: JobModalService) {}
 
-  openJobModal() {
-    this.jobModalService.openCreateJobModal();
-  }
+@Component({
+  selector: 'app-profile-page',
+  standalone: true,
+  imports: [
+    NavbarComponent,
+    NgForOf,
+    JobCardComponent
+  ],
+  templateUrl: './profile-page.component.html',
+  styleUrls: ['./profile-page.component.css']
+})
+export class EmployerProfilePageComponent {
+  name       = 'Islam Sad Aldeen';
+  email      = 'islamsadaldeen@gmail.com';
+  location   = 'Palestine nablus';
+  aboutMe    = 'I’m looking for new job to develop my expertise';
   jobs = [
     {
       image: 'assets/adham.jpg',
@@ -47,7 +47,16 @@ export class EmployerHomeComponent {
       description: 'Analyze data trends and create reports.',
       salary: '$850 - $1050 Salary/Month',
       status: 'open'
-    }
+    },
+    {
+      image: 'assets/adham.jpg',
+      title: 'UI Designer',
+      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
+      salary: '$700 - $900 Salary/Month',
+      status: 'closed'
+    },
   ];
-
+  closeJob(job: any) {
+    job.status = 'closed';
+  }
 }
