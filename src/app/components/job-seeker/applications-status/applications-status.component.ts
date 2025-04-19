@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-applications-status',
   imports: [
     NgForOf,
-    NgClass
+    NgClass,
+    NavbarComponent
   ],
   templateUrl: './applications-status.component.html',
   standalone: true,

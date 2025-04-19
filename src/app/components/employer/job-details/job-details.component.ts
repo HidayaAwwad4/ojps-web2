@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgClass, NgIf} from '@angular/common';
 import {ActivatedRoute, RouterLink} from '@angular/router';
 import {FormsModule} from '@angular/forms';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-job-details',
@@ -9,7 +10,8 @@ import {FormsModule} from '@angular/forms';
     NgClass,
     NgIf,
     FormsModule,
-    RouterLink
+    RouterLink,
+    NavbarComponent
   ],
   templateUrl: './job-details.component.html',
   standalone: true,

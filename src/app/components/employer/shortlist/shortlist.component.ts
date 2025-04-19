@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-shortlist',
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    NavbarComponent
   ],
   templateUrl: './shortlist.component.html',
   standalone: true,

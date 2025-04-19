@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-application-review',
   templateUrl: './application-review.component.html',
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    NavbarComponent
   ],
   standalone: true,
   styleUrls: ['./application-review.component.css']
