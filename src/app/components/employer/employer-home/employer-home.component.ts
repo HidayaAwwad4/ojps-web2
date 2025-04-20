@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
-import { JobModalService } from '../../../servies/job-modal.service';
+import { JobModalService } from '../../../services/job-modal.service';
 import {JobCardComponent} from "../job-card/job-card.component";
 import {CreateJobComponent} from '../create-job/create-job.component';
 import console from 'node:console';

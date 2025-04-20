@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {JobModalService} from '../../../servies/job-modal.service';
+import {JobModalService} from '../../../services/job-modal.service';
 import {NgIf} from '@angular/common';
 
 @Component({
