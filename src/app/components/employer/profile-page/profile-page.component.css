@@ -1,0 +1,64 @@
+.profile-container {
+    padding-bottom: 2rem;
+  }
+  
+  .avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #ccc;
+  }
+  
+  .profile-name {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  
+  .btn {
+    background: #631B1B;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+  }
+  
+  .resume-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding-bottom: 0.5rem;
+  }
+  
+  .section-title {
+    color: #631B1B;
+    font-size: 1.75rem;
+  }
+  
+  .subsection h5 {
+    margin-bottom: 0.5rem;
+    color: #631B1B;
+  }
+  
+  .resume-actions .action-btn {
+    font-size: 0.875rem;
+  }
+  
+  @media (max-width: 768px) {
+    .profile-header {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    .edit-profile-btn {
+      align-self: center;
+    }
+    .resume-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .resume-actions {
+      align-self: flex-start;
+    }
+  }
+  

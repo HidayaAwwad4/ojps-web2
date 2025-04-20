@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-job-applications-employers',
   standalone: true,
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    NavbarComponent
   ],
   templateUrl: './job-applications.component.html',
   styleUrl: './job-applications.component.css'
