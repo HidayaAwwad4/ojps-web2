@@ -3,13 +3,35 @@
     <button class="btn btn-outline-back me-3" (click)="goBack()">
       <i class="bi bi-arrow-left-circle"></i>
     </button>
-    <h3 class="page-title flex-grow-1 mb-4">All Users</h3>
+    <h3 class="page-title flex-grow-1 mb-4">Manage Users</h3>
   </div>
+
+  <div *ngIf="editMode" class="edit-overlay">
+    <div class="overlay-backdrop" (click)="closeEdit()"></div>
+    <div class="edit-popup">
+      <app-edit-user [user]="userBeingEdited" (close)="closeEdit()"></app-edit-user>
+    </div>
+  </div>
+
+  <div *ngIf="addMode" class="edit-overlay">
+    <div class="overlay-backdrop" (click)="closeAddUser()"></div>
+    <div class="edit-popup">
+      <app-add-user (close)="closeAddUser()" (userAdded)="addUser($event)"></app-add-user>
+    </div>
+  </div>
+
   <div class="mb-3 search-wrapper position-relative">
     <input type="text" class="form-control ps-5 search-input" placeholder="Search in userName"
            [(ngModel)]="searchTerm" />
     <i class="bi bi-search position-absolute icon-search-inside"></i>
   </div>
+
+  <div class="d-flex justify-content-end mb-3">
+    <button class="btn btn-success addUser" (click)="openAddUser()">
+      <i class="bi bi-person-plus-fill me-1"></i> Add User
+    </button>
+  </div>
+
   <div class="table-responsive mb-4">
     <table class="table tableDashBoard text-center align-middle">
       <thead>
@@ -28,15 +50,20 @@
         <td class="table-td">{{ user.name }}</td>
         <td class="table-td">{{ user.email }}</td>
         <td class="table-td">
-          <span [ngStyle]="{ 'font-weight': user.type === 'employers' ? 'bold' : 'normal' }">
-            {{ user.type }}
-          </span>
+            <span [ngStyle]="{ 'font-weight': user.type === 'employers' ? 'bold' : 'normal' }">
+              {{ user.type }}
+            </span>
         </td>
         <td class="table-td">{{ user.location }}</td>
         <td class="table-td">
-          <button class="btn btn-sm btn-outline-danger" (click)="openConfirmModal(user)">
-            <i class="bi bi-trash"></i>
-          </button>
+          <div class="action-buttons">
+            <button class="btn btn-sm btn-outline-warning" (click)="editUser(user)">
+              <i class="bi bi-pencil-square"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-danger" (click)="openConfirmModal(user)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
         </td>
       </tr>
       </tbody>
@@ -44,6 +71,7 @@
   </div>
 </div>
 
+<!-- Confirm Delete Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content custom-modal text-white">
