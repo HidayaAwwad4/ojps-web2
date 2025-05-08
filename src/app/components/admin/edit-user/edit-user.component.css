@@ -1,0 +1,29 @@
+.form-control {
+  background-color: #ffffff !important;
+  color: #030306 !important;
+  border: 2px solid #631b1b !important;
+  border-radius: 0.5rem !important;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(181, 29, 30, 0.25);
+  outline: none;
+}
+
+.btn-primary {
+  background-color: #631B1B;
+  border: #030306;
+}
+
+.btn-primary:hover {
+  background-color: #B51D1E !important;
+}
+
+.label-form {
+  color: #631B1B;
+}
+
+/*.titleEdit {*/
+/*  text-align: center;*/
+/*}*/

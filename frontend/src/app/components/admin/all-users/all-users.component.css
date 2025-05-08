@@ -3,65 +3,50 @@
   color: #b51d1e !important;
   border-color: #b51d1e !important;
 }
-
 .btn-outline-danger:hover {
   background-color: #b51d1e !important;
   color: #ffffff !important;
   border-color: #b51d1e !important;
 }
-
-.bi-trash {
+.bi-trash,.bi-arrow-left-circle {
   font-size: 1.5rem;
 }
-
 .btn-outline-back {
   font-size: 1.5rem;
   color: #631B1B !important;
   border-color: #631B1B !important;
 }
-
 .btn-outline-back:hover {
   background-color: #631B1B !important;
   color: #ffffff !important;
   border-color: #631B1B !important;
 }
-
-.bi-arrow-left-circle {
-  font-size: 1.5rem;
-}
-
 .d-flex {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
 .page-title {
   text-align: center;
   flex-grow: 1;
 }
-
 .tableDashBoard {
   vertical-align: middle;
   text-align: center;
 }
-
 .table-td,
 .table-th {
   border: none;
   padding: 0.75rem;
 }
-
 .table-th {
   background-color: #631b1b;
   color: #ffffff;
 }
-
 .table-td {
   background-color: #131114;
   color: #ffffff;
 }
-
 .search-input {
   background-color: #ffffff !important;
   color: #030306 !important;
@@ -70,18 +55,14 @@
   padding-left: 2.5rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-
 .search-input:focus {
-  border-color: #b51d1e !important;
   box-shadow: 0 0 0 0.2rem rgba(181, 29, 30, 0.25);
   outline: none;
 }
-
 .search-input::placeholder {
   color: rgba(0, 0, 0, 0.45);
   opacity: 1;
 }
-
 .icon-search-inside {
   top: 50%;
   left: 15px;
@@ -92,30 +73,26 @@
   color: #631b1b;
 }
 
-.icon-manageEmployers {
-  font-size: 1rem;
-}
+/*.icon-manageEmployers {*/
+/*  font-size: 1rem;*/
+/*}*/
 
 .custom-modal {
   background-color: #631b1b !important;
 }
-
 .modal-footer .btn-primary {
   background-color: #b51d1e !important;
   border-color: #b51d1e !important;
 }
-
 .modal-footer .btn-primary:hover {
   background-color: #a11a1b !important;
   border-color: #a11a1b !important;
 }
-
 .action-buttons {
   display: flex;
   justify-content: center;
   gap: 0.5rem;
 }
-
 .action-buttons .btn {
   width: 36px;
   height: 36px;
@@ -123,14 +100,59 @@
   align-items: center;
   justify-content: center;
 }
-
 .search-wrapper {
   width: 100%;
   max-width: 500px;
 }
-
 @media (max-width: 768px) {
   .search-wrapper {
     max-width: 100%;
   }
+}
+.btn-outline-warning {
+  font-size: 1rem;
+  color: #e6a800 !important;
+  border-color: #e6a800 !important;
+}
+.btn-outline-warning:hover {
+  background-color: #e6a800 !important;
+  color: #ffffff !important;
+  border-color: #e6a800 !important;
+}
+.bi-pencil-square {
+  font-size: 1.5rem;
+}
+.edit-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.overlay-backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.edit-popup {
+  position: relative;
+  z-index: 2;
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.addUser {
+  background-color: #631B1B;
 }

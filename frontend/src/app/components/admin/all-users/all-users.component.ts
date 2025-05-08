@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Location } from '@angular/common';
-import { NgForOf, NgStyle } from '@angular/common';
+import { NgForOf, NgStyle, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {EditUserComponent} from '../edit-user/edit-user.component';
+import {AddUserComponent} from '../add-user/add-user.component';
 declare var bootstrap: any;
 
 @Component({
@@ -9,12 +11,14 @@ declare var bootstrap: any;
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.css'],
   standalone: true,
-  imports: [NgForOf, NgStyle, FormsModule]
+  imports: [NgForOf, NgStyle, FormsModule, NgIf, EditUserComponent, AddUserComponent]
 })
 export class AllUsersComponent {
   constructor(private location: Location) {}
 
   searchTerm: string = '';
+  editMode = false;
+  userBeingEdited: any = null;
 
   users = [
     { name: 'Mohammad Husain', email: 'Mohammad@gmail.com', type: 'Job Seeker', location: 'Nablus' },
@@ -45,7 +49,36 @@ export class AllUsersComponent {
     this.selectedUser = null;
   }
 
+  editUser(user: any) {
+    this.userBeingEdited = { ...user };
+    this.editMode = true;
+  }
+
+  closeEdit() {
+    const index = this.users.findIndex(u => u.email === this.userBeingEdited.email);
+    if (index !== -1) {
+      this.users[index] = { ...this.userBeingEdited };
+    }
+    this.editMode = false;
+    this.userBeingEdited = null;
+  }
+
   goBack() {
     this.location.back();
   }
+
+  addMode = false;
+
+  openAddUser() {
+    this.addMode = true;
+  }
+
+  closeAddUser() {
+    this.addMode = false;
+  }
+
+  addUser(newUser: any) {
+    this.users.push(newUser);
+  }
+
 }

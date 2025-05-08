@@ -8,5 +8,14 @@
       <option class="option-select" value="3">Last Years</option>
     </select>
   </div>
-  <div class="bg-white mt-3" style="height: 250px; border-radius: 8px;"></div>
+
+  <div class="bg-white mt-3 p-3 rounded" *ngIf="isBrowser">
+    <canvas
+      baseChart
+      [data]="barChartData"
+      [options]="barChartOptions"
+      [type]="barChartType"
+      style="height: 250px;">
+    </canvas>
+  </div>
 </div>
