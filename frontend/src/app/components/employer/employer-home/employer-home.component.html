@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+<div class="row m-0" style="height: 70vh;">
+  <div class="col-md-5 d-flex flex-column justify-content-center align-items-start p-5 bg-white">
+    <h4 class="my-5">
+      Discover top talent and find the perfect candidate for every role in your company’s journey.
+    </h4>
+        <button class="btn text-white px-4 py-2 add-job-btn" (click)="openJobModal()">+ Add New Job</button>
+  </div>
+  <div class="col-md-7 p-0">
+    <div class="hero-img"></div>
+  </div>
+</div>
+
+<div class="dashboard mt-5" style="font-family: 'Carlito', sans-serif;">
+  <app-create-job></app-create-job>
+  <div class="row align-items-center">
+    <div class="col">
+      <h5 class="fw-bold">Open Positions</h5>
+    </div>
+    <div class="col text-end">
+      <a routerLink="/employer/job-postings" class="text-dark text-decoration-none">See All</a>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <div class="row g-5">
+      <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let job of jobs">
+        <app-job-card [job]="job"></app-job-card>
+      </div>
+    </div>
+  </div>
+</div>
