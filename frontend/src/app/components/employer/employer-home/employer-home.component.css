@@ -1,5 +1,5 @@
 .hero-img {
-  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 25%),
+  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%),
   url('/assets/sign-up.jpg');
   background-size: cover;
   background-position: center;
