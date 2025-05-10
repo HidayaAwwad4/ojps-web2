@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [role]="'admin'"></app-navbar>
 
 <div class="container profile-container">
   <div class="profile-header d-flex justify-content-between align-items-start mt-4">
@@ -6,9 +6,9 @@
       <img src="assets/account-avatar.png" class="me-3">
       <div class="profile-info">
         <h2 class="profile-name">{{ name }}</h2>
-        <p>Email : {{ email }}.</p>
-        <p>Location : {{ location }}.</p>
-        <p>About me : {{ aboutMe }}.</p>
+        <p>Email: {{ email }}.</p>
+        <p>Location: {{ location }}.</p>
+        <p>About me: {{ aboutMe }}.</p>
       </div>
     </div>
     <button class="btn edit-profile-btn">Edit profile</button>

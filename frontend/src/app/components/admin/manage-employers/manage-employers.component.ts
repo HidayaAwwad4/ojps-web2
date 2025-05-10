@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
+import {NavbarComponent} from "../../navbar/navbar.component";
 
 declare var bootstrap: any;
 
@@ -10,7 +11,7 @@ declare var bootstrap: any;
   templateUrl: './manage-employers.component.html',
   styleUrls: ['./manage-employers.component.css'],
   standalone: true,
-  imports: [NgForOf, FormsModule, NgClass],
+    imports: [NgForOf, FormsModule, NgClass, NavbarComponent],
 })
 export class ManageEmployersComponent {
   constructor(private location: Location) {}

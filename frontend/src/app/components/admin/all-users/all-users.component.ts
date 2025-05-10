@@ -4,6 +4,7 @@ import { NgForOf, NgStyle, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {EditUserComponent} from '../edit-user/edit-user.component';
 import {AddUserComponent} from '../add-user/add-user.component';
+import {NavbarComponent} from '../../navbar/navbar.component';
 declare var bootstrap: any;
 
 @Component({
@@ -11,7 +12,7 @@ declare var bootstrap: any;
   templateUrl: './all-users.component.html',
   styleUrls: ['./all-users.component.css'],
   standalone: true,
-  imports: [NgForOf, NgStyle, FormsModule, NgIf, EditUserComponent, AddUserComponent]
+  imports: [NgForOf, NgStyle, FormsModule, NgIf, EditUserComponent, AddUserComponent, NavbarComponent]
 })
 export class AllUsersComponent {
   constructor(private location: Location) {}

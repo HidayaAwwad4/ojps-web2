@@ -2,13 +2,14 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import {NavbarComponent} from "../../navbar/navbar.component";
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
   standalone: true,
-  imports: [FormsModule, CommonModule]
+    imports: [FormsModule, CommonModule, NavbarComponent]
 })
 export class AddUserComponent {
   @Output() close = new EventEmitter<void>();

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from '../../navbar/navbar.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-candidate-view',
   standalone: true,
-  imports: [CommonModule, NavbarComponent],
+  imports: [CommonModule, NavbarComponent, RouterLink],
   templateUrl: './candidate-view.component.html',
   styleUrls: ['./candidate-view.component.css']
 })

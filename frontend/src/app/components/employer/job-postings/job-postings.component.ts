@@ -4,11 +4,12 @@ import { NgForOf } from '@angular/common';
 import { JobModalService } from '../../../services/job-modal.service';
 import { CreateJobComponent } from '../create-job/create-job.component';
 import {RouterLink} from '@angular/router';
+import {NavbarComponent} from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-job-postings',
   standalone: true,
-  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink],
+  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink, NavbarComponent],
   templateUrl: './job-postings.component.html',
   styleUrls: ['./job-postings.component.css']
 })
