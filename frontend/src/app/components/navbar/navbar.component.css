@@ -1,53 +1,45 @@
 .navbar {
-  background: #631B1B;
-  width: 100%;
-}
-
-.logo {
-  max-height: 40px;
-}
-
-.title {
-  font-size: 1.25rem;
-  color: white;
-}
-
-.nav-icon-container {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  transition: background-color 0.3s;
-}
-.nav-icon-container:hover {
-  background-color: rgb(165, 27, 27);
-}
-
-.nav-icon {
-  width: 24px;
-  height: 24px;
-}
-
-.nav-label {
-  margin-top: 0.5rem;
-  font-size: 0.875rem;
+  justify-content: space-between;
+  background-color: #641B1B;
   color: white;
+  padding: 0.5rem 1rem;
 }
 
-@media (max-width: 768px) {
-  .navbar .container {
-    text-align: center;
-  }
+.navbar .logo {
+  font-family: fantasy;
+  font-size: 24px;
+}
 
-  .navbar-column {
-    text-align: center;
-    margin-bottom: 1rem;
-  }
+.navbar .title {
+  font-size: 14px;
+}
 
-  .nav-items {
-    justify-content: center !important;
-  }
+.navbar .menu {
+  display: flex;
+  gap: 1rem;
+}
+
+.navbar .menu .icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  cursor: pointer;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.navbar .menu .icon i {
+  font-size: 18px;
+}
+
+.navbar .menu .icon span {
+  margin-top: 2px;
+}
+
+.navbar .menu .icon:hover {
+  color: #B51D1E;
 }

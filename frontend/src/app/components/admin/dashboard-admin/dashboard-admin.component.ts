@@ -7,6 +7,7 @@ import { RecommendedJobsComponent } from "../recommended-jobs/recommended-jobs.c
 import { FooterComponent } from "../../footer/footer.component";
 import { NgClass, NgIf } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import {NavbarComponent} from '../../navbar/navbar.component';
 
 @Component({
   selector: 'app-dashboard-admin',
@@ -20,7 +21,8 @@ import { RouterOutlet } from '@angular/router';
     FooterComponent,
     NgClass,
     NgIf,
-    RouterOutlet
+    RouterOutlet,
+    NavbarComponent
   ],
   templateUrl: './dashboard-admin.component.html',
   styleUrls: ['./dashboard-admin.component.css']

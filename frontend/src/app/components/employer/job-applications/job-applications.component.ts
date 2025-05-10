@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { NavbarComponent } from '../../navbar/navbar.component';
 
 @Component({
@@ -50,5 +50,13 @@ export class JobApplicationsComponent {
       image: 'assets/james.jpeg'
     }
   ];
+  constructor(private router: Router) {}
 
+  shortlist(event: Event) {
+    event.stopPropagation();
+  }
+
+  reject(event: Event) {
+    event.stopPropagation();
+  }
 }

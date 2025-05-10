@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common';
+import {NavbarComponent} from '../../navbar/navbar.component';
 
 declare var bootstrap: any;
 
@@ -10,7 +11,7 @@ declare var bootstrap: any;
   templateUrl: './job-listings.component.html',
   styleUrls: ['./job-listings.component.css'],
   standalone: true,
-  imports: [NgForOf, FormsModule]
+  imports: [NgForOf, FormsModule, NavbarComponent]
 })
 export class JobListingsComponent {
   constructor(private location: Location) {}

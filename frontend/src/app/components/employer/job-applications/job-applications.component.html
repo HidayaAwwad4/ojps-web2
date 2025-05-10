@@ -1,4 +1,4 @@
-<app-navbar></app-navbar>
+<app-navbar [role]="'employer'"></app-navbar>
 
 <div class="job-applications-container">
   <div class="row justify-content-center mb-5">
@@ -8,11 +8,10 @@
     <div class="text-center">
       <h2>job applications</h2>
     </div>
-
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-md-3" *ngFor="let profile of profiles">
+    <div class="col-12 col-sm-6 col-md-3" *ngFor="let profile of profiles"  [routerLink]="['/candidate-view']">
       <div class="card text-center profile-card h-100">
         <div class="card-header p-0 bg-maroon rounded-top">
           <img [src]="profile.image" class="rounded-circle profile-img mt-2" alt="Profile image">
@@ -24,8 +23,8 @@
           <h6>{{profile.position}}</h6>
           <p class="card-text">{{profile.description}}</p>
           <div class="d-flex justify-content-around mt-3">
-            <button class="btn btn-outline-success">Add to Shortlist</button>
-            <button class="btn btn-outline-danger">Reject</button>
+            <button class="btn btn-outline-success" (click)="shortlist($event)">Add to Shortlist</button>
+            <button class="btn btn-outline-danger" (click)="reject($event)">Reject</button>
           </div>
         </div>
       </div>

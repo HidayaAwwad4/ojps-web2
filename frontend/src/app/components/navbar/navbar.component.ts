@@ -1,18 +1,20 @@
-import { Component } from '@angular/core';
-import { NgForOf } from '@angular/common';
+import {Component, Input} from '@angular/core';
+import {NgForOf, NgIf} from '@angular/common';
+import {RouterLink, RouterLinkActive} from '@angular/router';
+import {JobModalService} from '../../services/job-modal.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgForOf],
+  imports: [NgIf, RouterLink, RouterLinkActive],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  navItems = [
-    { icon: 'assets/home-vector.png',     label: 'Home',         url: '#' },
-    { icon: 'assets/bookmark-vector.png', label: 'Saved Jobs',   url: '#' },
-    { icon: 'assets/folder-vector.png',   label: 'Applications', url: '#' },
-    { icon: 'assets/account-vector.png',  label: 'Profile',      url: '#' },
-  ];
+  @Input() role: 'admin' | 'jobseeker' | 'employer' = 'jobseeker';
+  constructor(private jobModalService: JobModalService) {}
+
+  openJobModal() {
+    this.jobModalService.openCreateJobModal();
+  }
 }
