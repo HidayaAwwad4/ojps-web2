@@ -20,4 +20,8 @@ class JobListing extends Model
         'isOpened',
         'employer_id'
     ];
+    public function favoriteJobs() {
+        return $this->hasMany(FavoriteJob::class, 'job_id');
+    }
+
 }

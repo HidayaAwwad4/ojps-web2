@@ -11,11 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorite_jobs', function (Blueprint $table) {
-            $table->id();
-            $table->integer('job_seeker_id');
-            $table->integer('job_id');
-        });
+        //
     }
 
     /**
@@ -23,6 +19,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorite_jobs');
+        //
     }
 };
