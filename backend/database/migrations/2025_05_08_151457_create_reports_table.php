@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->date('report_month');
+            $table->integer('total_users');
+            $table->integer('total_job_posted');
+            $table->integer('saved_posts');
+            $table->integer('applications_received');
+
         });
     }
 

@@ -35,5 +35,7 @@ class User extends Authenticatable
     public function favoriteJobs() {
         return $this->hasMany(FavoriteJob::class, 'job_seeker_id');
     }
-
+    public function resumes() {
+        return $this->hasMany(Resume::class, 'job_seeker_id');
+    }
 }
