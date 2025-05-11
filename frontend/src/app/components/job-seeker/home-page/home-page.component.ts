@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {RecommendedJobsComponent} from '../recommended-jobs/recommended-jobs.component';
 import {JobCategoriesComponent} from '../job-category/job-category.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
+import {JobIntroComponent} from '../job-intro/job-intro.component';
 
 @Component({
   selector: 'app-homepage',
@@ -12,7 +13,8 @@ import { NavbarComponent } from '../../navbar/navbar.component';
     FormsModule,
     RecommendedJobsComponent,
     JobCategoriesComponent,
-    NavbarComponent
+    NavbarComponent,
+    JobIntroComponent
   ],
   styleUrls: ['./home-page.component.css']
 })
