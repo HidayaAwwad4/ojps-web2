@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('job_seeker_id');
+            $table->string('file_path')->nullable();
+            $table->string('about_me')->nullable();
+            $table->text('experience')->nullable();
+            $table->text('education')->nullable();
+            $table->text('skills')->nullable();
         });
     }
 
