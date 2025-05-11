@@ -25,6 +25,6 @@ export class JobSeekerProfilePageComponent {
   education = [
     'Bachelor of Science in Computer Systems Engineering, Birzeit University, Ramallah (2022).'
   ];
-  strengths = ['Adaptable', 'Quick Learner', 'Team Player'];
-  weaknesses = ['Workaholic', 'Emotional'];
+  skills = ['fast learner', 'good with problem solving'];
+  
 }
