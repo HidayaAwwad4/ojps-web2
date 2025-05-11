@@ -21,8 +21,8 @@ export class ResumeManagementComponent {
     { degree: 'High School', field: 'Science', institution: 'Central High School', year: '2011' }
   ];
 
-  strengths = ['Problem Solving', 'Teamwork'];
-  weaknesses = ['Perfectionism', 'Public Speaking'];
+ skills = ['Problem Solving', 'Teamwork'];
+  
 
   addExperience() {
     this.experiences.push({ company: '', position: '', from: '', to: '' });
@@ -41,20 +41,14 @@ export class ResumeManagementComponent {
   }
 
   addStrength() {
-    this.strengths.push('');
+    this.skills.push('');
   }
 
   deleteStrength(index: number) {
-    this.strengths.splice(index, 1);
+    this.skills.splice(index, 1);
   }
 
-  addWeakness() {
-    this.weaknesses.push('');
-  }
-
-  deleteWeakness(index: number) {
-    this.weaknesses.splice(index, 1);
-  }
+  
   showResumeModal = false;
 uploadedResumeFile: File | null = null;
 
