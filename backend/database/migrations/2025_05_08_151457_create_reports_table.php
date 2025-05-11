@@ -18,6 +18,9 @@ return new class extends Migration
             $table->integer('total_job_posted');
             $table->integer('saved_posts');
             $table->integer('applications_received');
+            $table->integer('applications_saved');
+            $table->String('category');
+            $table->integer('category_count');
 
         });
     }
