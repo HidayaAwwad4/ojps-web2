@@ -1,0 +1,8 @@
+<div class="intro-container position-relative text-white text-center">
+  <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt" class="img-fluid intro-image" />
+
+  <div class="intro-overlay d-flex flex-column justify-content-center align-items-center">
+    <h1 class="display-4 fw-bold">{{ images[currentIndex].title }}</h1>
+    <p class="lead">{{ images[currentIndex].subtitle }}</p>
+  </div>
+</div>
