@@ -5,18 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Notification extends Model
+class Employer extends Model
 {
     protected $fillable = [
         'user_id',
-        'message',
-        'type',
-        'read'
+        'company_name',
     ];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function jobListings()
+    {
+        return $this->hasMany(JobListing::class, 'employer_id');
     }
 }
-

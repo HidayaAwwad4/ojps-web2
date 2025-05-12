@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->decimal('salary');
+            $table->decimal('salary', 10, 2);
             $table->string('location');
             $table->string('category');
             $table->string('languages');
@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('experience');
             $table->string('employment');
             $table->string('documents');
-            $table->boolean('isOpened');
-            $table->integer('employer_id');
+            $table->boolean('isOpened')->default(true);
+            $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');
             $table->timestamps();
         });
+
     }
     public function down(): void
     {
