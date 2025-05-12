@@ -35,14 +35,16 @@ export class AppComponent implements OnInit {
   }
 
   getRole(): 'admin' | 'jobseeker' | 'employer' {
-    const role = localStorage.getItem('role');
-    if (role === 'admin' || role === 'jobseeker' || role === 'employer') {
-      return role;
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const role = localStorage.getItem('role');
+      if (role === 'admin' || role === 'jobseeker' || role === 'employer') {
+        return role;
+      }
     }
     return 'jobseeker';
   }
 
-  getUserType(): 'jobseeker' | 'employer' | null {
+    getUserType(): 'jobseeker' | 'employer' | null {
     const role = this.getRole();
     return role === 'jobseeker' || role === 'employer' ? role : null;
   }

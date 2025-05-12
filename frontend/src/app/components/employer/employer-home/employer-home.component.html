@@ -3,7 +3,15 @@
     <h4 class="my-5">
       Discover top talent and find the perfect candidate for every role in your company’s journey.
     </h4>
-        <button class="btn text-white px-4 py-2 add-job-btn" (click)="openJobModal()">+ Add New Job</button>
+    <div class="d-flex gap-3">
+      <!-- Add New Job Button -->
+      <button class="btn text-white px-4 py-2 add-job-btn" (click)="openJobModal()">+ Add New Job</button>
+
+      <!-- Monthly Reports Button -->
+      <a routerLink="/employer-reports" class="btn text-white px-4 py-2 add-job-btn d-flex align-items-center">
+        <i class="bi bi-graph-up-arrow me-2"></i> Monthly Reports
+      </a>
+    </div>
   </div>
   <div class="col-md-7 p-0">
     <div class="hero-img"></div>
