@@ -26,7 +26,7 @@ export class CandidateViewComponent {
     'High School Diploma, Central High School'
   ];
 
-  strengths = ['Teamwork', 'Problem Solving', 'Adaptability'];
+  skills = ['Teamwork', 'Problem Solving', 'Adaptability'];
 
-  weaknesses = ['Perfectionism', 'Public Speaking'];
+  
 }

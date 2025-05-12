@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('favorite_jobs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->integer('job_seeker_id');
+            $table->integer('job_id');
         });
     }
 
