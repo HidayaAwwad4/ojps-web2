@@ -1,18 +1,27 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router, RouterOutlet} from '@angular/router';
 import {FooterComponent} from './components/footer/footer.component'
-import {NgIf} from '@angular/common';
+import {AsyncPipe,NgIf} from '@angular/common';
+import {NotificationDrawerComponent} from './components/Notification/notification-drawer/notification-drawer.component';
 import {NavbarComponent} from './components/navbar/navbar.component';
+import { NotificationService } from './services/notifications/notification.service';
+import {Observable} from 'rxjs';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FooterComponent, NgIf, NavbarComponent],
+  imports: [RouterOutlet, FooterComponent, NgIf, AsyncPipe, NotificationDrawerComponent, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
-  constructor(public router: Router) {
+export class AppComponent implements OnInit {
+
+  drawerVisible!: Observable<boolean>;
+  constructor(public router: Router , private notificationService: NotificationService) {}
+
+  ngOnInit(): void {
+    this.drawerVisible = this.notificationService.drawerVisible$;
   }
+
 
   isAuthPage(): boolean {
     const hiddenFooterRoutes = ['/', '/signup','/signup-employer',
@@ -20,5 +29,21 @@ export class AppComponent {
       '/reset-password','/dashboard-admin'];
     return hiddenFooterRoutes.includes(this.router.url);
   }
-}
 
+  toggleDrawer() {
+    this.notificationService.toggleDrawer();
+  }
+
+  getRole(): 'admin' | 'jobseeker' | 'employer' {
+    const role = localStorage.getItem('role');
+    if (role === 'admin' || role === 'jobseeker' || role === 'employer') {
+      return role;
+    }
+    return 'jobseeker';
+  }
+
+  getUserType(): 'jobseeker' | 'employer' | null {
+    const role = this.getRole();
+    return role === 'jobseeker' || role === 'employer' ? role : null;
+  }
+}

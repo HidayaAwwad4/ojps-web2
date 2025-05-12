@@ -1,4 +1,19 @@
+<app-navbar
+  *ngIf="!isAuthPage()"
+  [role]="getRole()"
+  (notificationClick)="toggleDrawer()">
+</app-navbar>
 
-<router-outlet/>
+
+<router-outlet></router-outlet>
+
+<app-notification-drawer
+  *ngIf="(drawerVisible | async) && getUserType() !== null"
+  [userType]="getUserType()">
+</app-notification-drawer>
+
+
+
+
 <app-footer *ngIf="!isAuthPage()"></app-footer>
 
