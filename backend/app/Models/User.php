@@ -4,6 +4,8 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,6 +19,8 @@ class User extends Authenticatable
         'password',
         'role_id',
         'profile_picture',
+        'location',
+        'summary'
     ];
 
     protected $hidden = [
@@ -32,8 +36,13 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function favoriteJobs() {
-        return $this->hasMany(FavoriteJob::class, 'job_seeker_id');
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(Notification::class);
+    }
 }

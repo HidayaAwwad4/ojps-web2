@@ -4,12 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-class FavoriteJob extends Model
+class Application extends Model
 {
     protected $fillable = [
+        'job_id',
         'job_seeker_id',
-        'job_id'
+        'cover_letter',
+        'status',
+        'appliedAt'
     ];
 
     public function jobSeeker(): BelongsTo
@@ -19,6 +21,7 @@ class FavoriteJob extends Model
 
     public function job(): BelongsTo
     {
-        return $this->belongsTo(JobListing::class, 'job_id');
+        return $this->belongsTo(JobListing::class);
     }
 }
+

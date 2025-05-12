@@ -11,17 +11,24 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resumes', function (Blueprint $table) {
+        Schema::create('job_seekers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
+            $table->string('resume_path')->nullable();
+            $table->text('experience')->nullable();
+            $table->text('education')->nullable();
+            $table->text('skills')->nullable();
+
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('job_seeker');
     }
 };
