@@ -1,0 +1,110 @@
+
+.card.job-card {
+  border: 3px solid #631b1b;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgb(99, 27, 27);
+  transition: 150ms ease-in-out;
+  width: 220px;
+  margin: auto;
+  padding: 0 10px;
+}
+
+.card.job-card:hover {
+  box-shadow: 0 5px 10px rgb(99, 27, 27);
+}
+
+
+.job-card-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.row {
+  margin-right: 8px;
+  margin-left: 8px;
+}
+
+
+
+.custom {
+  color: #631b1b !important;
+}
+
+
+.job-image-wrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid #000000;
+  margin-top: 8px;
+}
+
+.job-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.bookmark-icon {
+  cursor: pointer;
+  color: #631b1b !important;
+}
+
+.bookmark-icon:hover {
+  transform: scale(1);
+  color: #c82424 !important;
+}
+
+
+
+.arrow-icon {
+  color: #631b1b !important;
+}
+
+.custom-rate-text {
+  color: #0b0b0b;
+  font-weight: bold;
+  flex-grow: 1;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 10px;
+}
+
+
+.apply-btn {
+  background-color: rgb(99, 27, 27);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  font-size: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  width: 80px;
+  height: 30px;
+}
+
+.apply-btn:hover {
+  background-color: #491111;
+}
+
+
+.back-btn{
+  border: none;
+  color: #631b1b;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.back-btn:hover{
+  color: #c82424 !important;
+}
+

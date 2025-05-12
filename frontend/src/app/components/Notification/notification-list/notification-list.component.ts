@@ -12,9 +12,6 @@ import {NotificationItemComponent} from '../notification-item/notification-item.
   styleUrl: './notification-list.component.css'
 })
 export class NotificationListComponent {
-  goBack() {
-
-  }
 
   groupedNotifications: any[] = [];
 

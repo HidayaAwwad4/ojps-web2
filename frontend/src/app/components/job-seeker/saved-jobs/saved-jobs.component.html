@@ -1,0 +1,43 @@
+
+
+<div class="container mt-4">
+
+  <div class="d-flex align-items-center mb-4">
+    <i class=" back-btn fa-solid fa-arrow-left me-3"
+       (click)="goBack()">
+    </i>
+    <div class="text-center flex-grow-1">
+      <h2 class="mb-0">Saved Jobs</h2>
+      <p class="mb-0">Your saved jobs are here. Apply when you're ready!</p>
+    </div>
+  </div>
+</div>
+
+<div class="job-card-container">
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+    <div class="col" *ngFor="let job of savedJobs">
+      <div class="card job-card position-relative h-100">
+        <i
+          class="bi bi-bookmark-fill bookmark-icon position-absolute m-2 text-danger"
+          style="font-size: 1.3rem; "
+          (click)="toggleSave(job)"
+        ></i>
+
+        <div class="job-image-wrapper">
+          <img [src]="job.image" alt="Company Logo" class="job-image" />
+        </div>
+
+        <div class="card-body">
+          <h6 class="card-title fw-bold">{{ job.title }}</h6>
+          <p class="card-text small text-muted">{{ job.description }}</p>
+        </div>
+
+        <div class="card-footer custom-rate-text">
+          <div>${{ job.salary }} per hour</div>
+          <button class="apply-btn" (click)="applyJob(job)">Apply Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
