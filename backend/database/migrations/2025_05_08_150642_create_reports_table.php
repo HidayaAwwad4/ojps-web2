@@ -19,10 +19,11 @@ return new class extends Migration
             $table->integer('saved_posts');
             $table->integer('applications_received');
             $table->integer('applications_saved');
-            $table->String('category');
+            $table->string('category');
             $table->integer('category_count');
-
+            $table->timestamps();
         });
+
     }
 
     /**

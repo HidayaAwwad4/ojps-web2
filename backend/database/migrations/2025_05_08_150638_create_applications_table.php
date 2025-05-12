@@ -10,9 +10,8 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('job_id')->constrained()->onDelete('cascade');
-            $table->foreignId('job_seeker_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('resume_id')->constrained()->onDelete('cascade');
+            $table->integer('job_id');
+            $table->integer('job_seeker_id');
             $table->string('cover_letter')->nullable();
             $table->string('status')->default('pending');
             $table->dateTime('appliedAt');

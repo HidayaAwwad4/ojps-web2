@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class JobListing extends Model
 {
@@ -20,8 +22,14 @@ class JobListing extends Model
         'isOpened',
         'employer_id'
     ];
-    public function favoriteJobs() {
+
+    public function favoriteJobs(): HasMany
+    {
         return $this->hasMany(FavoriteJob::class, 'job_id');
     }
 
+    public function employer(): BelongsTo
+    {
+        return $this->belongsTo(Employer::class, 'employer_id');
+    }
 }
