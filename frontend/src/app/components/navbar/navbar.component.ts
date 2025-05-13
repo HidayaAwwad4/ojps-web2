@@ -1,17 +1,17 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgIf} from '@angular/common';
+import {NgClass, NgIf} from '@angular/common';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {JobModalService} from '../../services/job-modal.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgIf, RouterLink, RouterLinkActive],
+  imports: [NgIf, RouterLink, RouterLinkActive, NgClass],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent {
-  @Input() role: 'admin' | 'jobseeker' | 'employer' = 'jobseeker';
+  @Input() role: 'admin' | 'jobseeker' | 'employer' | 'guest' = 'guest';
 
   @Output() notificationClick = new EventEmitter<void>();
 
