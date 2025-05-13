@@ -14,6 +14,9 @@ import {Observable} from 'rxjs';
   styleUrl: './app.component.css'
 })
 export class AppComponent implements OnInit {
+    title(title: any) {
+        throw new Error('Method not implemented.');
+    }
 
   drawerVisible!: Observable<boolean>;
   constructor(public router: Router , private notificationService: NotificationService) {}
@@ -34,10 +37,10 @@ export class AppComponent implements OnInit {
     this.notificationService.toggleDrawer();
   }
 
-  getRole(): 'admin' | 'jobseeker' | 'employer' {
+  getRole(): 'admin' | 'jobseeker' | 'employer' | 'guest' {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const role = localStorage.getItem('role');
-      if (role === 'admin' || role === 'jobseeker' || role === 'employer') {
+      if (role === 'admin' || role === 'jobseeker' || role === 'employer' || role === 'guest') {
         return role;
       }
     }

@@ -1,22 +1,24 @@
 <nav class="navbar">
-  <div class="logo">HiRUZA</div>
-  <div class="title">Welcome To The Hiruza App</div>
-  <div class="menu">
+  <img src="assets/logo-white.png" alt="Hiruza Logo" class="logo" />
+
+  <div class="menu" [ngClass]="{'centered-menu': role === 'guest', 'end-menu': role !== 'guest'}">
     <ng-container *ngIf="role === 'admin'">
       <div class="icon" routerLink="/dashboard-admin" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
       <div class="icon" routerLink="/" routerLinkActive="active"><i class="fa fa-bell"></i><span>Notification</span></div>
       <div class="icon" routerLink="/admin-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
     </ng-container>
 
-    <ng-container *ngIf="role === 'jobseeker'">
+    <ng-container *ngIf="role === 'jobseeker' || role === 'guest' ">
       <div class="icon" routerLink="/home-page" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
       <div class="icon" routerLink="/Saved-Jobs" routerLinkActive="active"><i class="fa fa-bookmark"></i><span>Saved</span></div>
       <div class="icon" routerLink="/applications-status" routerLinkActive="active"><i class="fa fa-folder"></i><span>Applications</span></div>
-      <div class="icon" (click)="onNotificationClick()">
-        <i class="fa fa-bell"></i><span>Notification</span>
+      <div class="icon" (click)="onNotificationClick()"><i class="fa fa-bell"></i><span>Notification</span></div>
+      <div class="icon" *ngIf="role === 'jobseeker'" routerLink="/jobseeker-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
+      <div class="icon login" *ngIf="role === 'guest'" routerLink="/login" routerLinkActive="active">
+        <span>Login</span>
       </div>
-      <div class="icon" routerLink="/jobseeker-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
     </ng-container>
+
 
     <ng-container *ngIf="role === 'employer'">
       <div class="icon" routerLink="/employer-home" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
@@ -30,8 +32,3 @@
   </div>
 </nav>
 
-<!--<app-notification-drawer *ngIf="isDrawerVisible && role !== 'admin'"-->
-<!--                         [userType]="getUserType()">-->
-<!--</app-notification-drawer>-->
-
-<!--<app-notification-drawer [userType]="'employer'" *ngIf="isDrawerVisible"></app-notification-drawer>-->
