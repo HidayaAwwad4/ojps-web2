@@ -1,5 +1,5 @@
-import {Component, Input} from '@angular/core';
-import {NgForOf, NgIf} from '@angular/common';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {NgIf} from '@angular/common';
 import {RouterLink, RouterLinkActive} from '@angular/router';
 import {JobModalService} from '../../services/job-modal.service';
 
@@ -12,9 +12,19 @@ import {JobModalService} from '../../services/job-modal.service';
 })
 export class NavbarComponent {
   @Input() role: 'admin' | 'jobseeker' | 'employer' = 'jobseeker';
-  constructor(private jobModalService: JobModalService) {}
+
+  @Output() notificationClick = new EventEmitter<void>();
+
+  constructor(private jobModalService: JobModalService
+  ) {}
 
   openJobModal() {
     this.jobModalService.openCreateJobModal();
   }
+
+  onNotificationClick() {
+    console.log('Notification icon clicked');
+    this.notificationClick.emit();
+  }
+
 }

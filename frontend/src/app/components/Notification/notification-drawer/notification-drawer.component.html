@@ -1,0 +1,10 @@
+<div class="drawer" [class.open]="isOpen">
+  <div class="drawer-header">
+    <h5>Notifications</h5>
+  </div>
+
+  <div class="drawer-content">
+    <app-seeker-notification *ngIf="userType === 'jobseeker'"></app-seeker-notification>
+    <app-employer-notification *ngIf="userType === 'employer'"></app-employer-notification>
+  </div>
+</div>

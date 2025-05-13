@@ -32,6 +32,7 @@ import {JobSeekerProfilePageComponent} from './components/job-seeker/profile-pag
 import {AdminProfilePageComponent} from './components/admin/profile-page/profile-page.component';
 import {EmployerProfilePageComponent} from './components/employer/profile-page/profile-page.component';
 import {EditProfilePageComponent} from './components/shared/edit-profile-page/edit-profile-page.component';
+import {SavedJobsComponent} from './components/job-seeker/saved-jobs/saved-jobs.component';
 export const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
@@ -65,4 +66,5 @@ export const routes: Routes = [
   { path: 'admin-profile', component: AdminProfilePageComponent },
   { path: 'candidate-view', component: CandidateViewComponent},
   { path: 'resume-management', component: ResumeManagementComponent },
+  { path: 'Saved-Jobs', component: SavedJobsComponent },
 ];
