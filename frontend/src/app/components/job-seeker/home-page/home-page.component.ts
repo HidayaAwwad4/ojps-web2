@@ -16,6 +16,7 @@ import {JobIntroComponent} from '../job-intro/job-intro.component';
     NavbarComponent,
     JobIntroComponent
   ],
+  standalone: true,
   styleUrls: ['./home-page.component.css']
 })
 export class HomepageComponent {

@@ -6,6 +6,7 @@ import {NotificationListComponent} from '../notification-list/notification-list.
     NotificationListComponent,
   ],
   templateUrl: './employer-notification.component.html',
+  standalone: true,
   styleUrl: './employer-notification.component.css'
 })
 export class EmployerNotificationComponent {

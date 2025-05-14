@@ -26,5 +26,9 @@ export class NavbarComponent {
     console.log('Notification icon clicked');
     this.notificationClick.emit();
   }
+  activeIcon: string = '';
 
+  setActive(icon: string) {
+    this.activeIcon = icon;
+  }
 }

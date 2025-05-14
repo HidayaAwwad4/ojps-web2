@@ -6,6 +6,7 @@ import {NotificationListComponent} from '../notification-list/notification-list.
     NotificationListComponent,
   ],
   templateUrl: './seeker-notification.component.html',
+  standalone: true,
   styleUrl: './seeker-notification.component.css'
 })
 export class SeekerNotificationComponent {

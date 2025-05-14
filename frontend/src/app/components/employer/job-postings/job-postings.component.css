@@ -2,11 +2,6 @@
   padding: 60px;
   border-radius: 10px;
 }
-.add-job{
-  background-color: #631B1B;
-  color: white;
-  border-radius: 50px;
-}
 .nav-tabs {
   display: flex;
   justify-content: space-evenly;

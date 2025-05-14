@@ -2,12 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-
 class JobListing extends Model
 {
+    use HasFactory;
+    const EXPERIENCE_OPTIONS = ['0-1 years', '1-3 years', '3+ years', 'Not required'];
+    const EMPLOYMENT_OPTIONS = ['Full-Time', 'Part-Time', 'Remote', 'Contract', 'Internship', 'Temporary', 'Volunteer'];
+    const CATEGORY_OPTIONS = ['Marketing', 'Technology', 'Design', 'Sales', 'Cooking', 'Other'];
     protected $fillable = [
         'title',
         'description',
@@ -22,6 +26,7 @@ class JobListing extends Model
         'isOpened',
         'employer_id'
     ];
+
 
     public function favoriteJobs(): HasMany
     {
