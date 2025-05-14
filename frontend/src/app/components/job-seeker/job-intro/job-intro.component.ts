@@ -7,6 +7,7 @@ import {NgForOf} from '@angular/common';
   imports: [
     NgForOf
   ],
+  standalone: true,
   styleUrls: ['./job-intro.component.css']
 })
 export class JobIntroComponent implements OnInit {

@@ -9,6 +9,7 @@ import {NotificationItemComponent} from '../notification-item/notification-item.
     NotificationItemComponent
   ],
   templateUrl: './notification-list.component.html',
+  standalone: true,
   styleUrl: './notification-list.component.css'
 })
 export class NotificationListComponent {

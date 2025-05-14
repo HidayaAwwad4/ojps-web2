@@ -15,6 +15,11 @@ class JobSeeker extends Model
         'education',
         'skills'
     ];
+    protected $casts = [
+        'experience' => 'array',
+        'education' => 'array',
+        'skills' => 'array',
+    ];
 
     public function user():BelongsTo
     {
