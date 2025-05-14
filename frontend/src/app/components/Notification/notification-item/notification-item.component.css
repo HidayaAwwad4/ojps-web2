@@ -1,21 +1,32 @@
 .card {
+  width: 100% !important;
   border: 2px solid #631B1B;
   border-radius: 12px;
   box-shadow: 0 2px 5px #953f3f;
   transition: 700ms;
 }
+
 .card:hover {
   background-color: #631B1B;
   color: white;
 }
+
 .card:hover p.text-muted {
   color: white !important;
   transition: 700ms;
 }
+
+.card.is-new {
+  background-color: #631B1B !important;
+  color: white !important;
+  border: 2px solid #631B1B;
+  box-shadow: 0 2px 5px #953f3f;
+}
+
+.card.is-new p.text-muted {
+  color: white !important;
+}
+
 img {
   object-fit: cover;
 }
-
-
-
-

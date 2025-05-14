@@ -1,15 +1,4 @@
-.notification-drawer {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 400px;
-  height: 100%;
-  background-color: #fff;
-  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-  overflow-y: auto;
-  z-index: 1050; /* higher than navbar */
-  transition: transform 0.3s ease-in-out;
-}
+
 
 .notification-content {
   padding: 20px;

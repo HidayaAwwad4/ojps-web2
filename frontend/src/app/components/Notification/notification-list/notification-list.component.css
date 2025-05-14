@@ -1,7 +1,30 @@
-.btn{
-  border: none;
-  color: #631b1b;
+.notification-list-wrapper {
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
-.btn:hover{
-  color: #ca6060;
+
+.notification-items {
+  display: flex;
+  padding: 10px;
+  flex-direction: column;
+  gap: 7px ;
+  width: 100%;
+}
+
+.section-title-new {
+  color: #631b1b;
+  font-weight: bold;
+}
+
+.section-new.card {
+  background-color: #631b1b;
+  color: white;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+
+.section-new.card:hover{
+  background-color: #ca6060 !important;
 }
