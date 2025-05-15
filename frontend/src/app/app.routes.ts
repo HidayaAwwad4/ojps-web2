@@ -33,8 +33,10 @@ import {AdminProfilePageComponent} from './components/admin/profile-page/profile
 import {EmployerProfilePageComponent} from './components/employer/profile-page/profile-page.component';
 import {EditProfilePageComponent} from './components/shared/edit-profile-page/edit-profile-page.component';
 import {SavedJobsComponent} from './components/job-seeker/saved-jobs/saved-jobs.component';
+import {WelcomeComponent} from './components/job-seeker/welcome/welcome.component';
+
 export const routes: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: WelcomeComponent },
   { path: 'signup', component: SignUpComponent },
   {path: 'signup-employer',component:SignUpEmployerComponent },
   { path: 'type', component: ChoseUserTypeComponent },
