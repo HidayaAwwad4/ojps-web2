@@ -9,7 +9,7 @@ import {NavbarComponent} from '../../navbar/navbar.component';
 @Component({
   selector: 'app-job-postings',
   standalone: true,
-  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink, NavbarComponent],
+  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink],
   templateUrl: './job-postings.component.html',
   styleUrls: ['./job-postings.component.css']
 })

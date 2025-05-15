@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('schedule');
             $table->string('experience');
             $table->string('employment');
-            $table->string('documents');
+            $table->string('documents')->nullable();;
             $table->boolean('isOpened')->default(true);
             $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');
             $table->timestamps();

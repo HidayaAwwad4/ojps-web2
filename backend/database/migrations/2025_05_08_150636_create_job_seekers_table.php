@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
             $table->string('resume_path')->nullable();
-            $table->text('experience')->nullable();
-            $table->text('education')->nullable();
-            $table->text('skills')->nullable();
+            $table->json('experience')->nullable();
+            $table->json('education')->nullable();
+            $table->json('skills')->nullable();
+
 
             $table->timestamps();
         });

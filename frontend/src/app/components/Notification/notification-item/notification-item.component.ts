@@ -7,6 +7,7 @@ import {NgClass} from '@angular/common';
     NgClass
   ],
   templateUrl: './notification-item.component.html',
+  standalone: true,
   styleUrl: './notification-item.component.css'
 })
 export class NotificationItemComponent {

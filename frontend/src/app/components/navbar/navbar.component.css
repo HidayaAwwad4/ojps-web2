@@ -3,44 +3,62 @@
   align-items: center;
   justify-content: space-between;
   background-color: #641B1B;
-  color: white;
-  padding: 0.5rem 1rem;
-  z-index: 1100;
+  padding: 10px 60px;
+  position: relative;
+  z-index: 60;
 }
 
-.navbar .logo {
-  font-family: fantasy;
-  font-size: 24px;
+.logo {
+  flex: 0 0 auto;
 }
 
-.navbar .title {
-  font-size: 14px;
-}
-
-.navbar .menu {
+.menu {
   display: flex;
-  gap: 1rem;
+  flex: 1;
+  justify-content: center;
+  gap: 25px;
+  position: relative;
 }
 
-.navbar .menu .icon {
+.icon {
+  color: white;
+  font-size: 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 12px;
   cursor: pointer;
-  transition: color 0.3s ease, background-color 0.3s ease;
-  padding: 4px;
-  border-radius: 8px;
 }
 
-.navbar .menu .icon i {
-  font-size: 18px;
-}
-
-.navbar .menu .icon span {
+.icon span {
+  margin-left: 0;
   margin-top: 2px;
+  font-size: 12px;
 }
 
-.navbar .menu .icon:hover {
-  color: #B51D1E;
+.icon.login {
+  position: absolute;
+  right: 0;
+  background-color: white;
+  color: #641B1B;
+  padding: 7px 15px;
+  border-radius: 5px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.icon.login:hover {
+  background-color: #F0F0F0;
+}
+
+.icon.active {
+  color: #000000;
+  font-weight: bold;
+}
+
+.centered-menu {
+  justify-content: center;
+}
+
+.end-menu {
+  justify-content: flex-end;
 }
