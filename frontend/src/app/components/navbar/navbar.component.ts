@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgClass, NgIf} from '@angular/common';
-import {RouterLink, RouterLinkActive} from '@angular/router';
-import {JobModalService} from '../../services/job-modal.service';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgIf, NgClass } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { JobModalService } from '../../services/job-modal.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,24 +11,48 @@ import {JobModalService} from '../../services/job-modal.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  @Input() role: 'admin' | 'jobseeker' | 'employer' | 'guest' = 'guest';
+export class NavbarComponent implements OnInit {
+  role: 'admin' | 'jobseeker' | 'employer' | 'guest' = 'guest';
 
   @Output() notificationClick = new EventEmitter<void>();
 
-  constructor(private jobModalService: JobModalService
+  constructor(
+    private jobModalService: JobModalService,
+    private router: Router
   ) {}
+
+  ngOnInit(): void {
+    const url = this.router.url;
+
+    if (url.startsWith('/home/guest')) {
+      this.role = 'guest';
+    } else if (
+      url.startsWith('/home-page') ||
+      url.startsWith('/jobseeker-profile') ||
+      url.startsWith('/Saved-Jobs') ||
+      url.startsWith('/applications-status')
+    ) {
+      this.role = 'jobseeker';
+    } else if (
+      url.startsWith('/employer-home') ||
+      url.startsWith('/employer-profile') ||
+      url.startsWith('/employer/job-postings')
+    ) {
+      this.role = 'employer';
+    } else {
+      this.role = 'admin';
+    }
+  }
 
   openJobModal() {
     this.jobModalService.openCreateJobModal();
   }
 
   onNotificationClick() {
-    console.log('Notification icon clicked');
     this.notificationClick.emit();
   }
-  activeIcon: string = '';
 
+  activeIcon: string = '';
   setActive(icon: string) {
     this.activeIcon = icon;
   }
