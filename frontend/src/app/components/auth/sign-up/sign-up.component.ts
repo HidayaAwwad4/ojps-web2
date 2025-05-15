@@ -6,19 +6,16 @@ import {FormsModule} from '@angular/forms';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-<<<<<<< Updated upstream
+
   standalone: true,
-  styleUrl: './sign-up.component.css'
-})
-export class SignUpComponent {
-=======
   imports: [
-    NgClass,
     FormsModule,
+    NgClass,
     NgIf
   ],
-  styleUrls: ['./sign-up.component.css']
+  styleUrl: './sign-up.component.css'
 })
+
 export class SignUpComponent {
   fullname: string = '';
   email: string = '';
