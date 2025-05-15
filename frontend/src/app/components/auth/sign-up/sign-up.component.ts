@@ -1,23 +1,19 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgClass, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-<<<<<<< Updated upstream
   standalone: true,
-  styleUrl: './sign-up.component.css'
-})
-export class SignUpComponent {
-=======
   imports: [
-    NgClass,
     FormsModule,
-    NgIf
+    NgClass,
+    NgIf,
+    RouterLink
   ],
-  styleUrls: ['./sign-up.component.css']
+  styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent {
   fullname: string = '';
