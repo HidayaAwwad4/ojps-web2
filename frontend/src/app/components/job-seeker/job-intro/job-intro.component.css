@@ -1,5 +1,5 @@
 .intro-container {
-  height: 400px;
+  height: 60vh;
   overflow: hidden;
   position: relative;
 }
@@ -17,7 +17,7 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.4); /* darker overlay for text visibility */
+  background: rgba(0, 0, 0, 0.4);
   color: white;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
