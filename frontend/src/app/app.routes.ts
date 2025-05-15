@@ -46,6 +46,7 @@ export const routes: Routes = [
   { path: 'verify-code', component: VerifyCodeComponent },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'home-page', component: HomepageComponent },
+  {path: 'home/guest',component: HomepageComponent},
   { path: 'employer-home', component: EmployerHomeComponent },
   { path: 'employer/job-postings', component: JobPostingsComponent },
   { path: 'dashboard-admin', component: DashboardAdminComponent },
