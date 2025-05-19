@@ -1,53 +1,51 @@
-import { Component } from '@angular/core';
-import {NgForOf} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { NgForOf } from '@angular/common';
+import { RouterLink } from '@angular/router';
 import { JobModalService } from '../../../services/job-modal.service';
-import {JobCardComponent} from "../job-card/job-card.component";
-import {CreateJobComponent} from '../create-job/create-job.component';
-import console from 'node:console';
+import { JobCardComponent } from '../job-card/job-card.component';
+import { CreateJobComponent } from '../create-job/create-job.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
+import {JobService} from '../../../services/jobs/job.service';
+
 @Component({
   selector: 'app-employer-home',
-  standalone:true,
-  imports: [JobCardComponent, NgForOf, RouterLink, CreateJobComponent,NavbarComponent],
+  standalone: true,
+  imports: [
+    JobCardComponent,
+    NgForOf,
+    RouterLink,
+    CreateJobComponent,
+    NavbarComponent
+  ],
   templateUrl: './employer-home.component.html',
   styleUrl: './employer-home.component.css'
 })
-export class EmployerHomeComponent {
-  constructor(private jobModalService: JobModalService) {}
+export class EmployerHomeComponent implements OnInit {
+  jobs: any[] = [];
+  employerId = 1;
 
-  openJobModal() {
+  constructor(
+    private jobModalService: JobModalService,
+    private jobService: JobService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadJobs();
+  }
+
+  loadJobs(): void {
+    this.jobService.getJobsByEmployer(this.employerId).subscribe({
+      next: (data) => {
+        this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
+      },
+      error: (err) => {
+        console.error('Failed to load jobs:', err);
+      }
+    });
+  }
+
+
+  openJobModal(): void {
     this.jobModalService.openCreateJobModal();
   }
-  jobs = [
-    {
-      image: 'assets/adham.jpg',
-      title: 'Full-Stack Developer',
-      description: 'Responsible for developing both front-end and back-end systems.',
-      salary: '$800 - $1000 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'UI/UX Designer',
-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
-      salary: '$700 - $900 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'Mobile App Developer',
-      description: 'Build and maintain cross-platform mobile applications.',
-      salary: '$750 - $950 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'Data Analyst',
-      description: 'Analyze data trends and create reports.',
-      salary: '$850 - $1050 Salary/Month',
-      status: 'open'
-    }
-  ];
-
 }

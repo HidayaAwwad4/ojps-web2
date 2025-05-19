@@ -9,10 +9,10 @@
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.title" class="form-control" />
           <span *ngIf="!isEditMode">{{ jobDetails.title }}</span>
         </h5>
-        <p class="mb-0 text-muted">
+        <!--<p class="mb-0 text-muted">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.companyName" class="form-control" />
           <span *ngIf="!isEditMode">{{ jobDetails.companyName }}</span>
-        </p>
+        </p>-->
         <p class="text-muted">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.location" class="form-control" />
           <span *ngIf="!isEditMode">{{ jobDetails.location }}</span>
@@ -46,8 +46,8 @@
       <div class="info-row my-3">
         <span>Experience</span>
         <span class="fw-bold">
-          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.experienceRequired" class="form-control" />
-          <span *ngIf="!isEditMode">{{ jobDetails.experienceRequired }}</span>
+          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.experience" class="form-control" />
+          <span *ngIf="!isEditMode">{{ jobDetails.experience }}</span>
         </span>
       </div>
       <hr>
@@ -62,8 +62,8 @@
       <div class="info-row my-3">
         <span>Employment</span>
         <span class="fw-bold">
-          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employmentType" class="form-control" />
-          <span *ngIf="!isEditMode">{{ jobDetails.employmentType }}</span>
+          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employment" class="form-control" />
+          <span *ngIf="!isEditMode">{{ jobDetails.employment }}</span>
         </span>
       </div>
       <hr>
@@ -72,6 +72,14 @@
         <span class="fw-bold">
           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.schedule" class="form-control" />
           <span *ngIf="!isEditMode">{{ jobDetails.schedule }}</span>
+        </span>
+      </div>
+      <hr>
+      <div class="info-row my-3">
+        <span>category</span>
+        <span class="fw-bold">
+          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.category" class="form-control" />
+          <span *ngIf="!isEditMode">{{ jobDetails.category }}</span>
         </span>
       </div>
       <hr>

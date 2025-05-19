@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   isAuthPage(): boolean {
     const hiddenFooterRoutes = ['/', '/signup','/signup-employer',
       '/forgot-password','/verify-code','/field','/login','/type',
-      '/reset-password','/dashboard-admin'];
+      '/reset-password','/dashboard-admin','/job-details'];
     return hiddenFooterRoutes.includes(this.router.url);
   }
 
