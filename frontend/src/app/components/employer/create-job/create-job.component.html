@@ -10,84 +10,79 @@
         <form>
           <div class="mb-3">
             <label>Job Title</label>
-            <input type="text" class="form-control custom-border" placeholder="title...">
+            <input type="text" class="form-control custom-border" placeholder="title..." [(ngModel)]="jobDetails.title" name="title">
           </div>
 
           <div class="mb-3">
             <label>Description</label>
-            <textarea rows="4" class="form-control custom-border" placeholder="description..."></textarea>
+            <textarea rows="4" class="form-control custom-border" placeholder="description..." [(ngModel)]="jobDetails.description" name="description"></textarea>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Location</label>
-              <input type="text" class="form-control custom-border" placeholder="e.g. Nablus, Palestine">
+              <input type="text" class="form-control custom-border" placeholder="e.g. Nablus, Palestine" [(ngModel)]="jobDetails.location" name="location">
             </div>
             <div class="col-md-6 mb-3">
               <label>Languages</label>
-              <input type="text" class="form-control custom-border" placeholder="e.g. English - Advanced">
+              <input type="text" class="form-control custom-border" placeholder="e.g. English - Advanced" [(ngModel)]="jobDetails.languages" name="languages">
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Schedule</label>
-              <input type="text" class="form-control custom-border" placeholder="e.g. Sunday to Thursday">
+              <input type="text" class="form-control custom-border" placeholder="e.g. Sunday to Thursday" [(ngModel)]="jobDetails.schedule" name="schedule">
             </div>
             <div class="col-md-6 mb-3">
               <label>Salary</label>
-              <input type="text" class="form-control custom-border" placeholder="Hourly/ daily/ monthly">
+              <input type="number" class="form-control custom-border" placeholder="e.g. 10.50, 100, 5000" [(ngModel)]="jobDetails.salary" name="salary" min="0" step="0.01" required>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-6 mb-3">
               <label>Experience</label>
-              <select class="form-select custom-border">
-                <option selected disabled> - - - - - - - - </option>
-                <option>0-1 years</option>
-                <option>1-3 years</option>
-                <option>3+ years</option>
-                <option>Not required</option>
+              <select class="form-select custom-border" [(ngModel)]="jobDetails.experience" name="experience">
+                <option *ngFor="let option of jobOptions.experienceOptions" [value]="option">{{ option }}</option>
               </select>
             </div>
             <div class="col-md-6 mb-3">
               <label>Employment</label>
-              <select class="form-select custom-border">
-                <option selected disabled> - - - - - - - - </option>
-                <option>Full-Time</option>
-                <option>Part-Time</option>
-                <option>Remote</option>
-                <option>Contract</option>
-                <option>Internship</option>
-                <option>Temporary</option>
-                <option>Volunteer</option>
+              <select class="form-select custom-border" [(ngModel)]="jobDetails.employment" name="employmentType">
+                <option *ngFor="let option of jobOptions.employmentOptions" [value]="option">{{ option }}</option>
               </select>
-            </div>
-
-              <div class="mb-3">
-                <label>Category</label>
-                <select class="form-select custom-border">
-                  <option selected disabled> - - - - - - - - </option>
-                  <option>Marketing</option>
-                  <option>Technology</option>
-                  <option>Design</option>
-                  <option>Sales</option>
-                  <option>Cooking</option>
-                  <option>Other</option>
-                </select>
             </div>
           </div>
 
           <div class="mb-3">
+            <label>Category</label>
+            <select class="form-select custom-border" [(ngModel)]="jobDetails.category" name="category">
+              <option *ngFor="let option of jobOptions.categoryOptions" [value]="option">{{ option }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
             <label class="form-label">Documents</label>
-            <input type="file" class="form-control custom-border">
+            <input type="file" class="form-control custom-border" (change)="onFileSelected($event)">
           </div>
         </form>
       </div>
 
       <div class="modal-footer">
-        <button class="btn w-100 text-white" style="background-color: #631B1B;" (click)="closeModal()">Post</button>
+        <button
+          type="button"
+          class="btn w-100 text-white"
+          [disabled]="!isFormValid()"
+          style="background-color: #631B1B;"
+          (click)="submitJob()"
+        >
+          Post
+        </button>
+      </div>
+
+      <div *ngIf="!isFormValid()" class="text-danger text-center mt-2">
+        Please fill in all required fields
       </div>
     </div>
   </div>

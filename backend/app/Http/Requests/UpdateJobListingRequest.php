@@ -9,7 +9,7 @@ class UpdateJobListingRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // تأكدي من تغييرها حسب الحاجة إذا بدك تتحكمي بالصلاحيات
+        return true;
     }
 
     public function rules(): array
