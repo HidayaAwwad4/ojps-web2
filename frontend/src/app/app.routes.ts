@@ -55,7 +55,7 @@ export const routes: Routes = [
   { path: 'admin/job-listings', component: JobListingsComponent },
   {path: 'employer/shortlist', component: ShortlistComponent},
   {path: 'employer/job-applications', component: JobApplicationsComponent},
-  {path: 'job-details', component: JobDetailsComponent},
+  { path: 'job-details/:id', component: JobDetailsComponent },
   { path: 'applications-status', component: ApplicationsStatusComponent },
   {path: 'categories-page', component: CategoriesPageComponent},
   {path: 'application-review', component: ApplicationReviewComponent},
