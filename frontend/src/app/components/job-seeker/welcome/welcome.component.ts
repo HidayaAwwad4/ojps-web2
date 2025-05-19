@@ -11,7 +11,7 @@ export class WelcomeComponent {
   constructor(private router: Router) {}
 
   goToLogin() {
-    this.router.navigate(['/home-page']).then(() => {
+    this.router.navigate(['/home/guest']).then(() => {
       console.log('Navigation successful!');
     }).catch((error) => {
       console.error('Navigation error:', error);
