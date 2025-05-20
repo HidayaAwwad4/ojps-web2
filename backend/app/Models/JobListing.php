@@ -23,6 +23,7 @@ class JobListing extends Model
         'experience',
         'employment',
         'documents',
+        'company_logo',
         'isOpened',
         'employer_id'
     ];

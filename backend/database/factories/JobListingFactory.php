@@ -17,14 +17,17 @@ class JobListingFactory extends Factory
             'description' => $this->faker->paragraph,
             'salary' => $this->faker->numberBetween(3000, 10000),
             'location' => $this->faker->city,
-            'category' => $this->faker->randomElement(JobListing::CATEGORY_OPTIONS),
             'languages' => 'English',
             'schedule' => 'Sunday, Tuesday, Thursday',
+            'documents' => null,
+            'company_logo' => null,
+            'isOpened' => 1,
+            'employer_id' => Employer::factory(),
+            'category' => $this->faker->randomElement(JobListing::CATEGORY_OPTIONS),
             'experience' => $this->faker->randomElement(JobListing::EXPERIENCE_OPTIONS),
             'employment' => $this->faker->randomElement(JobListing::EMPLOYMENT_OPTIONS),
-            'documents' => null,
-            'isOpened' => false,
-            'employer_id' => Employer::factory(),
+
         ];
+
     }
 }

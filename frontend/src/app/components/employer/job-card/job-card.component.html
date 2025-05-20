@@ -15,8 +15,12 @@
     (click)="onCloseClick($event)">
     Close
   </button>
+  @if(job.company_logo != null){
+    <img [src]="job.company_logo" alt="Company Logo" class="mb-3 job-img" />
+  }@else{
+  <img [src]=" 'assets/default-logo.png'" alt="Company Logo" class="mb-3 job-img" />
+  }
 
-  <img [src]="job.image" alt="Company Logo" class="mb-3 job-img" />
 
   <div>
     <h6 class="fw-bold">{{ job.title }}</h6>
