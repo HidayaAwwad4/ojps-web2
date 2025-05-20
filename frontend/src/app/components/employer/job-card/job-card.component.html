@@ -1,39 +1,43 @@
 <div
-  class="job-card position-relative p-3 h-100 d-flex flex-column justify-content-between"
+  class="job-card-modern"
   [routerLink]="['/job-details', job.id]"
   [queryParams]="{ role: 'employer' }"
   data-bs-toggle="tooltip"
   data-bs-placement="top"
   title="Click to view job details"
-  data-bs-delay='{"show":0,"hide":100}'>
-
-
-<button
-    *ngIf="job.status === 'open'"
-    class="btn btn-sm position-absolute top-0 end-0 m-2 px-3 py-1 rounded-pill shadow"
-    style="background-color: #631B1B; color: white; font-size: 0.75rem; z-index: 2;"
-    (click)="onCloseClick($event)">
-    Close
-  </button>
-  @if(job.company_logo != null){
-    <img [src]="job.company_logo" alt="Company Logo" class="mb-3 job-img" />
-  }@else{
-  <img [src]=" 'assets/default-logo.png'" alt="Company Logo" class="mb-3 job-img" />
-  }
-
-
-  <div>
-    <h6 class="fw-bold">{{ job.title }}</h6>
-    <p class="small">{{ job.description }}</p>
-    <p class="salary">{{ job.salary }}</p>
+  data-bs-delay='{"show":0,"hide":100}'
+>
+  <div class="card-top">
+    <div class="logo-wrapper">
+      <img
+        [src]="job.company_logo || 'assets/default-logo.png'"
+        alt="Company Logo"
+        class="company-logo"
+      />
+    </div>
+    <div class="dropdown-menu-container" (click)="$event.stopPropagation()">
+      <button class="btn btn-link dropdown-toggle" (click)="toggleDropdown($event)" aria-label="Toggle menu">
+        <i class="bi bi-three-dots-vertical"></i>
+      </button>
+      <ul *ngIf="dropdownOpen" class="dropdown-menu">
+        <li><button (click)="onDetailsClick($event)" [routerLink]="['/job-details', job.id]">more details</button></li>
+        <li><button (click)="onEditClick($event)" [routerLink]="['/job-details', job.id]">Edit</button></li>
+        <li><button (click)="onDeleteClick($event)">Delete</button></li>
+        <li><button (click)="onApplicantsClick($event)" [routerLink]="['/employer/job-applications']">Applicants</button></li>
+        <li>
+          <button *ngIf="job.isOpened" (click)="onCloseClick($event)">Close Job</button>
+          <button *ngIf="!job.isOpened" (click)="onOpenClick($event)">Open Job</button>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <div class="d-flex justify-content-between">
-    <button class="btn btn-outline-dark btn-sm w-100 me-2"
-            [routerLink]="['/employer/job-applications']"
-            (click)="$event.stopPropagation()">Applicants</button>
-    <button class="btn btn-outline-danger btn-sm w-100"
-            (click)="onDeleteClick($event)">Delete</button>
+
+  <div class="card-body">
+    <h5 class="job-title">{{ job.title }}</h5>
+    <h6 class="job-category">{{ job.category }}</h6>
+    <p class="job-desc">{{ job.description }}</p>
+    <p class="job-salary">{{ job.salary }}</p>
   </div>
 
 </div>

@@ -1,36 +1,72 @@
-
 <div class="job-applications-container">
-  <div class="row justify-content-center mb-5">
+  <!-- Back Button + Title -->
+  <div class="row justify-content-center mb-4">
     <i class="fa-solid fa-arrow-left text-dark me-2"
        style="font-size: 1.8rem; cursor: pointer; color: #631b1b !important;"
        [routerLink]="['/employer/job-postings']"></i>
     <div class="text-center">
-      <h2>job applications</h2>
+      <h2>Job Applications</h2>
     </div>
   </div>
 
+  <!-- Filter Buttons -->
+  <div class="text-center mb-4">
+    <div class="btn-group" role="group">
+      <button class="btn btn-outline-dark" [class.active]="selectedFilter === 'all'" (click)="filterProfiles('all')">All</button>
+      <button class="btn btn-outline-dark" [class.active]="selectedFilter === 'pending'" (click)="filterProfiles('pending')">Pending</button>
+      <button class="btn btn-outline-dark" [class.active]="selectedFilter === 'shortlisted'" (click)="filterProfiles('shortlisted')">Shortlisted</button>
+      <button class="btn btn-outline-dark" [class.active]="selectedFilter === 'accepted'" (click)="filterProfiles('accepted')">Accepted</button>
+      <button class="btn btn-outline-dark" [class.active]="selectedFilter === 'rejected'" (click)="filterProfiles('rejected')">Rejected</button>
+    </div>
+  </div>
+
+  <!-- No Results Message -->
+  <div *ngIf="profiles.length === 0" class="text-center text-muted mb-5">
+    No applications found for this filter.
+  </div>
+
+  <!-- Profiles Cards -->
   <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-md-3" *ngFor="let profile of profiles"  [routerLink]="['/candidate-view']">
+    <div class="col-12 col-sm-6 col-md-3" *ngFor="let profile of profiles" [routerLink]="['/candidate-view']">
       <div class="card text-center profile-card h-100">
         <div class="card-header p-0 bg-maroon rounded-top">
           <img [src]="profile.image" class="rounded-circle profile-img mt-2" alt="Profile image">
         </div>
         <div class="card-body">
-          <h5 class="card-title">{{profile.name}}</h5>
-          <p class="card-text mb-0">{{profile.email}}</p>
-          <p class="card-text">{{profile.location}}</p>
-          <h6>{{profile.position}}</h6>
-          <p class="card-text">{{profile.description}}</p>
+          <h5 class="card-title">{{ profile.name }}</h5>
+          <p class="card-text mb-0">{{ profile.email }}</p>
+          <p class="card-text">{{ profile.location }}</p>
+          <h6>{{ profile.position }}</h6>
+          <p class="card-text">{{ profile.description }}</p>
+
+          <!-- Buttons by Status -->
           <div class="d-flex justify-content-around mt-3">
-            <button class="btn btn-outline-success" (click)="shortlist($event)">Add to Shortlist</button>
-            <button class="btn btn-outline-danger" (click)="reject($event)">Reject</button>
+            <ng-container [ngSwitch]="profile.status">
+              <!-- Pending -->
+              <ng-container *ngSwitchCase="'pending'">
+                <button class="btn btn-outline-success" (click)="shortlist($event, profile)">Add to Shortlist</button>
+                <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
+              </ng-container>
+
+              <!-- Shortlisted -->
+              <ng-container *ngSwitchCase="'shortlisted'">
+                <button class="btn btn-outline-primary" (click)="accept($event, profile)">Accept</button>
+                <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
+              </ng-container>
+
+              <!-- Accepted -->
+              <ng-container *ngSwitchCase="'accepted'">
+                <button class="btn btn-success" disabled>Accepted</button>
+              </ng-container>
+
+              <!-- Rejected -->
+              <ng-container *ngSwitchCase="'rejected'">
+                <button class="btn btn-danger" disabled>Rejected</button>
+              </ng-container>
+            </ng-container>
           </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="text-center mt-4">
-    <button class="btn view-shortlist-btn" [routerLink]="['/employer/shortlist']">View Shortlist</button>
   </div>
 </div>

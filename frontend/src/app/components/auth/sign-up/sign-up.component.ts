@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {NgClass, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 
@@ -11,7 +11,8 @@ import {FormsModule} from '@angular/forms';
   imports: [
     FormsModule,
     NgClass,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   styleUrl: './sign-up.component.css'
 })

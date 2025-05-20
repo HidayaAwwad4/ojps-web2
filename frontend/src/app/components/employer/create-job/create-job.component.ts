@@ -24,9 +24,9 @@ export class CreateJobComponent implements OnInit {
   selectedLogoUrl: string | null = null;
 
   jobOptions: any = {
-    experiences: [],
-    employmentTypes: [],
-    categories: []
+    experienceOptions: [],
+    employmentOptions: [],
+    categoryOptions: []
   };
 
   jobDetails: any = {
@@ -39,10 +39,10 @@ export class CreateJobComponent implements OnInit {
     employment: '',
     category: '',
     salary: null,
-    document: null,
+    documents: null,
     company_logo: null,
     isOpened: 1,
-    employer_id: 1
+    employer_id: 37
   };
 
   constructor(
@@ -64,14 +64,15 @@ export class CreateJobComponent implements OnInit {
     const formData = new FormData();
     for (const key in this.jobDetails) {
       if (this.jobDetails[key] !== null && this.jobDetails[key] !== undefined) {
+        if (key === 'document' || key === 'company_logo') continue;
         formData.append(key, this.jobDetails[key]);
       }
     }
     if (this.selectedLogo) {
       formData.append('company_logo', this.selectedLogo);
     }
-    if (this.jobDetails.document) {
-      formData.append('document', this.jobDetails.document);
+    if (this.jobDetails.documents) {
+      formData.append('documents', this.jobDetails.documents);
     }
     this.jobService.createJob(formData).subscribe({
       next: (response) => {
@@ -81,6 +82,7 @@ export class CreateJobComponent implements OnInit {
       },
       error: (error) => {
         console.error('Error creating job:', error);
+        alert('Error: ' + JSON.stringify(error.error));
       }
     });
   }
@@ -125,7 +127,7 @@ export class CreateJobComponent implements OnInit {
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
-    this.jobDetails.document = file;
+    this.jobDetails.documents = file;
   }
 
   isFormValid(): boolean {

@@ -14,13 +14,14 @@ class JobListingController extends Controller
     public function getById($id): JsonResponse
     {
         try {
-            $job = JobListing::findOrFail($id);
+            $job = JobListing::with('employer')->findOrFail($id);
 
             if ($job->company_logo) {
-                $job->company_logo = Storage::url($job->company_logo);
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+
             }
-            if ($job->document) {
-                $job->document = Storage::url($job->document);
+            if ($job->documents) {
+                $job->documents = config('app.url') . Storage::url($job->documents);
             }
 
             return response()->json($job);
@@ -32,15 +33,17 @@ class JobListingController extends Controller
 
     public function getByEmployer($employerId): JsonResponse
     {
-        $jobs = JobListing::where('employer_id', $employerId)->get();
+        $jobs = JobListing::with('employer')
+        ->where('employer_id', $employerId)
+            ->get();
 
         $jobs->transform(function ($job) {
             if ($job->company_logo) {
-                $job->company_logo = Storage::url($job->company_logo);
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
             }
 
-            if ($job->document) {
-                $job->document = Storage::url($job->document);
+            if ($job->documents) {
+                $job->documents =config('app.url') . Storage::url($job->documents);
             }
 
             return $job;
@@ -94,11 +97,6 @@ class JobListingController extends Controller
     {
         try {
             $job = JobListing::findOrFail($id);
-
-            /*if ($job->employer_id !== Auth::id()) {
-                return response()->json(['error' => 'Unauthorized'], 403);
-            }*/
-
             $job->delete();
             return response()->json(['message' => 'Job deleted successfully']);
         } catch (\Exception $e) {
