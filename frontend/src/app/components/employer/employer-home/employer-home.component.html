@@ -19,7 +19,7 @@
 </div>
 
 <div class="dashboard mt-5" style="font-family: 'Carlito', sans-serif;">
-  <app-create-job></app-create-job>
+  <app-create-job (jobCreated)="addJobToList($event)"></app-create-job>
   <div class="row align-items-center">
     <div class="col">
       <h5 class="fw-bold">Open Positions</h5>
