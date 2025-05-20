@@ -14,7 +14,7 @@ return new class extends Migration
             $table->integer('job_seeker_id');
             $table->string('cover_letter')->nullable();
             $table->string('status')->default('pending');
-            $table->dateTime('appliedAt');
+            $table->dateTime('appliedAt')->nullable();
             $table->timestamps();
         });
     }
