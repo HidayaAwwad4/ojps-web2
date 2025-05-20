@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {NotificationListComponent} from '../notification-list/notification-list.component';
 @Component({
   selector: 'app-seeker-notification',
@@ -10,5 +10,5 @@ import {NotificationListComponent} from '../notification-list/notification-list.
   styleUrl: './seeker-notification.component.css'
 })
 export class SeekerNotificationComponent {
-
+  @Input() notifications: any[] = [];
 }

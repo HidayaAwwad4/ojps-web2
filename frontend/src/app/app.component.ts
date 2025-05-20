@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
         return role;
       }
     }
-    return 'jobseeker';
+    return 'employer';
   }
 
     getUserType(): 'jobseeker' | 'employer' | null {
