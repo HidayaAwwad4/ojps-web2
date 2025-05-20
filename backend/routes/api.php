@@ -3,15 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JobListingController;
-
-Route::get('/jobs', [JobListingController::class, 'getAll']);
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteJobController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\JobListingController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -44,6 +40,7 @@ Route::get('/favorites', [FavoriteJobController::class, 'index']);
 Route::post('/favorites', [FavoriteJobController::class, 'store']);
 Route::delete('/favorites/{id}', [FavoriteJobController::class, 'destroy']);
 Route::get('/favorites/job-seeker/{jobSeekerId}', [FavoriteJobController::class, 'getByJobSeeker']);
+Route::get('/jobs', [JobListingController::class, 'getAll']);
 Route::get('/jobs/{id}', [JobListingController::class, 'getById']);
 Route::get('/employer/{employerId}/jobs', [JobListingController::class, 'getByEmployer']);
 Route::post('/jobs', [JobListingController::class, 'create']);
@@ -65,7 +62,7 @@ Route::get('/admin/job-seeker-count', [AdminController::class, 'jobSeekerCount']
 Route::get('/admin/job-listing-count', [AdminController::class, 'jobListingCount']);
 Route::get('/admin/accepted-applications', [AdminController::class, 'acceptedApplicationsCount']);
 Route::get('/admin/rejected-applications', [AdminController::class, 'rejectedApplicationsCount']);
-Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListing]);
+Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListing']);
 Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions']);
 Route::get('/applications/job/{jobId}', [ApplicationController::class, 'getApplicantsByJobId']);
 
