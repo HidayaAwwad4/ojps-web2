@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->text('summary')->nullable();
             $table->foreignId('role_id')->constrained()->onDelete('cascade');
-
+            $table->boolean('is_approved')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

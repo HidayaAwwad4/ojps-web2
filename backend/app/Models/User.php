@@ -20,7 +20,8 @@ class User extends Authenticatable
         'role_id',
         'profile_picture',
         'location',
-        'summary'
+        'summary',
+        'is_approved'
     ];
 
     protected $hidden = [
@@ -44,5 +45,10 @@ class User extends Authenticatable
     public function notifications(): HasMany
     {
         return $this->hasMany(Notification::class);
+    }
+
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Report::class);
     }
 }
