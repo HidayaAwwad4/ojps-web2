@@ -26,7 +26,6 @@ import {CandidateViewComponent} from './components/employer/candidate-view/candi
 import {SeekerNotificationComponent} from './components/Notification/seeker-notification/seeker-notification.component';
 import {EmployerReportsComponent} from './components/Reports/employer-reports/employer-reports.component';
 import {AdminReportsComponent} from './components/Reports/admin-reports/admin-reports.component';
-import {SignUpEmployerComponent} from './components/auth/sign-up-employer/sign-up-employer.component';
 import {JobFieldCategoriesComponent} from './components/auth/job-field-categories/job-field-categories.component';
 import {JobSeekerProfilePageComponent} from './components/job-seeker/profile-page/profile-page.component';
 import {AdminProfilePageComponent} from './components/admin/profile-page/profile-page.component';
@@ -37,8 +36,7 @@ import {WelcomeComponent} from './components/job-seeker/welcome/welcome.componen
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
-  { path: 'signup', component: SignUpComponent },
-  {path: 'signup-employer',component:SignUpEmployerComponent },
+  { path: 'sign-up', component: SignUpComponent },
   { path: 'type', component: ChoseUserTypeComponent },
   { path: 'login', component: LoginComponent },
   {path: 'field', component: JobFieldCategoriesComponent },

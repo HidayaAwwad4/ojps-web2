@@ -1,10 +1,8 @@
 <div class="login-box">
   <img src="assets/sign-up.jpg" alt="Background" class="background-img" />
   <div class="form-section">
-
     <img src="assets/logo.png" alt="Logo" class="logo-img" />
-
-    <h1>Welcome Back </h1>
+    <h1>Welcome Back</h1>
     <p class="sub-text">Login to access your dream job opportunities!</p>
 
     <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm)" novalidate>
@@ -27,7 +25,7 @@
         <small *ngIf="emailInput.errors?.['email']">Invalid email format.</small>
       </div>
 
-
+      <!-- Password -->
       <label for="password">Password</label>
       <input
         type="password"
@@ -40,11 +38,11 @@
         #passwordInput="ngModel"
         [ngClass]="{ 'invalid-input': passwordInput.invalid && submitted }"
       />
-
       <div class="error-message" *ngIf="passwordInput.invalid && submitted">
         <small *ngIf="passwordInput.errors?.['required']">Password is required.</small>
         <small *ngIf="passwordInput.errors?.['minlength']">Password must be at least 6 characters.</small>
       </div>
+
       <p class="forgot-password-link">
         <a href="/forgot-password">Forgot Password?</a>
       </p>
@@ -53,17 +51,12 @@
         <small>{{ formInvalidMessage }}</small>
       </div>
 
-
       <div class="error-message" *ngIf="formValidButWrongFormat">
         <small>Email or password is incorrect.</small>
       </div>
 
-
-      <button type="submit" class="login-button">
-        Log In
-      </button>
+      <button type="submit" class="login-button">Log In</button>
       <p class="login-link">Don't have an account? <a class="signup-link" href="/type">Sign Up</a></p>
     </form>
-
   </div>
 </div>

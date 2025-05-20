@@ -12,12 +12,12 @@
 
   .signup-box {
     width: 1000px;
-    height: 650px;
+    height: 700px;
     position: relative;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    margin: 50px 100px;
+    margin: 50px 50px;
      margin-left:250px;
   }
 
@@ -58,8 +58,8 @@
 
 
   .sub-text {
-    margin-bottom: 30px;
-    font-size: 20px;
+    margin-bottom: 10px;
+    font-size: 15px;
     color: #6e1f1f;
 
     text-align: center;
@@ -74,18 +74,21 @@
     margin-bottom: 5px;
     font-weight: 600;
     text-align: left;
+
+    display: block;
   }
 
   input {
-
-    padding: 10px;
+    width: 100%;
+    margin-bottom: 5px;
+    padding: 8px;
     border-radius: 20px;
     border: 1px solid #aaa;
   }
 
   button {
     margin-top: 20px;
-    padding: 12px;
+    padding: 5px;
     border-radius: 20px;
     background-color: #6e1f1f;
     color: white;
@@ -114,10 +117,11 @@
   .invalid-input {
     border: 1px solid red;
   }
-
   .error-message {
+    min-height: 2px;
     color: red;
-    font-size: 0.85em;
-    margin-top: 4px;
-    margin-bottom: 12px;
+    font-size: 12px;
+    margin-top: 1px;
+    margin-bottom: 2px;
   }
+

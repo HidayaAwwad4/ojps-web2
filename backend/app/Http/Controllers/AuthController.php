@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
+
 
 class AuthController extends Controller
 {
@@ -24,7 +26,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:6',
             'role_id' => 'required|exists:roles,id',
         ]);
 
@@ -113,10 +115,10 @@ class AuthController extends Controller
         $user->save();
 
 
+        Mail::to($user->email)->send(new VerificationCodeMail($verification_code));
 
         return response()->json(['message' => 'Verification code sent to your email']);
     }
-
 
     public function verifyForgotCode(Request $request)
     {
@@ -134,7 +136,7 @@ class AuthController extends Controller
         if ($user->verification_code === $request->verification_code) {
             return response()->json(['message' => 'Code verified']);
         } else {
-            return response()->json(['message' => 'Invalid verification code'], 400);
+            return response()->json(['message' => 'Invalid verification code'], 422);
         }
     }
 

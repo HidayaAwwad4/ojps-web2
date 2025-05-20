@@ -1,51 +1,86 @@
-import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {NgClass, NgIf} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgClass, NgIf } from '@angular/common';
+import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
+  styleUrls: ['./sign-up.component.css'],
   standalone: true,
-  imports: [
-    FormsModule,
-    NgClass,
-    NgIf,
-    RouterLink
-  ],
-  styleUrl: './sign-up.component.css'
+  imports: [FormsModule, NgIf, NgClass, RouterLink],
 })
-export class SignUpComponent {
-  fullname: string = '';
+export class SignUpComponent implements OnInit {
+  userType: string | null = null;
+  name: string = '';
+  companyName: string = '';
   email: string = '';
   password: string = '';
   submitted: boolean = false;
   formInvalidMessage: string = '';
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  constructor(private router: Router) {}
+  ngOnInit() {
+    this.route.queryParamMap.subscribe((params) => {
+      this.userType = params.get('role');
+      console.log('User type:', this.userType);
+    });
+  }
 
   onSignUp(form: any) {
     this.submitted = true;
     this.formInvalidMessage = '';
 
     if (form.invalid) {
-      this.formInvalidMessage = 'Please fill in all required fields correctly.';
+      this.formInvalidMessage = 'Please fill all required fields correctly.';
       return;
     }
 
+    if (this.userType === 'employer' && !this.companyName) {
+      this.formInvalidMessage = 'Company name is required for employers.';
+      return;
+    }
+    let role_id: number | null = null;
+    if (this.userType === 'employer') {
+      role_id = 1;
+    } else if (this.userType === 'job-seeker') {
+      role_id = 2;
+    }
 
-    if (!this.email.includes('@')) {
-      this.formInvalidMessage = 'Email must contain "@" symbol.';
+    if (!role_id) {
+      this.formInvalidMessage = 'Invalid user type.';
       return;
     }
 
-    if (this.password.length < 6) {
-      this.formInvalidMessage = 'Password must be at least 6 characters.';
-      return;
-    }
+    const registerData = {
+      name: this.name,
+      company_name: this.companyName,
+      email: this.email,
+      password: this.password,
+      role_id: role_id,
+    };
 
+    this.authService.register(registerData).subscribe({
+      next: (res) => {
+        console.log('Registered successfully:', res);
 
-    this.router.navigate(['/field']);
+        if (this.userType === 'employer') {
+          this.router.navigate(['/employer-home']);
+        } else if (this.userType === 'job-seeker') {
+          this.router.navigate(['/home-page']);
+        }
+      },
+      error: (err) => {
+        console.error(' Registration error:', err);
+        this.formInvalidMessage =
+          err.error?.message || 'Registration failed. Please try again.';
+      },
+    });
   }
 
 }
