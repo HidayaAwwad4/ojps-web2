@@ -72,5 +72,19 @@ class ApplicationController extends Controller
 
         return response()->json(['message' => 'Application deleted successfully']);
     }
+
+    public function getApplicantsByJobId($jobId)
+    {
+        $applications = Application::with(['jobSeeker.user'])
+            ->where('job_id', $jobId)
+            ->get();
+
+        if ($applications->isEmpty()) {
+            return response()->json(['message' => 'No applications found for this job'], 404);
+        }
+
+        return response()->json($applications);
+    }
+
 }
 

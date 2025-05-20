@@ -8,7 +8,7 @@
 
           <div *ngIf="isEditMode" class="logo-upload-wrapper" (click)="fileInput.click()">
             <img
-              [src]="jobDetails.company_logo || 'assets/default-logo.png'"
+              [src]="jobDetails.preview_logo ? jobDetails.preview_logo : 'assets/default-logo.png'"
               alt="Company Logo"
               class="company-logo"
             />
@@ -40,10 +40,9 @@
             <span *ngIf="!isEditMode">{{ jobDetails.title }}</span>
           </h5>
 
-          <p class="mb-1 text-muted d-flex align-items-center gap-2">
+          <p class="mb-1 text-muted d-flex align-items-center gap-2" *ngIf="!isEditMode">
             <i class="fa-solid fa-building text-custom-red" style="font-size: 1rem;"></i>
-            <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employer.company_name" class="form-control" />
-            <span *ngIf="!isEditMode">{{ jobDetails.employer?.company_name }}</span>
+            <span>{{ jobDetails.employer?.company_name }}</span>
           </p>
 
           <p class="text-muted mb-1 d-flex align-items-center gap-2">
@@ -142,7 +141,7 @@
           <label for="documentUpload" class="form-label">Upload New Document</label>
           <input type="file" class="form-control" (change)="onFileChange($event)" id="documentUpload" />
         </div>
-        <button *ngIf="jobDetails.document" class="btn btn-danger w-100 mb-3" (click)="removeDocument()">
+        <button *ngIf="jobDetails.documents" class="btn btn-danger w-100 mb-3" (click)="removeDocument()">
           Remove Current Document
         </button>
       </div>

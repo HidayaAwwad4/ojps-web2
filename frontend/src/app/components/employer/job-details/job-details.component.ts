@@ -46,17 +46,22 @@ export class JobDetailsComponent implements OnInit {
 
     const jobId =  Number(this.route.snapshot.paramMap.get('id'));
     if (jobId) {
-      this.jobService.getJobById(jobId).subscribe({
-        next: (response: any) => {
-          this.jobDetails = response;
-        },
-        error: (err) => {
-          console.error('Failed to fetch job', err);
-        }
-      });
+      this.loadJobDetails(jobId);
     }
     this.jobService.getJobFormOptions().subscribe((res: any) => {
       this.jobOptions = res;
+    });
+  }
+
+  loadJobDetails(jobId: number) {
+    this.jobService.getJobById(jobId).subscribe({
+      next: (response: any) => {
+        this.jobDetails = response;
+        this.jobDetails.preview_logo = response.company_logo || null;
+      },
+      error: (err) => {
+        console.error('Failed to fetch job', err);
+      }
     });
   }
 
@@ -65,18 +70,18 @@ export class JobDetailsComponent implements OnInit {
   }
 
   saveChanges() {
-    if (!this.jobDetails.id) return;
+    const jobId = this.jobDetails.id;
 
     const formData = new FormData();
-
-    for (const key in this.jobDetails) {
-      if (this.jobDetails.hasOwnProperty(key)) {
-        if (key === 'company_logo' || key === 'documents') {
-          continue;
-        }
-        formData.append(key, this.jobDetails[key]);
-      }
-    }
+    formData.append('title', this.jobDetails.title);
+    formData.append('location', this.jobDetails.location);
+    formData.append('description', this.jobDetails.description);
+    formData.append('experience', this.jobDetails.experience);
+    formData.append('languages', this.jobDetails.languages);
+    formData.append('employment', this.jobDetails.employment);
+    formData.append('schedule', this.jobDetails.schedule);
+    formData.append('category', this.jobDetails.category);
+    formData.append('salary', this.jobDetails.salary);
 
     if (this.jobDetails.company_logo instanceof File) {
       formData.append('company_logo', this.jobDetails.company_logo);
@@ -86,15 +91,14 @@ export class JobDetailsComponent implements OnInit {
       formData.append('documents', this.jobDetails.documents);
     }
 
-    this.jobService.updateJob(this.jobDetails.id, formData).subscribe({
-      next: (response) => {
-        this.jobDetails = response;
+    this.jobService.updateJob(jobId, formData).subscribe({
+      next: (res) => {
+        console.log('update success', res);
+        this.jobDetails = res;
         this.isEditMode = false;
-        this.isSaved = true;
       },
-      error: (error) => {
-        console.error('Failed to update job', error);
-        alert('Failed to save changes!');
+      error: (err) => {
+        console.error('Error updating job', err);
       }
     });
   }
@@ -119,17 +123,19 @@ export class JobDetailsComponent implements OnInit {
     }
   }
 
-
   onFileChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       this.jobDetails.documents = file;
     }
   }
+
   downloadDocument() {
     if (!this.jobDetails.documents) return;
 
-    const fileUrl = this.jobDetails.documents;
+    const fileUrl = typeof this.jobDetails.documents === 'string' ? this.jobDetails.documents : null;
+    if (!fileUrl) return;
+
     const link = document.createElement('a');
     link.href = fileUrl;
     const fileName = fileUrl.substring(fileUrl.lastIndexOf('/') + 1);
@@ -139,7 +145,6 @@ export class JobDetailsComponent implements OnInit {
     link.click();
     document.body.removeChild(link);
   }
-
 
   removeDocument() {
     this.jobDetails.documents = null;

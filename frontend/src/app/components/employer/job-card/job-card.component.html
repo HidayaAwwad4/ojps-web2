@@ -23,7 +23,7 @@
         <li><button (click)="onDetailsClick($event)" [routerLink]="['/job-details', job.id]">more details</button></li>
         <li><button (click)="onEditClick($event)" [routerLink]="['/job-details', job.id]">Edit</button></li>
         <li><button (click)="onDeleteClick($event)">Delete</button></li>
-        <li><button (click)="onApplicantsClick($event)" [routerLink]="['/employer/job-applications']">Applicants</button></li>
+        <li><button (click)="onApplicantsClick($event)" [routerLink]="['/employer/job-applications']" [queryParams]="{ jobId: job.id }">Applicants</button></li>
         <li>
           <button *ngIf="job.isOpened" (click)="onCloseClick($event)">Close Job</button>
           <button *ngIf="!job.isOpened" (click)="onOpenClick($event)">Open Job</button>

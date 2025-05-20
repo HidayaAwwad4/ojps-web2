@@ -47,4 +47,5 @@ Route::post('/jobs', [JobListingController::class, 'create']);
 Route::put('/jobs/{id}', [JobListingController::class, 'update']);
 Route::delete('/jobs/{id}', [JobListingController::class, 'delete']);
 Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions']);
+Route::get('/applications/job/{jobId}', [ApplicationController::class, 'getApplicantsByJobId']);
 

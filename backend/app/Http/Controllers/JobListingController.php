@@ -87,7 +87,9 @@ class JobListingController extends Controller
             }
 
             $job->update($data);
+            $job->refresh();
             return response()->json($job);
+
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to update job', 'details' => $e->getMessage()], 500);
         }

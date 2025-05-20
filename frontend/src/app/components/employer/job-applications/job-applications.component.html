@@ -21,50 +21,44 @@
   </div>
 
   <!-- No Results Message -->
-  <div *ngIf="profiles.length === 0" class="text-center text-muted mb-5">
+  <div *ngIf="filteredProfiles.length === 0" class="text-center text-muted mb-5">
     No applications found for this filter.
   </div>
 
   <!-- Profiles Cards -->
-  <div class="row justify-content-center">
-    <div class="col-12 col-sm-6 col-md-3" *ngFor="let profile of profiles" [routerLink]="['/candidate-view']">
-      <div class="card text-center profile-card h-100">
-        <div class="card-header p-0 bg-maroon rounded-top">
-          <img [src]="profile.image" class="rounded-circle profile-img mt-2" alt="Profile image">
-        </div>
-        <div class="card-body">
-          <h5 class="card-title">{{ profile.name }}</h5>
-          <p class="card-text mb-0">{{ profile.email }}</p>
-          <p class="card-text">{{ profile.location }}</p>
-          <h6>{{ profile.position }}</h6>
-          <p class="card-text">{{ profile.description }}</p>
+  <div class="profiles-grid">
+    <div class="profile-col" *ngFor="let profile of filteredProfiles" [routerLink]="['/candidate-view']">
+      <div class="card text-center profile-card h-100 d-flex flex-column">
+      <div class="card-header p-0 bg-maroon rounded-top">
+        <img [src]="profile.job_seeker.user.profile_picture || 'assets/account-avatar.png'" class="rounded-circle profile-img mt-2" alt="Profile image">
+      </div>
+      <div class="card-body d-flex flex-column flex-grow-1">
+        <h5 class="card-title">{{ profile.job_seeker.user.name }}</h5>
+        <p class="card-text mb-0">{{ profile.job_seeker.user.email }}</p>
+        <p class="card-text">{{ profile.job_seeker.user.location }}</p>
+        <p class="card-text flex-grow-1">{{ profile.cover_letter }}</p>
 
-          <!-- Buttons by Status -->
-          <div class="d-flex justify-content-around mt-3">
-            <ng-container [ngSwitch]="profile.status">
-              <!-- Pending -->
-              <ng-container *ngSwitchCase="'pending'">
-                <button class="btn btn-outline-success" (click)="shortlist($event, profile)">Add to Shortlist</button>
-                <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
-              </ng-container>
-
-              <!-- Shortlisted -->
-              <ng-container *ngSwitchCase="'shortlisted'">
-                <button class="btn btn-outline-primary" (click)="accept($event, profile)">Accept</button>
-                <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
-              </ng-container>
-
-              <!-- Accepted -->
-              <ng-container *ngSwitchCase="'accepted'">
-                <button class="btn btn-success" disabled>Accepted</button>
-              </ng-container>
-
-              <!-- Rejected -->
-              <ng-container *ngSwitchCase="'rejected'">
-                <button class="btn btn-danger" disabled>Rejected</button>
-              </ng-container>
+        <!-- Buttons by Status -->
+        <div class="action-buttons mt-auto d-flex justify-content-around">
+          <ng-container [ngSwitch]="profile.status">
+            <ng-container *ngSwitchCase="'pending'">
+              <button class="btn btn-outline-success" (click)="shortlist($event, profile)">Add to Shortlist</button>
+              <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
             </ng-container>
-          </div>
+
+            <ng-container *ngSwitchCase="'shortlisted'">
+              <button class="btn btn-outline-primary" (click)="accept($event, profile)">Accept</button>
+              <button class="btn btn-outline-danger" (click)="reject($event, profile)">Reject</button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'accepted'">
+              <button class="btn btn-success" disabled>Accepted</button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'rejected'">
+              <button class="btn btn-danger" disabled>Rejected</button>
+            </ng-container>
+          </ng-container>
         </div>
       </div>
     </div>

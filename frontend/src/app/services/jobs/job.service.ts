@@ -34,5 +34,11 @@ export class JobService {
     return this.http.delete(`${this.apiUrl}/jobs/${jobId}`);
   }
 
+  getApplicantsByJobId(jobId: number): Observable<any> {
+    return this.http.get(`${this.apiUrl}/applications/job/${jobId}`);
+  }
+  updateApplicationStatus(applicationId: number, status: string): Observable<any> {
+    return this.http.put(`${this.apiUrl}/applications/${applicationId}`, { status });
+  }
 
 }
