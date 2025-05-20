@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { JobModalService } from '../../../services/job-modal.service';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { JobModalService } from '../../../services/jobs/job-modal.service';
 import { JobService } from '../../../services/jobs/job.service';
 import { NgIf, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +16,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './create-job.component.css'
 })
 export class CreateJobComponent implements OnInit {
+  @Output() jobCreated = new EventEmitter<any>();
+  @ViewChild('logoInput') logoInput!: ElementRef;
+
   showModal = false;
+  selectedLogo: File | null = null;
+  selectedLogoUrl: string | null = null;
 
   jobOptions: any = {
     experiences: [],
@@ -33,7 +38,9 @@ export class CreateJobComponent implements OnInit {
     experience: '',
     employment: '',
     category: '',
+    salary: null,
     document: null,
+    company_logo: null,
     isOpened: 1,
     employer_id: 1
   };
@@ -53,26 +60,72 @@ export class CreateJobComponent implements OnInit {
     });
   }
 
-  closeModal() {
-    this.showModal = false;
-  }
-
-  onFileSelected(event: any) {
-    const file = event.target.files[0];
-    this.jobDetails.document = file;
-  }
-
-  submitJob() {
-    console.log('Job Data:', this.jobDetails);
-    this.jobService.createJob(this.jobDetails).subscribe({
+  submitJob(): void {
+    const formData = new FormData();
+    for (const key in this.jobDetails) {
+      if (this.jobDetails[key] !== null && this.jobDetails[key] !== undefined) {
+        formData.append(key, this.jobDetails[key]);
+      }
+    }
+    if (this.selectedLogo) {
+      formData.append('company_logo', this.selectedLogo);
+    }
+    if (this.jobDetails.document) {
+      formData.append('document', this.jobDetails.document);
+    }
+    this.jobService.createJob(formData).subscribe({
       next: (response) => {
         console.log('Job created successfully:', response);
-        this.closeModal();
+        this.jobCreated.emit(response);
+        this.showModal = false;
       },
       error: (error) => {
         console.error('Error creating job:', error);
       }
     });
+  }
+
+  closeModal(): void {
+    const hasData =
+      this.jobDetails.title?.trim() ||
+      this.jobDetails.description?.trim() ||
+      this.jobDetails.location?.trim() ||
+      this.jobDetails.languages?.trim() ||
+      this.jobDetails.schedule?.trim() ||
+      this.jobDetails.salary ||
+      this.jobDetails.experience ||
+      this.jobDetails.employment ||
+      this.jobDetails.category ||
+      this.selectedLogo;
+
+    if (hasData) {
+      const confirmClose = confirm('Are you sure you want to close? Unsaved data will be lost.');
+      if (!confirmClose) return;
+    }
+
+    this.showModal = false;
+  }
+
+  onLogoSelected(event: Event): void {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.selectedLogo = file;
+
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedLogoUrl = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  triggerLogoUpload(): void {
+    this.logoInput.nativeElement.click();
+  }
+
+  onFileSelected(event: any): void {
+    const file = event.target.files[0];
+    this.jobDetails.document = file;
   }
 
   isFormValid(): boolean {
@@ -82,7 +135,6 @@ export class CreateJobComponent implements OnInit {
       job.location?.trim() &&
       job.languages?.trim() &&
       job.schedule?.trim() &&
-      job.salary?.trim() &&
       job.experience &&
       job.employment &&
       !isNaN(job.salary) &&

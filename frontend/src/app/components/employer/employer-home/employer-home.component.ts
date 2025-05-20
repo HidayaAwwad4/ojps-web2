@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { JobModalService } from '../../../services/job-modal.service';
+import { JobModalService } from '../../../services/jobs/job-modal.service';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { CreateJobComponent } from '../create-job/create-job.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
@@ -37,6 +37,7 @@ export class EmployerHomeComponent implements OnInit {
     this.jobService.getJobsByEmployer(this.employerId).subscribe({
       next: (data) => {
         this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
+        console.log('jobs', this.jobs);
       },
       error: (err) => {
         console.error('Failed to load jobs:', err);
@@ -44,8 +45,10 @@ export class EmployerHomeComponent implements OnInit {
     });
   }
 
-
   openJobModal(): void {
     this.jobModalService.openCreateJobModal();
+  }
+  addJobToList(newJob: any): void {
+    this.jobs.unshift(newJob);
   }
 }

@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIf, NgClass } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { JobModalService } from '../../services/job-modal.service';
+import { JobModalService } from '../../services/jobs/job-modal.service';
 
 @Component({
   selector: 'app-navbar',
