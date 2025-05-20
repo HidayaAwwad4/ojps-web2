@@ -23,6 +23,7 @@ class CreateJobListingRequest extends FormRequest
             'schedule' => 'required|string',
             'isOpened' => 'required|boolean',
             'employer_id' => 'required|integer|exists:employers,id',
+            'company_logo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'experience' => 'required|in:' . implode(',', JobListing::EXPERIENCE_OPTIONS),
             'employment' => 'required|in:' . implode(',', JobListing::EMPLOYMENT_OPTIONS),
             'category' => 'required|in:' . implode(',', JobListing::CATEGORY_OPTIONS),

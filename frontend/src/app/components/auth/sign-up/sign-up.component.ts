@@ -1,24 +1,21 @@
 import { Component } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
+import { Router } from '@angular/router';
 import {NgClass, NgIf} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [
-    RouterLink
-  ],
   templateUrl: './sign-up.component.html',
+
   standalone: true,
   imports: [
     FormsModule,
     NgClass,
-    NgIf,
-    RouterLink
+    NgIf
   ],
   styleUrl: './sign-up.component.css'
 })
+
 export class SignUpComponent {
   fullname: string = '';
   email: string = '';
@@ -52,7 +49,4 @@ export class SignUpComponent {
     this.router.navigate(['/field']);
   }
 
-  styleUrl: './sign-up.component.css'
-})
-export class SignUpComponent {
 }
