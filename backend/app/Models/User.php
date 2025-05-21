@@ -21,12 +21,8 @@ class User extends Authenticatable
         'profile_picture',
         'location',
         'summary',
-<<<<<<< HEAD
-        'is_approved'
-=======
+        'is_approved',
         'verification_code',
-
->>>>>>> 65882c4a5f7b7009107e68472c766d089bd36e6c
     ];
 
     protected $hidden = [

@@ -12,10 +12,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
-<<<<<<< HEAD
-=======
         "laravel/sanctum": "^4.1",
->>>>>>> 65882c4a5f7b7009107e68472c766d089bd36e6c
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
