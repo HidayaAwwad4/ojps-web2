@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
 
 
   isAuthPage(): boolean {
-    const hiddenFooterRoutes = ['/', '/signup','/signup-employer',
+    const hiddenFooterRoutes = ['/', '/sign-up',
       '/forgot-password','/verify-code','/field','/login','/type',
       '/reset-password','/dashboard-admin','/job-details'];
     return hiddenFooterRoutes.includes(this.router.url);
@@ -35,6 +35,7 @@ export class AppComponent implements OnInit {
 
   toggleDrawer() {
     this.notificationService.toggleDrawer();
+
   }
 
   getRole(): 'admin' | 'jobseeker' | 'employer' | 'guest' {
