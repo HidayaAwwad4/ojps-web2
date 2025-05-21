@@ -1,47 +1,117 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\CreateJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
 use App\Models\JobListing;
-use App\Http\Requests\CreateJobListingRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class JobListingController extends Controller
 {
-    public function getAll(): JsonResponse
-    {
-        return response()->json(JobListing::all());
-    }
-
     public function getById($id): JsonResponse
     {
-        $job = JobListing::findOrFail($id);
-        return response()->json($job);
+        try {
+            $job = JobListing::with('employer')->findOrFail($id);
+
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+
+            }
+            if ($job->documents) {
+                $job->documents = config('app.url') . Storage::url($job->documents);
+            }
+
+            return response()->json($job);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Job not found'], 404);
+        }
     }
 
     public function getByEmployer($employerId): JsonResponse
     {
-        $jobs = JobListing::where('employer_id', $employerId)->get();
+        $jobs = JobListing::with('employer')
+        ->where('employer_id', $employerId)
+            ->get();
+
+        $jobs->transform(function ($job) {
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+            }
+
+            if ($job->documents) {
+                $job->documents =config('app.url') . Storage::url($job->documents);
+            }
+
+            return $job;
+        });
+
         return response()->json($jobs);
     }
 
     public function create(CreateJobListingRequest $request): JsonResponse
     {
-        $job = JobListing::create($request->validated());
-        return response()->json($job, 201);
+        try {
+            $data = $request->validated();
+
+            if ($request->hasFile('company_logo')) {
+                $data['company_logo'] = $request->file('company_logo')->store('logos', 'public');
+            }
+
+            if ($request->hasFile('documents')) {
+                $data['documents'] = $request->file('documents')->store('documents', 'public');
+            }
+
+            $job = JobListing::create($data);
+            return response()->json($job, 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create job', 'details' => $e->getMessage()], 500);
+        }
     }
 
     public function update(UpdateJobListingRequest $request, $id): JsonResponse
     {
-        $job = JobListing::findOrFail($id);
-        $job->update($request->validated());
-        return response()->json($job);
+        try {
+            $job = JobListing::findOrFail($id);
+            $data = $request->validated();
+
+            if ($request->hasFile('company_logo')) {
+                $data['company_logo'] = $request->file('company_logo')->store('logos', 'public');
+            }
+
+            if ($request->hasFile('documents')) {
+                $data['documents'] = $request->file('documents')->store('documents', 'public');
+            }
+
+            $job->update($data);
+            $job->refresh();
+            return response()->json($job);
+
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to update job', 'details' => $e->getMessage()], 500);
+        }
     }
 
     public function delete($id): JsonResponse
     {
-        $job = JobListing::findOrFail($id);
-        $job->delete();
-        return response()->json(['message' => 'Job deleted successfully']);
+        try {
+            $job = JobListing::findOrFail($id);
+            $job->delete();
+            return response()->json(['message' => 'Job deleted successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to delete job'], 500);
+        }
+    }
+
+    public function getJobFormOptions(): JsonResponse
+    {
+        return response()->json([
+            'experienceOptions' => JobListing::EXPERIENCE_OPTIONS,
+            'employmentOptions' => JobListing::EMPLOYMENT_OPTIONS,
+            'categoryOptions' => JobListing::CATEGORY_OPTIONS,
+        ]);
     }
 }
