@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\FavoriteJob;
+use App\Models\JobListing;
+use App\Models\Notification;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -21,6 +23,20 @@ class FavoriteJobController extends Controller
         ]);
 
         $favorite = FavoriteJob::create($request->only('job_seeker_id', 'job_id'));
+
+        $job = JobListing::find($request->only('job_seeker_id','job_id'));
+
+        $job = JobListing::find($request->job_id);
+
+
+        if ($job && $job->employer_id) {
+            Notification::create([
+                'user_id' => $job->employer_id,
+                'message' => 'A job seeker has added your job: ' . $job->title . ' to favorites',
+                'type' => 'favorited',
+                'is_read' => false,
+            ]);
+        }
         return response()->json($favorite, 201);
     }
     public function destroy($id): JsonResponse

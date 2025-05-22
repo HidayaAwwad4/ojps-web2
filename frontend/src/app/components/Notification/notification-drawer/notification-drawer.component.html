@@ -4,7 +4,14 @@
   </div>
 
   <div class="drawer-content">
-    <app-seeker-notification *ngIf="userType === 'jobseeker'"></app-seeker-notification>
-    <app-employer-notification *ngIf="userType === 'employer'"></app-employer-notification>
+    <app-seeker-notification
+      *ngIf="userType === 'jobseeker'"
+    [notifications]="notifications">
+    </app-seeker-notification>
+    <app-employer-notification
+      *ngIf="userType === 'employer'"
+    [notifications]="notifications">
+
+    </app-employer-notification>
   </div>
 </div>

@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {NgClass} from '@angular/common';
+import {Notification} from '../../../../models/notification.model';
 
 @Component({
   selector: 'app-notification-item',
@@ -11,6 +12,6 @@ import {NgClass} from '@angular/common';
   styleUrl: './notification-item.component.css'
 })
 export class NotificationItemComponent {
-  @Input() notification: any;
+  @Input() notification!: Notification;
   @Input() isNew: boolean = false;
 }

@@ -11,7 +11,9 @@ class Notification extends Model
         'user_id',
         'message',
         'type',
-        'read'
+        'is_read',
+        'created_at',
+        'avatar'
     ];
 
     public function user(): BelongsTo
