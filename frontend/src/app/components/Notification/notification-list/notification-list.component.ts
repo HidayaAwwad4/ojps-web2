@@ -1,42 +1,47 @@
-import {Component, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NgClass, NgForOf} from '@angular/common';
 import {NotificationItemComponent} from '../notification-item/notification-item.component';
+import {NotificationService} from '../../../services/notifications/notification.service';
+import {Router} from '@angular/router';
+
+
 
 @Component({
   selector: 'app-notification-list',
+  standalone: true,
   imports: [
     NgForOf,
     NotificationItemComponent,
     NgClass
   ],
   templateUrl: './notification-list.component.html',
-  standalone: true,
   styleUrl: './notification-list.component.css'
 })
-export class NotificationListComponent {
+export class NotificationListComponent implements OnInit{
 
   groupedNotifications: any[] = [];
 
-  private rawNotifications = [
-    { title: 'Asal Company', avatar: 'assets/avatar2.jpg', message: 'You received a new update...', date: new Date(), opened: false },
-    { title: 'ADHAM', avatar: 'assets/adham.jpg', message: 'Application received...', date: new Date(), opened: false },
-    { title: 'New TERIC', avatar: 'assets/avatar2.jpg', message: 'Interview invitation...', date: new Date(), opened: true },
-    { title: 'Fashion Store', avatar: 'assets/avatar2.jpg', message: 'Application update...', date: new Date(), opened: true },
-    { title: 'TECH', avatar: 'assets/avatar2.jpg', message: 'Your job has been viewed...', date: new Date(new Date().setDate(new Date().getDate() - 3)), opened: true },
-    { title: 'ARISO', avatar: 'assets/avatar2.jpg', message: 'Your application was rejected.', date: new Date(new Date().setDate(new Date().getDate() - 5)), opened: true }
-  ];
+  constructor(private notificationService: NotificationService ,
+              private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.groupNotifications();
+    this.loadNotifications();
   }
 
-  private groupNotifications() {
+  private loadNotifications() {
+    this.notificationService.getAllNotifications().subscribe((notifications: any[]) => {
+      this.groupNotifications(notifications);
+    });
+  }
+  private groupNotifications(notifications: any[]) {
     const today = new Date();
-    const isSameDay = (d1: Date, d2: Date) => d1.toDateString() === d2.toDateString();
+    const isSameDay = (d1: Date, d2: Date) =>
+      new Date(d1).toDateString() === new Date(d2).toDateString();
 
-    const newList = this.rawNotifications.filter(n => !n.opened);
-    const todayList = this.rawNotifications.filter(n => n.opened && isSameDay(n.date, today));
-    const weekList = this.rawNotifications.filter(n => n.opened && !isSameDay(n.date, today));
+    const newList = notifications.filter(n => !n.is_read);
+    const todayList = notifications.filter(n => n.is_read && isSameDay(n.created_at, today));
+    const weekList = notifications.filter(n => n.is_read && !isSameDay(n.created_at, today));
 
     this.groupedNotifications = [
       { title: 'New', items: newList },
@@ -45,9 +50,18 @@ export class NotificationListComponent {
     ];
   }
 
-  // Simulate opening a notification (e.g., when clicked)
   onOpenNotification(notification: any) {
-    notification.opened = true;
-    this.groupNotifications();
+   if (!notification.is_read) {
+     this.notificationService.markAsRead(notification.id).subscribe(() => {
+       notification.is_read = true;
+       this.navigateTo(notification.redirect_url || '/');
+       this.loadNotifications();
+     });
+   }else {
+     this.navigateTo(notification.redirect_url || '/');
+   }
+  }
+  private navigateTo(url: string) {
+    this.router.navigateByUrl(url);
   }
 }

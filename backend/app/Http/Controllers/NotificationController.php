@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Notification;
 use App\Models\User;
 use Illuminate\Http\Request;
+use function PHPSTORM_META\map;
 
 class NotificationController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
 
@@ -20,22 +21,27 @@ class NotificationController extends Controller
     /**
      * Get unread notifications
      */
-    public function unread(Request $request)
+    public function unread(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
 
         return response()->json([
-            'notifications' => $user->notifications()->where('read', false)->latest()->get()
+            'notifications' => $user->notifications()->where('is_read', false)->latest()->get()
         ]);
     }
 
     /**
      * Mark a notification as read
      */
-    public function markAsRead($id)
+    public function markAsRead(Request $request,$id): \Illuminate\Http\JsonResponse
     {
-        $notification = Notification::findOrFail($id);
-        $notification->update(['read' => true]);
+        $notification = Notification::where('id', $id)
+            ->where('user_id', $request->user()->id)
+            ->first();
+        if (!$notification) {
+            return response()->json(['message' => 'Notification not found.'], 404);
+        }
+        $notification->update(['is_read' => true]);
 
         return response()->json(['message' => 'Notification marked as read.']);
     }
@@ -43,7 +49,7 @@ class NotificationController extends Controller
     /**
      * Create notification for seeker when application is accepted/rejected
      */
-    public function notifySeekerApplicationStatus($seekerId, $status)
+    public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
     {
         $message = $status === 'accepted'
             ? 'Your application has been accepted. Please contact the company for an interview.'
@@ -53,7 +59,7 @@ class NotificationController extends Controller
             'user_id' => $seekerId,
             'message' => $message,
             'type' => 'application_status',
-            'read' => false
+            'is_read' => false
         ]);
 
         return response()->json(['message' => 'Notification sent to seeker.']);
@@ -62,7 +68,7 @@ class NotificationController extends Controller
     /**
      * Create notification for employer when seeker applies or favorites a job
      */
-    public function notifyEmployerActivity($employerId, $type)
+    public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
     {
         $message = '';
 
@@ -76,19 +82,46 @@ class NotificationController extends Controller
             'user_id' => $employerId,
             'message' => $message,
             'type' => 'seeker_activity',
-            'read' => false
+            'is_read' => false
         ]);
 
         return response()->json(['message' => 'Notification sent to employer.']);
     }
 
-    public function getUserNotifications(Request $request)
+
+    /**
+     * Return all user notifications with redirect_url
+     */
+
+    public function getUserNotifications(Request $request): \Illuminate\Http\JsonResponse
     {
-        $notifications = Notification::where('user_id', auth()->id())
+        $notifications = Notification::with('user')
+        -> where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
-            ->get();
+            ->get()
+        ->map(function ($notification) {
+            return array_merge($notification->toArray(), [
+                'redirect_url' => $this->generatedRedirectUrl($notification)
+            ]);
+    });
+
 
         return response()->json($notifications);
     }
 
+    private function generatedRedirectUrl( Notification $notification): string
+
+    {
+        switch ($notification->type) {
+            case 'application_status':
+                return '/seeker/applications-status';
+
+                case 'seeker_activity':
+                    return '/employer/job-applications';
+
+                    default:
+                        return '/';
+
+        }
+    }
 }

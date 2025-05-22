@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApplicationController;
@@ -48,3 +49,10 @@ Route::put('/jobs/{id}', [JobListingController::class, 'update']);
 Route::delete('/jobs/{id}', [JobListingController::class, 'delete']);
 Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/unread', [NotificationController::class, 'unread']);
+    Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/seeker/{seekerId}/{status}', [NotificationController::class, 'notifySeekerApplicationStatus']);
+    Route::post('/notifications/employer/{employerId}/{type}', [NotificationController::class, 'notifyEmployerActivity']);
+});
