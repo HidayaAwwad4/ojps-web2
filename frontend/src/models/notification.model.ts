@@ -1,6 +1,6 @@
 export interface User {
   name: string;
-  avatar?: string;
+  profile_picture?: string;
 }
 
 export interface Notification {
