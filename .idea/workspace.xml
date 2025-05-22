@@ -6,11 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.spec.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +168,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\hp Lap\\Desktop\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
+    "ts.external.directory.path": "C:\\Users\\PC\\Documents\\GitHub\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -169,6 +178,12 @@
   }
 }]]></component>
   <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ojps-web2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />

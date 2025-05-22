@@ -37,7 +37,7 @@ export class LoginComponent {
 
     this.authService.login(loginData).subscribe({
       next: (res: any) => {
-        console.log('✅ Login success:', res);
+        console.log('Login success:', res);
 
         localStorage.setItem('token', res.access_token);
         localStorage.setItem('role', res.user.role.name);
@@ -51,7 +51,7 @@ export class LoginComponent {
         }
       },
       error: (err: any) => {
-        console.error('❌ Login error:', err);
+        console.error('Login error:', err);
         this.formInvalidMessage = err.error?.message || 'Invalid email or password.';
       }
     });

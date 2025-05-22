@@ -31,8 +31,8 @@ export class ForgotPasswordComponent {
 
     this.authService.forgotPassword(this.email).subscribe({
       next: (res: any) => {
-        this.successMessage = res.message || 'Code sent successfully!';
-
+        this.successMessage = res.message || 'Code sent successfully !';
+        localStorage.setItem('reset_email', this.email);
         this.router.navigate(['/verify-code'], {
           queryParams: { email: this.email },
         });
