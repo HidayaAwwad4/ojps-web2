@@ -1,9 +1,13 @@
 <?php
 
+
+use App\Http\Controllers\NotificationController;
+use Illuminate\Http\Request;
+
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JobListingController;
-use Illuminate\Http\Request;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteJobController;
@@ -16,9 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
 Route::get('/roles', [AuthController::class, 'getRoles']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/verify-code', [AuthController::class, 'verifyCode']);
@@ -66,3 +68,10 @@ Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListing']);
 Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions']);
 Route::get('/applications/job/{jobId}', [ApplicationController::class, 'getApplicantsByJobId']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::get('/notifications/unread', [NotificationController::class, 'unread']);
+    Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+    Route::post('/notifications/seeker/{seekerId}/{status}', [NotificationController::class, 'notifySeekerApplicationStatus']);
+    Route::post('/notifications/employer/{employerId}/{type}', [NotificationController::class, 'notifyEmployerActivity']);
+});

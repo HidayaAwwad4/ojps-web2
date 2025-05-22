@@ -11,11 +11,12 @@ body {
   margin: 50px auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 50px;
+  text-align: center;
 }
 
 .logo-img {
   width: 280px;
-  margin-bottom: 10px;
+  margin-left: 50px;
 }
 
 h1 {
@@ -66,8 +67,8 @@ h1 {
 }
 
 .card.selected {
-  border-color: #db88a4;
-  background-color: #ffe8d6;
+  border-color:  #6e1f1f;
+  background-color: #f8ccdb;
 }
 
 .start-btn {
@@ -84,5 +85,5 @@ h1 {
 }
 
 .start-btn:hover {
-  background-color: #a83232;
+  background-color: #651e1e;
 }

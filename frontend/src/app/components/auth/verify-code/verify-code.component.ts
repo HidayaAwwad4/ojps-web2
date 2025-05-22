@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
-import { AuthService } from '../../../services/auth/auth.service'; // Update with the correct path
-
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-verify-code',
   templateUrl: './verify-code.component.html',
-  imports: [
-    FormsModule
-  ],
+  imports: [FormsModule],
   styleUrls: ['./verify-code.component.css']
 })
-export class VerifyCodeComponent {
+export class VerifyCodeComponent implements OnInit {
   verificationCode: string = '';
-  email: string = 'tasneemjber@gmail.com';
+  email: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    const storedEmail = localStorage.getItem('reset_email');
+    if (storedEmail) {
+      this.email = storedEmail;
+    } else {
+      alert('Email not found. Please go back and enter your email again.');
+      this.router.navigate(['/forgot-password']);
+    }
+  }
 
   verifyCode() {
     if (!this.verificationCode) {
@@ -27,9 +34,7 @@ export class VerifyCodeComponent {
     this.authService.verifyForgotCode(this.email, this.verificationCode).subscribe({
       next: (res: any) => {
         alert(res.message);
-
         if (res.message === 'Code verified') {
-          localStorage.setItem('reset_email', this.email);
           this.router.navigate(['/reset-password']);
         }
       },

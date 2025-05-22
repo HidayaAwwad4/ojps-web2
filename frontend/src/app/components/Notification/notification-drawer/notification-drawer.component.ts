@@ -19,12 +19,29 @@ export class NotificationDrawerComponent implements OnInit {
   isOpen = false;
   @Input() userType: 'jobseeker' | 'employer' | null = null;
 
+  notifications: any[] = [];
+
   constructor(
     private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.notificationService.drawerVisible$.subscribe((visible) => {
       this.isOpen = visible;
+
+      if (visible) {
+        this.fetchNotifications();
+      }
+    });
+  }
+
+  fetchNotifications(): void {
+    this.notificationService.getNotifications().subscribe({
+      next: (data) => {
+        this.notifications = data;
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      }
     });
   }
 
