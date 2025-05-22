@@ -5,7 +5,7 @@ import { JobModalService } from '../../../services/jobs/job-modal.service';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { CreateJobComponent } from '../create-job/create-job.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import {JobService} from '../../../services/jobs/job.service';
+import { JobService } from '../../../services/jobs/job.service';
 
 @Component({
   selector: 'app-employer-home',
@@ -22,7 +22,7 @@ import {JobService} from '../../../services/jobs/job.service';
 })
 export class EmployerHomeComponent implements OnInit {
   jobs: any[] = [];
-  employerId = 1;
+  employerId = 37;
 
   constructor(
     private jobModalService: JobModalService,
@@ -48,7 +48,19 @@ export class EmployerHomeComponent implements OnInit {
   openJobModal(): void {
     this.jobModalService.openCreateJobModal();
   }
+
   addJobToList(newJob: any): void {
     this.jobs.unshift(newJob);
+  }
+
+  onJobStatusChange(event: { job: any; isOpened: boolean }) {
+    const index = this.jobs.findIndex(j => j.id === event.job.id);
+    if (index !== -1) {
+      if (!event.isOpened) {
+        this.jobs.splice(index, 1);
+      } else {
+        this.jobs[index].isOpened = true;
+      }
+    }
   }
 }

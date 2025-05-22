@@ -1,0 +1,1054 @@
+Index: frontend/src/app/components/employer/job-postings/job-postings.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"job-postings-container\">\n  <div>\n    <i class=\"fa-solid fa-arrow-left text-dark me-2\"\n       style=\"font-size: 1.8rem; cursor: pointer; color: #631b1b !important;\"\n       routerLink=\"/employer-home\" ></i>\n    <h1 class=\"text-center\">Job Postings</h1>\n  </div>\n  <div class=\"border-bottom border-3 my-5\" style=\"border-color: #631B1B;\">\n    <ul class=\"nav nav-tabs\">\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [class.active]=\"selectedTab === 'open'\" (click)=\"selectedTab = 'open'\">Open Positions</a>\n      </li>\n      <li class=\"nav-item\">\n        <a class=\"nav-link\" [class.active]=\"selectedTab === 'closed'\" (click)=\"selectedTab = 'closed'\">Closed Positions</a>\n      </li>\n    </ul>\n  </div>\n\n  <div class=\"row g-5\">\n    <div class=\"col-sm-6 col-md-4 col-lg-3\" *ngFor=\"let job of filteredJobs\">\n      <app-job-card\n        [job]=\"job\"\n        (closeJob)=\"closeJob(job)\"\n      ></app-job-card>\n\n    </div>\n  </div>\n</div>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-postings/job-postings.component.html b/frontend/src/app/components/employer/job-postings/job-postings.component.html
+--- a/frontend/src/app/components/employer/job-postings/job-postings.component.html	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-postings/job-postings.component.html	(date 1747677163678)
+@@ -2,9 +2,10 @@
+   <div>
+     <i class="fa-solid fa-arrow-left text-dark me-2"
+        style="font-size: 1.8rem; cursor: pointer; color: #631b1b !important;"
+-       routerLink="/employer-home" ></i>
++       routerLink="/employer-home"></i>
+     <h1 class="text-center">Job Postings</h1>
+   </div>
++
+   <div class="border-bottom border-3 my-5" style="border-color: #631B1B;">
+     <ul class="nav nav-tabs">
+       <li class="nav-item">
+@@ -16,13 +17,29 @@
+     </ul>
+   </div>
+ 
+-  <div class="row g-5">
++  <!--  Loading state -->
++  <div *ngIf="loading" class="text-center my-4">
++    <div class="spinner-border text-danger" role="status"></div>
++    <p class="mt-2">Loading jobs...</p>
++  </div>
++
++  <!--  Error state -->
++  <div *ngIf="!loading && error" class="alert alert-danger text-center">
++    {{ error }}
++  </div>
++
++  <!-- ❕ Empty state -->
++  <div *ngIf="!loading && !error && filteredJobs.length === 0" class="text-center text-muted mt-4">
++    No {{ selectedTab }} jobs found.
++  </div>
++
++  <!--  Jobs list -->
++  <div class="row g-5" *ngIf="!loading && !error && filteredJobs.length > 0">
+     <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let job of filteredJobs">
+       <app-job-card
+         [job]="job"
+-        (closeJob)="closeJob(job)"
+-      ></app-job-card>
+-
++        (closeJob)="closeJob(job)">
++      </app-job-card>
+     </div>
+   </div>
+ </div>
+Index: frontend/src/app/components/employer/job-details/job-details.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Component, OnInit} from '@angular/core';\nimport {NgClass, NgIf} from '@angular/common';\nimport {ActivatedRoute, RouterLink} from '@angular/router';\nimport {FormsModule} from '@angular/forms';\nimport { NavbarComponent } from '../../navbar/navbar.component';\n\n@Component({\n  selector: 'app-job-details',\n  imports: [\n    NgClass,\n    NgIf,\n    FormsModule,\n    RouterLink,\n    NavbarComponent\n  ],\n  templateUrl: './job-details.component.html',\n  standalone: true,\n  styleUrl: './job-details.component.css'\n})\nexport class JobDetailsComponent implements OnInit {\n  role: 'employer' | 'job-seeker' = 'employer';\n  isEditMode = false;\n  isSaved = false;\n  constructor(private route: ActivatedRoute) {}\n\n  ngOnInit() {\n    this.route.queryParams.subscribe(params => {\n      if (params['role'] === 'employer' || params['role'] === 'job-seeker') {\n        this.role = params['role'];\n      }\n    });\n  }\n  jobDetails = {\n    title: 'Front End Web Developer',\n    companyName: 'ADHAM',\n    location: 'Nablus, Palestine',\n    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +\n      ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' +\n      ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +\n      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in ' +\n      'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla ' +\n      'pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ' +\n      'qui officia deserunt mollit anim id est laborum.',\n    experienceRequired: 'Required',\n    languages: 'English - Advanced',\n    employmentType: 'Full-time',\n    schedule: 'Wednesday to Saturday',\n    salary: '$800 - $1000 monthly',\n    document: 'job_seeker_1471014.pdf'\n  };\n\n  toggleEditMode() {\n    this.isEditMode = !this.isEditMode;\n  }\n\n  saveChanges() {\n    this.isEditMode = false;\n  }\n  toggleSave() {\n    this.isSaved = !this.isSaved;\n  }\n  goBack() {\n    window.history.back();\n  }\n  onFileChange(event: any) {\n    const file = event.target.files[0];\n    if (file) {\n      this.jobDetails.document = file;\n    }\n  }\n  removeDocument() {\n    this.jobDetails.document = '';\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-details/job-details.component.ts b/frontend/src/app/components/employer/job-details/job-details.component.ts
+--- a/frontend/src/app/components/employer/job-details/job-details.component.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-details/job-details.component.ts	(date 1747677163678)
+@@ -1,27 +1,30 @@
+-import {Component, OnInit} from '@angular/core';
+-import {NgClass, NgIf} from '@angular/common';
+-import {ActivatedRoute, RouterLink} from '@angular/router';
+-import {FormsModule} from '@angular/forms';
++import { Component, OnInit } from '@angular/core';
++import { NgClass, NgIf } from '@angular/common';
++import { ActivatedRoute, RouterLink } from '@angular/router';
++import { FormsModule } from '@angular/forms';
+ import { NavbarComponent } from '../../navbar/navbar.component';
++import { HttpClientModule, HttpClient } from '@angular/common/http';
+ 
+ @Component({
+   selector: 'app-job-details',
++  standalone: true,
+   imports: [
+     NgClass,
+     NgIf,
+     FormsModule,
+     RouterLink,
+-    NavbarComponent
++    NavbarComponent,
+   ],
+   templateUrl: './job-details.component.html',
+-  standalone: true,
+   styleUrl: './job-details.component.css'
+ })
+ export class JobDetailsComponent implements OnInit {
+   role: 'employer' | 'job-seeker' = 'employer';
+   isEditMode = false;
+   isSaved = false;
+-  constructor(private route: ActivatedRoute) {}
++  jobDetails: any = {};
++
++  constructor(private route: ActivatedRoute, private http: HttpClient) {}
+ 
+   ngOnInit() {
+     this.route.queryParams.subscribe(params => {
+@@ -29,25 +32,19 @@
+         this.role = params['role'];
+       }
+     });
++
++    const jobId = this.route.snapshot.paramMap.get('id');
++    if (jobId) {
++      this.http.get(`http://localhost:8000/api/jobs/${jobId}`).subscribe({
++        next: (response: any) => {
++          this.jobDetails = response;
++        },
++        error: (err) => {
++          console.error('Failed to fetch job', err);
++        }
++      });
++    }
+   }
+-  jobDetails = {
+-    title: 'Front End Web Developer',
+-    companyName: 'ADHAM',
+-    location: 'Nablus, Palestine',
+-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit,' +
+-      ' sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' +
+-      ' Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris ' +
+-      'nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in ' +
+-      'reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla ' +
+-      'pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa ' +
+-      'qui officia deserunt mollit anim id est laborum.',
+-    experienceRequired: 'Required',
+-    languages: 'English - Advanced',
+-    employmentType: 'Full-time',
+-    schedule: 'Wednesday to Saturday',
+-    salary: '$800 - $1000 monthly',
+-    document: 'job_seeker_1471014.pdf'
+-  };
+ 
+   toggleEditMode() {
+     this.isEditMode = !this.isEditMode;
+@@ -56,18 +53,22 @@
+   saveChanges() {
+     this.isEditMode = false;
+   }
++
+   toggleSave() {
+     this.isSaved = !this.isSaved;
+   }
++
+   goBack() {
+     window.history.back();
+   }
++
+   onFileChange(event: any) {
+     const file = event.target.files[0];
+     if (file) {
+       this.jobDetails.document = file;
+     }
+   }
++
+   removeDocument() {
+     this.jobDetails.document = '';
+   }
+Index: frontend/src/app/components/employer/job-details/job-details.component.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.job-details-card {\n  padding: 60px;\n}\n.custom-btn {\n  background-color: #631B1B;\n  transition: background-color 0.3s ease;\n}\n\n.custom-btn:hover {\n  background-color: #4a1111;\n}\n.text-custom-red {\n  color: #631B1B !important;\n}\n\n.custom-box {\n  border: 3px solid #631B1B;\n  border-radius: 10px;\n  box-shadow: 0 4px 6px rgba(99, 27, 27, 0.4);\n  transition: transform 0.2s ease;\n}\n\n.info-row {\n  display: flex;\n  justify-content: space-between;\n  margin-bottom: 1rem;\n}\n\nhr {\n  margin: 0.5rem 0;\n  border: none;\n  border-top: 2px solid #606060;\n}\n.custom-gray-btn {\n  background-color: #e0e0e0;\n  color: #000;\n  transition: background-color 0.3s ease, box-shadow 0.2s ease;\n}\n\n.custom-gray-btn:hover {\n  background-color: #d5d5d5; /* أغمق شوي */\n  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1); /* ظل خفيف */\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-details/job-details.component.css b/frontend/src/app/components/employer/job-details/job-details.component.css
+--- a/frontend/src/app/components/employer/job-details/job-details.component.css	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-details/job-details.component.css	(date 1747677163678)
+@@ -1,5 +1,5 @@
+ .job-details-card {
+-  padding: 60px;
++  padding: 60px 250px;
+ }
+ .custom-btn {
+   background-color: #631B1B;
+Index: frontend/src/app/components/employer/job-details/job-details.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"job-details-card position-relative\">\n  <i class=\"fa-solid fa-arrow-left text-dark me-2\"\n     style=\"font-size: 1.8rem; cursor: pointer; color: #631b1b !important;\"\n     (click)=\"goBack()\"></i>\n  <div class=\"container\">\n    <div class=\"d-flex justify-content-between align-items-start my-3\">\n      <div>\n        <h5 class=\"mb-1\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.title\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.title }}</span>\n        </h5>\n        <p class=\"mb-0 text-muted\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.companyName\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.companyName }}</span>\n        </p>\n        <p class=\"text-muted\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.location\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.location }}</span>\n        </p>\n      </div>\n\n      <div class=\"d-flex align-items-start gap-2\">\n        <button *ngIf=\"role === 'employer'\" class=\"btn custom-btn w-100 text-white\" (click)=\"toggleEditMode()\">\n          {{ isEditMode ? 'Save' : 'Edit' }}\n        </button>\n\n        <div *ngIf=\"role === 'job-seeker'\" class=\"d-flex gap-2\">\n          <button class=\"btn btn-light border\" (click)=\"toggleSave()\">\n            <i [ngClass]=\"isSaved ? 'bi bi-bookmark-fill text-custom-red' : 'bi bi-bookmark text-dark'\"></i>\n          </button>\n          <button class=\"btn custom-btn text-white\" [routerLink]=\"['/application-review']\">\n            Apply Now\n          </button>\n        </div>\n      </div>\n    </div>\n\n\n    <div class=\"mb-5\">\n      <h6>Description</h6>\n      <textarea *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.description\" class=\"form-control\" rows=\"5\"></textarea>\n      <p *ngIf=\"!isEditMode\">{{ jobDetails.description }}</p>\n    </div>\n\n    <div class=\"custom-box p-4\">\n      <div class=\"info-row my-3\">\n        <span>Experience</span>\n        <span class=\"fw-bold\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.experienceRequired\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.experienceRequired }}</span>\n        </span>\n      </div>\n      <hr>\n      <div class=\"info-row my-3\">\n        <span>Languages</span>\n        <span class=\"fw-bold\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.languages\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.languages }}</span>\n        </span>\n      </div>\n      <hr>\n      <div class=\"info-row my-3\">\n        <span>Employment</span>\n        <span class=\"fw-bold\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.employmentType\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.employmentType }}</span>\n        </span>\n      </div>\n      <hr>\n      <div class=\"info-row my-3\">\n        <span>Schedule</span>\n        <span class=\"fw-bold\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.schedule\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.schedule }}</span>\n        </span>\n      </div>\n      <hr>\n      <div class=\"info-row my-3\">\n        <span>Salary</span>\n        <span class=\"text-danger fw-bold\">\n          <input *ngIf=\"isEditMode\" [(ngModel)]=\"jobDetails.salary\" class=\"form-control\" />\n          <span *ngIf=\"!isEditMode\">{{ jobDetails.salary }}</span>\n        </span>\n      </div>\n      <hr>\n\n      <div *ngIf=\"isEditMode\">\n        <div class=\"form-group my-3\">\n          <label for=\"documentUpload\" class=\"form-label\">Upload New Document</label>\n          <input type=\"file\" class=\"form-control\" (change)=\"onFileChange($event)\" id=\"documentUpload\" />\n        </div>\n        <button *ngIf=\"jobDetails.document\" class=\"btn btn-danger w-100 mb-3\" (click)=\"removeDocument()\">\n          Remove Current Document\n        </button>\n      </div>\n\n      <button *ngIf=\"!isEditMode\" class=\"btn custom-gray-btn w-100 my-3\">\n        <i class=\"bi bi-download me-2\"></i> Download Documents\n      </button>\n    </div>\n\n  </div>\n</div>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-details/job-details.component.html b/frontend/src/app/components/employer/job-details/job-details.component.html
+--- a/frontend/src/app/components/employer/job-details/job-details.component.html	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-details/job-details.component.html	(date 1747677163678)
+@@ -9,10 +9,10 @@
+           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.title" class="form-control" />
+           <span *ngIf="!isEditMode">{{ jobDetails.title }}</span>
+         </h5>
+-        <p class="mb-0 text-muted">
++        <!--<p class="mb-0 text-muted">
+           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.companyName" class="form-control" />
+           <span *ngIf="!isEditMode">{{ jobDetails.companyName }}</span>
+-        </p>
++        </p>-->
+         <p class="text-muted">
+           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.location" class="form-control" />
+           <span *ngIf="!isEditMode">{{ jobDetails.location }}</span>
+@@ -46,8 +46,8 @@
+       <div class="info-row my-3">
+         <span>Experience</span>
+         <span class="fw-bold">
+-          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.experienceRequired" class="form-control" />
+-          <span *ngIf="!isEditMode">{{ jobDetails.experienceRequired }}</span>
++          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.experience" class="form-control" />
++          <span *ngIf="!isEditMode">{{ jobDetails.experience }}</span>
+         </span>
+       </div>
+       <hr>
+@@ -62,8 +62,8 @@
+       <div class="info-row my-3">
+         <span>Employment</span>
+         <span class="fw-bold">
+-          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employmentType" class="form-control" />
+-          <span *ngIf="!isEditMode">{{ jobDetails.employmentType }}</span>
++          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.employment" class="form-control" />
++          <span *ngIf="!isEditMode">{{ jobDetails.employment }}</span>
+         </span>
+       </div>
+       <hr>
+@@ -72,6 +72,14 @@
+         <span class="fw-bold">
+           <input *ngIf="isEditMode" [(ngModel)]="jobDetails.schedule" class="form-control" />
+           <span *ngIf="!isEditMode">{{ jobDetails.schedule }}</span>
++        </span>
++      </div>
++      <hr>
++      <div class="info-row my-3">
++        <span>category</span>
++        <span class="fw-bold">
++          <input *ngIf="isEditMode" [(ngModel)]="jobDetails.category" class="form-control" />
++          <span *ngIf="!isEditMode">{{ jobDetails.category }}</span>
+         </span>
+       </div>
+       <hr>
+Index: frontend/src/app/components/employer/create-job/create-job.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Component, OnInit} from '@angular/core';\nimport {JobModalService} from '../../../services/job-modal.service';\nimport {NgIf} from '@angular/common';\n\n@Component({\n  selector: 'app-create-job',\n  imports: [\n    NgIf\n  ],\n  templateUrl: './create-job.component.html',\n  standalone: true,\n  styleUrl: './create-job.component.css'\n})\n\nexport class CreateJobComponent implements OnInit {\n  showModal = false;\n\n  constructor(private jobModalService: JobModalService) {\n  }\n\n  ngOnInit(): void {\n    this.jobModalService.openModal$.subscribe(() => {\n      this.showModal = true;\n    });\n  }\n\n  closeModal() {\n    this.showModal = false;\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/create-job/create-job.component.ts b/frontend/src/app/components/employer/create-job/create-job.component.ts
+--- a/frontend/src/app/components/employer/create-job/create-job.component.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/create-job/create-job.component.ts	(date 1747677163678)
+@@ -1,30 +1,93 @@
+-import {Component, OnInit} from '@angular/core';
+-import {JobModalService} from '../../../services/job-modal.service';
+-import {NgIf} from '@angular/common';
++import { Component, OnInit } from '@angular/core';
++import { JobModalService } from '../../../services/job-modal.service';
++import { JobService } from '../../../services/jobs/job.service';
++import { NgIf, NgForOf } from '@angular/common';
++import { FormsModule } from '@angular/forms';
+ 
+ @Component({
+   selector: 'app-create-job',
++  standalone: true,
+   imports: [
+-    NgIf
++    NgIf,
++    NgForOf,
++    FormsModule
+   ],
+   templateUrl: './create-job.component.html',
+-  standalone: true,
+   styleUrl: './create-job.component.css'
+ })
+-
+ export class CreateJobComponent implements OnInit {
+   showModal = false;
+ 
+-  constructor(private jobModalService: JobModalService) {
+-  }
++  jobOptions: any = {
++    experiences: [],
++    employmentTypes: [],
++    categories: []
++  };
++
++  jobDetails: any = {
++    title: '',
++    description: '',
++    location: '',
++    languages: '',
++    schedule: '',
++    experience: '',
++    employment: '',
++    category: '',
++    document: null,
++    isOpened: 1,
++    employer_id: 1
++  };
++
++  constructor(
++    private jobModalService: JobModalService,
++    private jobService: JobService
++  ) {}
+ 
+   ngOnInit(): void {
+     this.jobModalService.openModal$.subscribe(() => {
+       this.showModal = true;
+     });
++
++    this.jobService.getJobFormOptions().subscribe((res: any) => {
++      this.jobOptions = res;
++    });
+   }
+ 
+   closeModal() {
+     this.showModal = false;
+   }
++
++  onFileSelected(event: any) {
++    const file = event.target.files[0];
++    this.jobDetails.document = file;
++  }
++
++  submitJob() {
++    console.log('Job Data:', this.jobDetails);
++    this.jobService.createJob(this.jobDetails).subscribe({
++      next: (response) => {
++        console.log('Job created successfully:', response);
++        this.closeModal();
++      },
++      error: (error) => {
++        console.error('Error creating job:', error);
++      }
++    });
++  }
++
++  isFormValid(): boolean {
++    const job = this.jobDetails;
++    return job.title?.trim() &&
++      job.description?.trim() &&
++      job.location?.trim() &&
++      job.languages?.trim() &&
++      job.schedule?.trim() &&
++      job.salary?.trim() &&
++      job.experience &&
++      job.employment &&
++      !isNaN(job.salary) &&
++      job.category;
++  }
++
++  protected readonly isNaN = isNaN;
+ }
+Index: frontend/src/app/components/navbar/navbar.component.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.navbar {\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  background-color: #fff;\n  padding:8px 40px;\n  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);\n  border-radius: 10px;\n  position: relative;\n  z-index: 60;\n}\n\n.logo {\n  width: 130px;\n  height: auto;\n}\n\n.menu {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: 30px;\n}\n\n.icon {\n  color: #641B1B;\n  font-size: 14px;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  transition: all 0.3s ease;\n  position: relative;\n}\n\n.icon:hover {\n  color: #B83232;\n  transform: translateY(-3px);\n}\n\n.icon span {\n  margin-top: 4px;\n  font-size: 12px;\n  font-weight: 500;\n}\n.icon.login {\n  background-color: #641B1B;\n  color: #fff;\n  padding: 5px 14px;\n  border-radius: 8px;\n  transition: background-color 0.3s ease, transform 0.3s ease;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-direction: row !important;\n  height: 34px;\n  min-width: 90px;\n  user-select: none;\n  text-align: center;\n}\n\n.icon.login:hover {\n  background-color: #A22525;\n  transform: scale(1.05);\n}\n\n.icon.active {\n  color: #000;\n  font-weight: bold;\n}\n\n@media screen and (max-width: 768px) {\n  .navbar {\n    flex-direction: column;\n    align-items: flex-start;\n    padding: 15px 20px;\n  }\n\n  .menu {\n    flex-direction: column;\n    align-items: flex-start;\n    gap: 20px;\n    width: 100%;\n    margin-top: 10px;\n  }\n\n  .icon {\n    flex-direction: row;\n    gap: 10px;\n    font-size: 14px;\n  }\n\n  .icon span {\n    margin-top: 0;\n    font-size: 14px;\n  }\n\n  .icon.login {\n    align-self: flex-end;\n    margin-top: 10px;\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/navbar/navbar.component.css b/frontend/src/app/components/navbar/navbar.component.css
+--- a/frontend/src/app/components/navbar/navbar.component.css	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/navbar/navbar.component.css	(date 1747677163678)
+@@ -64,7 +64,7 @@
+ }
+ 
+ .icon.active {
+-  color: #000;
++  color: #d50000;
+   font-weight: bold;
+ }
+ 
+Index: backend/routes/api.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\n\nuse Illuminate\\Http\\Request;\nuse Illuminate\\Support\\Facades\\Route;\nuse App\\Http\\Controllers\\AuthController;\n\nRoute::get('/roles', [AuthController::class, 'getRoles']);\nRoute::post('/register', [AuthController::class, 'register']);\nRoute::post('/verify-code', [AuthController::class, 'verifyCode']);\nRoute::post('/login', [AuthController::class, 'login']);\nRoute::post('/forgot-password', [AuthController::class, 'forgotPassword']);\nRoute::post('/verify-forgot-code', [AuthController::class, 'verifyForgotCode']);\nRoute::post('/reset-password', [AuthController::class, 'resetPassword']);\nRoute::middleware('auth:sanctum')->group(function () {\n    Route::post('/logout', [AuthController::class, 'logout']);\n    Route::get('/profile', [AuthController::class, 'userProfile']);\n});\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/routes/api.php b/backend/routes/api.php
+--- a/backend/routes/api.php	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/backend/routes/api.php	(date 1747677210178)
+@@ -2,18 +2,6 @@
+ 
+ use Illuminate\Http\Request;
+ use Illuminate\Support\Facades\Route;
+-use App\Http\Controllers\AuthController;
+ 
+-Route::get('/roles', [AuthController::class, 'getRoles']);
+-Route::post('/register', [AuthController::class, 'register']);
+-Route::post('/verify-code', [AuthController::class, 'verifyCode']);
+-Route::post('/login', [AuthController::class, 'login']);
+-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+-Route::post('/verify-forgot-code', [AuthController::class, 'verifyForgotCode']);
+-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+-Route::middleware('auth:sanctum')->group(function () {
+-    Route::post('/logout', [AuthController::class, 'logout']);
+-    Route::get('/profile', [AuthController::class, 'userProfile']);
+-});
+ 
+ 
+Index: frontend/src/app/components/employer/employer-home/employer-home.component.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.hero-img {\n  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%),\n  url('/assets/sign-up.jpg');\n  background-size: cover;\n  background-position: center;\n  width: 100%;\n  height: 100%;\n}\n.dashboard {\n  font-family: 'Carlito', sans-serif;\n  padding: 60px;\n}\n.add-job-btn {\n  background-color: #631B1B;\n  height: 50px;\n  border-radius: 50px;\n}\n.add-job-btn:hover{\n  background-color: #4a1111;\n}\n.headline-paragraph{\n  font-size: 27px;\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/employer-home/employer-home.component.css b/frontend/src/app/components/employer/employer-home/employer-home.component.css
+--- a/frontend/src/app/components/employer/employer-home/employer-home.component.css	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/employer-home/employer-home.component.css	(date 1747677163678)
+@@ -1,5 +1,5 @@
+ .hero-img {
+-  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 20%),
++  background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 10%),
+   url('/assets/sign-up.jpg');
+   background-size: cover;
+   background-position: center;
+Index: frontend/src/app/components/employer/job-postings/job-postings.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Component } from '@angular/core';\nimport { JobCardComponent } from '../job-card/job-card.component';\nimport { NgForOf } from '@angular/common';\nimport { JobModalService } from '../../../services/job-modal.service';\nimport { CreateJobComponent } from '../create-job/create-job.component';\nimport {RouterLink} from '@angular/router';\nimport {NavbarComponent} from '../../navbar/navbar.component';\n\n@Component({\n  selector: 'app-job-postings',\n  standalone: true,\n  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink],\n  templateUrl: './job-postings.component.html',\n  styleUrls: ['./job-postings.component.css']\n})\nexport class JobPostingsComponent {\n  selectedTab: string = 'open';\n\n  constructor(private jobModalService: JobModalService) {}\n\n  openJobModal() {\n    this.jobModalService.openCreateJobModal();\n  }\n\n  jobs = [\n    {\n      image: 'assets/adham.jpg',\n      title: 'Full-Stack Developer',\n      description: 'Responsible for developing both front-end and back-end systems.',\n      salary: '$800 - $1000 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'UI/UX Designer',\n      description: 'Focus on crafting intuitive and visually appealing user interfaces.',\n      salary: '$700 - $900 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'Mobile App Developer',\n      description: 'Build and maintain cross-platform mobile applications.',\n      salary: '$750 - $950 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'Data Analyst',\n      description: 'Analyze data trends and create reports.',\n      salary: '$850 - $1050 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'UI Designer',\n      description: 'Focus on crafting intuitive and visually appealing user interfaces.',\n      salary: '$700 - $900 Salary/Month',\n      status: 'closed'\n    },\n  ];\n\n  closeJob(job: any) {\n    job.status = 'closed';\n  }\n\n  get filteredJobs() {\n    return this.jobs.filter(job => job.status === this.selectedTab);\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-postings/job-postings.component.ts b/frontend/src/app/components/employer/job-postings/job-postings.component.ts
+--- a/frontend/src/app/components/employer/job-postings/job-postings.component.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-postings/job-postings.component.ts	(date 1747677163678)
+@@ -1,70 +1,64 @@
+-import { Component } from '@angular/core';
++import { Component, OnInit } from '@angular/core';
+ import { JobCardComponent } from '../job-card/job-card.component';
+-import { NgForOf } from '@angular/common';
++import { NgForOf, NgIf } from '@angular/common';
+ import { JobModalService } from '../../../services/job-modal.service';
+ import { CreateJobComponent } from '../create-job/create-job.component';
+-import {RouterLink} from '@angular/router';
+-import {NavbarComponent} from '../../navbar/navbar.component';
++import { RouterLink } from '@angular/router';
++import { NavbarComponent } from '../../navbar/navbar.component';
++import {JobService} from '../../../services/jobs/job.service';
++
+ 
+ @Component({
+   selector: 'app-job-postings',
+   standalone: true,
+-  imports: [JobCardComponent, NgForOf, CreateJobComponent, RouterLink],
++  imports: [JobCardComponent, NgForOf, NgIf, CreateJobComponent, RouterLink, NavbarComponent],
+   templateUrl: './job-postings.component.html',
+   styleUrls: ['./job-postings.component.css']
+ })
+-export class JobPostingsComponent {
++export class JobPostingsComponent implements OnInit {
+   selectedTab: string = 'open';
++  jobs: any[] = [];
++  loading = false;
++  error = '';
+ 
+-  constructor(private jobModalService: JobModalService) {}
++  constructor(
++    private jobService: JobService
++  ) {}
+ 
+-  openJobModal() {
+-    this.jobModalService.openCreateJobModal();
++  ngOnInit() {
++    this.fetchJobs();
+   }
+ 
+-  jobs = [
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Full-Stack Developer',
+-      description: 'Responsible for developing both front-end and back-end systems.',
+-      salary: '$800 - $1000 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'UI/UX Designer',
+-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
+-      salary: '$700 - $900 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Mobile App Developer',
+-      description: 'Build and maintain cross-platform mobile applications.',
+-      salary: '$750 - $950 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Data Analyst',
+-      description: 'Analyze data trends and create reports.',
+-      salary: '$850 - $1050 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'UI Designer',
+-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
+-      salary: '$700 - $900 Salary/Month',
+-      status: 'closed'
+-    },
+-  ];
++  fetchJobs() {
++    const employerId = 1;
++
++    this.loading = true;
++    this.error = '';
++    this.jobService.getJobsByEmployer(employerId).subscribe({
++      next: (data) => {
++        this.jobs = data;
++        this.loading = false;
++      },
++      error: (err) => {
++        this.error = 'Failed to load jobs';
++        this.loading = false;
++      }
++    });
++  }
+ 
+   closeJob(job: any) {
+     job.status = 'closed';
+   }
+ 
+   get filteredJobs() {
+-    return this.jobs.filter(job => job.status === this.selectedTab);
++    return this.jobs.filter(job => {
++      if (this.selectedTab === 'open') {
++        return job.isOpened === 1;
++      } else if (this.selectedTab === 'closed') {
++        return job.isOpened === 0;
++      }
++      return false;
++    });
+   }
++
+ }
+Index: backend/database/migrations/2025_05_08_150637_create_job_listings_table.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\n\nuse Illuminate\\Database\\Migrations\\Migration;\nuse Illuminate\\Database\\Schema\\Blueprint;\nuse Illuminate\\Support\\Facades\\Schema;\n\nreturn new class extends Migration\n{\n    public function up(): void\n    {\n        Schema::create('job_listings', function (Blueprint $table) {\n            $table->id();\n            $table->string('title');\n            $table->text('description');\n            $table->decimal('salary', 10, 2);\n            $table->string('location');\n            $table->string('category');\n            $table->string('languages');\n            $table->string('schedule');\n            $table->string('experience');\n            $table->string('employment');\n            $table->string('documents')->nullable();;\n            $table->boolean('isOpened')->default(true);\n            $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');\n            $table->timestamps();\n        });\n\n    }\n    public function down(): void\n    {\n        Schema::dropIfExists('job_listings');\n    }\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/database/migrations/2025_05_08_150637_create_job_listings_table.php b/backend/database/migrations/2025_05_08_150637_create_job_listings_table.php
+--- a/backend/database/migrations/2025_05_08_150637_create_job_listings_table.php	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/backend/database/migrations/2025_05_08_150637_create_job_listings_table.php	(date 1747677163663)
+@@ -20,7 +20,7 @@
+             $table->string('experience');
+             $table->string('employment');
+             $table->string('documents')->nullable();;
+-            $table->boolean('isOpened')->default(true);
++            $table->boolean('isOpened')->default(1);
+             $table->foreignId('employer_id')->constrained('employers')->onDelete('cascade');
+             $table->timestamps();
+         });
+Index: backend/app/Http/Controllers/JobListingController.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\n\nnamespace App\\Http\\Controllers;\nuse App\\Http\\Requests\\UpdateJobListingRequest;\nuse App\\Models\\JobListing;\nuse App\\Http\\Requests\\CreateJobListingRequest;\nuse Illuminate\\Http\\JsonResponse;\n\nclass JobListingController extends Controller\n{\n    public function getAll(): JsonResponse\n    {\n        return response()->json(JobListing::all());\n    }\n\n    public function getById($id): JsonResponse\n    {\n        $job = JobListing::findOrFail($id);\n        return response()->json($job);\n    }\n\n    public function getByEmployer($employerId): JsonResponse\n    {\n        $jobs = JobListing::where('employer_id', $employerId)->get();\n        return response()->json($jobs);\n    }\n\n    public function create(CreateJobListingRequest $request): JsonResponse\n    {\n        $job = JobListing::create($request->validated());\n        return response()->json($job, 201);\n    }\n\n    public function update(UpdateJobListingRequest $request, $id): JsonResponse\n    {\n        $job = JobListing::findOrFail($id);\n        $job->update($request->validated());\n        return response()->json($job);\n    }\n\n    public function delete($id): JsonResponse\n    {\n        $job = JobListing::findOrFail($id);\n        $job->delete();\n        return response()->json(['message' => 'Job deleted successfully']);\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/app/Http/Controllers/JobListingController.php b/backend/app/Http/Controllers/JobListingController.php
+--- a/backend/app/Http/Controllers/JobListingController.php	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/backend/app/Http/Controllers/JobListingController.php	(date 1747677163663)
+@@ -1,22 +1,23 @@
+ <?php
+ 
+ namespace App\Http\Controllers;
++
++use App\Http\Requests\CreateJobListingRequest;
+ use App\Http\Requests\UpdateJobListingRequest;
+ use App\Models\JobListing;
+-use App\Http\Requests\CreateJobListingRequest;
+ use Illuminate\Http\JsonResponse;
++//use Illuminate\Support\Facades\Auth;
+ 
+ class JobListingController extends Controller
+ {
+-    public function getAll(): JsonResponse
+-    {
+-        return response()->json(JobListing::all());
+-    }
+-
+     public function getById($id): JsonResponse
+     {
+-        $job = JobListing::findOrFail($id);
+-        return response()->json($job);
++        try {
++            $job = JobListing::findOrFail($id);
++            return response()->json($job);
++        } catch (\Exception $e) {
++            return response()->json(['error' => 'Job not found'], 404);
++        }
+     }
+ 
+     public function getByEmployer($employerId): JsonResponse
+@@ -27,21 +28,52 @@
+ 
+     public function create(CreateJobListingRequest $request): JsonResponse
+     {
+-        $job = JobListing::create($request->validated());
+-        return response()->json($job, 201);
++        try {
++            $job = JobListing::create($request->validated());
++            return response()->json($job, 201);
++        } catch (\Exception $e) {
++            return response()->json(['error' => 'Failed to create job'], 500);
++        }
+     }
+ 
+     public function update(UpdateJobListingRequest $request, $id): JsonResponse
+     {
+-        $job = JobListing::findOrFail($id);
+-        $job->update($request->validated());
+-        return response()->json($job);
++        try {
++            $job = JobListing::findOrFail($id);
++
++            /*if ($job->employer_id !== Auth::id()) {
++                return response()->json(['error' => 'Unauthorized'], 403);
++            }*/
++
++            $job->update($request->validated());
++            return response()->json($job);
++        } catch (\Exception $e) {
++            return response()->json(['error' => 'Failed to update job'], 500);
++        }
+     }
+ 
+     public function delete($id): JsonResponse
+     {
+-        $job = JobListing::findOrFail($id);
+-        $job->delete();
+-        return response()->json(['message' => 'Job deleted successfully']);
++        try {
++            $job = JobListing::findOrFail($id);
++
++            /*if ($job->employer_id !== Auth::id()) {
++                return response()->json(['error' => 'Unauthorized'], 403);
++            }*/
++
++            $job->delete();
++            return response()->json(['message' => 'Job deleted successfully']);
++        } catch (\Exception $e) {
++            return response()->json(['error' => 'Failed to delete job'], 500);
++        }
++    }
++
++    public function getJobFormOptions(): JsonResponse
++    {
++        return response()->json([
++            'experienceOptions' => JobListing::EXPERIENCE_OPTIONS,
++            'employmentOptions' => JobListing::EMPLOYMENT_OPTIONS,
++            'categoryOptions' => JobListing::CATEGORY_OPTIONS,
++        ]);
+     }
+ }
+Index: frontend/src/app/components/employer/job-card/job-card.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div\n  class=\"job-card position-relative p-3 h-100 d-flex flex-column justify-content-between\"\n  [routerLink]=\"['/job-details']\"\n  [queryParams]=\"{ role: 'employer' }\"\n  data-bs-toggle=\"tooltip\"\n  data-bs-placement=\"top\"\n  title=\"Click to view job details\"\n  data-bs-delay='{\"show\":0,\"hide\":100}'>\n\n\n<button\n    *ngIf=\"job.status === 'open'\"\n    class=\"btn btn-sm position-absolute top-0 end-0 m-2 px-3 py-1 rounded-pill shadow\"\n    style=\"background-color: #631B1B; color: white; font-size: 0.75rem; z-index: 2;\"\n    (click)=\"onCloseClick($event)\">\n    Close\n  </button>\n\n  <img [src]=\"job.image\" alt=\"Company Logo\" class=\"mb-3 job-img\" />\n\n  <div>\n    <h6 class=\"fw-bold\">{{ job.title }}</h6>\n    <p class=\"small\">{{ job.description }}</p>\n    <p class=\"salary\">{{ job.salary }}</p>\n  </div>\n\n  <div class=\"d-flex justify-content-between\">\n    <button class=\"btn btn-outline-dark btn-sm w-100 me-2\"\n            [routerLink]=\"['/employer/job-applications']\"\n            (click)=\"$event.stopPropagation()\">Applicants</button>\n    <button class=\"btn btn-outline-danger btn-sm w-100\"\n            (click)=\"onDeleteClick($event)\">Delete</button>\n  </div>\n\n</div>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/job-card/job-card.component.html b/frontend/src/app/components/employer/job-card/job-card.component.html
+--- a/frontend/src/app/components/employer/job-card/job-card.component.html	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/job-card/job-card.component.html	(date 1747677163678)
+@@ -1,6 +1,6 @@
+ <div
+   class="job-card position-relative p-3 h-100 d-flex flex-column justify-content-between"
+-  [routerLink]="['/job-details']"
++  [routerLink]="['/job-details', job.id]"
+   [queryParams]="{ role: 'employer' }"
+   data-bs-toggle="tooltip"
+   data-bs-placement="top"
+Index: frontend/src/app/services/jobs/job.service.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/services/jobs/job.service.ts b/frontend/src/app/services/jobs/job.service.ts
+new file mode 100644
+--- /dev/null	(date 1747677163694)
++++ b/frontend/src/app/services/jobs/job.service.ts	(date 1747677163694)
+@@ -0,0 +1,28 @@
++import { Injectable } from '@angular/core';
++import { HttpClient } from '@angular/common/http';
++import { Observable } from 'rxjs';
++
++@Injectable({
++  providedIn: 'root',
++})
++export class JobService {
++  private apiUrl = 'http://127.0.0.1:8000/api';
++
++  constructor(private http: HttpClient) {}
++
++  getJobsByEmployer(employerId: number): Observable<any> {
++    return this.http.get(`${this.apiUrl}/employer/${employerId}/jobs`);
++  }
++
++  getJobById(jobId: number): Observable<any> {
++      return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
++    }
++
++  createJob(jobData: any): Observable<any> {
++    return this.http.post(`${this.apiUrl}/jobs`, jobData);
++  }
++
++  getJobFormOptions() {
++    return this.http.get<any>(`${this.apiUrl}/job-form-options`);
++  }
++}
+Index: frontend/src/app/services/jobs/job.service.spec.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/services/jobs/job.service.spec.ts b/frontend/src/app/services/jobs/job.service.spec.ts
+new file mode 100644
+--- /dev/null	(date 1747677163678)
++++ b/frontend/src/app/services/jobs/job.service.spec.ts	(date 1747677163678)
+@@ -0,0 +1,16 @@
++import { TestBed } from '@angular/core/testing';
++
++import { JobService } from './job.service';
++
++describe('JobService', () => {
++  let service: JobService;
++
++  beforeEach(() => {
++    TestBed.configureTestingModule({});
++    service = TestBed.inject(JobService);
++  });
++
++  it('should be created', () => {
++    expect(service).toBeTruthy();
++  });
++});
+Index: frontend/src/app/components/employer/employer-home/employer-home.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Component } from '@angular/core';\nimport {NgForOf} from '@angular/common';\nimport {RouterLink} from '@angular/router';\nimport { JobModalService } from '../../../services/job-modal.service';\nimport {JobCardComponent} from \"../job-card/job-card.component\";\nimport {CreateJobComponent} from '../create-job/create-job.component';\nimport console from 'node:console';\nimport { NavbarComponent } from '../../navbar/navbar.component';\n@Component({\n  selector: 'app-employer-home',\n  standalone:true,\n  imports: [JobCardComponent, NgForOf, RouterLink, CreateJobComponent,NavbarComponent],\n  templateUrl: './employer-home.component.html',\n  styleUrl: './employer-home.component.css'\n})\nexport class EmployerHomeComponent {\n  constructor(private jobModalService: JobModalService) {}\n\n  openJobModal() {\n    this.jobModalService.openCreateJobModal();\n  }\n  jobs = [\n    {\n      image: 'assets/adham.jpg',\n      title: 'Full-Stack Developer',\n      description: 'Responsible for developing both front-end and back-end systems.',\n      salary: '$800 - $1000 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'UI/UX Designer',\n      description: 'Focus on crafting intuitive and visually appealing user interfaces.',\n      salary: '$700 - $900 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'Mobile App Developer',\n      description: 'Build and maintain cross-platform mobile applications.',\n      salary: '$750 - $950 Salary/Month',\n      status: 'open'\n    },\n    {\n      image: 'assets/adham.jpg',\n      title: 'Data Analyst',\n      description: 'Analyze data trends and create reports.',\n      salary: '$850 - $1050 Salary/Month',\n      status: 'open'\n    }\n  ];\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/employer-home/employer-home.component.ts b/frontend/src/app/components/employer/employer-home/employer-home.component.ts
+--- a/frontend/src/app/components/employer/employer-home/employer-home.component.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/employer-home/employer-home.component.ts	(date 1747677163678)
+@@ -1,53 +1,51 @@
+-import { Component } from '@angular/core';
+-import {NgForOf} from '@angular/common';
+-import {RouterLink} from '@angular/router';
++import { Component, OnInit } from '@angular/core';
++import { NgForOf } from '@angular/common';
++import { RouterLink } from '@angular/router';
+ import { JobModalService } from '../../../services/job-modal.service';
+-import {JobCardComponent} from "../job-card/job-card.component";
+-import {CreateJobComponent} from '../create-job/create-job.component';
+-import console from 'node:console';
++import { JobCardComponent } from '../job-card/job-card.component';
++import { CreateJobComponent } from '../create-job/create-job.component';
+ import { NavbarComponent } from '../../navbar/navbar.component';
++import {JobService} from '../../../services/jobs/job.service';
++
+ @Component({
+   selector: 'app-employer-home',
+-  standalone:true,
+-  imports: [JobCardComponent, NgForOf, RouterLink, CreateJobComponent,NavbarComponent],
++  standalone: true,
++  imports: [
++    JobCardComponent,
++    NgForOf,
++    RouterLink,
++    CreateJobComponent,
++    NavbarComponent
++  ],
+   templateUrl: './employer-home.component.html',
+   styleUrl: './employer-home.component.css'
+ })
+-export class EmployerHomeComponent {
+-  constructor(private jobModalService: JobModalService) {}
++export class EmployerHomeComponent implements OnInit {
++  jobs: any[] = [];
++  employerId = 1;
++
++  constructor(
++    private jobModalService: JobModalService,
++    private jobService: JobService
++  ) {}
++
++  ngOnInit(): void {
++    this.loadJobs();
++  }
++
++  loadJobs(): void {
++    this.jobService.getJobsByEmployer(this.employerId).subscribe({
++      next: (data) => {
++        this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
++      },
++      error: (err) => {
++        console.error('Failed to load jobs:', err);
++      }
++    });
++  }
+ 
+-  openJobModal() {
++
++  openJobModal(): void {
+     this.jobModalService.openCreateJobModal();
+   }
+-  jobs = [
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Full-Stack Developer',
+-      description: 'Responsible for developing both front-end and back-end systems.',
+-      salary: '$800 - $1000 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'UI/UX Designer',
+-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
+-      salary: '$700 - $900 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Mobile App Developer',
+-      description: 'Build and maintain cross-platform mobile applications.',
+-      salary: '$750 - $950 Salary/Month',
+-      status: 'open'
+-    },
+-    {
+-      image: 'assets/adham.jpg',
+-      title: 'Data Analyst',
+-      description: 'Analyze data trends and create reports.',
+-      salary: '$850 - $1050 Salary/Month',
+-      status: 'open'
+-    }
+-  ];
+-
+ }
+Index: frontend/src/app/app.routes.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { Routes } from '@angular/router';\nimport { JobPostingsComponent } from './components/employer/job-postings/job-postings.component';\nimport {EmployerHomeComponent} from './components/employer/employer-home/employer-home.component';\nimport {DashboardAdminComponent} from './components/admin/dashboard-admin/dashboard-admin.component';\nimport {ManageEmployersComponent} from './components/admin/manage-employers/manage-employers.component';\nimport {AllUsersComponent} from './components/admin/all-users/all-users.component';\nimport {JobListingsComponent} from './components/admin/job-listings/job-listings.component';\nimport {HomepageComponent} from './components/job-seeker/home-page/home-page.component';\nimport {SignUpComponent} from './components/auth/sign-up/sign-up.component';\nimport {LoginComponent}from './components/auth/login/login.component';\nimport {ForgotPasswordComponent} from './components/auth/forgot-password/forgot-password.component';\nimport {VerifyCodeComponent} from './components/auth/verify-code/verify-code.component';\nimport { ResetPasswordComponent } from './components/auth/reset-password/reset-password.component';\nimport {ChoseUserTypeComponent} from './components/auth/chose-user-type/chose-user-type.component';\nimport {ShortlistComponent} from './components/employer/shortlist/shortlist.component';\nimport {JobApplicationsComponent} from './components/employer/job-applications/job-applications.component';\nimport {JobDetailsComponent} from './components/employer/job-details/job-details.component';\nimport {ApplicationsStatusComponent} from './components/job-seeker/applications-status/applications-status.component';\nimport {CategoriesPageComponent} from './components/job-seeker/categories-page/categories-page.component';\nimport {ApplicationReviewComponent} from './components/job-seeker/application-review/application-review.component';\nimport {\n  EmployerNotificationComponent\n} from './components/Notification/employer-notification/employer-notification.component';\nimport {ResumeManagementComponent} from './components/job-seeker/resume-management/resume-management.component';\nimport {CandidateViewComponent} from './components/employer/candidate-view/candidate-view.component';\nimport {SeekerNotificationComponent} from './components/Notification/seeker-notification/seeker-notification.component';\nimport {EmployerReportsComponent} from './components/Reports/employer-reports/employer-reports.component';\nimport {AdminReportsComponent} from './components/Reports/admin-reports/admin-reports.component';\nimport {SignUpEmployerComponent} from './components/auth/sign-up-employer/sign-up-employer.component';\nimport {JobFieldCategoriesComponent} from './components/auth/job-field-categories/job-field-categories.component';\nimport {JobSeekerProfilePageComponent} from './components/job-seeker/profile-page/profile-page.component';\nimport {AdminProfilePageComponent} from './components/admin/profile-page/profile-page.component';\nimport {EmployerProfilePageComponent} from './components/employer/profile-page/profile-page.component';\nimport {EditProfilePageComponent} from './components/shared/edit-profile-page/edit-profile-page.component';\nimport {SavedJobsComponent} from './components/job-seeker/saved-jobs/saved-jobs.component';\nimport {WelcomeComponent} from './components/job-seeker/welcome/welcome.component';\n\nexport const routes: Routes = [\n  { path: '', component: WelcomeComponent },\n  { path: 'signup', component: SignUpComponent },\n  {path: 'signup-employer',component:SignUpEmployerComponent },\n  { path: 'type', component: ChoseUserTypeComponent },\n  { path: 'login', component: LoginComponent },\n  {path: 'field', component: JobFieldCategoriesComponent },\n  { path: 'forgot-password', component: ForgotPasswordComponent },\n  { path: 'verify-code', component: VerifyCodeComponent },\n  { path: 'reset-password', component: ResetPasswordComponent },\n  { path: 'home-page', component: HomepageComponent },\n  {path: 'home/guest',component: HomepageComponent},\n  { path: 'employer-home', component: EmployerHomeComponent },\n  { path: 'employer/job-postings', component: JobPostingsComponent },\n  { path: 'dashboard-admin', component: DashboardAdminComponent },\n  { path: 'admin/manage-employers', component: ManageEmployersComponent},\n  { path: 'admin/all-users', component: AllUsersComponent },\n  { path: 'admin/job-listings', component: JobListingsComponent },\n  {path: 'employer/shortlist', component: ShortlistComponent},\n  {path: 'employer/job-applications', component: JobApplicationsComponent},\n  {path: 'job-details', component: JobDetailsComponent},\n  { path: 'applications-status', component: ApplicationsStatusComponent },\n  {path: 'categories-page', component: CategoriesPageComponent},\n  {path: 'application-review', component: ApplicationReviewComponent},\n  {path: 'employer-notification', component: EmployerNotificationComponent},\n  {path: 'seeker-notification', component: SeekerNotificationComponent},\n  {path: 'employer-reports', component: EmployerReportsComponent},\n  {path: 'admin-reports', component: AdminReportsComponent},\n  { path: 'jobseeker-profile', component: JobSeekerProfilePageComponent },\n  { path: 'employer-profile', component: EmployerProfilePageComponent },\n  { path: 'edit-profile', component: EditProfilePageComponent },\n  { path: 'admin-profile', component: AdminProfilePageComponent },\n  { path: 'candidate-view', component: CandidateViewComponent},\n  { path: 'resume-management', component: ResumeManagementComponent },\n  { path: 'Saved-Jobs', component: SavedJobsComponent },\n];\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/app.routes.ts b/frontend/src/app/app.routes.ts
+--- a/frontend/src/app/app.routes.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/app.routes.ts	(date 1747677163663)
+@@ -55,7 +55,7 @@
+   { path: 'admin/job-listings', component: JobListingsComponent },
+   {path: 'employer/shortlist', component: ShortlistComponent},
+   {path: 'employer/job-applications', component: JobApplicationsComponent},
+-  {path: 'job-details', component: JobDetailsComponent},
++  { path: 'job-details/:id', component: JobDetailsComponent },
+   { path: 'applications-status', component: ApplicationsStatusComponent },
+   {path: 'categories-page', component: CategoriesPageComponent},
+   {path: 'application-review', component: ApplicationReviewComponent},
+Index: frontend/src/app/components/employer/create-job/create-job.component.html
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><div class=\"modal fade show d-block\" tabindex=\"-1\" *ngIf=\"showModal\" style=\"background: rgba(0,0,0,0.5);\">\n  <div class=\"modal-dialog modal-lg\">\n    <div class=\"modal-content p-3\">\n      <div class=\"modal-header\">\n        <h5 class=\"modal-title\">Create Job</h5>\n        <button type=\"button\" class=\"btn-close\" (click)=\"closeModal()\"></button>\n      </div>\n\n      <div class=\"modal-body\">\n        <form>\n          <div class=\"mb-3\">\n            <label>Job Title</label>\n            <input type=\"text\" class=\"form-control custom-border\" placeholder=\"title...\">\n          </div>\n\n          <div class=\"mb-3\">\n            <label>Description</label>\n            <textarea rows=\"4\" class=\"form-control custom-border\" placeholder=\"description...\"></textarea>\n          </div>\n\n          <div class=\"row\">\n            <div class=\"col-md-6 mb-3\">\n              <label>Location</label>\n              <input type=\"text\" class=\"form-control custom-border\" placeholder=\"e.g. Nablus, Palestine\">\n            </div>\n            <div class=\"col-md-6 mb-3\">\n              <label>Languages</label>\n              <input type=\"text\" class=\"form-control custom-border\" placeholder=\"e.g. English - Advanced\">\n            </div>\n          </div>\n\n          <div class=\"row\">\n            <div class=\"col-md-6 mb-3\">\n              <label>Schedule</label>\n              <input type=\"text\" class=\"form-control custom-border\" placeholder=\"e.g. Sunday to Thursday\">\n            </div>\n            <div class=\"col-md-6 mb-3\">\n              <label>Salary</label>\n              <input type=\"text\" class=\"form-control custom-border\" placeholder=\"Hourly/ daily/ monthly\">\n            </div>\n          </div>\n\n          <div class=\"row\">\n            <div class=\"col-md-6 mb-3\">\n              <label>Experience</label>\n              <select class=\"form-select custom-border\">\n                <option selected disabled> - - - - - - - - </option>\n                <option>0-1 years</option>\n                <option>1-3 years</option>\n                <option>3+ years</option>\n                <option>Not required</option>\n              </select>\n            </div>\n            <div class=\"col-md-6 mb-3\">\n              <label>Employment</label>\n              <select class=\"form-select custom-border\">\n                <option selected disabled> - - - - - - - - </option>\n                <option>Full-Time</option>\n                <option>Part-Time</option>\n                <option>Remote</option>\n                <option>Contract</option>\n                <option>Internship</option>\n                <option>Temporary</option>\n                <option>Volunteer</option>\n              </select>\n            </div>\n\n              <div class=\"mb-3\">\n                <label>Category</label>\n                <select class=\"form-select custom-border\">\n                  <option selected disabled> - - - - - - - - </option>\n                  <option>Marketing</option>\n                  <option>Technology</option>\n                  <option>Design</option>\n                  <option>Sales</option>\n                  <option>Cooking</option>\n                  <option>Other</option>\n                </select>\n            </div>\n          </div>\n\n          <div class=\"mb-3\">\n            <label class=\"form-label\">Documents</label>\n            <input type=\"file\" class=\"form-control custom-border\">\n          </div>\n        </form>\n      </div>\n\n      <div class=\"modal-footer\">\n        <button class=\"btn w-100 text-white\" style=\"background-color: #631B1B;\" (click)=\"closeModal()\">Post</button>\n      </div>\n    </div>\n  </div>\n</div>\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/components/employer/create-job/create-job.component.html b/frontend/src/app/components/employer/create-job/create-job.component.html
+--- a/frontend/src/app/components/employer/create-job/create-job.component.html	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/components/employer/create-job/create-job.component.html	(date 1747677163663)
+@@ -10,84 +10,79 @@
+         <form>
+           <div class="mb-3">
+             <label>Job Title</label>
+-            <input type="text" class="form-control custom-border" placeholder="title...">
++            <input type="text" class="form-control custom-border" placeholder="title..." [(ngModel)]="jobDetails.title" name="title">
+           </div>
+ 
+           <div class="mb-3">
+             <label>Description</label>
+-            <textarea rows="4" class="form-control custom-border" placeholder="description..."></textarea>
++            <textarea rows="4" class="form-control custom-border" placeholder="description..." [(ngModel)]="jobDetails.description" name="description"></textarea>
+           </div>
+ 
+           <div class="row">
+             <div class="col-md-6 mb-3">
+               <label>Location</label>
+-              <input type="text" class="form-control custom-border" placeholder="e.g. Nablus, Palestine">
++              <input type="text" class="form-control custom-border" placeholder="e.g. Nablus, Palestine" [(ngModel)]="jobDetails.location" name="location">
+             </div>
+             <div class="col-md-6 mb-3">
+               <label>Languages</label>
+-              <input type="text" class="form-control custom-border" placeholder="e.g. English - Advanced">
++              <input type="text" class="form-control custom-border" placeholder="e.g. English - Advanced" [(ngModel)]="jobDetails.languages" name="languages">
+             </div>
+           </div>
+ 
+           <div class="row">
+             <div class="col-md-6 mb-3">
+               <label>Schedule</label>
+-              <input type="text" class="form-control custom-border" placeholder="e.g. Sunday to Thursday">
++              <input type="text" class="form-control custom-border" placeholder="e.g. Sunday to Thursday" [(ngModel)]="jobDetails.schedule" name="schedule">
+             </div>
+             <div class="col-md-6 mb-3">
+               <label>Salary</label>
+-              <input type="text" class="form-control custom-border" placeholder="Hourly/ daily/ monthly">
++              <input type="number" class="form-control custom-border" placeholder="e.g. 10.50, 100, 5000" [(ngModel)]="jobDetails.salary" name="salary" min="0" step="0.01" required>
+             </div>
+           </div>
+ 
+           <div class="row">
+             <div class="col-md-6 mb-3">
+               <label>Experience</label>
+-              <select class="form-select custom-border">
+-                <option selected disabled> - - - - - - - - </option>
+-                <option>0-1 years</option>
+-                <option>1-3 years</option>
+-                <option>3+ years</option>
+-                <option>Not required</option>
++              <select class="form-select custom-border" [(ngModel)]="jobDetails.experience" name="experience">
++                <option *ngFor="let option of jobOptions.experienceOptions" [value]="option">{{ option }}</option>
+               </select>
+             </div>
+             <div class="col-md-6 mb-3">
+               <label>Employment</label>
+-              <select class="form-select custom-border">
+-                <option selected disabled> - - - - - - - - </option>
+-                <option>Full-Time</option>
+-                <option>Part-Time</option>
+-                <option>Remote</option>
+-                <option>Contract</option>
+-                <option>Internship</option>
+-                <option>Temporary</option>
+-                <option>Volunteer</option>
++              <select class="form-select custom-border" [(ngModel)]="jobDetails.employment" name="employmentType">
++                <option *ngFor="let option of jobOptions.employmentOptions" [value]="option">{{ option }}</option>
+               </select>
+             </div>
++          </div>
+ 
+-              <div class="mb-3">
+-                <label>Category</label>
+-                <select class="form-select custom-border">
+-                  <option selected disabled> - - - - - - - - </option>
+-                  <option>Marketing</option>
+-                  <option>Technology</option>
+-                  <option>Design</option>
+-                  <option>Sales</option>
+-                  <option>Cooking</option>
+-                  <option>Other</option>
+-                </select>
+-            </div>
++          <div class="mb-3">
++            <label>Category</label>
++            <select class="form-select custom-border" [(ngModel)]="jobDetails.category" name="category">
++              <option *ngFor="let option of jobOptions.categoryOptions" [value]="option">{{ option }}</option>
++            </select>
+           </div>
+ 
+           <div class="mb-3">
+             <label class="form-label">Documents</label>
+-            <input type="file" class="form-control custom-border">
++            <input type="file" class="form-control custom-border" (change)="onFileSelected($event)">
+           </div>
+         </form>
+       </div>
+ 
+       <div class="modal-footer">
+-        <button class="btn w-100 text-white" style="background-color: #631B1B;" (click)="closeModal()">Post</button>
++        <button
++          type="button"
++          class="btn w-100 text-white"
++          [disabled]="!isFormValid()"
++          style="background-color: #631B1B;"
++          (click)="submitJob()"
++        >
++          Post
++        </button>
++      </div>
++
++      <div *ngIf="!isFormValid()" class="text-danger text-center mt-2">
++        Please fill in all required fields
+       </div>
+     </div>
+   </div>
+Index: frontend/src/app/app.config.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';\nimport { provideRouter } from '@angular/router';\n\nimport { routes } from './app.routes';\nimport { provideClientHydration, withEventReplay } from '@angular/platform-browser';\n\nexport const appConfig: ApplicationConfig = {\n  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]\n};\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/app.config.ts b/frontend/src/app/app.config.ts
+--- a/frontend/src/app/app.config.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/app.config.ts	(date 1747677163663)
+@@ -3,7 +3,8 @@
+ 
+ import { routes } from './app.routes';
+ import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
++import {provideHttpClient} from '@angular/common/http';
+ 
+ export const appConfig: ApplicationConfig = {
+-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]
++  providers: [provideHttpClient(),provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]
+ };
+Index: frontend/src/app/app.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Component, OnInit} from '@angular/core';\nimport {Router, RouterOutlet} from '@angular/router';\nimport {FooterComponent} from './components/footer/footer.component'\nimport {AsyncPipe,NgIf} from '@angular/common';\nimport {NotificationDrawerComponent} from './components/Notification/notification-drawer/notification-drawer.component';\nimport {NavbarComponent} from './components/navbar/navbar.component';\nimport { NotificationService } from './services/notifications/notification.service';\nimport {Observable} from 'rxjs';\n@Component({\n  selector: 'app-root',\n  standalone: true,\n  imports: [RouterOutlet, FooterComponent, NgIf, AsyncPipe, NotificationDrawerComponent, NavbarComponent],\n  templateUrl: './app.component.html',\n  styleUrl: './app.component.css'\n})\nexport class AppComponent implements OnInit {\n    title(title: any) {\n        throw new Error('Method not implemented.');\n    }\n\n  drawerVisible!: Observable<boolean>;\n  constructor(public router: Router , private notificationService: NotificationService) {}\n\n  ngOnInit(): void {\n    this.drawerVisible = this.notificationService.drawerVisible$;\n  }\n\n\n  isAuthPage(): boolean {\n    const hiddenFooterRoutes = ['/', '/signup','/signup-employer',\n      '/forgot-password','/verify-code','/field','/login','/type',\n      '/reset-password','/dashboard-admin'];\n    return hiddenFooterRoutes.includes(this.router.url);\n  }\n\n  toggleDrawer() {\n    this.notificationService.toggleDrawer();\n  }\n\n  getRole(): 'admin' | 'jobseeker' | 'employer' | 'guest' {\n    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {\n      const role = localStorage.getItem('role');\n      if (role === 'admin' || role === 'jobseeker' || role === 'employer' || role === 'guest') {\n        return role;\n      }\n    }\n    return 'jobseeker';\n  }\n\n    getUserType(): 'jobseeker' | 'employer' | null {\n    const role = this.getRole();\n    return role === 'jobseeker' || role === 'employer' ? role : null;\n  }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/frontend/src/app/app.component.ts b/frontend/src/app/app.component.ts
+--- a/frontend/src/app/app.component.ts	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/frontend/src/app/app.component.ts	(date 1747677163663)
+@@ -29,7 +29,7 @@
+   isAuthPage(): boolean {
+     const hiddenFooterRoutes = ['/', '/signup','/signup-employer',
+       '/forgot-password','/verify-code','/field','/login','/type',
+-      '/reset-password','/dashboard-admin'];
++      '/reset-password','/dashboard-admin','/job-details'];
+     return hiddenFooterRoutes.includes(this.router.url);
+   }
+ 
+Index: backend/routes/web.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\n\nuse Illuminate\\Support\\Facades\\Route;\n\n\nRoute::get('/jobs', 'App\\Http\\Controllers\\JobListingController@getAll');\nRoute::get('/jobs/{id}', 'App\\Http\\Controllers\\JobListingController@getById');\nRoute::get('/employer/{employerId}/jobs', 'App\\Http\\Controllers\\JobListingController@getByEmployer');\nRoute::post('/jobs', 'App\\Http\\Controllers\\JobListingController@create');\nRoute::put('/jobs/{id}', 'App\\Http\\Controllers\\JobListingController@update');\nRoute::delete('/jobs/{id}', 'App\\Http\\Controllers\\JobListingController@delete');\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/routes/web.php b/backend/routes/web.php
+--- a/backend/routes/web.php	(revision 90597ebae5c804614af24a04be91c6252b7f67e5)
++++ b/backend/routes/web.php	(date 1747677163663)
+@@ -3,10 +3,5 @@
+ use Illuminate\Support\Facades\Route;
+ 
+ 
+-Route::get('/jobs', 'App\Http\Controllers\JobListingController@getAll');
+-Route::get('/jobs/{id}', 'App\Http\Controllers\JobListingController@getById');
+-Route::get('/employer/{employerId}/jobs', 'App\Http\Controllers\JobListingController@getByEmployer');
+-Route::post('/jobs', 'App\Http\Controllers\JobListingController@create');
+-Route::put('/jobs/{id}', 'App\Http\Controllers\JobListingController@update');
+-Route::delete('/jobs/{id}', 'App\Http\Controllers\JobListingController@delete');
++
+ 

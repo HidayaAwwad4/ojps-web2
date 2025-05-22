@@ -1,18 +1,139 @@
-.job-card {
+.job-card-modern {
+  background-color: white;
   border: 3px solid #631B1B;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(99, 27, 27, 0.4);
-  transition: transform 0.2s ease;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(99, 27, 27, 0.4);
+  padding: 1rem;
+  position: relative;
+  cursor: pointer;
+  max-width: 350px;
+  transition: box-shadow 0.3s ease;
+  height: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-.job-card:hover {
-  transform: translateY(-3px);
+.job-card-modern:hover {
+  box-shadow: 0 10px 20px rgba(99, 27, 27, 0.6);
 }
-.job-img {
+
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  direction: rtl;
+}
+
+
+.logo-wrapper {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 30px;
+}
+.company-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #fff;
+  border: 2px solid #631B1B;
+}
+
+.dropdown-menu-container {
+  position: relative;
+  display: inline-block;
+
+}
+
+.btn-link.dropdown-toggle {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #631B1B;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  text-decoration: none;
+  box-shadow: none;
+}
+
+.btn-link.dropdown-toggle::after {
+  display: none !important;
+}
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #641B1B;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(100, 27, 27, 0.3);
+  z-index: 9999;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  min-width: 140px;
+  display: block;
+}
+
+.dropdown-menu li {
+  padding: 0;
+}
+
+.dropdown-menu li button {
+  display: block;
   width: 100%;
-  border-radius: 12px;
-  box-sizing: border-box;
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #23141B;
+  transition: background-color 0.2s ease;
 }
-.salary{
+
+.dropdown-menu li button:hover {
+  background-color: #641B1B;
+  color: white;
+}
+
+.card-body {
+  margin-top: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.job-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 0.4rem;
+  color: #631B1B;
+}
+
+.job-desc {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.6rem;
+  height: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.job-salary {
   color: #B51D1E;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.job-category {
+  font-size: 0.85rem;
+  color: #777;
+  margin-top: -0.4rem;
+  margin-bottom: 0.6rem;
 }

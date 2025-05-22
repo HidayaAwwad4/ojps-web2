@@ -7,25 +7,21 @@ body {
 }
 
 .container {
-  width: 800px;
-  margin: 50px;
-  margin-left: 320px;
+  max-width: 800px;
+  margin: 50px auto;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 50px;
+  text-align: center;
 }
 
-.logo {
-  font-size: 40px;
-  font-weight: bold;
-  color: #4B1D1D;
-  font-family: 'Georgia', serif;
-  margin-bottom: 20px;
+.logo-img {
+  width: 280px;
+  margin-left: 50px;
 }
 
 h1 {
   font-size: 32px;
   margin: 0;
-
 }
 
 .subtitle {
@@ -48,16 +44,15 @@ h1 {
   padding: 20px;
   width: 200px;
   text-align: center;
-  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, border-color 0.3s;
 }
 
 .card img {
   width: 40px;
   height: 40px;
-  margin-bottom: 10px;
-  text-align: center;
-  margin-left: 60px;
-
+  margin: 0 auto 10px auto;
+  display: block;
 }
 
 .card h3 {
@@ -71,7 +66,12 @@ h1 {
   color: #7d7d7d;
 }
 
-a.start-btn {
+.card.selected {
+  border-color:  #6e1f1f;
+  background-color: #f8ccdb;
+}
+
+.start-btn {
   background-color: #6e1f1f;
   color: white;
   padding: 12px 90px;
@@ -81,4 +81,9 @@ a.start-btn {
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.start-btn:hover {
+  background-color: #651e1e;
 }

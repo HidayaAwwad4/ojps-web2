@@ -40,20 +40,7 @@ class ApplicationController extends Controller
             'appliedAt' => $request->appliedAt,
         ]);
 
-        $job = \App\Models\JobListing::find($request->job_id);
-
-        if ($job && $job->employer_id) {
-            \App\Models\Notification::create([
-                'user_id' => $job->employer_id,
-                'message' => 'A job seeker has applied to your job: ' . $job->title,
-                'type' => 'application_received',
-                'redirect_url' => '/employer/job-applications',
-                'is_read' => false,
-            ]);
-        }
-
         return response()->json($application, 201);
-
     }
 
     public function update(Request $request, $id)
@@ -71,18 +58,6 @@ class ApplicationController extends Controller
 
         $application->update($request->only(['cover_letter', 'status', 'appliedAt']));
 
-        if ($request->has('status') && in_array($request->status, ['accepted', 'rejected'])) {
-            \App\Models\Notification::create([
-                'user_id' => $application->job_seeker_id,
-                'message' => 'Your application has been ' . $request->status . '.',
-                'type' => 'application_' . $request->status,
-                'redirect_url' => '/seeker/applications-status',
-                'is_read' => false,
-            ]);
-        }
-
-
-
         return response()->json($application);
     }
 
@@ -97,7 +72,5 @@ class ApplicationController extends Controller
 
         return response()->json(['message' => 'Application deleted successfully']);
     }
-
-
 }
 

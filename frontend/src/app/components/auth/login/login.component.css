@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
   }
-  
+
   .login-box {
     width: 1000px;
     height: 650px;
@@ -19,14 +19,14 @@ body {
     margin: 50px 100px;
     margin-left: 250px;
   }
-  
+
   .background-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  
+
   .form-section {
     position: absolute;
     top: 0;
@@ -41,42 +41,43 @@ body {
     justify-content: center;
     z-index: 2;
   }
-  
+
   h1 {
     margin-bottom: 35px;
     text-align: center;
   }
-  
-  .logo {
-    font-family: Georgia, serif;
-    font-weight: bold;
+
+  .logo-img {
+   width: 200px;
+
+    margin-left: 120px;
   }
-  
+
   .sub-text {
     margin-bottom: 30px;
     font-size: 20px;
     color: #000000;
     text-align: center;
   }
-  
+
   form {
     display: flex;
     flex-direction: column;
   }
-  
+
   label {
     margin-bottom: 5px;
     font-weight: 600;
     text-align: left;
   }
-  
+
   input {
     margin-bottom: 15px;
     padding: 10px;
     border-radius: 20px;
     border: 1px solid #aaa;
   }
-  
+
   button {
     padding: 12px;
     border-radius: 20px;
@@ -86,30 +87,29 @@ body {
     font-weight: bold;
     cursor: pointer;
   }
-  
+
   .login-link {
     margin-top: 30px;
     font-size: 14px;
     text-align: center;
- 
+
   }
-  
+
   .login-link a {
     color: #6e1f1f;
     font-weight: bold;
     text-decoration: none;
   }
-  
- 
+
+
   .forgot-password-link {
-   
+
     font-size: 14px;
     text-align:end;
   }
-  
+
   .forgot-password-link a {
     color: #6e1f1f;
     font-weight: bold;
     text-decoration: none;
   }
-  

@@ -24,6 +24,7 @@ class UpdateJobListingRequest extends FormRequest
             'isOpened' => 'sometimes|boolean',
             'employer_id' => 'sometimes|exists:employers,id',
             'documents' => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'company_logo' => 'nullable|file|mimes:jpg,jpeg,png|max:5120',
             'experience' => 'sometimes|in:' . implode(',', JobListing::EXPERIENCE_OPTIONS),
             'employment' => 'sometimes|in:' . implode(',', JobListing::EMPLOYMENT_OPTIONS),
             'category' => 'sometimes|in:' . implode(',', JobListing::CATEGORY_OPTIONS),
