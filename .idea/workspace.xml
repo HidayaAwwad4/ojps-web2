@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/ojps-web2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ojps-web2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,6 +196,7 @@
       <workItem from="1747847996709" duration="6153000" />
       <workItem from="1747893601178" duration="293000" />
       <workItem from="1747905938771" duration="962000" />
+      <workItem from="1747909173560" duration="729000" />
     </task>
     <servers />
   </component>
