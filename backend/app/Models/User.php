@@ -22,7 +22,6 @@ class User extends Authenticatable
         'location',
         'summary',
         'verification_code',
-        'avatar',
 
     ];
 
