@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\ReportsController;
 use Illuminate\Http\Request;
 
 
@@ -75,3 +76,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/notifications/seeker/{seekerId}/{status}', [NotificationController::class, 'notifySeekerApplicationStatus']);
     Route::post('/notifications/employer/{employerId}/{type}', [NotificationController::class, 'notifyEmployerActivity']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/reports/employer-stats/{id}', [ReportsController::class, 'getEmployerStats']);
+    Route::get('/reports/employer-Line-chart/{id}', [ReportsController::class, 'getEmployerLineChartData']);
+});
+Route::get('/reports/admin-stats', [ReportsController::class, 'getAdminStats']);
+Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);

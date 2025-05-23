@@ -5,109 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/ojps.HhE0AA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ojps-web2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/phpunit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2025_8_53_PM_[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_19_2025_8_53_PM__Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/AdminController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/app/Mail/VerificationCodeMail.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/factories/ApplicationFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/factories/JobSeekerFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/factories/RoleFactory.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_131615_add_is_approved_to_users_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_134155_create_personal_access_tokens_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_20_133428_create_cache_table.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/seeders/ApplicationSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/seeders/EmployerSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/seeders/JobSeekerSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/seeders/RoleSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/database/seeders/UserSeeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/resources/views/emails/verification_code.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/auth.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/auth.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/services/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Requests/UpdateJobListingRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Requests/UpdateJobListingRequest.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Application.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Application.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Report.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Report.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/config/mail.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/config/mail.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/factories/EmployerFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/factories/EmployerFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150634_create_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150634_create_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150638_create_applications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150638_create_applications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150642_create_reports_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150642_create_reports_table.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/ojps.HhE0AA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-item/notification-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-item/notification-item.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/reset-password/reset-password.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/reset-password/reset-password.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/reset-password/reset-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/reset-password/reset-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-applications/job-applications.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/auth.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/auth/auth.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/auth.service.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/models/notification.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/models/notification.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,25 +171,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging haneeen",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\study\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;haneeen&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\study\\ojps-web2\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\study\ojps-web2\frontend\src\app\services\Reports" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="ojps-web2" />
@@ -280,8 +212,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.25659.45" />
+        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.25659.45" />
       </set>
     </attachedChunks>
   </component>
@@ -297,6 +229,8 @@
       <workItem from="1747710330640" duration="25497000" />
       <workItem from="1747751665623" duration="16047000" />
       <workItem from="1747840486801" duration="1110000" />
+      <workItem from="1747916296266" duration="108000" />
+      <workItem from="1747916435091" duration="37008000" />
     </task>
     <servers />
   </component>
