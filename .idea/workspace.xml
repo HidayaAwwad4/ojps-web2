@@ -5,34 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/ojps.HhE0AA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/91f8b160-029d-4422-8a61-6d708d186213/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a9bd794b-cf80-46f2-9bc2-c893b8bc7e62/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,12 +175,6 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ojps-web2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -231,6 +202,9 @@
       <workItem from="1747840486801" duration="1110000" />
       <workItem from="1747916296266" duration="108000" />
       <workItem from="1747916435091" duration="37008000" />
+      <workItem from="1748191422254" duration="685000" />
+      <workItem from="1748351260691" duration="1365000" />
+      <workItem from="1748423980145" duration="295000" />
     </task>
     <servers />
   </component>
