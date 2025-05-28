@@ -70,7 +70,7 @@ class ApplicationController extends Controller
         ]);
 
         $application->update($request->only(['cover_letter', 'status', 'appliedAt']));
-
+/*
         if ($request->has('status') && in_array($request->status, ['accepted', 'rejected'])) {
             \App\Models\Notification::create([
                 'user_id' => $application->job_seeker_id,
@@ -80,8 +80,8 @@ class ApplicationController extends Controller
                 'is_read' => false,
             ]);
         }
-
-
+*/
+        $application->load('jobSeeker.user');
 
         return response()->json($application);
     }
@@ -98,7 +98,6 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Application deleted successfully']);
     }
 
-
     public function getApplicantsByJobId($jobId)
     {
         $applications = Application::with(['jobSeeker.user'])
@@ -110,6 +109,19 @@ class ApplicationController extends Controller
         }
 
         return response()->json($applications);
+    }
+
+    public function getApplicationById($applicationId)
+    {
+        $application = Application::with(['jobSeeker.user'])
+            ->where('id', $applicationId)
+            ->first();
+
+        if (!$application) {
+            return response()->json(['message' => 'Application not found'], 404);
+        }
+
+        return response()->json($application);
     }
 
 }

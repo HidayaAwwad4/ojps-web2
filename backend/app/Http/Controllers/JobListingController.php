@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
+use App\Models\Employer;
 use App\Models\JobListing;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -11,6 +12,20 @@ use Illuminate\Support\Facades\Storage;
 
 class JobListingController extends Controller
 {
+    public function getEmployerByUser(): JsonResponse
+    {
+        try {
+            $userId = Auth::id();
+            $employer = Employer::where('user_id', $userId)->firstOrFail();
+            return response()->json([
+                'id' => $employer->id,
+                'name' => $employer->company_name ?? null,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Employer not found'], 404);
+        }
+    }
+
     public function getById($id): JsonResponse
     {
         try {
@@ -34,7 +49,8 @@ class JobListingController extends Controller
     public function getByEmployer($employerId): JsonResponse
     {
         $jobs = JobListing::with('employer')
-        ->where('employer_id', $employerId)
+            ->where('employer_id', $employerId)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         $jobs->transform(function ($job) {
