@@ -22,7 +22,6 @@ import { JobService } from '../../../services/jobs/job.service';
 })
 export class EmployerHomeComponent implements OnInit {
   jobs: any[] = [];
-  employerId = 37;
 
   constructor(
     private jobModalService: JobModalService,
@@ -34,13 +33,21 @@ export class EmployerHomeComponent implements OnInit {
   }
 
   loadJobs(): void {
-    this.jobService.getJobsByEmployer(this.employerId).subscribe({
-      next: (data) => {
-        this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
-        console.log('jobs', this.jobs);
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        const employerId = employerData.id;
+        this.jobService.getJobsByEmployer(employerId).subscribe({
+          next: (data) => {
+            this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
+            console.log('jobs', this.jobs);
+          },
+          error: (err) => {
+            console.error('Failed to load jobs:', err);
+          }
+        });
       },
       error: (err) => {
-        console.error('Failed to load jobs:', err);
+        console.error('Failed to load employer info:', err);
       }
     });
   }
