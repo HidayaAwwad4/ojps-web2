@@ -28,17 +28,26 @@ export class JobPostingsComponent implements OnInit {
   }
 
   fetchJobs() {
-    const employerId = 37;
-
     this.loading = true;
     this.error = '';
-    this.jobService.getJobsByEmployer(employerId).subscribe({
-      next: (data) => {
-        this.jobs = data;
-        this.loading = false;
+
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        const employerId = employerData.id;
+
+        this.jobService.getJobsByEmployer(employerId).subscribe({
+          next: (data) => {
+            this.jobs = data;
+            this.loading = false;
+          },
+          error: (err) => {
+            this.error = 'Failed to load jobs';
+            this.loading = false;
+          }
+        });
       },
       error: (err) => {
-        this.error = 'Failed to load jobs';
+        this.error = 'Failed to load employer info';
         this.loading = false;
       }
     });
