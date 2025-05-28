@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -204,7 +200,8 @@
       <workItem from="1747916435091" duration="37008000" />
       <workItem from="1748191422254" duration="685000" />
       <workItem from="1748351260691" duration="1365000" />
-      <workItem from="1748423980145" duration="295000" />
+      <workItem from="1748423980145" duration="539000" />
+      <workItem from="1748427789642" duration="275000" />
     </task>
     <servers />
   </component>
