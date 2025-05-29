@@ -994,7 +994,13 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
     <collation id="287" parent="1" name="utf8mb4_mn_cyrl_0900_as_cs">
       <Charset>utf8mb4</Charset>
     </collation>
+<<<<<<< HEAD:.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml
+    <schema id="288" parent="1" name="haneen2061">
+      <Current>1</Current>
+      <LastIntrospectionLocalTimestamp>2025-05-22.12:21:06</LastIntrospectionLocalTimestamp>
+=======
     <schema id="288" parent="1" name="mysql">
+>>>>>>> f453ba9b72f62905b20046908f0493623108a52a:.idea/dataSources/cec0c678-b2e7-41f9-ba47-94b678c1659c.xml
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
