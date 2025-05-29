@@ -42,7 +42,7 @@ export class CreateJobComponent implements OnInit {
     documents: null,
     company_logo: null,
     isOpened: 1,
-    employer_id: 37
+    employer_id: null
   };
 
   constructor(
@@ -58,13 +58,26 @@ export class CreateJobComponent implements OnInit {
     this.jobService.getJobFormOptions().subscribe((res: any) => {
       this.jobOptions = res;
     });
+
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        if (employerData && employerData.id) {
+          this.jobDetails.employer_id = employerData.id;
+        } else {
+          console.warn('Employer data or ID not found');
+        }
+      },
+      error: (error) => {
+        console.error('Failed to get employer data', error);
+      }
+    });
   }
 
   submitJob(): void {
     const formData = new FormData();
     for (const key in this.jobDetails) {
       if (this.jobDetails[key] !== null && this.jobDetails[key] !== undefined) {
-        if (key === 'document' || key === 'company_logo') continue;
+        if (key === 'documents' || key === 'company_logo') continue;
         formData.append(key, this.jobDetails[key]);
       }
     }

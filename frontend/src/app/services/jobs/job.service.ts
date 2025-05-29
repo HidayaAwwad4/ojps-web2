@@ -38,11 +38,21 @@ export class JobService {
     return this.http.get<any>(`${this.apiUrl}/job-form-options`);
   }
 
-  updateJob(jobId: number, jobData: any): Observable<any> {
+  updateJob(jobId: number, jobData: FormData): Observable<any> {
     const token = localStorage.getItem('token');
-    return this.http.put(`${this.apiUrl}/jobs/${jobId}`, jobData, {
+    jobData.append('_method', 'PUT');
+    return this.http.post(`${this.apiUrl}/jobs/${jobId}`, jobData, {
       headers: { Authorization: `Bearer ${token}` }
     });
+  }
+
+  updateJobStatus(jobId: number, isOpened: boolean): Observable<any> {
+    const token = localStorage.getItem('token') || '';
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+    return this.http.put(`${this.apiUrl}/jobs/${jobId}/status`, { isOpened }, { headers });
   }
 
   deleteJob(jobId: number): Observable<any> {
