@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Http\Request;
 use App\Http\Requests\CreateJobListingRequest;
 use App\Http\Requests\UpdateJobListingRequest;
 use App\Models\Employer;
@@ -82,6 +82,15 @@ class JobListingController extends Controller
             }
 
             $job = JobListing::create($data);
+
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+            }
+
+            if ($job->documents) {
+                $job->documents = config('app.url') . Storage::url($job->documents);
+            }
+
             return response()->json($job, 201);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create job', 'details' => $e->getMessage()], 500);
@@ -93,21 +102,58 @@ class JobListingController extends Controller
         try {
             $job = JobListing::findOrFail($id);
             $data = $request->validated();
-
             if ($request->hasFile('company_logo')) {
+                if ($job->company_logo) {
+                    Storage::disk('public')->delete($job->company_logo);
+                }
                 $data['company_logo'] = $request->file('company_logo')->store('logos', 'public');
+            } else {
+                $data['company_logo'] = $job->company_logo;
             }
-
             if ($request->hasFile('documents')) {
+                if ($job->documents) {
+                    Storage::disk('public')->delete($job->documents);
+                }
                 $data['documents'] = $request->file('documents')->store('documents', 'public');
+            } else {
+                $data['documents'] = $job->documents;
             }
 
             $job->update($data);
             $job->refresh();
+
+            // ✅ إرسال الرابط الكامل للصور والمستندات
+            $job->company_logo = asset('storage/' . $job->company_logo);
+            $job->documents = asset('storage/' . $job->documents);
+
             return response()->json($job);
 
         } catch (\Exception $e) {
-            return response()->json(['error' => 'Failed to update job', 'details' => $e->getMessage()], 500);
+            return response()->json([
+                'error' => 'Failed to update job',
+                'details' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function updateStatus(Request $request, $id): JsonResponse
+    {
+        try {
+            $job = JobListing::findOrFail($id);
+            $request->validate([
+                'isOpened' => 'required|boolean',
+            ]);
+            $job->isOpened = $request->input('isOpened');
+            $job->save();
+            return response()->json([
+                'message' => 'Status updated successfully',
+                'job' => $job
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to update status',
+                'details' => $e->getMessage()
+            ], 500);
         }
     }
 
