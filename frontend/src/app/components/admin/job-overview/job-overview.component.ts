@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, PLATFORM_ID, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { BaseChartDirective } from 'ng2-charts';
 import {
@@ -7,6 +7,7 @@ import {
   Chart,
   registerables
 } from 'chart.js';
+import { AdminService } from '../../../services/admin/admin.service';
 
 Chart.register(...registerables);
 
@@ -17,12 +18,10 @@ Chart.register(...registerables);
   templateUrl: './job-overview.component.html',
   styleUrls: ['./job-overview.component.css']
 })
-export class JobOverviewComponent {
+export class JobOverviewComponent implements OnInit {
   isBrowser = false;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   public barChartType: ChartType = 'bar';
 
@@ -42,16 +41,39 @@ export class JobOverviewComponent {
   };
 
   public barChartData: ChartConfiguration['data'] = {
-    labels: [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May',
-      'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ],
+    labels: [],
     datasets: [
       {
-        label: 'Jobs',
-        data: [12, 19, 3, 5, 2, 9, 7, 14, 8, 6, 10, 4],
+        label: 'Applications',
+        data: [],
         backgroundColor: '#631B1B'
       }
     ]
   };
+
+  constructor(
+    @Inject(PLATFORM_ID) platformId: Object,
+    private adminService: AdminService
+  ) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngOnInit(): void {
+    this.loadApplicationStats();
+  }
+
+  loadApplicationStats(): void {
+    this.adminService.getApplicationsStats().subscribe((data) => {
+      const monthLabels = data.map((item: any) => {
+        const date = new Date(item.month + '-01');
+        return date.toLocaleString('default', { month: 'short' });
+      });
+      const totals = data.map((item: any) => item.total);
+
+      this.barChartData.labels = monthLabels;
+      this.barChartData.datasets[0].data = totals;
+
+      this.chart?.update();
+    });
+  }
 }
