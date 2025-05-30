@@ -15,8 +15,9 @@
     Explore a world of career opportunities and find the perfect job for every stage of your journey.
   </p>
 </div>
+
 <app-job-category></app-job-category>
-<app-recommended-jobs
-  [jobs]="recommendedJobs"
-  (jobClicked)="handleJobClick($event)"
-></app-recommended-jobs>
+
+<app-recommended-jobs [jobs]="recommendedJobs"></app-recommended-jobs>
+
+

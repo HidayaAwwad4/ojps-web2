@@ -1,14 +1,17 @@
 <div class="row g-3">
   <div class="col-auto job-card-container" *ngFor="let job of jobs" style="cursor: pointer;">
-    <div class="card job-card">
-      <img [src]="job.image" alt="Company Logo" class="job-image" />
+    <a
+      class="card job-card"
+      [routerLink]="['/job-details', job.id]"
+      [queryParams]="{ role: 'job-seeker' }"
+      style="cursor: pointer; text-decoration: none; color: inherit;"
+    >
       <div class="card-body">
-        <h6 class="card-title fw-bold">{{ job.title }}</h6>
-        <p class="card-text small text-muted">{{ job.description }}</p>
+        <h5 class="card-title">{{ job.title }}</h5>
+        <p class="card-text">{{ job.description }}</p>
+        <p class="text-muted">${{ job.salary }} per hour</p>
       </div>
-      <div class="card-footer custom-rate-text">
-        ${{ job.salary }} per hour
-      </div>
-    </div>
+    </a>
+
   </div>
 </div>

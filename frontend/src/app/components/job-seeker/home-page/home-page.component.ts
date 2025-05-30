@@ -1,82 +1,54 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {RecommendedJobsComponent} from '../recommended-jobs/recommended-jobs.component';
-import {JobCategoriesComponent} from '../job-category/job-category.component';
+import { FormsModule } from '@angular/forms';
+import { JobService } from '../../../services/jobs/job.service';
+import { JobCardsComponent } from '../job-cards/job-cards.component';
+import { RecommendedJobsComponent } from '../recommended-jobs/recommended-jobs.component';
+import { JobCategoriesComponent } from '../job-category/job-category.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
-import {JobIntroComponent} from '../job-intro/job-intro.component';
+import { JobIntroComponent } from '../job-intro/job-intro.component';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './home-page.component.html',
+  standalone: true,
   imports: [
     FormsModule,
     RecommendedJobsComponent,
     JobCategoriesComponent,
     NavbarComponent,
-    JobIntroComponent
+    JobIntroComponent,
+    JobCardsComponent // ✅ أضفتيه عشان تستخدميه
   ],
-  standalone: true,
   styleUrls: ['./home-page.component.css']
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   searchText: string = '';
+  allJobs: any[] = [];
+  recommendedJobs: any[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private jobService: JobService) {}
 
-  navigateToCategory(category: string) {
-    this.router.navigate(['/categories-page', category]);
+  ngOnInit() {
+    this.fetchAllJobs();
   }
 
+  fetchAllJobs() {
+    this.jobService.getJobsByEmployer(1).subscribe((jobs) => {
+      this.allJobs = jobs;
+      this.recommendedJobs = jobs.slice(0, 3); // أو أي فلترة للتوصيات
+    });
+  }
 
-  onSearchChange() {}
-
-  recommendedJobs = [
-    {
-      title: 'Full-Stack Developer',
-      description: 'Responsible for developing both front-end and back-end systems.',
-      logo: 'assets/adham.jpg',
-      rate: 26.32
-    },
-    {
-      title: 'Front-End Developer',
-      description: 'Building engaging UIs using HTML, CSS, and JavaScript.',
-      logo: 'assets/NEO.jpg',
-      rate: 11.32
-    },
-    {
-      title: 'Back-End Developer',
-      description: 'Focuses on server-side logic and integration of services.',
-      logo: 'assets/Tecnhnolgy.jpg',
-      rate: 20.32
-    },
-    {
-      title: 'Software Tester',
-      description: 'Tests software before release, ensuring high-quality.',
-      logo: 'assets/TECHNO.jpg',
-      rate: 18.32
-    },
-    {
-      title: 'UI/UX Designer',
-      description: 'Designs intuitive and visually appealing interfaces.',
-      logo: 'assets/AR.jpg',
-      rate: 15.32
-    },
-    {
-      title: 'DevOps Engineer',
-      description: 'Responsible for automating and optimizing the development and deployment pipelines.',
-      logo: 'assets/NEO.jpg',
-      rate: 23.00
-    },
-    {
-      title: 'Data Scientist',
-      description: 'Analyzes large datasets to extract meaningful insights for decision-making.',
-      logo: 'assets/adham.jpg',
-      rate: 28.50
+  onSearchChange() {
+    if (this.searchText.trim() === '') {
+      this.fetchAllJobs();
+      return;
     }
-  ];
 
-  handleJobClick(job: any) {
-    console.log('Clicked job:', job);
+    this.allJobs = this.allJobs.filter(job =>
+      job.title.toLowerCase().includes(this.searchText.toLowerCase())
+    );
   }
+
 }

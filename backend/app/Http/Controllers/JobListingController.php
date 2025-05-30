@@ -114,4 +114,8 @@ class JobListingController extends Controller
             'categoryOptions' => JobListing::CATEGORY_OPTIONS,
         ]);
     }
+public function getAll()
+{
+    return response()->json(Job::all());
+}
 }

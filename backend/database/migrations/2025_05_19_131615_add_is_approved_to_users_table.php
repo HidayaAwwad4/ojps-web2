@@ -6,12 +6,15 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    public function up(): void
+    public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->boolean('is_approved')->default(false);
-        });
+        if (!Schema::hasColumn('users', 'is_approved')) {
+            Schema::table('users', function (Blueprint $table) {
+                $table->boolean('is_approved')->default(false);
+            });
+        }
     }
+
 
     public function down(): void
     {

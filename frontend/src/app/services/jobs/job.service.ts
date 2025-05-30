@@ -6,17 +6,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class JobService {
-  private apiUrl = 'http://127.0.0.1:8000/api';
+  private apiUrl = 'http://127.0.0.1:8080/api';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getJobsByEmployer(employerId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/employer/${employerId}/jobs`);
   }
 
   getJobById(jobId: number): Observable<any> {
-      return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
-    }
+    return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
+  }
 
   createJob(jobData: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/jobs`, jobData);
@@ -37,8 +38,16 @@ export class JobService {
   getApplicantsByJobId(jobId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/applications/job/${jobId}`);
   }
+
   updateApplicationStatus(applicationId: number, status: string): Observable<any> {
-    return this.http.put(`${this.apiUrl}/applications/${applicationId}`, { status });
+    return this.http.put(`${this.apiUrl}/applications/${applicationId}`, {status});
   }
 
+  // getCategories(): Observable<any> {
+  //   return this.http.get(`${this.apiUrl}/categories`);
+  // }
+  getAllJobs(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/jobs`);
+
+  }
 }

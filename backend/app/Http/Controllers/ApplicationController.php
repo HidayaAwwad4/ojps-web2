@@ -12,6 +12,17 @@ class ApplicationController extends Controller
         $applications = Application::with(['job', 'jobSeeker'])->get();
         return response()->json($applications);
     }
+// في ApplicationController.php أو UploadController.php جديد
+public function uploadCV(Request $request)
+{
+    $request->validate([
+        'cv' => 'required|file|mimes:pdf,jpeg,png,jpg|max:2048', // حجم محدود مثلا 2MB
+    ]);
+
+    $path = $request->file('cv')->store('cvs', 'public'); // يحفظ الملف داخل storage/app/public/cvs
+
+    return response()->json(['cv_path' => $path]);
+}
 
     public function show($id)
     {

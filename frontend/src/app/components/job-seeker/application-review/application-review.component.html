@@ -1,24 +1,36 @@
-<div class="m-5">
-  <i class="fa-solid fa-arrow-left text-dark me-2"
-     style="font-size: 1.8rem; cursor: pointer; color: #631b1b !important;"
-     [routerLink]="['/home-page']"></i>
-</div>
 <div class="container mt-5">
   <h4>Excellent progress so far!</h4>
-  <p>
-    To complete your application, please ensure that the CV you previously attached is up to date
-    and includes all the necessary information. To increase your chances of being accepted, it is
-    highly recommended to include a cover letter that highlights your motivation and relevant skills for the position.
-  </p>
+  <p>...</p>
 
   <div class="row mt-4" style="min-height: 400px;">
     <div class="col-md-6 d-flex flex-column align-items-center">
       <h5 class="cv-title">Your CV</h5>
       <div class="flex-fill d-flex align-items-center justify-content-center p-3 border rounded cv-box w-100">
-        <img src="assets/cv-placeholder.png" alt="CV Preview" class="img-fluid w-100" style="object-fit: contain; max-height: 100%;">
+        <ng-container *ngIf="!editingCV">
+          <!-- If image -->
+          <img *ngIf="cvUrl && (cvUrl.endsWith('.png') || cvUrl.endsWith('.jpg') || cvUrl.endsWith('.jpeg'))"
+               [src]="cvUrl" alt="CV Preview" class="img-fluid w-100" style="object-fit: contain; max-height: 100%;">
+
+          <!-- If PDF -->
+          <iframe *ngIf="cvUrl && cvUrl.endsWith('.pdf')"
+                  [src]="cvUrl" width="100%" height="300px"></iframe>
+
+          <!-- If no CV -->
+          <img *ngIf="!cvUrl"
+               src="assets/cv-placeholder.png"
+               alt="CV Placeholder"
+               class="img-fluid w-100"
+               style="object-fit: contain; max-height: 100%;">
+        </ng-container>
+
+        <!-- أثناء التعديل -->
+        <ng-container *ngIf="editingCV">
+          <input type="file" (change)="onFileSelected($event)" accept=".pdf,.png,.jpg,.jpeg" />
+        </ng-container>
       </div>
 
-      <button class="btn btn-sm btn-edit mt-3" (click)="onEditCV()">Edit</button>
+      <button class="btn btn-sm btn-edit mt-3" (click)="onEditCV()" *ngIf="!editingCV">Edit</button>
+      <button class="btn btn-sm btn-cancel mt-3" (click)="editingCV=false" *ngIf="editingCV">Cancel</button>
     </div>
 
     <div class="col-md-6 d-flex flex-column">
@@ -29,12 +41,16 @@
           placeholder="Add a short cover letter to support your application"
           formControlName="coverLetter"
         ></textarea>
+
+        <div *ngIf="applicationForm.get('coverLetter')?.invalid && applicationForm.get('coverLetter')?.touched" class="text-danger">
+          Cover letter is required.
+        </div>
+
+
+        <div class="d-flex justify-content-center submit-container mt-3">
+          <button type="submit" class="btn btn-success btn-sm custom-submit-btn" [disabled]="applicationForm.invalid">Submit</button>
+        </div>
       </form>
     </div>
   </div>
-
-  <div class="d-flex justify-content-center submit-container mb-5">
-    <button type="submit" class="btn btn-success btn-sm custom-submit-btn" (click)="onSubmit()">Submit</button>
-  </div>
-
 </div>

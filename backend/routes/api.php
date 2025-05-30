@@ -67,6 +67,8 @@ Route::get('/admin/rejected-applications', [AdminController::class, 'rejectedApp
 Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListing']);
 Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions']);
 Route::get('/applications/job/{jobId}', [ApplicationController::class, 'getApplicantsByJobId']);
+Route::get('/jobs', [JobListingController::class, 'getAll']);
+Route::post('/upload-cv', [ApplicationController::class, 'uploadCV']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/notifications', [NotificationController::class, 'index']);

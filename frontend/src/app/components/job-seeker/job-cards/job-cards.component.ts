@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import {NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-job-cards',
   standalone: true,
   templateUrl: './job-cards.component.html',
   imports: [
-    NgForOf
+    NgForOf,
+    RouterLink
   ],
   styleUrls: ['./job-cards.component.css']
 })
