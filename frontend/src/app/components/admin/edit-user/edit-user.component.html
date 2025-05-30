@@ -11,14 +11,10 @@
     </div>
     <div class="mb-3">
       <label class="label-form">Type</label>
-      <select class="form-control" [(ngModel)]="user.type" name="type">
-        <option value="Job Seeker">Job Seeker</option>
-        <option value="employers">Employers</option>
+      <select class="form-control" [(ngModel)]="user.role_id" name="role_id">
+        <option [value]="2">Job Seeker</option>
+        <option [value]="1">Employers</option>
       </select>
-    </div>
-    <div class="mb-3">
-      <label class="label-form">Location</label>
-      <input type="text" class="form-control" [(ngModel)]="user.location" name="location" />
     </div>
     <button type="button" class="btn btn-primary me-2" (click)="saveChanges()">Save</button>
     <button type="button" class="btn btn-secondary" (click)="cancelEdit()">Cancel</button>
