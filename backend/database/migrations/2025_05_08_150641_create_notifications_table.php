@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('message');
             $table->string('type');
             $table->boolean('is_read')->default(false);
+            $table->string('avatar')->nullable();
             $table->timestamps();
         });
 

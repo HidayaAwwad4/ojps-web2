@@ -1,15 +1,13 @@
-// add-user.component.ts
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import {NavbarComponent} from "../../navbar/navbar.component";
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.css'],
   standalone: true,
-    imports: [FormsModule, CommonModule, NavbarComponent]
+  imports: [FormsModule, CommonModule]
 })
 export class AddUserComponent {
   @Output() close = new EventEmitter<void>();
@@ -18,13 +16,35 @@ export class AddUserComponent {
   user = {
     name: '',
     email: '',
-    type: 'Job Seeker',
+    type: '',
     password: '',
-    location: ''
+    location: '',
+    role_id: 0
   };
 
   save() {
-    this.userAdded.emit({ ...this.user });
+    if (!this.user.name || this.user.name.trim() === '') {
+      alert('Please enter a username.');
+      return;
+    }
+    if (!this.user.email || this.user.email.trim() === '') {
+      alert('Please enter an email.');
+      return;
+    }
+    if (this.user.type === 'employers') {
+      this.user.role_id = 1;
+    } else if (this.user.type === 'job_seeker') {
+      this.user.role_id = 2;
+    } else {
+      alert('Please select a valid user type.');
+      return;
+    }
+    if (!this.user.password || this.user.password.length < 6) {
+      alert('Password must be at least 6 characters.');
+      return;
+    }
+
+    this.userAdded.emit(this.user);
     this.close.emit();
   }
 

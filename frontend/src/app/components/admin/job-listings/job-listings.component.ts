@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { Location } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { DatePipe, Location, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgForOf } from '@angular/common';
-import {NavbarComponent} from '../../navbar/navbar.component';
+import { AdminService } from '../../../services/admin/admin.service';
+import { debounceTime, Subject } from 'rxjs';
 
 declare var bootstrap: any;
 
@@ -11,28 +12,50 @@ declare var bootstrap: any;
   templateUrl: './job-listings.component.html',
   styleUrls: ['./job-listings.component.css'],
   standalone: true,
-  imports: [NgForOf, FormsModule, NavbarComponent]
+  imports: [NgForOf, FormsModule, DatePipe, NgIf]
 })
-export class JobListingsComponent {
-  constructor(private location: Location) {}
+export class JobListingsComponent implements OnInit {
+  constructor(private location: Location, private adminService: AdminService) {}
 
   searchTerm = '';
+  searchSubject = new Subject<string>();
   selectedJob: any = null;
+  jobs: any[] = [];
+  mostDemandedJobs: any[] = [];
 
-  jobs = [
-    { title: 'Web Designer', employer: 'Mohammad Husain', location: 'Nablus', date: '2023-07-02' },
-    { title: 'Graphic Designer', employer: 'Hidaya Awwad', location: 'Ramallah', date: '2024-07-22' },
-    { title: 'Web Developer', employer: 'Islam Sadaldeen', location: 'Ramallah', date: '2025-01-28' },
-    { title: 'Photographer', employer: 'Razan abudaia', location: 'Jerusalem', date: '2023-06-06' },
-    { title: 'quality assurance', employer: 'Tasneem jber', location: 'Nablus', date: '2024-12-09' },
-    { title: 'Data analysis', employer: 'Haneen Akobeh', location: 'Ramallah', date: '2025-09-17' }
-  ];
+  ngOnInit(): void {
+    this.fetchJobs();
+    this.fetchJobDemandStats();
 
-  filteredJobs() {
-    return this.jobs.filter(job =>
-      job.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-      job.employer.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    this.searchSubject.pipe(debounceTime(300)).subscribe(term => {
+      this.fetchJobs(term);
+    });
+  }
+
+  fetchJobs(searchTerm: string = '') {
+    this.adminService.getJobListings(searchTerm).subscribe({
+      next: (data) => {
+        this.jobs = data;
+      },
+      error: (err) => {
+        console.error('Failed to fetch job listings:', err);
+      }
+    });
+  }
+
+  fetchJobDemandStats() {
+    this.adminService.getJobDemandStats().subscribe({
+      next: (data) => {
+        this.mostDemandedJobs = data.most_posted;
+      },
+      error: (err) => {
+        console.error('Failed to fetch job posting stats:', err);
+      }
+    });
+  }
+
+  onSearchChange() {
+    this.searchSubject.next(this.searchTerm);
   }
 
   openConfirmModal(job: any) {
@@ -43,9 +66,17 @@ export class JobListingsComponent {
 
   confirmDelete() {
     if (this.selectedJob) {
-      this.jobs = this.jobs.filter(j => j !== this.selectedJob);
+      this.adminService.deleteJobListing(this.selectedJob.id).subscribe({
+        next: () => {
+          this.fetchJobs(this.searchTerm);
+          this.selectedJob = null;
+          alert('Job listing deleted successfully!');
+        },
+        error: (err) => {
+          console.error('Error deleting job listing:', err);
+        }
+      });
     }
-    this.selectedJob = null;
   }
 
   goBack() {
