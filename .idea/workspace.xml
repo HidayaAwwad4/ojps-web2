@@ -5,29 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9/storage_v2/_src_/schema/haneen2061.ErLZnw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cec0c678-b2e7-41f9-ba47-94b678c1659c/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4752fdeb-6a7f-4b0b-874c-1edfce4444c9/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cec0c678-b2e7-41f9-ba47-94b678c1659c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/cec0c678-b2e7-41f9-ba47-94b678c1659c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ojps-web2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ojps-web2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-card/job-card.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-details/job-details.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up/sign-up.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_134155_create_personal_access_tokens_table.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,14 +20,12 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/backend/composer.json</pharConfigPath>
-    <execution>
-      <executable path="composer" />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Users\lenovo\.config\herd-lite\bin\php.exe">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php8.3.14\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/backend/vendor/ralouphie/getallheaders" />
@@ -168,25 +150,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging haneeen",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\hp Lap\\Desktop\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hidaya&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\hp Lap\\Desktop\\ojps-web2\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -230,7 +212,11 @@
       <workItem from="1748445268940" duration="3914000" />
       <workItem from="1748458710132" duration="439000" />
       <workItem from="1748512018871" duration="2326000" />
-      <workItem from="1748515080019" duration="4252000" />
+      <workItem from="1748515080019" duration="4801000" />
+      <workItem from="1748530984946" duration="952000" />
+      <workItem from="1748542423675" duration="4008000" />
+      <workItem from="1748614844121" duration="62000" />
+      <workItem from="1748615043978" duration="2852000" />
     </task>
     <servers />
   </component>

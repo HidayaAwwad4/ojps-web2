@@ -17,7 +17,7 @@ import {NotificationService} from '../../../services/notifications/notification.
 export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
-  @Input() userType: 'jobseeker' | 'employer' | null = null;
+  @Input() userType: 'job-seeker' | 'employer' | null = null;
 
   notifications: any[] = [];
 
