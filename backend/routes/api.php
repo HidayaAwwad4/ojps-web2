@@ -1,11 +1,8 @@
 <?php
 
-
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportsController;
 use Illuminate\Http\Request;
-
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\JobListingController;
@@ -13,11 +10,22 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteJobController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'userProfile']);
+    
+    Route::get('/user/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/user/profile', [ProfileController::class, 'updateProfile']);
+    Route::post('/user/profile/picture', [ProfileController::class, 'uploadProfilePicture']);
+    Route::post('/user/resume', [ProfileController::class, 'uploadResume']);
+    
+    Route::get('/job-seekers/{id}', [ProfileController::class, 'getJobSeekerProfile']);
+    Route::get('/job-seekers/{id}/resume', [ProfileController::class, 'downloadResume']);
+    Route::post('/user/update-password', [ProfileController::class, 'updatePassword']);
 });
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
