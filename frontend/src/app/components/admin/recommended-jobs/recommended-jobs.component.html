@@ -1,0 +1,14 @@
+<div class="recommended-jobs text-white">
+  <h5 class="text-center mb-4">Recommended Jobs</h5>
+
+  <div class="job-box mb-5" *ngFor="let job of recommendedJobs">
+    <strong>{{ job.title }}</strong><br>
+    {{ job.salary }}<br>
+    {{ job.location }}<br>
+    <small>{{ job.created_at | date: 'short' }}</small>
+  </div>
+
+  <div *ngIf="recommendedJobs.length === 0" class="text-center">
+    No jobs found.
+  </div>
+</div>

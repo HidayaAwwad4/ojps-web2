@@ -1,0 +1,39 @@
+<div class="container">
+  <img src="assets/logo-red.png" alt="Logo" class="logo-img" />
+  <h1>Choose Your Type</h1>
+  <p class="subtitle">
+    Choose the role that suits you to continue.<br />
+    This will help direct you to the tools and
+    features made for your needs.
+  </p>
+
+  <div class="options">
+    <div
+      class="card"
+      [class.selected]="selectedRole === 'employer'"
+      (click)="selectRole('employer')"
+    >
+      <img
+        src="https://img.icons8.com/ios-glyphs/60/user--v1.png"
+        alt="To find an employee"
+      />
+      <h3>To find an employee</h3>
+      <p>To find an employee</p>
+    </div>
+
+    <div
+      class="card"
+      [class.selected]="selectedRole === 'job-seeker'"
+      (click)="selectRole('job-seeker')"
+    >
+      <img
+        src="https://img.icons8.com/ios-glyphs/60/briefcase.png"
+        alt="To find a job"
+      />
+      <h3>To find a job</h3>
+      <p>Find and apply for jobs.</p>
+    </div>
+  </div>
+
+  <button class="start-btn" (click)="startNow()">Start Now!</button>
+</div>

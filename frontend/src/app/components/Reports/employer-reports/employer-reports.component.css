@@ -1,0 +1,9 @@
+.back-btn{
+  border: none;
+  color: #631b1b;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+.back-btn:hover{
+  color: #c82424 !important;
+}

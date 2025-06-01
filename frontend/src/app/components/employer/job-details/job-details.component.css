@@ -1,0 +1,87 @@
+.job-details-card {
+  padding: 60px 250px;
+}
+.custom-btn {
+  background-color: #631B1B;
+  transition: background-color 0.3s ease;
+}
+
+.custom-btn:hover {
+  background-color: #4a1111;
+}
+.text-custom-red {
+  color: #631B1B !important;
+}
+
+.custom-box {
+  border: 3px solid #631B1B;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(99, 27, 27, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+hr {
+  margin: 0.5rem 0;
+  border: none;
+  border-top: 2px solid #606060;
+}
+.custom-gray-btn {
+  background-color: #e0e0e0;
+  color: #000;
+  transition: background-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.custom-gray-btn:hover {
+  background-color: #d5d5d5;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo-upload-wrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
+.logo-upload-wrapper .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.logo-upload-wrapper:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.logo-upload-wrapper .overlay i {
+  font-size: 1.5rem;
+}

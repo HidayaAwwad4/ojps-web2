@@ -1,0 +1,17 @@
+<app-navbar
+  *ngIf="!isAuthPage()"
+
+  (notificationClick)="toggleDrawer()">
+</app-navbar>
+
+<app-notification-drawer
+  *ngIf="(drawerVisible | async) && getUserType() !== null"
+  [userType]="getUserType()">
+</app-notification-drawer>
+
+<div class="d-flex flex-column min-vh-100">
+  <main class="flex-grow-1">
+    <router-outlet/>
+  </main>
+</div>
+<app-footer *ngIf="!isAuthPage()" class="footer mt-auto"></app-footer>

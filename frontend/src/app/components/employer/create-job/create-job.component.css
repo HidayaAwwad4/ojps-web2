@@ -1,0 +1,57 @@
+.custom-border {
+  border: 2px solid #631B1B !important;
+  border-radius: 0.5rem;
+}
+
+.modal-content {
+  background-color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  font-weight: 500;
+  color: #333;
+}
+
+textarea,
+input,
+select {
+  font-size: 14px;
+}
+
+.btn:disabled {
+  background-color: #d6d6d6 !important;
+  color: #999 !important;
+  border: none;
+  cursor: not-allowed;
+}
+
+.logo-upload-wrapper {
+  width: 120px;
+  height: 120px;
+  border: 2px dashed #ccc;
+  border-radius: 50%;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s;
+}
+
+.logo-upload-wrapper:hover {
+  border-color: #641B1B;
+}
+
+.logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: #888;
+}
