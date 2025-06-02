@@ -2,14 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-edit-profile-page',
   standalone: true,
   imports: [
-    NavbarComponent,
     FormsModule,
     CommonModule
   ],
@@ -23,6 +21,7 @@ export class EditProfilePageComponent implements OnInit {
   location: string = '';
   aboutMe: string = '';
   userRole: string = '';
+  profilePictureUrl: string = 'assets/account-avatar.png';
   
   // Password fields
   currentPassword: string = '';
@@ -58,8 +57,10 @@ export class EditProfilePageComponent implements OnInit {
           this.location = userData.location || '';
           this.aboutMe = userData.summary || '';
           this.userRole = userData.role?.name || '';
+          this.profilePictureUrl = userData.profile_picture_url || 'assets/account-avatar.png';
           
           console.log('Edit profile loaded for user role:', this.userRole);
+          console.log('Profile picture URL:', this.profilePictureUrl);
         } else {
           this.error = 'Invalid response format from server';
         }
@@ -88,6 +89,10 @@ export class EditProfilePageComponent implements OnInit {
     this.authService.uploadProfilePicture(this.profilePictureFile).subscribe({
       next: (response: any) => {
         this.successMessage = 'Profile picture updated successfully!';
+        // Update the displayed profile picture immediately
+        if (response.data && response.data.profile_picture_url) {
+          this.profilePictureUrl = response.data.profile_picture_url;
+        }
         setTimeout(() => this.successMessage = null, 3000);
         this.saving = false;
       },

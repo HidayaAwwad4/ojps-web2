@@ -1,4 +1,3 @@
-
 <div class="container profile-edit-container mt-5">
   <div *ngIf="loading" class="text-center">
     <p>Loading profile data...</p>
@@ -14,7 +13,10 @@
   
   <div *ngIf="!loading">
     <div class="profile-edit-header text-center mt-4">
-      <img src="assets/account-avatar.png" alt="User Avatar" class="mb-2">
+      <img [src]="profilePictureUrl" 
+           alt="User Avatar" 
+           class="mb-2 profile-avatar"
+           (error)="profilePictureUrl='assets/account-avatar.png'">
       <br>
       <button class="btn photo-btn" (click)="fileInput.click()">
         <i class="bi bi-camera"></i> Add a profile photo
@@ -23,6 +25,7 @@
     </div>
 
     <form class="mt-4" (ngSubmit)="saveChanges()">
+      <!-- Rest of your form remains the same -->
       <div class="row g-3">
         <div class="col-12">
           <label for="name" class="form-label">Name:</label>

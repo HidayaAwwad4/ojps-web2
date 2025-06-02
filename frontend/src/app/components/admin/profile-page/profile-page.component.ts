@@ -20,6 +20,7 @@ export class AdminProfilePageComponent implements OnInit {
   email = '';
   location = '';
   aboutMe = '';
+  profilePictureUrl = 'assets/account-avatar.png'; // Default avatar
   loading = true;
   error = false;
 
@@ -44,18 +45,23 @@ export class AdminProfilePageComponent implements OnInit {
           const data = response.data;
 
           console.log('Admin profile data extracted:', data);
+          console.log('Profile picture URL:', data.user?.profile_picture_url);
 
           // Basic user info
           this.name = data.user?.name || '';
           this.email = data.user?.email || '';
           this.location = data.user?.location || 'No location specified';
           this.aboutMe = data.user?.summary || 'No summary provided';
+          
+          // Profile picture - use uploaded picture if available, otherwise default
+          this.profilePictureUrl = data.user?.profile_picture_url || 'assets/account-avatar.png';
 
           console.log('Final admin component data:', {
             name: this.name,
             email: this.email,
             location: this.location,
-            aboutMe: this.aboutMe
+            aboutMe: this.aboutMe,
+            profilePictureUrl: this.profilePictureUrl
           });
         } else {
           console.error('Invalid response format from server');

@@ -46,56 +46,59 @@ class ProfileController extends Controller
             Log::info('=== GET PROFILE REQUEST START ===');
             Log::info('User found:', ['user_id' => $user->id, 'role' => $user->role->name ?? 'unknown']);
             
+            // Add profile picture URL to user data
+            $userData = $user->toArray();
+            if ($user->profile_picture) {
+                $userData['profile_picture_url'] = url('storage/' . $user->profile_picture);
+            } else {
+                $userData['profile_picture_url'] = null;
+            }
+            
             // Basic profile data with empty arrays by default
             $profile = [
-                'user' => $user,
+                'user' => $userData,
                 'experience' => [],
                 'education' => [],
                 'skills' => [],
                 'resume_path' => null
             ];
             
-            // FIXED: Changed from 'job-seeker' to 'Job Seeker' to match your database
-            if ($user->role && $user->role->name === 'Job Seeker') {
-                Log::info('User is a Job Seeker, fetching data...');
-                
-                // Get the job seeker record
-                $jobSeeker = JobSeeker::where('user_id', $user->id)->first();
-                
-                if ($jobSeeker) {
-                    Log::info('JobSeeker found:', ['job_seeker_id' => $jobSeeker->id]);
-                    
-                    // Log raw database values
-                    Log::info('Raw JobSeeker data from database:', [
-                        'experience' => $jobSeeker->experience,
-                        'education' => $jobSeeker->education,
-                        'skills' => $jobSeeker->skills
-                    ]);
-                    
-                    // Decode experience, education, and skills
-                    $decodedExperience = $this->decodeJsonField($jobSeeker->experience);
-                    $decodedEducation = $this->decodeJsonField($jobSeeker->education);
-                    $decodedSkills = $this->decodeJsonField($jobSeeker->skills);
-                    
-                    Log::info('Decoded data:', [
-                        'experience' => $decodedExperience,
-                        'education' => $decodedEducation,
-                        'skills' => $decodedSkills
-                    ]);
-                    
-                    $profile['experience'] = $decodedExperience;
-                    $profile['education'] = $decodedEducation;
-                    $profile['skills'] = $decodedSkills;
-                    
-                    // Add resume path
-                    if ($jobSeeker->resume_path) {
-                        $profile['resume_path'] = url('storage/' . $jobSeeker->resume_path);
-                    }
-                } else {
-                    Log::warning('JobSeeker record not found for user:', ['user_id' => $user->id]);
+            // Handle different user roles
+            if ($user->role) {
+                switch ($user->role->name) {
+                    case 'Job Seeker':
+                        // Get the raw data directly from the database to avoid accessor interference
+                        $rawJobSeeker = DB::table('job_seekers')->where('user_id', $user->id)->first();
+                        
+                        if ($rawJobSeeker) {
+                            Log::info('JobSeeker found:', ['job_seeker_id' => $rawJobSeeker->id]);
+                            
+                            // Decode experience, education, and skills
+                            $profile['experience'] = $this->decodeJsonField($rawJobSeeker->experience);
+                            $profile['education'] = $this->decodeJsonField($rawJobSeeker->education);
+                            $profile['skills'] = $this->decodeJsonField($rawJobSeeker->skills);
+                            
+                            // Add resume path
+                            if ($rawJobSeeker->resume_path) {
+                                $profile['resume_path'] = url('storage/' . $rawJobSeeker->resume_path);
+                            }
+                        }
+                        break;
+                        
+                    case 'Employer':
+                        Log::info('User is an Employer');
+                        // Employer-specific data can be added here if needed
+                        break;
+                        
+                    case 'Admin':
+                        Log::info('User is an Admin');
+                        // Admin-specific data can be added here if needed
+                        break;
+                        
+                    default:
+                        Log::info('Unknown user role');
+                        break;
                 }
-            } else {
-                Log::info('User is not a Job Seeker or role is null');
             }
             
             Log::info('Final profile data being sent:', $profile);

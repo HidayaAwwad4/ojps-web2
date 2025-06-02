@@ -2,13 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NavbarComponent } from '../../navbar/navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-resume-management',
   standalone: true,
-  imports: [CommonModule, FormsModule, NavbarComponent],
+  imports: [CommonModule, FormsModule],
   templateUrl: './resume-management.component.html',
   styleUrls: ['./resume-management.component.css']
 })
@@ -97,6 +96,10 @@ export class ResumeManagementComponent implements OnInit {
         this.errorMessage = err.error?.message || 'Failed to load resume data. Please try again.';
       }
     });
+  }
+
+  trackByIndex(index: number, item: any): number {
+    return index;
   }
 
   saveChanges(): void {

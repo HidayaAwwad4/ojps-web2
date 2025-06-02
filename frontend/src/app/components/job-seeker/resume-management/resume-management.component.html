@@ -173,7 +173,7 @@
           No skills added yet. Click 'Add Skill' to get started.
         </div>
         <div class="row g-2">
-          <div *ngFor="let s of skills; let i = index" class="col-md-6">
+          <div *ngFor="let s of skills; let i = index; trackBy: trackByIndex" class="col-md-6">
             <div class="d-flex align-items-center mb-2 gap-2">
               <input type="text" class="form-control" placeholder="Enter a skill" [(ngModel)]="skills[i]">
               <button class="btn btn-delete" (click)="deleteStrength(i)">
