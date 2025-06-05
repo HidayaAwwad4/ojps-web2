@@ -1,103 +1,128 @@
-
-<div class="container profile-edit-container">
-  <div class="profile-edit-header text-center mt-4">
-    <img src="assets/account-avatar.png" alt="User Avatar" class="mb-2">
-    <br>
-    <button class="btn photo-btn">
-      <i class="bi bi-camera"></i> Add a profile photo
-    </button>
+<div class="container profile-edit-container mt-5">
+  <div *ngIf="loading" class="text-center">
+    <p>Loading profile data...</p>
   </div>
-
-  <form class="mt-4">
-    <div class="row g-3">
-      <div class="col-md-6">
-        <label for="firstName" class="form-label">First name:</label>
-        <input
-          id="firstName"
-          type="text"
-          class="form-control"
-          placeholder="First name..."
-          [(ngModel)]="firstName"
-          name="firstName"
-        >
-      </div>
-
-      <div class="col-md-6">
-        <label for="lastName" class="form-label">Last name:</label>
-        <input
-          id="lastName"
-          type="text"
-          class="form-control"
-          placeholder="Last name..."
-          [(ngModel)]="lastName"
-          name="lastName"
-        >
-      </div>
-
-      <div class="col-12">
-        <label for="email" class="form-label">Email:</label>
-        <input
-          id="email"
-          type="email"
-          class="form-control"
-          placeholder="Email..."
-          [(ngModel)]="email"
-          name="email"
-        >
-      </div>
-
-      <div class="col-12">
-        <label for="location" class="form-label">Location:</label>
-        <input
-          id="location"
-          type="text"
-          class="form-control"
-          placeholder="Location..."
-          [(ngModel)]="location"
-          name="location"
-        >
-      </div>
-
-      <div class="col-md-6">
-        <label for="newPassword" class="form-label">New password:</label>
-        <input
-          id="newPassword"
-          type="password"
-          class="form-control"
-          placeholder="••••••"
-          [(ngModel)]="newPassword"
-          name="newPassword"
-        >
-      </div>
-
-      <div class="col-md-6">
-        <label for="confirmPassword" class="form-label">Confirm your password:</label>
-        <input
-          id="confirmPassword"
-          type="password"
-          class="form-control"
-          placeholder="••••••"
-          [(ngModel)]="confirmPassword"
-          name="confirmPassword"
-        >
-      </div>
-
-      <div class="col-12">
-        <label for="aboutMe" class="form-label">About me:</label>
-        <textarea
-          id="aboutMe"
-          class="form-control"
-          rows="4"
-          placeholder="Description..."
-          [(ngModel)]="aboutMe"
-          name="aboutMe"
-        ></textarea>
-      </div>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    {{ error }}
+  </div>
+  
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  
+  <div *ngIf="!loading">
+    <div class="profile-edit-header text-center mt-4">
+      <img [src]="profilePictureUrl" 
+           alt="User Avatar" 
+           class="mb-2 profile-avatar"
+           (error)="profilePictureUrl='assets/account-avatar.png'">
+      <br>
+      <button class="btn photo-btn" (click)="fileInput.click()">
+        <i class="bi bi-camera"></i> Add a profile photo
+      </button>
+      <input #fileInput type="file" style="display: none" (change)="onFileSelected($event)" accept="image/*">
     </div>
 
-    <div class="form-actions mt-4 d-flex justify-content-center">
-      <button type="submit" class="btn action-btn me-2">Save Changes</button>
-      <button type="button" class="btn action-btn cancel-btn">Cancel</button>
-    </div>
-  </form>
+    <form class="mt-4" (ngSubmit)="saveChanges()">
+      <!-- Rest of your form remains the same -->
+      <div class="row g-3">
+        <div class="col-12">
+          <label for="name" class="form-label">Name:</label>
+          <input
+            id="name"
+            type="text"
+            class="form-control"
+            placeholder="Enter your full name..."
+            [(ngModel)]="name"
+            name="name"
+            required
+          >
+        </div>
+
+        <div class="col-12">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            placeholder="Email..."
+            [(ngModel)]="email"
+            name="email"
+            disabled
+          >
+          <small class="text-muted">Email cannot be changed</small>
+        </div>
+
+        <div class="col-12">
+          <label for="location" class="form-label">Location:</label>
+          <input
+            id="location"
+            type="text"
+            class="form-control"
+            placeholder="Location..."
+            [(ngModel)]="location"
+            name="location"
+          >
+        </div>
+
+        <div class="col-12">
+          <label for="currentPassword" class="form-label">Current password:</label>
+          <input
+            id="currentPassword"
+            type="password"
+            class="form-control"
+            placeholder="Enter current password to change password"
+            [(ngModel)]="currentPassword"
+            name="currentPassword"
+          >
+        </div>
+
+        <div class="col-md-6">
+          <label for="newPassword" class="form-label">New password:</label>
+          <input
+            id="newPassword"
+            type="password"
+            class="form-control"
+            placeholder="••••••"
+            [(ngModel)]="newPassword"
+            name="newPassword"
+            [disabled]="!currentPassword"
+          >
+        </div>
+
+        <div class="col-md-6">
+          <label for="confirmPassword" class="form-label">Confirm your password:</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            class="form-control"
+            placeholder="••••••"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            [disabled]="!currentPassword"
+          >
+        </div>
+
+        <div class="col-12">
+          <label for="aboutMe" class="form-label">About me:</label>
+          <textarea
+            id="aboutMe"
+            class="form-control"
+            rows="4"
+            placeholder="Description..."
+            [(ngModel)]="aboutMe"
+            name="aboutMe"
+          ></textarea>
+        </div>
+      </div>
+
+      <div class="form-actions mt-4 d-flex justify-content-center">
+        <button type="submit" class="btn action-btn me-2" [disabled]="saving">
+          {{ saving ? 'Saving...' : 'Save Changes' }}
+        </button>
+        <button type="button" class="btn action-btn cancel-btn" (click)="cancel()" [disabled]="saving">Cancel</button>
+      </div>
+    </form>
+  </div>
 </div>
