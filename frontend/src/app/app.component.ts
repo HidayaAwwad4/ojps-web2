@@ -37,7 +37,12 @@ export class AppComponent implements OnInit {
     this.notificationService.toggleDrawer();
 
   }
-
+  getRole(): 'admin' | 'seeker' | 'employer' | 'guest' {
+    if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
+      const role = localStorage.getItem('role');
+      if (role === 'admin' || role === 'seeker' || role === 'employer' || role === 'guest') {
+        return role;
+      }
   getRole(): 'admin' | 'job-seeker' | 'employer' | 'guest' {
     const role = localStorage.getItem('role');
     if (role === 'admin' || role === 'job-seeker' || role === 'employer') {
@@ -46,6 +51,9 @@ export class AppComponent implements OnInit {
     return 'guest';
   }
 
+    getUserType(): 'seeker' | 'employer' | null {
+    const role = this.getRole();
+    return role === 'seeker' || role === 'employer' ? role : null;
 
     getUserType(): 'job-seeker' | 'employer' | null {
     const role = this.getRole();
