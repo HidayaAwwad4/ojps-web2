@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+
     <data-source source="LOCAL" name="ojps_laravel@localhost" uuid="8ee81366-e349-4bbd-a9a5-f98285dca5b1">
+
+    <data-source source="LOCAL" name="haneeen1@localhost" uuid="48902896-01a9-49e3-b70c-e482bfc3f461">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/haneeen1</jdbc-url>
+    <data-source source="LOCAL" name="ojps@localhost" uuid="e7906a11-bc0c-4955-a792-cb38d23d5b9d">
+
       <driver-ref>mysql.8</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
