@@ -38,18 +38,18 @@ export class AppComponent implements OnInit {
 
   }
 
-  getRole(): 'admin' | 'jobseeker' | 'employer' | 'guest' {
+  getRole(): 'admin' | 'seeker' | 'employer' | 'guest' {
     if (typeof window !== 'undefined' && typeof localStorage !== 'undefined') {
       const role = localStorage.getItem('role');
-      if (role === 'admin' || role === 'jobseeker' || role === 'employer' || role === 'guest') {
+      if (role === 'admin' || role === 'seeker' || role === 'employer' || role === 'guest') {
         return role;
       }
     }
     return 'employer';
   }
 
-    getUserType(): 'jobseeker' | 'employer' | null {
+    getUserType(): 'seeker' | 'employer' | null {
     const role = this.getRole();
-    return role === 'jobseeker' || role === 'employer' ? role : null;
+    return role === 'seeker' || role === 'employer' ? role : null;
   }
 }
