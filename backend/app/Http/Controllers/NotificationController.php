@@ -18,9 +18,6 @@ class NotificationController extends Controller
         ]);
     }
 
-    /**
-     * Get unread notifications
-     */
     public function unread(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
@@ -30,9 +27,6 @@ class NotificationController extends Controller
         ]);
     }
 
-    /**
-     * Mark a notification as read
-     */
     public function markAsRead(Request $request,$id): \Illuminate\Http\JsonResponse
     {
         $notification = Notification::where('id', $id)
@@ -46,9 +40,6 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification marked as read.']);
     }
 
-    /**
-     * Create notification for seeker when application is accepted/rejected
-     */
     public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
     {
         $message = $status === 'accepted'
