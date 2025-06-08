@@ -5,48 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/JobSeekerController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/services/job_seeker/application.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/services/job_seeker/application.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/services/job_seeker/job-seeker.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/services/job_seeker/job-seeker.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/ojps.HhE0AA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/FavoriteJobController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/FavoriteJobController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150636_create_job_seekers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150636_create_job_seekers_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150639_create_favorite_jobs_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150639_create_favorite_jobs_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_131615_add_is_approved_to_users_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_131615_add_is_approved_to_users_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/application-review/application-review.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/applications-status/applications-status.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/applications-status/applications-status.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/applications-status/applications-status.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/applications-status/applications-status.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/categories-page/categories-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/categories-page/categories-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/categories-page/categories-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/categories-page/categories-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/home-page/home-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/home-page/home-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/home-page/home-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/home-page/home-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/job-category/job-category.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/job-category/job-category.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/recommended-jobs/recommended-jobs.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/saved-jobs/saved-jobs.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/saved-jobs/saved-jobs.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/saved-jobs/saved-jobs.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/job-seeker/saved-jobs/saved-jobs.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +235,7 @@
       <workItem from="1748542423675" duration="4008000" />
       <workItem from="1748614844121" duration="62000" />
       <workItem from="1748615043978" duration="2852000" />
-      <workItem from="1749305880010" duration="46104000" />
+      <workItem from="1749305880010" duration="46664000" />
     </task>
     <servers />
   </component>
