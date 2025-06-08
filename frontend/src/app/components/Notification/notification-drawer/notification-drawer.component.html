@@ -5,6 +5,7 @@
 
   <div class="drawer-content">
     <app-seeker-notification
+      *ngIf="userType === 'seeker'"
       *ngIf="userType === 'job-seeker'"
     [notifications]="notifications">
     </app-seeker-notification>
