@@ -1,51 +1,57 @@
-import { Component } from '@angular/core';
-import {NgClass, NgForOf} from '@angular/common';
-import { NavbarComponent } from '../../navbar/navbar.component';
+import { Component, OnInit } from '@angular/core';
+import { JobService } from '../../../services/jobs/job.service';
+import {NgClass, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-applications-status',
-  imports: [
-    NgForOf,
-    NgClass,
-    NavbarComponent
-  ],
   templateUrl: './applications-status.component.html',
+  styleUrl: './applications-status.component.css',
   standalone: true,
-  styleUrl: './applications-status.component.css'
+  imports: [NgClass, NgForOf, NgIf]
 })
-export class ApplicationsStatusComponent {
-  selectedTab: string = 'applied';
+export class ApplicationsStatusComponent implements OnInit {
+  selectedTab: string = 'under_review';
+  underReviewJobs: any[] = [];
+  acceptedJobs: any[] = [];
+  rejectedJobs: any[] = [];
 
-  jobs = [
-    {
-      image: 'assets/NEO.jpg',
-      title: 'Frontend Developer',
-      description: 'Work with Angular and React to build UIs.',
-      salary: '800 - 1000',
-      status: 'applied'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'Backend Developer',
-      description: 'Create REST APIs using Node.js.',
-      salary: '900 - 1100',
-      status: 'interviewing'
-    },
-    {
-      image: 'assets/AR.jpg',
-      title: 'QA Tester',
-      description: 'Manual and automated testing.',
-      salary: '700 - 900',
-      status: 'rejected'
+  constructor(private jobService: JobService) {}
+
+  ngOnInit(): void {
+    const userJson = localStorage.getItem('user');
+    if (!userJson) {
+      console.error('User data not found in localStorage');
+      return;
     }
-  ];
 
-  get filteredJobs() {
-    return this.jobs.filter(job => job.status === this.selectedTab);
+    const user = JSON.parse(userJson);
+    const jobSeekerId = user.job_seeker_id ?? user.id;
+
+    if (!jobSeekerId) {
+      console.error('Job Seeker ID not found in user data');
+      return;
+    }
+
+    this.jobService.getApplicationsByJobSeekerId(jobSeekerId).subscribe(applications => {
+      this.underReviewJobs = applications.filter(app =>
+          ['pending', 'shortlisted'].includes(app.status?.toLowerCase())
+      );
+      this.acceptedJobs = applications.filter(app =>
+          app.status?.toLowerCase() === 'accepted'
+      );
+      this.rejectedJobs = applications.filter(app =>
+          app.status?.toLowerCase() === 'rejected'
+      );
+    });
   }
 
-  onJobClick(job: any) {
-    console.log('Job clicked:', job);
-    alert('You clicked on: ' + job.title);
+
+  get filteredJobs(): any[] {
+    if (this.selectedTab === 'under_review') return this.underReviewJobs;
+    if (this.selectedTab === 'accepted') return this.acceptedJobs;
+    return this.rejectedJobs;
+  }
+
+  onJobClick(app: any) {
   }
 }

@@ -13,19 +13,18 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/profile', [AuthController::class, 'userProfile']);
 
+    Route::get('/user/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/user/profile', [ProfileController::class, 'updateProfile']);
+    Route::post('/user/profile/picture', [ProfileController::class, 'uploadProfilePicture']);
+    Route::post('/user/resume', [ProfileController::class, 'uploadResume']);
+
+    Route::get('/job-seekers/{id}', [ProfileController::class, 'getJobSeekerProfile']);
+    Route::get('/job-seekers/{id}/resume', [ProfileController::class, 'downloadResume']);
+    Route::post('/user/update-password', [ProfileController::class, 'updatePassword']);
 });
-Route::post('/logout', [AuthController::class, 'logout']);
-Route::get('/profile', [AuthController::class, 'userProfile']);
-Route::get('/user/profile', [ProfileController::class, 'getProfile']);
-Route::post('/user/profile', [ProfileController::class, 'updateProfile']);
-Route::post('/user/profile/picture', [ProfileController::class, 'uploadProfilePicture']);
-Route::post('/user/resume', [ProfileController::class, 'uploadResume']);
-Route::get('job-seekers/user/{userId}', [ProfileController::class, 'getJobSeekerIdByUserId']);
-Route::get('/job-seekers/{id}', [ProfileController::class, 'getJobSeekerProfile']);
-Route::get('/job-seekers/{id}/resume', [ProfileController::class, 'downloadResume']);
-Route::post('/user/update-password', [ProfileController::class, 'updatePassword']);
-
 
 Route::get('/user', function (Request $request) {
     return $request->user();

@@ -1,44 +1,66 @@
-import { Component } from '@angular/core';
-import {Router} from '@angular/router';
-import {Location, NgForOf} from '@angular/common';
-import {NavbarComponent} from '../../navbar/navbar.component';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import {Location, NgClass, NgForOf} from '@angular/common';
+import { JobService } from '../../../services/jobs/job.service';
 
 @Component({
   selector: 'app-saved-jobs',
-  imports: [
-    NavbarComponent,
-    NgForOf
-  ],
   templateUrl: './saved-jobs.component.html',
-  styleUrl: './saved-jobs.component.css'
+  imports: [
+    NgForOf,
+    NgClass
+  ],
+  styleUrls: ['./saved-jobs.component.css']
 })
-export class SavedJobsComponent {
+export class SavedJobsComponent implements OnInit {
+  savedJobs: any[] = [];
 
   constructor(
     private router: Router,
-    private location: Location
+    private location: Location,
+    private jobService: JobService
   ) {}
 
-  jobs = [
-    { title: 'Fashion Stylist', description: 'Styling for magazines and events', image: 'assets/AR.jpg', salary: 26.32, saved: true },
-    { title: 'Fashion Designer', description: 'Design new collections', image: 'assets/adham.jpg', salary: 22.95, saved: false },
-    { title: 'Makeup Artist', description: 'Beauty & cosmetics expert', image: 'assets/AR.jpg', salary: 24.10, saved: true },
-    { title: 'Runway Coach', description: 'Train models for the runway', image: 'assets/TECHNO.jpg', salary: 28.50, saved: false },
-    { title: 'Textile Expert', description: 'Work with fabrics and trends', image: 'assets/AR.jpg', salary: 23.75, saved: true },
-    { title: 'Fashion Blogger', description: 'Create fashion content online', image: 'assets/NEO.jpg', salary: 21.00, saved: false },
-    { title: 'Shoe Designer', description: 'Design custom footwear', image: 'assets/TECHNO.jpg', salary: 27.40, saved: true },
-    { title: 'Visual Merchandiser', description: 'Display expert for stores', image: 'assets/AR.jpg', salary: 25.60, saved: false },
-    { title: 'Wardrobe Consultant', description: 'Personal styling for clients', image: 'assets/adham.jpg', salary: 22.20, saved: true },
-    { title: 'Model Agent', description: 'Scout and manage talent', image: 'assets/NEO.jpg', salary: 29.90, saved: false }
-  ];
-
-  get savedJobs() {
-    return this.jobs.filter(job => job.saved);
+  ngOnInit(): void {
+    this.fetchSavedJobs();
   }
 
-  toggleSave(job: any) {
-    job.saved = !job.saved;
+  fetchSavedJobs(): void {
+    this.jobService.getSavedJobs().subscribe({
+      next: (response) => {
+        this.savedJobs = response.map((fav: any) => ({
+          ...fav.job,
+          favorite_id: fav.id
+        }));
+      },
+      error: (err) => {
+        console.error('Error fetching saved jobs:', err);
+      }
+    });
   }
+
+  toggleSave(event: Event, job: any) {
+    event.stopPropagation();
+
+    if (job.favorite_id) {
+      this.jobService.removeSavedJob(job.id).subscribe({
+        next: () => {
+          job.favorite_id = null;
+        },
+        error: (err) => console.error('Error removing saved job:', err)
+      });
+    } else {
+      this.jobService.saveJob(job.id).subscribe({
+        next: (response: any) => {
+          job.favorite_id = response.id;
+        },
+        error: (err) => console.error('Error saving job:', err)
+      });
+    }
+  }
+
+
+
 
   goBack() {
     this.location.back();
@@ -46,11 +68,6 @@ export class SavedJobsComponent {
 
   applyJob(job: any) {
     console.log('Applying for job:', job.title);
-    this.router.navigate(['/application-review']).then(() => {
-      console.log('Navigated to Application Review screen');
-    }).catch(err => {
-      console.error('Navigation error:', err);
-    });
+    this.router.navigate(['/application-review']);
   }
 }
-

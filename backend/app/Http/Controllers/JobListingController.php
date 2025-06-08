@@ -31,6 +31,14 @@ class JobListingController extends Controller
         try {
             $job = JobListing::with('employer')->findOrFail($id);
 
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+
+            }
+            if ($job->documents) {
+                $job->documents = config('app.url') . Storage::url($job->documents);
+            }
+
             return response()->json($job);
 
         } catch (\Exception $e) {
@@ -43,7 +51,19 @@ class JobListingController extends Controller
         $jobs = JobListing::with('employer')
             ->where('employer_id', $employerId)
             ->orderBy('created_at', 'desc')
-            ->paginate(8);
+            ->get();
+
+        $jobs->transform(function ($job) {
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+            }
+
+            if ($job->documents) {
+                $job->documents =config('app.url') . Storage::url($job->documents);
+            }
+
+            return $job;
+        });
 
         return response()->json($jobs);
     }
@@ -62,6 +82,14 @@ class JobListingController extends Controller
             }
 
             $job = JobListing::create($data);
+
+            if ($job->company_logo) {
+                $job->company_logo = config('app.url') . Storage::url($job->company_logo);
+            }
+
+            if ($job->documents) {
+                $job->documents = config('app.url') . Storage::url($job->documents);
+            }
 
             return response()->json($job, 201);
         } catch (\Exception $e) {
@@ -93,6 +121,11 @@ class JobListingController extends Controller
 
             $job->update($data);
             $job->refresh();
+
+            // ✅ إرسال الرابط الكامل للصور والمستندات
+            $job->company_logo = asset('storage/' . $job->company_logo);
+            $job->documents = asset('storage/' . $job->documents);
+
             return response()->json($job);
 
         } catch (\Exception $e) {
@@ -128,16 +161,7 @@ class JobListingController extends Controller
     {
         try {
             $job = JobListing::findOrFail($id);
-
-            if ($job->company_logo) {
-                Storage::disk('public')->delete($job->company_logo);
-            }
-            if ($job->documents) {
-                Storage::disk('public')->delete($job->documents);
-            }
-
             $job->delete();
-
             return response()->json(['message' => 'Job deleted successfully']);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to delete job'], 500);
