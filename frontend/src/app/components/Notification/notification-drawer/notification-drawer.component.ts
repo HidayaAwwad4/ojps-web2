@@ -18,6 +18,7 @@ export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
   @Input() userType: 'seeker' | 'employer' | null = null;
+  @Input() userType: 'job-seeker' | 'employer' | null = null;
 
   notifications: any[] = [];
 

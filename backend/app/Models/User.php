@@ -22,7 +22,7 @@ class User extends Authenticatable
         'location',
         'summary',
         'verification_code',
-
+        'is_approved',
     ];
 
     protected $hidden = [

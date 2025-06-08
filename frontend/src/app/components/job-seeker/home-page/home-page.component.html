@@ -1,22 +1,45 @@
 <app-job-intro></app-job-intro>
 
 <div class="container text-center mt-5">
-  <div class="text-center mt-5">
+  <div class="search-wrapper position-relative mx-auto" style="max-width: 600px;">
     <input
       type="text"
-      class="form-control rounded-pill text-center custom-search-input mx-auto"
-      placeholder="Search by job title, or keywords to explore the best career opportunities for you."
+      class="form-control rounded-pill text-center w-100"
+      placeholder="Search by job title, category, company, or location"
       [(ngModel)]="searchText"
       (input)="onSearchChange()"
+      autocomplete="off"
     />
+
+    <div *ngIf="searchResults.length > 0"
+         class="position-absolute w-100 bg-white border rounded mt-1 shadow-sm"
+         style="z-index: 1050; max-height: 300px; overflow-y: auto;">
+      <ul class="list-group list-group-flush">
+        <li
+          *ngFor="let job of searchResults"
+          class="list-group-item list-group-item-action"
+          (click)="selectJob(job)"
+          style="cursor: pointer;"
+        >
+          <div>
+            <strong>{{ job.title }}</strong>
+            <div class="text-muted small">
+              {{ job.category }} | {{ job.location }} | {{ job.employer?.company_name }}
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
   </div>
+
+  <p *ngIf="noResults" class="text-danger mt-2">NO JOB FOUND</p>
 
   <p class="mt-4 fs-5">
     Explore a world of career opportunities and find the perfect job for every stage of your journey.
   </p>
 </div>
+
 <app-job-category></app-job-category>
 <app-recommended-jobs
-  [jobs]="recommendedJobs"
-  (jobClicked)="handleJobClick($event)"
-></app-recommended-jobs>
+  (jobClicked)="handleJobClick($event)">
+</app-recommended-jobs>

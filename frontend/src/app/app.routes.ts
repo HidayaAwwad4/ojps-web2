@@ -17,7 +17,7 @@ import {JobApplicationsComponent} from './components/employer/job-applications/j
 import {JobDetailsComponent} from './components/employer/job-details/job-details.component';
 import {ApplicationsStatusComponent} from './components/job-seeker/applications-status/applications-status.component';
 import {CategoriesPageComponent} from './components/job-seeker/categories-page/categories-page.component';
-import {ApplicationReviewComponent} from './components/job-seeker/application-review/application-review.component';
+import { ApplicationReviewComponent } from './components/job-seeker/application-review/application-review.component';
 import {
   EmployerNotificationComponent
 } from './components/Notification/employer-notification/employer-notification.component';

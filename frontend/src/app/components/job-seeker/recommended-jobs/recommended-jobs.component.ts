@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { JobService } from '../../../services/jobs/job.service';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 
@@ -8,13 +9,39 @@ import {RouterLink} from '@angular/router';
   styleUrls: ['./recommended-jobs.component.css'],
   imports: [
     NgForOf,
-    RouterLink],
+    RouterLink
+  ],
   standalone: true
 })
-export class RecommendedJobsComponent {
-  @Input() jobs: any[] = [];
+export class RecommendedJobsComponent implements OnInit {
+   jobs: any[] = [];
+
   @Output() jobClicked = new EventEmitter<any>();
   @ViewChild('carousel', { static: true }) carousel!: ElementRef;
+
+  constructor(private jobService: JobService) {}
+
+  ngOnInit(): void {
+    this.loadRecommendedJobs();
+  }
+
+  loadRecommendedJobs() {
+    this.jobService.getRecommendedJobs().subscribe({
+      next: (jobs) => {
+        this.jobs = jobs;
+        console.log('Recommended jobs loaded:', jobs);
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          console.log('No recommended jobs found');
+          this.jobs = [];
+        } else {
+          console.error('Failed to load recommended jobs', err);
+        }
+      }
+    });
+
+  }
 
   onJobClick(job: any) {
     this.jobClicked.emit(job);

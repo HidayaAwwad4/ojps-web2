@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Location } from '@angular/common';
-import {NavbarComponent} from "../../navbar/navbar.component";
+import { AdminService } from '../../../services/admin/admin.service';
 
 declare var bootstrap: any;
 
@@ -11,24 +11,35 @@ declare var bootstrap: any;
   templateUrl: './manage-employers.component.html',
   styleUrls: ['./manage-employers.component.css'],
   standalone: true,
-    imports: [NgForOf, FormsModule, NgClass, NavbarComponent],
+  imports: [NgForOf, FormsModule, NgClass],
 })
-export class ManageEmployersComponent {
-  constructor(private location: Location) {}
-
+export class ManageEmployersComponent implements OnInit {
   searchTerm: string = '';
-
-  employers = [
-    { name: 'Mohammad Husain', email: 'Mohammad@gmail.com', status: 'pending' },
-    { name: 'Hidaya Awwad', email: 'Hidaya@gmail.com', status: 'pending' },
-    { name: 'Islam Sadaldeen', email: 'Islam@gmail.com', status: 'pending' },
-    { name: 'Razan abudaia', email: 'Razan@gmail.com', status: 'pending' },
-    { name: 'Tasneem jber', email: 'Tasneem@gmail.com', status: 'pending' },
-    { name: 'Haneen Akobeh', email: 'Haneen@gmail.com', status: 'pending' },
-  ];
-
+  employers: any[] = [];
   selectedEmployer: any = null;
   actionType: 'approve' | 'remove' = 'remove';
+
+  constructor(private location: Location, private adminService: AdminService) {}
+
+  ngOnInit() {
+    this.loadPendingEmployers();
+  }
+
+  loadPendingEmployers() {
+    this.adminService.getPendingEmployers().subscribe({
+      next: (data) => {
+        this.employers = data.map((employer: any) => ({
+          id: employer.id,
+          name: employer.name,
+          email: employer.email,
+          status: 'pending',
+        }));
+      },
+      error: (err) => {
+        console.error('Error loading pending employers', err);
+      }
+    });
+  }
 
   filteredEmployers() {
     return this.employers.filter(employer =>
@@ -47,17 +58,32 @@ export class ManageEmployersComponent {
     if (!this.selectedEmployer) return;
 
     if (this.actionType === 'remove') {
-      this.employers = this.employers.filter(emp => emp !== this.selectedEmployer);
+      this.adminService.rejectEmployer(this.selectedEmployer.id).subscribe({
+        next: () => {
+          this.employers = this.employers.filter(emp => emp !== this.selectedEmployer);
+          this.selectedEmployer = null;
+        },
+        error: (err) => {
+          console.error('Error rejecting employer', err);
+        }
+      });
     } else if (this.actionType === 'approve') {
-      const index = this.employers.findIndex(emp => emp === this.selectedEmployer);
-      if (index !== -1) {
-        this.employers[index] = {
-          ...this.selectedEmployer,
-          status: 'approved',
-        };
-      }
+      this.adminService.approveEmployer(this.selectedEmployer.id).subscribe({
+        next: () => {
+          const index = this.employers.findIndex(emp => emp === this.selectedEmployer);
+          if (index !== -1) {
+            this.employers[index] = {
+              ...this.selectedEmployer,
+              status: 'approved',
+            };
+          }
+          this.selectedEmployer = null;
+        },
+        error: (err) => {
+          console.error('Error approving employer', err);
+        }
+      });
     }
-    this.selectedEmployer = null;
   }
 
   goBack() {
