@@ -9,9 +9,58 @@ use App\Models\JobListing;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\JobSeeker;
 
 class JobListingController extends Controller
 {
+  public function getRecommendedJobsForSeeker(Request $request)
+  {
+      $user = $request->user();
+
+      if (!$user) {
+          return response()->json(['error' => 'User not authenticated'], 401);
+      }
+
+      $jobSeeker = JobSeeker::where('user_id', $user->id)->first();
+
+      if (!$jobSeeker) {
+          return response()->json(['error' => 'Job Seeker not found'], 404);
+      }
+
+      if (strtolower($jobSeeker->category) === 'other') {
+          $jobs = JobListing::where('isOpened', 1)->get();
+      } else {
+          $jobs = JobListing::whereRaw('LOWER(category) = ?', [strtolower($jobSeeker->category)])
+                            ->where('isOpened', 1)
+                            ->get();
+      }
+
+      if ($jobs->isEmpty()) {
+          return response()->json(['error' => 'No jobs found'], 404);
+      }
+
+      return response()->json($jobs);
+  }
+
+
+
+
+ public function search(Request $request)
+ {
+     $query = $request->input('query');
+
+     if (!$query) {
+         return response()->json([]);
+     }
+
+     $jobs = JobListing::where('title', 'like', "%$query%")
+                       ->limit(10)
+                       ->get(['id', 'title']);
+
+     return response()->json($jobs);
+ }
+
+
     public function getEmployerByUser(): JsonResponse
     {
         try {
@@ -122,7 +171,6 @@ class JobListingController extends Controller
             $job->update($data);
             $job->refresh();
 
-            // ✅ إرسال الرابط الكامل للصور والمستندات
             $job->company_logo = asset('storage/' . $job->company_logo);
             $job->documents = asset('storage/' . $job->documents);
 
@@ -176,4 +224,44 @@ class JobListingController extends Controller
             'categoryOptions' => JobListing::CATEGORY_OPTIONS,
         ]);
     }
+public function getJobsByCategory($category)
+{
+    $user = auth()->user();
+    $jobSeeker = $user ? $user->jobSeeker : null;
+
+    $jobs = JobListing::where('category', $category)->get();
+
+    $favorites = $jobSeeker
+        ? FavoriteJob::where('job_seeker_id', $jobSeeker->id)->pluck('job_id')->toArray()
+        : [];
+
+    $jobs = $jobs->map(function ($job) use ($favorites) {
+        $job->saved = in_array($job->id, $favorites);
+        return $job;
+    });
+
+    return response()->json($jobs);
+}
+public function advancedSearch(Request $request)
+{
+    $query = $request->input('query');
+
+    if (!$query) {
+        return response()->json([]);
+    }
+
+    $jobs = JobListing::with('employer')
+        ->where(function ($q) use ($query) {
+            $q->where('title', 'like', "%$query%")
+              ->orWhere('location', 'like', "%$query%")
+              ->orWhere('category', 'like', "%$query%")
+              ->orWhereHas('employer', function ($q2) use ($query) {
+                  $q2->where('company_name', 'like', "%$query%");
+              });
+        })
+        ->get();
+
+    return response()->json($jobs);
+}
+
 }
