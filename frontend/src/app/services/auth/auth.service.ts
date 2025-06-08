@@ -15,6 +15,7 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
+
   private getAuthHeaders() {
     let token = '';
     
@@ -30,6 +31,18 @@ export class AuthService {
     };
   }
 
+  private getAuthHeaders() {
+    let token = '';
+    if (isPlatformBrowser(this.platformId)) {
+      token = localStorage.getItem('token') || '';
+    }
+
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
   getRoles() {
     return this.http.get(`${this.apiUrl}/roles`);
   }
@@ -58,6 +71,27 @@ export class AuthService {
           console.log('Update profile response:', response);
         })
       );
+  }
+
+  uploadProfilePicture(file: File) {
+    const formData = new FormData();
+    formData.append('profile_picture', file);
+    return this.http.post(`${this.apiUrl}/user/profile/picture`, formData, this.getAuthHeaders());
+  }
+
+  updatePassword(currentPassword: string, newPassword: string, confirmPassword: string) {
+    return this.http.post(`${this.apiUrl}/user/update-password`, {
+      current_password: currentPassword,
+      password: newPassword,
+      password_confirmation: confirmPassword
+    }, this.getAuthHeaders());
+  }
+
+  uploadResume(file: File) {
+    const formData = new FormData();
+    formData.append('resume', file);
+    return this.http.post(`${this.apiUrl}/user/resume`, formData, this.getAuthHeaders());
+  }
   }
 
   uploadProfilePicture(file: File) {
@@ -115,7 +149,6 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/verify-code`, { user_id, verification_code });
   }
 
-  // Helper method to check if token exists
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       return !!localStorage.getItem('token');
@@ -123,7 +156,6 @@ export class AuthService {
     return false;
   }
 
-  // Helper method to safely get token
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('token');
@@ -131,17 +163,17 @@ export class AuthService {
     return null;
   }
 
-  // Helper method to safely set token
   setToken(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
     }
   }
 
-  // Helper method to safely remove token
+
   removeToken(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
     }
   }
+}
 }
