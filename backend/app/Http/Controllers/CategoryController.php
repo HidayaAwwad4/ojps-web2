@@ -12,7 +12,6 @@ class CategoryController extends Controller
         $categories = Category::all();
         return response()->json($categories);
     }
-
     public function show($id)
     {
         $category = Category::find($id);
@@ -55,8 +54,6 @@ class CategoryController extends Controller
             'updated_category' => $category
         ]);
     }
-
-
     public function destroy($id)
     {
         $category = Category::find($id);

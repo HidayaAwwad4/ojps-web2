@@ -1,16 +1,20 @@
-.cv-box,
-.cover-box {
-  position: relative;
-  height: 100%;
-  min-height: 100%;
-  border: 2px solid #631b1b;
-  box-shadow: 0 8px 10px rgba(99, 27, 27);
-  border-radius: 10px;
-  background-color: #fff;
-  z-index: 1;
+.application-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9;
+  padding: 40px 20px;
 }
-.submit-container {
-  margin-top: 60px;
+
+.application-form {
+  width: 100%;
+  max-width: 750px;
+  background-color: #fff;
+  border: 1px solid rgba(99, 27, 27, 0.84);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .btn-edit {
@@ -18,40 +22,59 @@
   color: white;
   font-weight: bold;
   border-radius: 20px;
-  padding: 4px 20px;
+  padding: 6px 20px;
   font-size: 14px;
   border: none;
   box-shadow: 0 2px 4px rgba(99, 27, 27, 0.5);
-  height:60px;
-  width:100px;
+}
+
+.cv-file-name {
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #2c3e50;
 }
 
 .cover-letter-textarea {
-  border: none;
-  box-shadow: none;
   resize: vertical;
-  text-align: left;
-  background: transparent;
-  padding: 0;
-  margin: 0;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  padding: 12px;
+  font-size: 1rem;
+  background-color: #fcfcfc;
 }
-
 
 .custom-submit-btn {
-  background-color: rgb(99, 27, 27)!important;
+  background-color: #631b1b !important;
   color: white;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 14px 28px;
   border: none;
-  border-radius: 28px;
-  height: 50px;
-  width: 300px;
+  border-radius: 30px;
+  width: 100%;
+  max-width: 350px;
+  height: 54px;
+  box-shadow: 0 4px 8px rgba(99, 27, 27, 0.3);
+  transition: all 0.3s ease;
 }
 
-.cv-title {
-  align-self: flex-start;
-  margin-bottom: 10px;
-  padding-left: 10px;
-  text-align: left;
+.custom-submit-btn:hover {
+  background-color: #4f1515 !important;
+  transform: translateY(-2px);
 }
+
+.disabled-btn {
+  background-color: #c9c9c9 !important;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.form-text {
+  font-size: 0.85rem;
+}
+.application-form:hover {
+  box-shadow:
+    0 0 0 4px rgb(99, 27, 27),
+    0 12px 30px rgb(99, 27, 27);
+}
+

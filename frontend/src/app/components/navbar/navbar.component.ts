@@ -12,7 +12,7 @@ import { JobModalService } from '../../services/jobs/job-modal.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  role: 'admin' | 'jobseeker' | 'employer' | 'guest' = 'guest';
+  role: 'admin' | 'job-seeker' | 'employer' | 'guest' = 'guest';
 
   @Output() notificationClick = new EventEmitter<void>();
 
@@ -22,27 +22,14 @@ export class NavbarComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const url = this.router.url;
-
-    if (url.startsWith('/home/guest')) {
-      this.role = 'guest';
-    } else if (
-      url.startsWith('/home-page') ||
-      url.startsWith('/jobseeker-profile') ||
-      url.startsWith('/Saved-Jobs') ||
-      url.startsWith('/applications-status')
-    ) {
-      this.role = 'jobseeker';
-    } else if (
-      url.startsWith('/employer-home') ||
-      url.startsWith('/employer-profile') ||
-      url.startsWith('/employer/job-postings')
-    ) {
-      this.role = 'employer';
+    const storedRole = localStorage.getItem('role');
+    if (storedRole === 'admin' || storedRole === 'job-seeker' || storedRole === 'employer') {
+      this.role = storedRole;
     } else {
-      this.role = 'admin';
+      this.role = 'guest';
     }
   }
+
 
   openJobModal() {
     this.jobModalService.openCreateJobModal();
