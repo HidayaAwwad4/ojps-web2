@@ -10,9 +10,11 @@ import { JobService } from '../../../services/jobs/job.service';
     NgForOf,
     NgClass
   ],
+  standalone: true,
   styleUrls: ['./saved-jobs.component.css']
 })
 export class SavedJobsComponent implements OnInit {
+
   savedJobs: any[] = [];
 
   constructor(

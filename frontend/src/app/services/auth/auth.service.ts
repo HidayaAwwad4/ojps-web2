@@ -15,22 +15,6 @@ export class AuthService {
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
-
-  private getAuthHeaders() {
-    let token = '';
-    
-    // Check if we're in the browser environment
-    if (isPlatformBrowser(this.platformId)) {
-      token = localStorage.getItem('token') || '';
-    }
-    
-    return {
-      headers: new HttpHeaders({
-        'Authorization': `Bearer ${token}`
-      })
-    };
-  }
-
   private getAuthHeaders() {
     let token = '';
     if (isPlatformBrowser(this.platformId)) {
@@ -43,6 +27,7 @@ export class AuthService {
       })
     };
   }
+
   getRoles() {
     return this.http.get(`${this.apiUrl}/roles`);
   }
@@ -92,27 +77,6 @@ export class AuthService {
     formData.append('resume', file);
     return this.http.post(`${this.apiUrl}/user/resume`, formData, this.getAuthHeaders());
   }
-  }
-
-  uploadProfilePicture(file: File) {
-    const formData = new FormData();
-    formData.append('profile_picture', file);
-    return this.http.post(`${this.apiUrl}/user/profile/picture`, formData, this.getAuthHeaders());
-  }
-
-  updatePassword(currentPassword: string, newPassword: string, confirmPassword: string) {
-    return this.http.post(`${this.apiUrl}/user/update-password`, {
-      current_password: currentPassword,
-      password: newPassword,
-      password_confirmation: confirmPassword
-    }, this.getAuthHeaders());
-  }
-
-  uploadResume(file: File) {
-    const formData = new FormData();
-    formData.append('resume', file);
-    return this.http.post(`${this.apiUrl}/user/resume`, formData, this.getAuthHeaders());
-  }
 
   getJobSeekerProfile(id: number) {
     return this.http.get(`${this.apiUrl}/job-seekers/${id}`, this.getAuthHeaders());
@@ -122,8 +86,9 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/job-seekers/${id}/resume`, {
       ...this.getAuthHeaders(),
       responseType: 'blob'
-    });
+    }) as Observable<Blob>;
   }
+
 
   logout() {
     return this.http.post(`${this.apiUrl}/logout`, {}, this.getAuthHeaders());
@@ -169,11 +134,10 @@ export class AuthService {
     }
   }
 
-
   removeToken(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
     }
   }
 }
-}
+
