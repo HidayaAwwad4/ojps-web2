@@ -92,6 +92,7 @@ export class CreateJobComponent implements OnInit {
         console.log('Job created successfully:', response);
         this.jobCreated.emit(response);
         this.showModal = false;
+        this.resetForm();
       },
       error: (error) => {
         console.error('Error creating job:', error);
@@ -157,4 +158,24 @@ export class CreateJobComponent implements OnInit {
   }
 
   protected readonly isNaN = isNaN;
+
+  resetForm(): void {
+    this.jobDetails = {
+      title: '',
+      description: '',
+      location: '',
+      languages: '',
+      schedule: '',
+      experience: '',
+      employment: '',
+      category: '',
+      salary: null,
+      documents: null,
+      company_logo: null,
+      isOpened: 1,
+      employer_id: this.jobDetails.employer_id
+    };
+    this.selectedLogo = null;
+    this.selectedLogoUrl = null;
+  }
 }

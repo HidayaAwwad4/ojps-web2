@@ -38,7 +38,9 @@ export class EmployerHomeComponent implements OnInit {
         const employerId = employerData.id;
         this.jobService.getJobsByEmployer(employerId).subscribe({
           next: (data) => {
-            this.jobs = data.filter((job: any) => job.isOpened === 1 || job.isOpened === true);
+            this.jobs = (data.data || [])
+              .filter((job: any) => job.isOpened === 1 || job.isOpened === true)
+              .slice(0, 4);
             console.log('jobs', this.jobs);
           },
           error: (err) => {

@@ -70,17 +70,22 @@ class ApplicationController extends Controller
         ]);
 
         $application->update($request->only(['cover_letter', 'status', 'appliedAt']));
-/*
+
         if ($request->has('status') && in_array($request->status, ['accepted', 'rejected'])) {
-            \App\Models\Notification::create([
-                'user_id' => $application->job_seeker_id,
-                'message' => 'Your application has been ' . $request->status . '.',
-                'type' => 'application_' . $request->status,
-                'redirect_url' => '/seeker/applications-status',
-                'is_read' => false,
-            ]);
+            $userId = $application->jobSeeker->user->id ?? null;
+
+            if ($userId) {
+                \App\Models\Notification::create([
+                    'user_id' => $userId,
+                    'message' => 'Your application has been ' . $request->status . '.',
+                    'type' => 'application_' . $request->status,
+                    'redirect_url' => '/seeker/applications-status',
+                    'is_read' => false,
+                ]);
+            }
         }
-*/
+
+
         $application->load('jobSeeker.user');
 
         return response()->json($application);

@@ -5,13 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/ojps.HhE0AA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/96a4482c-ec6a-4cdf-b929-0fef28fce61a/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/cec0c678-b2e7-41f9-ba47-94b678c1659c/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_19_134155_create_personal_access_tokens_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ApplicationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/JobListingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Models/JobListing.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/JobListing.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/create-job/create-job.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/employer-home/employer-home.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/employer/job-postings/job-postings.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/jobs/job.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +165,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;hidaya&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hidayaawwad&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -217,6 +229,12 @@
       <workItem from="1748542423675" duration="4008000" />
       <workItem from="1748614844121" duration="62000" />
       <workItem from="1748615043978" duration="2852000" />
+      <workItem from="1749149524934" duration="417000" />
+      <workItem from="1749276882787" duration="7755000" />
+      <workItem from="1749297882005" duration="4724000" />
+      <workItem from="1749318513425" duration="4309000" />
+      <workItem from="1749358852624" duration="73000" />
+      <workItem from="1749375631100" duration="2221000" />
     </task>
     <servers />
   </component>
