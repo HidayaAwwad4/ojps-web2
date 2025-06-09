@@ -7,7 +7,7 @@ import { JobModalService } from '../../services/jobs/job-modal.service';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [NgIf, RouterLink, RouterLinkActive, NgClass],
+  imports: [NgIf, RouterLink, RouterLinkActive, ],
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })

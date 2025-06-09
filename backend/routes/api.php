@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\employerController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportsController;
 use Illuminate\Http\Request;

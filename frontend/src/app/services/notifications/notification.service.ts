@@ -16,6 +16,11 @@ export class NotificationService {
     return this.http.get<any[]>('/api/notifications');
   }
 
+  sendNotification(notificationData: Notification): Observable<any> {
+    return this.http.post('/api/notifications', notificationData);
+  }
+
+
   markAsRead(id: number) {
     return this.http.post(`/api/notifications/${id}/mark-as-read`, {});
   }
