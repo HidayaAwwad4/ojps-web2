@@ -73,9 +73,9 @@ export class SignUpComponent implements OnInit {
         localStorage.setItem('user', JSON.stringify(res.user));
         localStorage.setItem('role', res.user.role.name);
 
-        if (this.userType === 'Employer') {
+        if (this.userType === 'employer') {
           this.router.navigate(['/employer-home']);
-        } else if (this.userType === 'Job Seeker') {
+        } else if (this.userType === 'job-seeker') {
           this.router.navigate(['/home-page']);
         }
       },

@@ -66,7 +66,7 @@ class ProfileController extends Controller
             // Handle different user roles
             if ($user->role) {
                 switch ($user->role->name) {
-                    case 'Job Seeker':
+                    case 'job-seeker':
                         // Get the raw data directly from the database to avoid accessor interference
                         $rawJobSeeker = DB::table('job_seekers')->where('user_id', $user->id)->first();
                         
@@ -85,12 +85,12 @@ class ProfileController extends Controller
                         }
                         break;
                         
-                    case 'Employer':
+                    case 'employer':
                         Log::info('User is an Employer');
                         // Employer-specific data can be added here if needed
                         break;
                         
-                    case 'Admin':
+                    case 'admin':
                         Log::info('User is an Admin');
                         // Admin-specific data can be added here if needed
                         break;
@@ -165,8 +165,7 @@ class ProfileController extends Controller
             Log::info('User data saved successfully');
 
             // Handle JobSeeker data if user is a job-seeker
-            // FIXED: Changed from 'job-seeker' to 'Job Seeker' to match your database
-            if ($user->role && $user->role->name === 'Job Seeker') {
+            if ($user->role && $user->role->name === 'job-Seeker') {
                 Log::info('Processing job-seeker data...');
                 
                 $jobSeeker = JobSeeker::where('user_id', $user->id)->first();

@@ -45,9 +45,9 @@ export class LoginComponent {
 
         const role = res.user.role.name;
 
-        if (role == 'Employer') {
+        if (role == 'employer') {
           this.router.navigate(['/employer-home']);
-        } else if (role == 'Job Seeker') {
+        } else if (role == 'job-seeker') {
           this.router.navigate(['/home-page']);
         } else if (role == 'admin') {
           this.router.navigate(['/dashboard-admin']);

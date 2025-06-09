@@ -13,7 +13,7 @@ import { AuthService } from '../../services/auth/auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-  role: 'admin' | 'Job Seeker' | 'Employer' | 'guest' = 'guest';
+  role: 'admin' | 'job-seeker' | 'employer' | 'guest' = 'guest';
 
   @Output() notificationClick = new EventEmitter<void>();
 
@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     const storedRole = localStorage.getItem('role');
-    if (storedRole == 'admin' || storedRole == 'Job Seeker' || storedRole == 'Employer') {
+    if (storedRole == 'admin' || storedRole == 'job-seeker' || storedRole == 'employer') {
       this.role = storedRole;
     } else {
       this.role = 'guest';
