@@ -108,6 +108,7 @@ class ApplicationController extends Controller
             return response()->json(['message' => 'No applications found for this job'], 404);
         }
 
+
         return response()->json($applications);
     }
 

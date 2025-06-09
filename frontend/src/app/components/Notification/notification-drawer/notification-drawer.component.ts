@@ -1,8 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {SeekerNotificationComponent} from '../seeker-notification/seeker-notification.component';
-import {EmployerNotificationComponent} from '../employer-notification/employer-notification.component';
-import {NgIf} from '@angular/common';
-import {NotificationService} from '../../../services/notifications/notification.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { SeekerNotificationComponent } from '../seeker-notification/seeker-notification.component';
+import { EmployerNotificationComponent } from '../employer-notification/employer-notification.component';
+import { NgIf } from '@angular/common';
+import { NotificationService } from '../../../services/notifications/notification.service';
+
 @Component({
   selector: 'app-notification-drawer',
   standalone: true,
@@ -12,17 +13,21 @@ import {NotificationService} from '../../../services/notifications/notification.
     NgIf
   ],
   templateUrl: './notification-drawer.component.html',
-  styleUrl: './notification-drawer.component.css'
+  styleUrls: ['./notification-drawer.component.css'] // ✅ fixed
 })
 export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
+<<<<<<< Updated upstream
   @Input() userType: 'job-seeker' | 'employer' | null = null;
+=======
+
+  @Input() userType: 'job-seeker' | 'employer' | null = null; // ✅ use one consistent type
+>>>>>>> Stashed changes
 
   notifications: any[] = [];
 
-  constructor(
-    private notificationService: NotificationService) {}
+  constructor(private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.notificationService.drawerVisible$.subscribe((visible) => {
@@ -44,5 +49,4 @@ export class NotificationDrawerComponent implements OnInit {
       }
     });
   }
-
 }

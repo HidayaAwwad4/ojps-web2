@@ -9,25 +9,28 @@
     </ng-container>
 
 
-    <ng-container *ngIf="role === 'admin'">
+    <ng-container *ngIf="role == 'admin'">
       <div class="icon" routerLink="/dashboard-admin" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
       <div class="icon" routerLink="/admin-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
+      <div class="icon logout" (click)="logout()"><i class="fa fa-sign-out"></i><span>Logout</span></div>
     </ng-container>
 
-    <ng-container *ngIf="role === 'job-seeker'">
+    <ng-container *ngIf="role == 'Job Seeker'">
       <div class="icon" routerLink="/home-page" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
       <div class="icon" routerLink="/Saved-Jobs" routerLinkActive="active"><i class="fa fa-bookmark"></i><span>Saved</span></div>
       <div class="icon" routerLink="/applications-status" routerLinkActive="active"><i class="fa fa-folder"></i><span>Applications</span></div>
       <div class="icon" (click)="onNotificationClick()"><i class="fa fa-bell"></i><span>Notification</span></div>
       <div class="icon" routerLink="/jobseeker-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
+      <div class="icon logout" (click)="logout()"><i class="fa fa-sign-out"></i><span>Logout</span></div>
     </ng-container>
 
-    <ng-container *ngIf="role === 'employer'">
+    <ng-container *ngIf="role == 'Employer'">
       <div class="icon" routerLink="/employer-home" routerLinkActive="active"><i class="fa fa-home"></i><span>Home</span></div>
       <div class="icon" (click)="openJobModal()" routerLinkActive="active"><i class="fa fa-plus-circle"></i><span>New Job</span></div>
       <div class="icon" routerLink="/employer/job-postings" routerLinkActive="active"><i class="fa fa-briefcase"></i><span>Jobs</span></div>
       <div class="icon" (click)="onNotificationClick()"><i class="fa fa-bell"></i><span>Notification</span></div>
       <div class="icon" routerLink="/employer-profile" routerLinkActive="active"><i class="fa fa-user"></i><span>Profile</span></div>
+      <div class="icon logout" (click)="logout()"><i class="fa fa-sign-out"></i><span>Logout</span></div>
     </ng-container>
   </div>
 </nav>

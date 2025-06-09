@@ -27,10 +27,13 @@
 
   <!-- Profiles Cards -->
   <div class="profiles-grid">
-    <div class="profile-col" *ngFor="let profile of filteredProfiles" [routerLink]="['/candidate-view']">
+    <div class="profile-col" *ngFor="let profile of filteredProfiles" [routerLink]="['/candidate-view']" [queryParams]="{applicationId: profile.id}">
       <div class="card text-center profile-card h-100 d-flex flex-column">
       <div class="card-header p-0 bg-maroon rounded-top">
-        <img [src]="profile.job_seeker.user.profile_picture || 'assets/account-avatar.png'" class="rounded-circle profile-img mt-2" alt="Profile image">
+        <img [src]="getProfilePictureUrl(profile)" 
+             class="rounded-circle profile-img mt-2" 
+             alt="Profile image"
+             (error)="handleImageError($event)">
       </div>
       <div class="card-body d-flex flex-column flex-grow-1">
         <h5 class="card-title">{{ profile.job_seeker.user.name }}</h5>

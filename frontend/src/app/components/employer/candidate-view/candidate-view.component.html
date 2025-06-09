@@ -1,4 +1,3 @@
-
 <div class="container profile-container">
   <div class="mt-4">
     <i class="fa-solid fa-arrow-left"
@@ -6,51 +5,108 @@
        [routerLink]="['/employer/job-applications']"></i>
   </div>
 
-  <div class="profile-header d-flex justify-content-between align-items-start mt-4">
-    <div class="d-flex align-items-center">
-      <img src="assets/account-avatar.png" class="me-3">
-      <div class="profile-info">
-        <h2 class="profile-name mb-0">{{ name }}</h2>
-        <p>Email: {{ email }}.</p>
-        <p>Location: {{ location }}.</p>
-        <p>About me: {{ aboutMe }}.</p>
+  <!-- Loading State -->
+  <div *ngIf="loading" class="text-center my-5">
+    <p>Loading candidate data...</p>
+  </div>
+  
+  <!-- Error State -->
+  <div *ngIf="error" class="alert alert-danger my-5">
+    <p>{{ errorMessage || 'Error loading candidate data. Please try again later.' }}</p>
+  </div>
+  
+  <!-- Content -->
+  <div *ngIf="!loading && !error" class="profile-content">
+    <div class="profile-header d-flex justify-content-between align-items-start mt-4">
+      <div class="d-flex align-items-center">
+        <img [src]="profilePictureUrl" 
+             alt="Profile Picture" 
+             class="me-3 profile-avatar"
+             (error)="handleImageError($event)">
+        <div class="profile-info">
+          <h2 class="profile-name mb-0">{{ name }}</h2>
+          <p>Email: {{ email }}</p>
+          <p>Location: {{ location }}</p>
+          <p>About me: {{ aboutMe }}</p>
+        </div>
+      </div>
+
+      <div class="action-buttons d-flex gap-2">
+        <ng-container [ngSwitch]="applicationStatus">
+          <ng-container *ngSwitchCase="'pending'">
+            <button class="btn btn-accept" (click)="acceptCandidate()" [disabled]="loading">
+              Accept
+            </button>
+            <button class="btn btn-shortlist" (click)="shortlistCandidate()" [disabled]="loading">
+              Shortlist
+            </button>
+            <button class="btn btn-reject" (click)="rejectCandidate()" [disabled]="loading">
+              Reject
+            </button>
+          </ng-container>
+          
+          <ng-container *ngSwitchCase="'shortlisted'">
+            <button class="btn btn-accept" (click)="acceptCandidate()" [disabled]="loading">
+              Accept
+            </button>
+            <button class="btn btn-shortlist" disabled>
+              Shortlisted
+            </button>
+            <button class="btn btn-reject" (click)="rejectCandidate()" [disabled]="loading">
+              Reject
+            </button>
+          </ng-container>
+          
+          <ng-container *ngSwitchCase="'accepted'">
+            <button class="btn btn-accept" disabled>
+              Accepted
+            </button>
+          </ng-container>
+          
+          <ng-container *ngSwitchCase="'rejected'">
+            <button class="btn btn-reject" disabled>
+              Rejected
+            </button>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div> <!-- ADDED MISSING CLOSING DIV HERE -->
+
+    <div class="resume-section mt-5">
+      <div class="resume-header d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Resume Details</h2>
+        <button class="btn btn-view-resume" [disabled]="!resumeUrl && !jobSeekerId" (click)="viewResume()">
+          View Resume
+        </button>
+      </div>
+
+      <div class="subsection mt-3">
+        <h5>Professional Experience</h5>
+        <div *ngIf="experiences.length === 0">No experience added yet.</div>
+        <ul *ngIf="experiences.length > 0">
+          <li *ngFor="let exp of experiences">
+            {{ exp.company }} – {{ exp.position }} ({{ exp.from }}–{{ exp.to }})
+          </li>
+        </ul>
+      </div>
+
+      <div class="subsection mt-3">
+        <h5>Education</h5>
+        <div *ngIf="education.length === 0">No education added yet.</div>
+        <ul *ngIf="education.length > 0">
+          <li *ngFor="let edu of education">
+            {{ edu.degree }} in {{ edu.field }}, {{ edu.institution }} ({{ edu.year }})
+          </li>
+        </ul>
+      </div>
+
+      <div class="subsection mt-3">
+        <h5>Skills</h5>
+        <div *ngIf="skills.length === 0">No skills added yet.</div>
+        <ul *ngIf="skills.length > 0">
+          <li *ngFor="let s of skills">{{ s }}</li>
+        </ul>
       </div>
     </div>
-
-    <div class="action-buttons d-flex gap-2">
-      <button class="btn btn-accept">Accept</button>
-      <button class="btn btn-shortlist">Shortlist</button>
-      <button class="btn btn-reject">Reject</button>
-    </div>
-  </div>
-
-  <div class="resume-section mt-5">
-    <div class="resume-header d-flex justify-content-between align-items-center mb-4">
-      <h2 class="section-title mb-0">Resume Details</h2>
-      <button class="btn btn-view-resume">View Resume</button>
-    </div>
-
-    <div class="subsection mt-3">
-      <h5>Professional Experience</h5>
-      <ul>
-        <li *ngFor="let exp of experiences">{{ exp }}</li>
-      </ul>
-    </div>
-
-    <div class="subsection mt-3">
-      <h5>Education</h5>
-      <ul>
-        <li *ngFor="let edu of education">{{ edu }}</li>
-      </ul>
-    </div>
-
-    <div class="subsection mt-3">
-      <h5>Skills</h5>
-      <ul>
-        <li *ngFor="let s of skills">{{ s }}</li>
-      </ul>
-    </div>
-
-  
   </div>
 </div>
