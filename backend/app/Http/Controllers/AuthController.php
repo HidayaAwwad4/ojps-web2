@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Mail\VerificationCodeMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
-
+use App\Models\JobSeeker;
 
 class AuthController extends Controller
 {
@@ -181,5 +181,19 @@ class AuthController extends Controller
             'data' => $request->user()->load('role'),
         ]);
     }
+
+    public function updateCategory(Request $request, $jobSeekerId)
+    {
+        $request->validate([
+            'category' => 'required|string|max:255',
+        ]);
+
+        $jobSeeker = JobSeeker::findOrFail($jobSeekerId);
+        $jobSeeker->category = $request->input('category');
+        $jobSeeker->save();
+
+        return response()->json(['message' => 'Category updated successfully']);
+    }
+
 
 }

@@ -6,20 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/52d1926b-1a01-41b4-81ff-daa0f6010bcc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_5_19_2025_8_40_PM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/AuthController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/JobSeeker.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/factories/UserFactory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150636_create_job_seekers_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150636_create_job_seekers_table.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/chose-user-type/chose-user-type.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/forgot-password/forgot-password.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/login/login.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.spec.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/sign-up-employer/sign-up-employer.component.ts" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/auth/verify-code/verify-code.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +28,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tasneemjber&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/HidayaAwwad4/ojps-web2.git&quot;,
+    &quot;accountId&quot;: &quot;42cde08d-0fb2-4583-b2d2-49f949287905&quot;
+  }
+}</component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Users\PC\.config\herd-lite\bin\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/phpoption/phpoption" />
@@ -158,32 +165,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "tas1",
-    "kotlin-language-version-configured": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\PC\\Documents\\GitHub\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;tas1&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\PC\\Documents\\GitHub\\ojps-web2\\frontend\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="ojps-web2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
       <method v="2" />
@@ -192,8 +194,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
+        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.145" />
+        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.145" />
       </set>
     </attachedChunks>
   </component>
@@ -209,6 +211,14 @@
       <workItem from="1747710330640" duration="25497000" />
       <workItem from="1747751665623" duration="16047000" />
       <workItem from="1747840486801" duration="1110000" />
+      <workItem from="1748017775149" duration="4530000" />
+      <workItem from="1748024322322" duration="3544000" />
+      <workItem from="1748057989659" duration="13231000" />
+      <workItem from="1748081406192" duration="18212000" />
+      <workItem from="1749306816385" duration="2509000" />
+      <workItem from="1749325102961" duration="23234000" />
+      <workItem from="1749421023759" duration="2075000" />
+      <workItem from="1749464927616" duration="17540000" />
     </task>
     <servers />
   </component>

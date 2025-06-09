@@ -15,7 +15,8 @@ class JobSeeker extends Model
         'resume_path',
         'experience',
         'education',
-        'skills'
+        'skills',
+        'category',
     ];
     protected $casts = [
         'experience' => 'array',
