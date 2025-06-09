@@ -29,14 +29,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/employer', [JobListingController::class, 'getEmployerByUser']);
     Route::get('/user/profile', [ProfileController::class, 'getProfile']);
     Route::post('/user/profile', [ProfileController::class, 'updateProfile']);
-    Route::put('/user/profile', [ProfileController::class, 'updateSeekerProfile']);
+    Route::put('/seeker/profile/basic', [ProfileController::class, 'updateBasicInfo']);
+    Route::put('/seeker/profile/resume', [ProfileController::class, 'updateResumeInfo']);
     Route::post('/user/profile/picture', [ProfileController::class, 'uploadProfilePicture']);
     Route::post('/user/resume', [ProfileController::class, 'uploadResume']);
     Route::get('/job-seekers/{id}', [ProfileController::class, 'getJobSeekerProfile']);
     Route::get('/job-seekers/{id}/resume', [ProfileController::class, 'downloadResume']);
     Route::post('/user/update-password', [ProfileController::class, 'updatePassword']);
 });
-
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

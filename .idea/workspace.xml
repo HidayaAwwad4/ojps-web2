@@ -4,19 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/employerController.php" afterDir="false" />
+    <list default="true" id="10df1363-6ad7-49af-b9e1-42b0429a0d72" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ojps-web2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/haneeen1.k3oqAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/haneeen1.k3oqAA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Employer.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Employer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/backend/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ProfileController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/navbar/navbar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,9 +34,7 @@
   </component>
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/backend/composer.json</pharConfigPath>
-    <execution>
-      <executable path="composer" />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -152,34 +159,30 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2xLFPjQOHyJSoSFLfTh74D9Immn" />
+  <component name="ProjectId" id="2yGBuPNp6AuB5Q5QViGIPal4vgX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;haneeen&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\study\\ojps-web2\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "Merging haneeen",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\study\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mariadb&quot;,
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -189,44 +192,20 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-PS-243.25659.45" />
-        <option value="bundled-php-predefined-a98d8de5180a-1ec7b7818973-com.jetbrains.php.sharedIndexes-PS-243.25659.45" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="" />
-      <created>1747709426684</created>
+      <changelist id="10df1363-6ad7-49af-b9e1-42b0429a0d72" name="Changes" comment="" />
+      <created>1749451254504</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1747709426684</updated>
-      <workItem from="1747709429207" duration="875000" />
-      <workItem from="1747710330640" duration="25497000" />
-      <workItem from="1747751665623" duration="16047000" />
-      <workItem from="1747840486801" duration="1110000" />
-      <workItem from="1747847996709" duration="6153000" />
-      <workItem from="1747893601178" duration="293000" />
-      <workItem from="1747905938771" duration="962000" />
-      <workItem from="1747909173560" duration="9020000" />
-      <workItem from="1748010180945" duration="4922000" />
-      <workItem from="1748053257571" duration="8693000" />
-      <workItem from="1748093289005" duration="346000" />
-      <workItem from="1748164171602" duration="12379000" />
-      <workItem from="1748215364247" duration="118000" />
-      <workItem from="1748247181192" duration="2719000" />
-      <workItem from="1748262040795" duration="2160000" />
-      <workItem from="1748273007836" duration="1091000" />
-      <workItem from="1748330423963" duration="12533000" />
-      <workItem from="1748410200367" duration="982000" />
-      <workItem from="1748445268940" duration="3914000" />
-      <workItem from="1749385343734" duration="1193000" />
-      <workItem from="1749387967895" duration="869000" />
-      <workItem from="1749388868979" duration="3313000" />
-      <workItem from="1749399744083" duration="64000" />
-      <workItem from="1749400370638" duration="1317000" />
-      <workItem from="1749461840804" duration="1637000" />
+      <updated>1749451254504</updated>
+      <workItem from="1749451257235" duration="5277000" />
     </task>
     <servers />
   </component>
