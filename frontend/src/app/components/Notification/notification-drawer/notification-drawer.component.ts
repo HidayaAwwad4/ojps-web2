@@ -37,12 +37,14 @@ export class NotificationDrawerComponent implements OnInit {
   fetchNotifications(): void {
     this.notificationService.getAllNotifications().subscribe({
       next: (data) => {
-        this.notifications = data;
+        console.log('Fetched notifications:', data);
+        this.notifications = data.notifications ?? data;
       },
       error: (err) => {
         console.error('Error fetching notifications:', err);
       }
     });
   }
+
 
 }

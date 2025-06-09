@@ -70,19 +70,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/jobs/{id}', [JobListingController::class, 'update']);
     Route::put('/jobs/{id}/status', [JobListingController::class, 'updateStatus']);
     Route::delete('/jobs/{id}', [JobListingController::class, 'delete']);
-    Route::get('/notifications', [NotificationController::class, 'index']);
     Route::get('/notifications/unread', [NotificationController::class, 'unread']);
     Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
     Route::post('/notifications/seeker/{seekerId}/{status}', [NotificationController::class, 'notifySeekerApplicationStatus']);
     Route::post('/notifications/employer/{employerId}/{type}', [NotificationController::class, 'notifyEmployerActivity']);
-    Route::get('/reports/employer-stats/{id}', [ReportsController::class, 'getEmployerStats']);
-    Route::get('/reports/employer-Line-chart/{id}', [ReportsController::class, 'getEmployerLineChartData']);
+    Route::get('/notifications', [NotificationController::class, 'getUserNotifications']);
+    Route::get('/notifications/unread', [NotificationController::class, 'unread']);
+    Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+    Route::get('/reports/employer-stats', [ReportsController::class, 'getEmployerStats']);
+    Route::get('/reports/employer-Line-chart', [ReportsController::class, 'getEmployerLineChartData']);
     Route::post('/applications/upload-cv-and-cover-letter', [ApplicationController::class, 'uploadCVAndCoverLetter']);
     //Route::get('/jobs/recommended', [JobListingController::class, 'getRecommendedJobs']);
     Route::get('/jobs/recommended', [JobListingController::class, 'getRecommendedJobsForSeeker']);
 });
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/reports/admin-stats', [ReportsController::class, 'getAdminStats']);
+    Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);
     Route::get('/admin/users', [AdminController::class, 'allUsers']);
     Route::post('/admin/users', [AdminController::class, 'addUser']);
     Route::put('/admin/users/{id}', [AdminController::class, 'updateUser']);
@@ -128,5 +132,3 @@ Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::get('/reports/admin-stats', [ReportsController::class, 'getAdminStats']);
-Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);
