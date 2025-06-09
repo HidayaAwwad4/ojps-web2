@@ -263,58 +263,30 @@ class ProfileController extends Controller
         }
     }
 
-    public function updateSeekerProfile(Request $request)
-    {
-        try {
-            $user = $request->user();
+    public function updateBasicInfo(Request $request) {
+        $user = Auth::user();
+        $jobSeeker = $user->jobSeeker;
 
-            if ($request->has('name')) {
-                $user->name = $request->name;
-            }
+        if ($request->has('name')) $jobSeeker->name = $request->name;
+        if ($request->has('email')) $jobSeeker->email = $request->email;
+        if ($request->has('summary')) $jobSeeker->summary = $request->summary;
 
-            if ($request->has('email')) {
-                $request->validate([
-                    'email' => 'email|unique:users,email,' . $user->id,
-                ]);
-                $user->email = $request->email;
-            }
+        $jobSeeker->save();
 
-            if ($request->has('summary')) {
-                $user->summary = $request->summary;
-            }
+        return response()->json(['message' => 'Basic info updated successfully']);
+    }
 
-            $user->save();
-                $jobSeeker = JobSeeker::where('user_id', $user->id)->first();
+    public function updateResumeInfo(Request $request) {
+        $user = Auth::user();
+        $jobSeeker = $user->jobSeeker;
 
-                if (!$jobSeeker) {
-                    return response()->json([
-                        'status' => false,
-                        'message' => 'JobSeeker record not found'
-                    ], 404);
-                }
+        if ($request->has('experience')) $jobSeeker->experience = json_encode($request->experience);
+        if ($request->has('education')) $jobSeeker->education = json_encode($request->education);
+        if ($request->has('skills')) $jobSeeker->skills = json_encode($request->skills);
 
-                if ($request->has('experience')) {
-                    $jobSeeker->experience = json_encode($request->experience);
-                }
-                if ($request->has('education')) {
-                    $jobSeeker->education = json_encode($request->education);
-                }
-                if ($request->has('skills')) {
-                    $jobSeeker->skills = json_encode($request->skills);
-                }
+        $jobSeeker->save();
 
-                $jobSeeker->save();
-
-            return response()->json([
-                'status' => true,
-                'message' => 'Profile updated successfully',
-            ]);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Error updating profile: ' . $e->getMessage(),
-            ], 500);
-        }
+        return response()->json(['message' => 'Resume info updated successfully']);
     }
 
     public function uploadProfilePicture(Request $request)
