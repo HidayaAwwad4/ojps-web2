@@ -18,13 +18,7 @@ import { NotificationService } from '../../../services/notifications/notificatio
 export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
-<<<<<<< Updated upstream
   @Input() userType: 'job-seeker' | 'employer' | null = null;
-=======
-
-  @Input() userType: 'job-seeker' | 'employer' | null = null; // ✅ use one consistent type
->>>>>>> Stashed changes
-
   notifications: any[] = [];
 
   constructor(private notificationService: NotificationService) {}

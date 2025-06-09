@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
     } else {
       this.role = 'guest';
     }
+    console.log(storedRole);
   }
 
   openJobModal() {
