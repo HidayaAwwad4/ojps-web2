@@ -40,6 +40,7 @@ export class LoginComponent {
         console.log('Login success:', res);
 
         localStorage.setItem('token', res.access_token);
+        localStorage.setItem('user', JSON.stringify(res.user));
         localStorage.setItem('role', res.user.role.name);
 
         const role = res.user.role.name;
@@ -48,6 +49,8 @@ export class LoginComponent {
           this.router.navigate(['/employer-home']);
         } else if (role === 'job-seeker') {
           this.router.navigate(['/home-page']);
+        } else if (role === 'admin') {
+          this.router.navigate(['/dashboard-admin']);
         }
       },
       error: (err: any) => {

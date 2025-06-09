@@ -17,7 +17,9 @@ import {NotificationService} from '../../../services/notifications/notification.
 export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
-  @Input() userType: 'jobseeker' | 'employer' | null = null;
+  @Input() userType: 'job-seeker' | 'employer' | null = null;
+
+  notifications: any[] = [];
 
   constructor(
     private notificationService: NotificationService) {}
@@ -25,7 +27,24 @@ export class NotificationDrawerComponent implements OnInit {
   ngOnInit(): void {
     this.notificationService.drawerVisible$.subscribe((visible) => {
       this.isOpen = visible;
+
+      if (visible) {
+        this.fetchNotifications();
+      }
     });
   }
+
+  fetchNotifications(): void {
+    this.notificationService.getAllNotifications().subscribe({
+      next: (data) => {
+        console.log('Fetched notifications:', data);
+        this.notifications = data.notifications ?? data;
+      },
+      error: (err) => {
+        console.error('Error fetching notifications:', err);
+      }
+    });
+  }
+
 
 }

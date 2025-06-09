@@ -1,20 +1,35 @@
-import { Component } from '@angular/core';
-import { NgForOf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { AdminService } from '../../../services/admin/admin.service';
+import {DatePipe, NgForOf, NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-recommended-jobs',
-  standalone: true,
-  imports: [NgForOf],
   templateUrl: './recommended-jobs.component.html',
-  styleUrl: './recommended-jobs.component.css'
+  styleUrl: './recommended-jobs.component.css',
+  standalone: true,
+  imports: [
+    NgForOf,
+    DatePipe,
+    NgIf
+  ]
 })
-export class RecommendedJobsComponent {
-  recommendedJobs = [
-    { title: 'Front-End Development', salary: '$1000 - $2500', location: 'Palestine - Nablus' },
-    { title: 'Back-End Development', salary: '$2500 - $3000', location: 'Palestine - Ramallah' },
-    { title: 'UI/UX Designer', salary: '$1500 - $2000', location: 'Palestine - Nablus' },
-    { title: 'Account Manager', salary: '$1000 - $2000', location: 'Palestine - Ramallah' },
-    { title: 'Quality assurance', salary: '$2000 - $3000', location: 'Palestine - Ramallah' },
-    { title: 'Data analyst', salary: '$3000 - $4000', location: 'Palestine - Nablus' },
-  ];
+export class RecommendedJobsComponent implements OnInit {
+  recommendedJobs: any[] = [];
+
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.loadLatestJobs();
+  }
+
+  loadLatestJobs(): void {
+    this.adminService.getLatestJobListings().subscribe({
+      next: (jobs) => {
+        this.recommendedJobs = jobs;
+      },
+      error: (err) => {
+        console.error('Error fetching latest jobs:', err);
+      }
+    });
+  }
 }

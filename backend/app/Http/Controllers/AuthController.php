@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employer;
+use App\Models\JobSeeker;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
@@ -20,7 +22,6 @@ class AuthController extends Controller
         return response()->json($roles);
     }
 
-
     public function register(Request $request)
     {
         $request->validate([
@@ -28,6 +29,7 @@ class AuthController extends Controller
             'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
             'role_id' => 'required|exists:roles,id',
+            'company_name' => 'nullable|string',
         ]);
 
         $user = User::create([
@@ -35,15 +37,24 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => $request->role_id,
-
         ]);
+
+        if ($user->role_id == 2) {
+            JobSeeker::create([
+                'user_id' => $user->id,
+            ]);
+        } elseif ($user->role_id == 1) {
+            Employer::create([
+                'user_id' => $user->id,
+                'company_name' => $request->company_name ?? 'underfund',
+            ]);
+        }
 
         return response()->json([
             'message' => 'User registered successfully.',
             'user_id' => $user->id,
         ], 201);
     }
-
 
     public function verifyCode(Request $request)
     {

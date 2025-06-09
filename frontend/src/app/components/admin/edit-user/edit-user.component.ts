@@ -12,9 +12,14 @@ import { CommonModule } from '@angular/common';
 export class EditUserComponent {
   @Input() user: any = null;
   @Output() close = new EventEmitter<void>();
+  @Output() save = new EventEmitter<any>();
 
   saveChanges() {
-    this.close.emit();
+    if (!this.user.name || !this.user.email || !this.user.role_id) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    this.save.emit(this.user);
   }
 
   cancelEdit() {

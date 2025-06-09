@@ -13,32 +13,50 @@ import { JobService } from '../../../services/jobs/job.service';
   templateUrl: './job-postings.component.html',
   styleUrls: ['./job-postings.component.css']
 })
+
 export class JobPostingsComponent implements OnInit {
   selectedTab: string = 'open';
   jobs: any[] = [];
   loading = false;
   error = '';
 
+  currentPage = 1;
+  lastPage = 1;
+  totalJobs = 0;
+
   constructor(
     private jobService: JobService
   ) {}
 
   ngOnInit() {
-    this.fetchJobs();
+    this.loadEmployerJobs(this.currentPage);
   }
 
-  fetchJobs() {
-    const employerId = 37;
-
+  loadEmployerJobs(page: number) {
     this.loading = true;
     this.error = '';
-    this.jobService.getJobsByEmployer(employerId).subscribe({
-      next: (data) => {
-        this.jobs = data;
-        this.loading = false;
+    this.currentPage = page;
+
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        const employerId = employerData.id;
+
+        this.jobService.getJobsByEmployer(employerId, this.currentPage).subscribe({
+          next: (response) => {
+            this.jobs = response.data;
+            this.currentPage = response.current_page;
+            this.lastPage = response.last_page;
+            this.totalJobs = response.total;
+            this.loading = false;
+          },
+          error: () => {
+            this.error = 'Failed to load jobs';
+            this.loading = false;
+          }
+        });
       },
-      error: (err) => {
-        this.error = 'Failed to load jobs';
+      error: () => {
+        this.error = 'Failed to load employer info';
         this.loading = false;
       }
     });
@@ -70,4 +88,18 @@ export class JobPostingsComponent implements OnInit {
       return false;
     });
   }
+
+  // أزرار التنقل للصفحات
+  goToPreviousPage() {
+    if (this.currentPage > 1) {
+      this.loadEmployerJobs(this.currentPage - 1);
+    }
+  }
+
+  goToNextPage() {
+    if (this.currentPage < this.lastPage) {
+      this.loadEmployerJobs(this.currentPage + 1);
+    }
+  }
 }
+

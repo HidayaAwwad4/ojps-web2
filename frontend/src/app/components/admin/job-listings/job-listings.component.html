@@ -6,24 +6,29 @@
     <h3 class="text-center flex-grow-1 mb-4">Job Listings</h3>
   </div>
 
-  <div class="d-flex flex-wrap justify-content-center gap-3 mb-4">
-    <div class="demand-card text-white">
-      <h6 class="fw-bold demand-title">Most in demand jobs :</h6>
-      <p class="mb-1 demand-text">Web developer : #</p>
-      <p class="mb-1 demand-text">Data analysis : #</p>
-      <p class="mb-0 demand-text">Web Designer : #</p>
-    </div>
-    <div class="demand-card text-white">
-      <h6 class="fw-bold demand-title">Least demanded jobs:</h6>
-      <p class="mb-1 demand-text">Web developer : #</p>
-      <p class="mb-1 demand-text">Data analysis : #</p>
-      <p class="mb-0 demand-text">Web Designer : #</p>
+  <div class="d-flex justify-content-center mb-4">
+    <div class="search-wrapper">
+      <div class="demand-card text-white">
+        <h6 class="fw-bold demand-title">Most posted job titles:</h6>
+        <ng-container *ngIf="mostDemandedJobs.length; else noPostings">
+          <p *ngFor="let job of mostDemandedJobs" class="mb-1 demand-text">
+            {{ job.title }} : {{ job.post_count }}
+          </p>
+        </ng-container>
+        <ng-template #noPostings>
+          <p class="mb-1 demand-text">No data available.</p>
+        </ng-template>
+      </div>
     </div>
   </div>
 
   <div class="mb-3 search-wrapper position-relative">
-    <input type="text" class="form-control ps-5 search-input" placeholder="search by Job title or employer"
-           [(ngModel)]="searchTerm" />
+    <input
+      type="text"
+      class="form-control ps-5 search-input"
+      placeholder="Search by job title or employer"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="onSearchChange()" />
     <i class="bi bi-search position-absolute icon-search-inside"></i>
   </div>
 
@@ -33,21 +38,19 @@
       <tr>
         <th class="table-th">#</th>
         <th class="table-th">Job Title</th>
-        <th class="table-th">employers name</th>
+        <th class="table-th">Employer Name</th>
         <th class="table-th">Location</th>
         <th class="table-th">Created Date</th>
         <th class="table-th">Action</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let job of filteredJobs(); let i = index">
+      <tr *ngFor="let job of jobs; let i = index">
         <td class="table-td">{{ i + 1 }}</td>
         <td class="table-td">{{ job.title }}</td>
-        <td class="table-td">{{ job.employer }}</td>
-        <td class="table-td">
-          {{ job.location }}
-        </td>
-        <td class="table-td">{{ job.date }}</td>
+        <td class="table-td">{{ job.employer_name }}</td>
+        <td class="table-td">{{ job.location }}</td>
+        <td class="table-td">{{ job.created_at | date: 'short' }}</td>
         <td class="table-td">
           <button class="btn btn-sm btn-outline-danger" (click)="openConfirmModal(job)">
             <i class="bi bi-trash"></i>

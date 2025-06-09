@@ -42,7 +42,7 @@ export class CreateJobComponent implements OnInit {
     documents: null,
     company_logo: null,
     isOpened: 1,
-    employer_id: 37
+    employer_id: null
   };
 
   constructor(
@@ -58,13 +58,26 @@ export class CreateJobComponent implements OnInit {
     this.jobService.getJobFormOptions().subscribe((res: any) => {
       this.jobOptions = res;
     });
+
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        if (employerData && employerData.id) {
+          this.jobDetails.employer_id = employerData.id;
+        } else {
+          console.warn('Employer data or ID not found');
+        }
+      },
+      error: (error) => {
+        console.error('Failed to get employer data', error);
+      }
+    });
   }
 
   submitJob(): void {
     const formData = new FormData();
     for (const key in this.jobDetails) {
       if (this.jobDetails[key] !== null && this.jobDetails[key] !== undefined) {
-        if (key === 'document' || key === 'company_logo') continue;
+        if (key === 'documents' || key === 'company_logo') continue;
         formData.append(key, this.jobDetails[key]);
       }
     }
@@ -79,6 +92,7 @@ export class CreateJobComponent implements OnInit {
         console.log('Job created successfully:', response);
         this.jobCreated.emit(response);
         this.showModal = false;
+        this.resetForm();
       },
       error: (error) => {
         console.error('Error creating job:', error);
@@ -144,4 +158,24 @@ export class CreateJobComponent implements OnInit {
   }
 
   protected readonly isNaN = isNaN;
+
+  resetForm(): void {
+    this.jobDetails = {
+      title: '',
+      description: '',
+      location: '',
+      languages: '',
+      schedule: '',
+      experience: '',
+      employment: '',
+      category: '',
+      salary: null,
+      documents: null,
+      company_logo: null,
+      isOpened: 1,
+      employer_id: this.jobDetails.employer_id
+    };
+    this.selectedLogo = null;
+    this.selectedLogoUrl = null;
+  }
 }

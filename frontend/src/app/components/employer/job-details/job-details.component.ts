@@ -86,7 +86,6 @@ export class JobDetailsComponent implements OnInit {
     if (this.jobDetails.company_logo instanceof File) {
       formData.append('company_logo', this.jobDetails.company_logo);
     }
-
     if (this.jobDetails.documents instanceof File) {
       formData.append('documents', this.jobDetails.documents);
     }
@@ -102,6 +101,7 @@ export class JobDetailsComponent implements OnInit {
       }
     });
   }
+
 
   toggleSave() {
     this.isSaved = !this.isSaved;

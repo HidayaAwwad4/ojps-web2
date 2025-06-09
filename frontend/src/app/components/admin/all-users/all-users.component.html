@@ -9,7 +9,11 @@
   <div *ngIf="editMode" class="edit-overlay">
     <div class="overlay-backdrop" (click)="closeEdit()"></div>
     <div class="edit-popup">
-      <app-edit-user [user]="userBeingEdited" (close)="closeEdit()"></app-edit-user>
+      <app-edit-user
+        [user]="userBeingEdited"
+        (close)="closeEdit()"
+        (save)="saveEdit($event)">
+      </app-edit-user>
     </div>
   </div>
 
@@ -21,8 +25,13 @@
   </div>
 
   <div class="mb-3 search-wrapper position-relative">
-    <input type="text" class="form-control ps-5 search-input" placeholder="Search in userName"
-           [(ngModel)]="searchTerm" />
+    <input
+      type="text"
+      class="form-control ps-5 search-input"
+      placeholder="Search in userName"
+      [(ngModel)]="searchTerm"
+      (input)="onSearchTermChange()"
+    />
     <i class="bi bi-search position-absolute icon-search-inside"></i>
   </div>
 
@@ -40,21 +49,19 @@
         <th class="table-th">UserName</th>
         <th class="table-th">Email</th>
         <th class="table-th">Type</th>
-        <th class="table-th">Location</th>
         <th class="table-th">Action</th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let user of filteredUsers(); let i = index">
+      <tr *ngFor="let user of users; let i = index">
         <td class="table-td">{{ i + 1 }}</td>
         <td class="table-td">{{ user.name }}</td>
         <td class="table-td">{{ user.email }}</td>
         <td class="table-td">
-            <span [ngStyle]="{ 'font-weight': user.type === 'employers' ? 'bold' : 'normal' }">
-              {{ user.type }}
+            <span [ngStyle]="{ 'font-weight': user.role?.name === 'employer' ? 'bold' : 'normal' }">
+              {{ user.role?.name || 'N/A' }}
             </span>
         </td>
-        <td class="table-td">{{ user.location }}</td>
         <td class="table-td">
           <div class="action-buttons">
             <button class="btn btn-sm btn-outline-warning" (click)="editUser(user)">
@@ -71,7 +78,6 @@
   </div>
 </div>
 
-<!-- Confirm Delete Modal -->
 <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content custom-modal text-white">

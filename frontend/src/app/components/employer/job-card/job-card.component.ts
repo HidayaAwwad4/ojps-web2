@@ -50,7 +50,6 @@ export class JobCardComponent {
     if (confirm('Are you sure you want to delete this job?')) {
       this.jobService.deleteJob(this.job.id).subscribe({
         next: () => {
-          alert('Job deleted successfully');
           this.statusChange.emit({ job: this.job, isOpened: false });
         },
         error: (err) => {
@@ -84,15 +83,18 @@ export class JobCardComponent {
       ...this.job,
       isOpened: isOpened,
     };
-    this.jobService.updateJob(this.job.id, { isOpened }).subscribe({
-      next: () => {
+
+    this.jobService.updateJobStatus(this.job.id, isOpened).subscribe({
+      next: (res) => {
         this.statusChange.emit({ job: updatedJob, isOpened });
         this.job.isOpened = isOpened;
       },
       error: (err) => {
         console.error('Failed to update job status:', err);
+        alert('Failed to update job status.');
       }
     });
   }
+
 
 }

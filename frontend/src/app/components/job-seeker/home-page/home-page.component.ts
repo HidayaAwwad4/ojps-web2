@@ -1,82 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {RecommendedJobsComponent} from '../recommended-jobs/recommended-jobs.component';
-import {JobCategoriesComponent} from '../job-category/job-category.component';
-import { NavbarComponent } from '../../navbar/navbar.component';
-import {JobIntroComponent} from '../job-intro/job-intro.component';
+import { JobService } from '../../../services/jobs/job.service';
+import { RecommendedJobsComponent } from '../recommended-jobs/recommended-jobs.component';
+import { JobCategoriesComponent } from '../job-category/job-category.component';
+import { JobIntroComponent } from '../job-intro/job-intro.component';
+import { FormsModule } from '@angular/forms';
+import { NgForOf, NgIf } from '@angular/common';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './home-page.component.html',
+  standalone: true,
   imports: [
-    FormsModule,
     RecommendedJobsComponent,
     JobCategoriesComponent,
-    NavbarComponent,
-    JobIntroComponent
+    JobIntroComponent,
+    FormsModule,
+    NgIf,
+    NgForOf
   ],
-  standalone: true,
   styleUrls: ['./home-page.component.css']
 })
-export class HomepageComponent {
+export class HomepageComponent implements OnInit {
   searchText: string = '';
+  searchResults: any[] = [];
+  noResults: boolean = false;
+  recommendedJobs: any[] = [];
 
-  constructor(private router: Router) {}
+  private searchTerms = new Subject<string>();
 
-  navigateToCategory(category: string) {
-    this.router.navigate(['/categories-page', category]);
+  constructor(private router: Router, private jobService: JobService) {}
+
+  ngOnInit() {
+    this.jobService.getRecommendedJobs().subscribe({
+      next: (jobs: any[]) => {
+        this.recommendedJobs = jobs;
+      },
+      error: (err) => {
+        console.error('Error fetching recommended jobs:', err);
+        this.recommendedJobs = [];
+      }
+    });
+    this.searchTerms.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      switchMap(term => this.jobService.searchJobs(term))
+    ).subscribe(results => {
+      this.searchResults = results;
+      this.noResults = results.length === 0 && this.searchText.trim().length > 0;
+    });
   }
 
-
-  onSearchChange() {}
-
-  recommendedJobs = [
-    {
-      title: 'Full-Stack Developer',
-      description: 'Responsible for developing both front-end and back-end systems.',
-      logo: 'assets/adham.jpg',
-      rate: 26.32
-    },
-    {
-      title: 'Front-End Developer',
-      description: 'Building engaging UIs using HTML, CSS, and JavaScript.',
-      logo: 'assets/NEO.jpg',
-      rate: 11.32
-    },
-    {
-      title: 'Back-End Developer',
-      description: 'Focuses on server-side logic and integration of services.',
-      logo: 'assets/Tecnhnolgy.jpg',
-      rate: 20.32
-    },
-    {
-      title: 'Software Tester',
-      description: 'Tests software before release, ensuring high-quality.',
-      logo: 'assets/TECHNO.jpg',
-      rate: 18.32
-    },
-    {
-      title: 'UI/UX Designer',
-      description: 'Designs intuitive and visually appealing interfaces.',
-      logo: 'assets/AR.jpg',
-      rate: 15.32
-    },
-    {
-      title: 'DevOps Engineer',
-      description: 'Responsible for automating and optimizing the development and deployment pipelines.',
-      logo: 'assets/NEO.jpg',
-      rate: 23.00
-    },
-    {
-      title: 'Data Scientist',
-      description: 'Analyzes large datasets to extract meaningful insights for decision-making.',
-      logo: 'assets/adham.jpg',
-      rate: 28.50
+  onSearchChange() {
+    const query = this.searchText.trim();
+    if (query.length === 0) {
+      this.searchResults = [];
+      this.noResults = false;
+      return;
     }
-  ];
+    this.searchTerms.next(query);
+  }
+
+  selectJob(job: any) {
+    this.router.navigate(['/job-details', job.id]);
+    this.searchResults = [];
+    this.searchText = job.title;
+  }
 
   handleJobClick(job: any) {
-    console.log('Clicked job:', job);
+    this.selectJob(job);
   }
 }
