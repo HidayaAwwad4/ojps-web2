@@ -4,6 +4,7 @@ import { NgClass, NgForOf, NgStyle, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { JobService } from '../../../services/jobs/job.service';
+
 @Component({
   selector: 'app-categories-page',
   standalone: true,
@@ -40,7 +41,7 @@ export class CategoriesPageComponent implements OnInit {
           (data: any[]) => {
             this.jobs = data;
           },
-          function (error) {
+          (error) => {
             console.error('Error loading jobs:', error);
           }
         );
@@ -50,7 +51,24 @@ export class CategoriesPageComponent implements OnInit {
 
   toggleSave(event: Event, job: any) {
     event.stopPropagation();
-    job.saved = !job.saved;
+
+    if (job.favorite_id) {
+      this.jobService.removeSavedJob(job.id).subscribe({
+        next: () => {
+          job.favorite_id = null;
+          job.saved = false;
+        },
+        error: (err) => console.error('Error removing saved job:', err)
+      });
+    } else {
+      this.jobService.saveJob(job.id).subscribe({
+        next: (response: any) => {
+          job.favorite_id = response.id;
+          job.saved = true;
+        },
+        error: (err) => console.error('Error saving job:', err)
+      });
+    }
   }
 
   goBack() {

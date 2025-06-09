@@ -1,137 +1,4 @@
 <?php
-/*
-namespace App\Http\Controllers;
-
-use App\Models\Application;
-use Illuminate\Http\Request;
-
-class ApplicationController extends Controller
-{
-    public function index()
-    {
-        $applications = Application::with(['job', 'jobSeeker'])->get();
-        return response()->json($applications);
-    }
-
-    public function show($id)
-    {
-        $application = Application::with(['job', 'jobSeeker'])->find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-        return response()->json($application);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'job_id' => 'required|integer',
-            'job_seeker_id' => 'required|integer',
-            'cover_letter' => 'nullable|string',
-            'status' => 'nullable|string',
-            'appliedAt' => 'required|date',
-        ]);
-
-        $application = Application::create([
-            'job_id' => $request->job_id,
-            'job_seeker_id' => $request->job_seeker_id,
-            'cover_letter' => $request->cover_letter,
-            'status' => $request->status ?? 'pending',
-            'appliedAt' => $request->appliedAt,
-        ]);
-
-        $job = \App\Models\JobListing::find($request->job_id);
-
-        if ($job && $job->employer_id) {
-            \App\Models\Notification::create([
-                'user_id' => $job->employer_id,
-                'message' => 'A job seeker has applied to your job: ' . $job->title,
-                'type' => 'application_received',
-                'redirect_url' => '/employer/job-applications',
-                'is_read' => false,
-            ]);
-        }
-
-        return response()->json($application, 201);
-
-    }
-
-    public function update(Request $request, $id)
-    {
-        $application = Application::find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        $request->validate([
-            'cover_letter' => 'nullable|string',
-            'status' => 'nullable|string',
-            'appliedAt' => 'nullable|date',
-        ]);
-
-        $application->update($request->only(['cover_letter', 'status', 'appliedAt']));
-
-        if ($request->has('status') && in_array($request->status, ['accepted', 'rejected'])) {
-            $userId = $application->jobSeeker->user->id ?? null;
-
-            if ($userId) {
-                \App\Models\Notification::create([
-                    'user_id' => $userId,
-                    'message' => 'Your application has been ' . $request->status . '.',
-                    'type' => 'application_' . $request->status,
-                    'redirect_url' => '/seeker/applications-status',
-                    'is_read' => false,
-                ]);
-            }
-        }
-
-
-        $application->load('jobSeeker.user');
-
-        return response()->json($application);
-    }
-
-    public function destroy($id)
-    {
-        $application = Application::find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        $application->delete();
-
-        return response()->json(['message' => 'Application deleted successfully']);
-    }
-
-    public function getApplicantsByJobId($jobId)
-    {
-        $applications = Application::with(['jobSeeker.user'])
-            ->where('job_id', $jobId)
-            ->get();
-
-        if ($applications->isEmpty()) {
-            return response()->json(['message' => 'No applications found for this job'], 404);
-        }
-
-        return response()->json($applications);
-    }
-
-    public function getApplicationById($applicationId)
-    {
-        $application = Application::with(['jobSeeker.user'])
-            ->where('id', $applicationId)
-            ->first();
-
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        return response()->json($application);
-    }
-
-}
-*/
-
 namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\JobListing;
@@ -143,13 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ApplicationController extends Controller
 {
-    public function index()
+    public function index(): \Illuminate\Http\JsonResponse
     {
         $applications = Application::with(['job', 'jobSeeker'])->get();
         return response()->json($applications);
     }
 
-    public function show($id)
+    public function show($id): \Illuminate\Http\JsonResponse
     {
         $application = Application::with(['job', 'jobSeeker'])->find($id);
         if (!$application) {
@@ -158,7 +25,7 @@ class ApplicationController extends Controller
         return response()->json($application);
     }
 
-    public function submit(Request $request)
+    public function submit(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'job_id' => 'required|exists:job_listings,id',
@@ -202,7 +69,7 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Application submitted successfully']);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): \Illuminate\Http\JsonResponse
     {
         $application = Application::find($id);
         if (!$application) {
@@ -237,7 +104,7 @@ class ApplicationController extends Controller
         return response()->json($application);
     }
 
-    public function destroy($id)
+    public function destroy($id): \Illuminate\Http\JsonResponse
     {
         $application = Application::find($id);
         if (!$application) {
@@ -249,7 +116,7 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Application deleted successfully']);
     }
 
-    public function getApplicantsByJobId($jobId)
+    public function getApplicantsByJobId($jobId): \Illuminate\Http\JsonResponse
     {
         $applications = Application::with(['jobSeeker.user'])
             ->where('job_id', $jobId)
@@ -262,7 +129,7 @@ class ApplicationController extends Controller
         return response()->json($applications);
     }
 
-    public function getApplicationById($applicationId)
+    public function getApplicationById($applicationId): \Illuminate\Http\JsonResponse
     {
         $application = Application::with(['jobSeeker.user'])
             ->where('id', $applicationId)
@@ -275,7 +142,7 @@ class ApplicationController extends Controller
         return response()->json($application);
     }
 
-    public function getApplicationsByJobSeekerId($jobSeekerId)
+    public function getApplicationsByJobSeekerId($jobSeekerId): \Illuminate\Http\JsonResponse
     {
         $user = auth()->user();
 
@@ -290,7 +157,7 @@ class ApplicationController extends Controller
         return response()->json($applications);
     }
 
-    public function getUserCV()
+    public function getUserCV(): \Illuminate\Http\JsonResponse
     {
         $user = Auth::user();
         $jobSeeker = JobSeeker::where('user_id', $user->id)->first();

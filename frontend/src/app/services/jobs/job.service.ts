@@ -98,18 +98,6 @@ export class JobService {
     return this.http.put(`${this.apiUrl}/applications/${applicationId}`, { status });
   }
 
-  saveJob(jobId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/favorites`, { job_id: jobId }, this.getAuthHeaders());
-  }
-
-  removeSavedJob(jobId: number) {
-    return this.http.delete(`${this.apiUrl}/favorites/job/${jobId}`, this.getAuthHeaders());
-  }
-
-  getSavedJobs(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/favorites/me`, this.getAuthHeaders());
-  }
-
   searchJobs(query: string): Observable<any[]> {
     const options = {
       params: { query }
@@ -139,5 +127,20 @@ export class JobService {
       this.getAuthHeaders()
     );
   }
+
+  getSavedJobs(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/favorite-jobs`, this.getAuthHeaders());
+  }
+
+  saveJob(jobId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/favorite-jobs`, { job_id: jobId }, this.getAuthHeaders());
+  }
+
+  removeSavedJob(jobId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/favorite-jobs/${jobId}`, this.getAuthHeaders());
+  }
+
+
+
 
 }
