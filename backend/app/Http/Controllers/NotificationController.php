@@ -56,9 +56,7 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification sent to seeker.']);
     }
 
-    /**
-     * Create notification for employer when seeker applies or favorites a job
-     */
+
     public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
     {
         $message = '';
@@ -80,9 +78,6 @@ class NotificationController extends Controller
     }
 
 
-    /**
-     * Return all user notifications with redirect_url
-     */
 
     public function getUserNotifications(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -97,7 +92,7 @@ class NotificationController extends Controller
     });
 
 
-        return response()->json($notifications);
+        return response()->json(['notifications' => $notifications]);
     }
 
     private function generatedRedirectUrl( Notification $notification): string

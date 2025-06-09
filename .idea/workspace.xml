@@ -5,27 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="10df1363-6ad7-49af-b9e1-42b0429a0d72" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ojps-web2.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/1fd710d2-5981-4167-bfa2-dec4c8b69673/storage_v2/_src_/schema/ojps_laravel.mCRDAQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/haneeen1.k3oqAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/haneeen1.k3oqAA.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/mysql.osA4Bg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/sys.zb4BAA.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/4855da96-b804-4f7b-94cf-2a21b135c80c/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ProfileController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ProfileController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +154,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Merging haneeen",
+    "git-widget-placeholder": "haneeen",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
