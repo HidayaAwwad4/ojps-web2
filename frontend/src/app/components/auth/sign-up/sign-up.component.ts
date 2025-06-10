@@ -19,6 +19,7 @@ export class SignUpComponent implements OnInit {
   password: string = '';
   submitted: boolean = false;
   formInvalidMessage: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -45,6 +46,7 @@ export class SignUpComponent implements OnInit {
       this.formInvalidMessage = 'Company name is required for employers.';
       return;
     }
+
     let role_id: number | null = null;
     if (this.userType === 'employer') {
       role_id = 1;
@@ -66,19 +68,25 @@ export class SignUpComponent implements OnInit {
     };
 
     this.authService.register(registerData).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log('Registered successfully:', res);
 
+
         if (this.userType === 'employer') {
-          this.router.navigate(['/employer-home']);
-        } else if (this.userType === 'job-seeker') {
-          this.router.navigate(['/home-page']);
+          alert('Your registration request has been sent to the admin. Please wait for approval.');
+          this.router.navigate(['/login']);
+        }
+
+        else if (this.userType === 'job-seeker') {
+          if (res.token) {
+            this.authService.setToken(res.token);
+          }
+          this.router.navigate(['/field']);
         }
       },
       error: (err) => {
-        console.error(' Registration error:', err);
-        this.formInvalidMessage =
-          err.error?.message || 'Registration failed. Please try again.';
+        console.error('Registration error:', err);
+        this.formInvalidMessage = err.error?.message || 'Registration failed. Please try again.';
       },
     });
   }

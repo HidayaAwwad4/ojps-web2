@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { JobService } from '../../../services/jobs/job.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-application-review',
@@ -23,7 +24,8 @@ export class ApplicationReviewComponent implements OnInit {
   constructor(
     private jobService: JobService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private location: Location // لاستعمال زر الرجوع
   ) {}
 
   ngOnInit() {
@@ -75,6 +77,10 @@ export class ApplicationReviewComponent implements OnInit {
     this.formValid = !!this.cvFileName && this.coverLetter.trim().length > 0;
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   onSubmit() {
     if (!this.formValid) return;
 
@@ -88,12 +94,15 @@ export class ApplicationReviewComponent implements OnInit {
 
     this.jobService.submitApplication(formData).subscribe({
       next: () => {
-        alert('Application submitted successfully');
         this.cvFile = null;
         this.cvFileName = null;
         this.coverLetter = '';
         this.fileInput.nativeElement.value = '';
         this.validateForm();
+
+        if (confirm('Application submitted successfully. Go to home page?')) {
+          this.router.navigate(['/home-page']);
+        }
       },
       error: (err) => {
         console.error('Error submitting application:', err);

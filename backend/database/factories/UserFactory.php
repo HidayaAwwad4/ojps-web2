@@ -21,7 +21,7 @@ class UserFactory extends Factory
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
             'role_id' => Role::inRandomOrder()->first()?->id ?? Role::factory()->create()->id,
-            ];
+        ];
     }
 
     public function unverified(): UserFactory
