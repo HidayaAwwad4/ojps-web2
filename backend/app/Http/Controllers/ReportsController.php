@@ -70,7 +70,7 @@ class ReportsController extends Controller
                 'applicationsReceived' => $applicationsReceived,
                 'applicationsSaved' => $applicationsSaved,
             ]
-        ], 200 );
+        ], $hasData ? 200 : 404);
     }
 
     public function getAdminBarchartData(): JsonResponse
