@@ -37,7 +37,6 @@ class ProfileController extends Controller
         Log::info('Field is not a non-empty string, returning empty array');
         return [];
     }
-
     public function getProfile(Request $request)
     {
         try {
@@ -84,12 +83,12 @@ class ProfileController extends Controller
                             }
                         }
                         break;
-                        
+
                     case 'employer':
                         Log::info('User is an Employer');
                         // Employer-specific data can be added here if needed
                         break;
-                        
+
                     case 'admin':
 
                     case 'Employer':
@@ -129,7 +128,6 @@ class ProfileController extends Controller
             ], 500);
         }
     }
-
     public function updateProfile(Request $request)
     {
         try {
@@ -268,7 +266,6 @@ class ProfileController extends Controller
             ], 500);
         }
     }
-
     public function updateBasicInfo(Request $request) {
         $user = Auth::user();
         $jobSeeker = $user->jobSeeker;
@@ -281,7 +278,6 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Basic info updated successfully']);
     }
-
     public function updateResumeInfo(Request $request) {
         $user = Auth::user();
         $jobSeeker = $user->jobSeeker;
@@ -294,7 +290,6 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Resume info updated successfully']);
     }
-
     public function uploadProfilePicture(Request $request)
     {
         $request->validate([
@@ -319,7 +314,6 @@ class ProfileController extends Controller
             ]
         ]);
     }
-
     public function uploadResume(Request $request)
     {
         $request->validate([
@@ -346,7 +340,6 @@ class ProfileController extends Controller
             ]
         ]);
     }
-
     public function getJobSeekerProfile($id)
     {
         $jobSeeker = JobSeeker::with('user')->findOrFail($id);
@@ -363,7 +356,6 @@ class ProfileController extends Controller
             ]
         ]);
     }
-
     public function downloadResume($id)
     {
         $jobSeeker = JobSeeker::findOrFail($id);
@@ -377,7 +369,6 @@ class ProfileController extends Controller
 
         return Storage::disk('public')->download($jobSeeker->resume_path);
     }
-
     public function updatePassword(Request $request)
     {
         $request->validate([
@@ -401,7 +392,6 @@ class ProfileController extends Controller
             'message' => 'Password updated successfully'
         ]);
     }
-
     public function getJobSeekerIdByUserId($userId): \Illuminate\Http\JsonResponse
     {
         $jobSeeker = JobSeeker::where('user_id', $userId)->first();

@@ -32,15 +32,15 @@ export class ApplicationsStatusComponent implements OnInit {
       return;
     }
 
-    this.jobService.getApplicationsByJobSeekerId(38).subscribe(applications => {
+    this.jobService.getApplicationsByJobSeekerId(1).subscribe(applications => {
       this.underReviewJobs = applications.filter(app =>
-          ['pending', 'shortlisted'].includes(app.status?.toLowerCase())
+        ['pending', 'shortlisted'].includes(app.status?.toLowerCase())
       );
       this.acceptedJobs = applications.filter(app =>
-          app.status?.toLowerCase() === 'accepted'
+        app.status?.toLowerCase() === 'accepted'
       );
       this.rejectedJobs = applications.filter(app =>
-          app.status?.toLowerCase() === 'rejected'
+        app.status?.toLowerCase() === 'rejected'
       );
     });
   }

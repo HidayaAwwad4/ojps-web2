@@ -97,3 +97,11 @@
   background-color: #631B1B;
 }
 
+.job-desc {
+  font-size: 0.9rem;
+  color: #444;
+  margin-bottom: 0.6rem;
+  height: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

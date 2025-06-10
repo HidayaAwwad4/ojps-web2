@@ -39,7 +39,6 @@ class employerController
         ], 200);
     }
 
-
     public function show()
     {
         $user = auth()->user(); // Get the currently authenticated employer

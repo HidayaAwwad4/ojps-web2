@@ -15,7 +15,6 @@ use App\Models\JobSeeker;
 
 class AuthController extends Controller
 {
-
     public function getRoles()
     {
         $roles = Role::select('id', 'name')->get();
@@ -76,9 +75,6 @@ class AuthController extends Controller
             'message' => 'Invalid role.',
         ], 400);
     }
-
-
-
 
     public function verifyCode(Request $request)
     {
@@ -182,7 +178,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -203,7 +198,6 @@ class AuthController extends Controller
         return response()->json(['message' => 'Password updated successfully']);
     }
 
-
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
@@ -214,7 +208,6 @@ class AuthController extends Controller
         ]);
     }
 
-
     public function userProfile(Request $request)
     {
         return response()->json([
@@ -223,7 +216,6 @@ class AuthController extends Controller
             'data' => $request->user()->load('role'),
         ]);
     }
-
 
     public function updateCategory(Request $request)
     {
@@ -247,6 +239,5 @@ class AuthController extends Controller
             'category' => $jobSeeker->category,
         ], 200);
     }
-
 
 }

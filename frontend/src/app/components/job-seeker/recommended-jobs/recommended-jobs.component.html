@@ -14,10 +14,10 @@
          style="cursor: pointer;">
 
       <div class="card job-card" [routerLink]="['/job-details']" [queryParams]="{ role: 'job-seeker' }">
-        <img [src]="job.image_url ||  'assets/default-logo.png'" alt="Company Logo" class="job-image" />
+        <img [src]="job.company_logo ||  'assets/default-logo.png'" alt="Company Logo" class="job-image" />
         <div class="card-body">
           <h6 class="card-title fw-bold">{{ job.title }}</h6>
-          <p class="card-text small text-muted">{{ job.description }}</p>
+          <p class="card-text small text-muted job-desc">{{ job.description }}</p>
         </div>
         <div class="card-footer custom-rate-text">
           ${{ job.salary }} per hour

@@ -25,7 +25,7 @@ export class ApplicationReviewComponent implements OnInit {
     private jobService: JobService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location // لاستعمال زر الرجوع
+    private location: Location
   ) {}
 
   ngOnInit() {

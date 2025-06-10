@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../../../models/notification.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,11 @@ export class NotificationService {
     return {};
   }
 
-  getAllNotifications(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
+  getAllNotifications(): Observable<{ notifications: any[] }> {
+    return this.http.get<{ notifications: any[] }>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
   }
+
+
 
   markAsRead(id: number) {
     return this.http.post(`${this.apiUrl}/notifications/${id}/mark-as-read`, {}, this.getAuthHeaders());
