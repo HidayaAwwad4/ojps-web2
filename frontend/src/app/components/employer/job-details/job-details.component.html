@@ -62,7 +62,7 @@
           <button class="btn btn-light border" (click)="toggleSave()">
             <i [ngClass]="isSaved ? 'bi bi-bookmark-fill text-custom-red' : 'bi bi-bookmark text-dark'"></i>
           </button>
-          <button class="btn custom-btn text-white" [routerLink]="['/application-review']">
+          <button class="btn custom-btn text-white" [routerLink]="['/application-review']" [queryParams]=" { jobId: jobDetails.id }">
             Apply Now
           </button>
         </div>

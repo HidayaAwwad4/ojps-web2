@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class FavoriteJobController extends Controller
 {
-
     public function index()
     {
         $jobSeeker = Auth::user()->jobSeeker;
@@ -24,7 +23,6 @@ class FavoriteJobController extends Controller
 
         return response()->json($favorites);
     }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -44,7 +42,6 @@ class FavoriteJobController extends Controller
 
         return response()->json($favorite, 201);
     }
-
     public function destroy($jobId)
     {
         $jobSeeker = Auth::user()->jobSeeker;

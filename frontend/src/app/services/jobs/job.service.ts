@@ -20,8 +20,6 @@ export class JobService {
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
-
-
   private getAuthHeaders(): { headers: HttpHeaders } | {} {
     const token = this.authService.getToken();
     if (token) {
@@ -35,7 +33,14 @@ export class JobService {
   }
 
   getRecommendedJobs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended`, this.getAuthHeaders());
+    const token = this.authService.getToken();
+    if (token) {
+      return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended`, {
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+      });
+    } else {
+      return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended-public`);
+    }
   }
 
   getEmployerByUser(): Observable<any> {

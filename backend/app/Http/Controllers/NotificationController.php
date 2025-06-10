@@ -17,7 +17,6 @@ class NotificationController extends Controller
             'notifications' => $user->notifications()->latest()->get()
         ]);
     }
-
     public function unread(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
@@ -26,7 +25,6 @@ class NotificationController extends Controller
             'notifications' => $user->notifications()->where('is_read', false)->latest()->get()
         ]);
     }
-
     public function markAsRead(Request $request,$id): \Illuminate\Http\JsonResponse
     {
         $notification = Notification::where('id', $id)
@@ -39,7 +37,6 @@ class NotificationController extends Controller
 
         return response()->json(['message' => 'Notification marked as read.']);
     }
-
     public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
     {
         $message = $status === 'accepted'
@@ -55,8 +52,6 @@ class NotificationController extends Controller
 
         return response()->json(['message' => 'Notification sent to seeker.']);
     }
-
-
     public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
     {
         $message = '';
@@ -76,25 +71,21 @@ class NotificationController extends Controller
 
         return response()->json(['message' => 'Notification sent to employer.']);
     }
-
-
-
     public function getUserNotifications(Request $request): \Illuminate\Http\JsonResponse
     {
         $notifications = Notification::with('user')
-        -> where('user_id', auth()->id())
+            -> where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get()
-        ->map(function ($notification) {
-            return array_merge($notification->toArray(), [
-                'redirect_url' => $this->generatedRedirectUrl($notification)
-            ]);
-    });
+            ->map(function ($notification) {
+                return array_merge($notification->toArray(), [
+                    'redirect_url' => $this->generatedRedirectUrl($notification)
+                ]);
+            });
 
 
         return response()->json(['notifications' => $notifications]);
     }
-
     private function generatedRedirectUrl( Notification $notification): string
 
     {
@@ -102,11 +93,11 @@ class NotificationController extends Controller
             case 'application_status':
                 return '/seeker/applications-status';
 
-                case 'seeker_activity':
-                    return '/employer/job-applications';
+            case 'seeker_activity':
+                return '/employer/job-applications';
 
-                    default:
-                        return '/';
+            default:
+                return '/';
 
         }
     }

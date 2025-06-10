@@ -39,6 +39,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/reports/employer-stats', [ReportsController::class, 'getEmployerStats']);
     Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);
     Route::get('/reports/employer-Line-chart', [ReportsController::class, 'getEmployerLineChartData']);
+    //ApplicationController
+    Route::get('/user/cv', [ApplicationController::class, 'getUserCV']);
+    Route::post('/applications/submit', [ApplicationController::class, 'submit']);
+    Route::get('/applications/by-job-seeker/{jobSeekerId}', [ApplicationController::class, 'getApplicationsByJobSeekerId']);
     Route::post('/applications/upload-cv-and-cover-letter', [ApplicationController::class, 'uploadCVAndCoverLetter']);
     //AdminController
     Route::get('/admin/user-count', [AdminController::class, 'userCount']);
