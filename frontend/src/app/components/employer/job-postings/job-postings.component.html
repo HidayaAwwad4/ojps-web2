@@ -42,4 +42,16 @@
       </app-job-card>
     </div>
   </div>
+
+  <div class="pagination-controls text-center my-4" *ngIf="lastPage > 1">
+    <button class="btn btn-secondary me-2" (click)="goToPreviousPage()" [disabled]="currentPage === 1">
+      Previous
+    </button>
+    <span>Page {{ currentPage }} of {{ lastPage }}</span>
+    <button class="btn btn-secondary ms-2" (click)="goToNextPage()" [disabled]="currentPage === lastPage">
+      Next
+    </button>
+  </div>
+
 </div>
+

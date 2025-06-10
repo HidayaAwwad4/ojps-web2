@@ -16,7 +16,8 @@ class JobSeeker extends Model
         'resume_path',
         'experience',
         'education',
-        'skills'
+        'skills',
+        'category'
     ];
 
     public function user(): BelongsTo

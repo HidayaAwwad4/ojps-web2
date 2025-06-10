@@ -1,46 +1,49 @@
-
 <div class="container1">
-  <h1 class="text-center">Applications Status</h1>
+    <h1 class="text-center">Applications Status</h1>
 
-  <div class="border-bottom border-3 my-4" style="border-color: #631B1B;">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" [class.active]="selectedTab === 'applied'" (click)="selectedTab = 'applied'">Under Review</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [class.active]="selectedTab === 'interviewing'" (click)="selectedTab = 'interviewing'">Accepted</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [class.active]="selectedTab === 'rejected'" (click)="selectedTab = 'rejected'">Rejected</a>
-      </li>
-    </ul>
-  </div>
-
-  <div class="row g-3 jobs-carousel">
-    <div class="col-auto job-card-container" *ngFor="let job of filteredJobs" (click)="onJobClick(job)" style="cursor: pointer; position: relative;">
-      <div class="card job-card">
-
-        <div
-          class="status-badge"
-          [ngClass]="{
-            'badge-applied': job.status === 'applied',
-            'badge-interviewing': job.status === 'interviewing',
-            'badge-rejected': job.status === 'rejected'
-          }"
-        >
-          {{ job.status === 'applied' ? 'Under Review' : (job.status === 'interviewing' ? 'Accepted' : 'Rejected') }}
-        </div>
-
-        <img [src]="job.image" alt="Company Logo" class="job-image" />
-        <div class="card-body">
-          <h6 class="card-title fw-bold">{{ job.title }}</h6>
-          <p class="card-text small text-muted">{{ job.description }}</p>
-        </div>
-        <div class="card-footer custom-rate-text">
-          ${{ job.salary }} per hour
-        </div>
-      </div>
+    <div class="border-bottom border-3 my-4" style="border-color: #631B1B;">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="selectedTab === 'under_review'" (click)="selectedTab = 'under_review'">Under Review</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="selectedTab === 'accepted'" (click)="selectedTab = 'accepted'">Accepted</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" [class.active]="selectedTab === 'rejected'" (click)="selectedTab = 'rejected'">Rejected</a>
+            </li>
+        </ul>
     </div>
-  </div>
-</div>
 
+    <div class="row g-3 jobs-carousel">
+        <div class="col-12 text-center text-muted" *ngIf="filteredJobs.length === 0">
+            No applications found in this status.
+        </div>
+
+        <div class="col-auto job-card-container" *ngFor="let app of filteredJobs" (click)="onJobClick(app)" style="cursor: pointer;">
+            <div class="card job-card">
+                <div
+                        class="status-badge"
+                        [ngClass]="{
+            'badge-applied': ['pending', 'shortlisted'].includes(app.status),
+            'badge-interviewing': app.status === 'accepted',
+            'badge-rejected': app.status === 'rejected'
+          }"
+                >
+                    {{ ['pending', 'shortlisted'].includes(app.status)
+                    ? 'Under Review'
+                    : (app.status === 'accepted' ? 'Accepted' : 'Rejected') }}
+                </div>
+
+                <img [src]="app.job.company_logo || 'assets/default-logo.png'" alt="Company_Logo" class="job-image" />
+                <div class="card-body">
+                    <h6 class="card-title fw-bold">{{ app.job.title }}</h6>
+                    <p class="card-text small text-muted">{{ app.job.description }}</p>
+                </div>
+                <div class="card-footer custom-rate-text">
+                    ${{ app.job.salary }} per hour
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

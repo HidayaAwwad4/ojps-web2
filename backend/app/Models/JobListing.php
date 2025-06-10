@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
+
 class JobListing extends Model
 {
     use HasFactory;
@@ -37,5 +39,15 @@ class JobListing extends Model
     public function employer(): BelongsTo
     {
         return $this->belongsTo(Employer::class, 'employer_id');
+    }
+
+    public function getCompanyLogoAttribute($value)
+    {
+        return $value ? config('app.url') . Storage::url($value) : null;
+    }
+
+    public function getDocumentsAttribute($value)
+    {
+        return $value ? config('app.url') . Storage::url($value) : null;
     }
 }

@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { SeekerNotificationComponent } from '../seeker-notification/seeker-notification.component';
-import { EmployerNotificationComponent } from '../employer-notification/employer-notification.component';
-import { NgIf } from '@angular/common';
-import { NotificationService } from '../../../services/notifications/notification.service';
-
+import {Component, Input, OnInit} from '@angular/core';
+import {SeekerNotificationComponent} from '../seeker-notification/seeker-notification.component';
+import {EmployerNotificationComponent} from '../employer-notification/employer-notification.component';
+import {NgIf} from '@angular/common';
+import {NotificationService} from '../../../services/notifications/notification.service';
 @Component({
   selector: 'app-notification-drawer',
   standalone: true,
@@ -13,15 +12,17 @@ import { NotificationService } from '../../../services/notifications/notificatio
     NgIf
   ],
   templateUrl: './notification-drawer.component.html',
-  styleUrls: ['./notification-drawer.component.css'] // ✅ fixed
+  styleUrl: './notification-drawer.component.css'
 })
 export class NotificationDrawerComponent implements OnInit {
 
   isOpen = false;
   @Input() userType: 'job-seeker' | 'employer' | null = null;
+
   notifications: any[] = [];
 
-  constructor(private notificationService: NotificationService) {}
+  constructor(
+    private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     this.notificationService.drawerVisible$.subscribe((visible) => {
@@ -36,11 +37,14 @@ export class NotificationDrawerComponent implements OnInit {
   fetchNotifications(): void {
     this.notificationService.getAllNotifications().subscribe({
       next: (data) => {
-        this.notifications = data;
+        console.log('Fetched notifications:', data);
+        this.notifications = data.notifications ?? data;
       },
       error: (err) => {
         console.error('Error fetching notifications:', err);
       }
     });
   }
+
+
 }

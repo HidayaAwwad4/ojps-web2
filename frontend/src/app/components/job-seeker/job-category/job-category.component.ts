@@ -13,17 +13,19 @@ export class JobCategoriesComponent {
   constructor(private router: Router) {}
 
   jobs = [
-    { title: 'Web Developer', icon: 'fa-solid fa-laptop-code' },
-    { title: 'Fashion', icon: 'fa-solid fa-person-dress' },
-    { title: 'Chef & Cook', icon: 'fas fa-utensils' },
-    { title: 'Waiters', icon: 'fas fa-concierge-bell' },
-    { title: 'UI & UX Designer', icon: 'fas fa-paint-brush' },
-    { title: 'Mobile Developer', icon: 'fas fa-mobile-alt' }
+    { title: 'Marketing', icon: 'fas fa-bullhorn' },
+    { title: 'Technology', icon: 'fas fa-microchip' },
+    { title: 'Sales', icon: 'fas fa-chart-line' },
+    { title: 'Cooking', icon: 'fas fa-utensils' },
+    { title: 'Design', icon: 'fas fa-paint-brush' }
   ];
 
   onCategoryClick(jobTitle: string) {
-      this.router.navigate(['/categories-page']).then(r => {
-        console.log('تم الانتقال لصفحة الفاشن بنجاح');
-      });
-    }
+    this.router.navigate(['/categories-page'], {
+      queryParams: { category: jobTitle }
+    }).then(() => {
+      console.log('');
+    });
+  }
+
 }

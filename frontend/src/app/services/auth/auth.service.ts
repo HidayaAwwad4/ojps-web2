@@ -17,12 +17,10 @@ export class AuthService {
 
   private getAuthHeaders() {
     let token = '';
-    
-    // Check if we're in the browser environment
     if (isPlatformBrowser(this.platformId)) {
       token = localStorage.getItem('token') || '';
     }
-    
+
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -88,8 +86,9 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/job-seekers/${id}/resume`, {
       ...this.getAuthHeaders(),
       responseType: 'blob'
-    });
+    }) as Observable<Blob>;
   }
+
 
   logout() {
     return this.http.post(`${this.apiUrl}/logout`, {}, this.getAuthHeaders());
@@ -115,7 +114,6 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/verify-code`, { user_id, verification_code });
   }
 
-  // Helper method to check if token exists
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       return !!localStorage.getItem('token');
@@ -123,7 +121,6 @@ export class AuthService {
     return false;
   }
 
-  // Helper method to safely get token
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('token');
@@ -131,17 +128,16 @@ export class AuthService {
     return null;
   }
 
-  // Helper method to safely set token
   setToken(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
     }
   }
 
-  // Helper method to safely remove token
   removeToken(): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.removeItem('token');
     }
   }
 }
+
