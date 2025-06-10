@@ -39,18 +39,36 @@ export class LoginComponent {
       next: (res: any) => {
         console.log('Login success:', res);
 
-        localStorage.setItem('token', res.access_token);
-        localStorage.setItem('user', JSON.stringify(res.user));
-        localStorage.setItem('role', res.user.role.name);
+        const user = res.user;
+        const token = res.access_token;
 
-        const role = res.user.role.name;
 
-        if (role == 'employer') {
+        if (!user || !token) {
+          this.formInvalidMessage = 'Invalid login response.';
+          return;
+        }
+
+
+        if (user.role.name === 'employer' && user.is_approved === false) {
+          this.formInvalidMessage = 'Your employer account is not approved yet. Please wait for admin approval.';
+          return;
+        }
+
+
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('role', user.role.name);
+
+
+        if (user.role.name === 'employer') {
           this.router.navigate(['/employer-home']);
-        } else if (role == 'job-seeker') {
+        } else if (user.role.name === 'job-seeker') {
           this.router.navigate(['/home-page']);
-        } else if (role == 'admin') {
+        } else if (user.role.name === 'admin') {
           this.router.navigate(['/dashboard-admin']);
+        } else {
+
+          this.formInvalidMessage = 'Unknown user role.';
         }
       },
       error: (err: any) => {
