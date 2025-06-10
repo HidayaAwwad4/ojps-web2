@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employer;
-use App\Models\JobSeeker;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Role;
@@ -32,6 +32,12 @@ class AuthController extends Controller
             'company_name' => 'nullable|string',
         ]);
 
+        if ($request->role_id == 1 && empty($request->company_name)) {
+            return response()->json([
+                'message' => 'Company name is required for employers.'
+            ], 422);
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
@@ -39,22 +45,40 @@ class AuthController extends Controller
             'role_id' => $request->role_id,
         ]);
 
-        if ($user->role_id == 2) {
+        if ($user->role_id == 2) { // job-seeker
             JobSeeker::create([
                 'user_id' => $user->id,
             ]);
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'message' => 'Registered successfully as job seeker.',
+                'user' => $user,
+                'token' => $token,
+            ], 201);
+
         } elseif ($user->role_id == 1) {
             Employer::create([
                 'user_id' => $user->id,
-                'company_name' => $request->company_name ?? 'underfund',
+                'company_name' => $request->company_name,
+                'is_approved' => false,
             ]);
+
+            return response()->json([
+                'message' => 'Your registration request has been sent to the admin. Please wait for approval.',
+                'user' => $user,
+            ], 201);
         }
 
+        // fallback error
         return response()->json([
-            'message' => 'User registered successfully.',
-            'user_id' => $user->id,
-        ], 201);
+            'message' => 'Invalid role.',
+        ], 400);
     }
+
+
+
 
     public function verifyCode(Request $request)
     {
@@ -76,7 +100,6 @@ class AuthController extends Controller
         }
     }
 
-
     public function login(Request $request)
     {
         try {
@@ -89,6 +112,18 @@ class AuthController extends Controller
 
             if (! $user || ! Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Invalid credentials'], 401);
+            }
+
+            // تحقق إذا كان المستخدم employer (role_id == 1)
+            if ($user->role_id == 1) {
+                $employer = $user->employer; // تأكد من وجود علاقة employer في موديل User
+
+                if (!$employer || !$employer->is_approved) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Your account is waiting for admin approval.',
+                    ], 403);
+                }
             }
 
             $token = $user->createToken('auth_token')->plainTextToken;
@@ -109,7 +144,6 @@ class AuthController extends Controller
             ], 500);
         }
     }
-
 
     public function forgotPassword(Request $request)
     {
@@ -193,18 +227,31 @@ class AuthController extends Controller
         ]);
     }
 
-    public function updateCategory(Request $request, $jobSeekerId)
+
+    public function updateCategory(Request $request)
     {
         $request->validate([
             'category' => 'required|string|max:255',
         ]);
 
-        $jobSeeker = JobSeeker::findOrFail($jobSeekerId);
-        $jobSeeker->category = $request->input('category');
+        $user = auth()->user();
+
+        if (! $user) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
+        $jobSeeker = $user->jobSeeker()->firstOrCreate([]);
+
+        $jobSeeker->category = $request->category;
         $jobSeeker->save();
 
-        return response()->json(['message' => 'Category updated successfully']);
+        return response()->json([
+            'message' => 'Category updated successfully',
+            'category' => $jobSeeker->category,
+        ], 200);
     }
+
+
 
 
 }

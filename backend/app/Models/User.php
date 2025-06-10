@@ -45,4 +45,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Notification::class);
     }
+    public function jobSeeker()
+    {
+        return $this->hasOne(JobSeeker::class, 'user_id', 'id');
+    }
+    public function employer()
+    {
+        return $this->hasOne(Employer::class);
+    }
+
 }

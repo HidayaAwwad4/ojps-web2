@@ -12,7 +12,8 @@ use App\Http\Controllers\AuthController;
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/profile', [AuthController::class, 'userProfile']);
-    Route::put('/job-seeker/{id}/update-category', [AuthController::class, 'updateCategory']);
+    Route::post('/job-seeker/category', [AuthController::class, 'updateCategory']);
+
 });
 Route::get('/user', function (Request $request) {
     return $request->user();
