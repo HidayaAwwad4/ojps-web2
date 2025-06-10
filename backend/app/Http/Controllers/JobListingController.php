@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\FavoriteJob;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateJobListingRequest;
@@ -121,14 +119,15 @@ class JobListingController extends Controller
     {
         try {
             $job = JobListing::findOrFail($id);
-            $data = $request->validated();
+            $data = $request->validated(); // Get all validated fields
+
             if ($request->hasFile('company_logo')) {
                 if ($job->company_logo) {
                     Storage::disk('public')->delete($job->company_logo);
                 }
                 $data['company_logo'] = $request->file('company_logo')->store('logos', 'public');
             } else {
-                $data['company_logo'] = $job->company_logo;
+                unset($data['company_logo']);
             }
             if ($request->hasFile('documents')) {
                 if ($job->documents) {
@@ -136,7 +135,7 @@ class JobListingController extends Controller
                 }
                 $data['documents'] = $request->file('documents')->store('documents', 'public');
             } else {
-                $data['documents'] = $job->documents;
+                unset($data['documents']);
             }
 
             $job->update($data);
@@ -151,7 +150,6 @@ class JobListingController extends Controller
             ], 500);
         }
     }
-
     public function updateStatus(Request $request, $id): JsonResponse
     {
         try {

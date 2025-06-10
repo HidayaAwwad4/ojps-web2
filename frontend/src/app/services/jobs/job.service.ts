@@ -17,7 +17,10 @@ interface PaginatedResponse<T> {
 })
 export class JobService {
   private apiUrl = 'http://127.0.0.1:8000/api';
+
   constructor(private http: HttpClient, private authService: AuthService) {}
+
+
 
   private getAuthHeaders(): { headers: HttpHeaders } | {} {
     const token = this.authService.getToken();
@@ -31,36 +34,24 @@ export class JobService {
     return {};
   }
 
-    getRecommendedJobs(): Observable<any[]> {
-        const token = this.authService.getToken();
-        if (token) {
-            return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended`, {
-                headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
-            });
-        } else {
-            return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended-public`);
-        }
-    }
-  
-   getEmployerByUser(): Observable<any> {
+  getRecommendedJobs(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended`, this.getAuthHeaders());
+  }
+
+  getEmployerByUser(): Observable<any> {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<any>(`${this.apiUrl}/employer`, { headers });
   }
-  
- getJobsByEmployer(employerId: number, page: number = 1): Observable<PaginatedResponse<any>> {
+
+  getJobsByEmployer(employerId: number, page: number = 1): Observable<PaginatedResponse<any>> {
     const token = localStorage.getItem('token');
     return this.http.get<PaginatedResponse<any>>(`${this.apiUrl}/employer/${employerId}/jobs?page=${page}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
 
- /* getRecommendedJobs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/jobs/recommended`, this.getAuthHeaders());
-  }*/
-
   getJobById(jobId: number): Observable<any> {
-
     return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
   }
 
@@ -70,9 +61,11 @@ export class JobService {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
   getJobFormOptions() {
     return this.http.get<any>(`${this.apiUrl}/job-form-options`);
   }
+
   updateJob(jobId: number, jobData: FormData): Observable<any> {
     const token = localStorage.getItem('token');
     jobData.append('_method', 'PUT');
@@ -80,6 +73,7 @@ export class JobService {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
   updateJobStatus(jobId: number, isOpened: boolean): Observable<any> {
     const token = localStorage.getItem('token') || '';
     const headers = new HttpHeaders({
@@ -88,32 +82,43 @@ export class JobService {
     });
     return this.http.put(`${this.apiUrl}/jobs/${jobId}/status`, { isOpened }, { headers });
   }
+
   deleteJob(jobId: number): Observable<any> {
     const token = localStorage.getItem('token');
     return this.http.delete(`${this.apiUrl}/jobs/${jobId}`, {
       headers: { Authorization: `Bearer ${token}` }
     });
   }
+
   getApplicantsByJobId(jobId: number): Observable<any> {
     return this.http.get(`${this.apiUrl}/applications/job/${jobId}`);
   }
+
   updateApplicationStatus(applicationId: number, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/applications/${applicationId}`, { status });
   }
 
-  getJobsByCategory(category: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/jobs/category/${category}`);
-  }
-  
-  getSavedJobs(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/favorite-jobs`, this.getAuthHeaders());
-  }
   saveJob(jobId: number): Observable<any> {
     return this.http.post(`${this.apiUrl}/favorites`, { job_id: jobId }, this.getAuthHeaders());
   }
-  
-  removeSavedJob(jobId: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/favorite-jobs/${jobId}`, this.getAuthHeaders());
+
+  removeSavedJob(jobId: number) {
+    return this.http.delete(`${this.apiUrl}/favorites/job/${jobId}`, this.getAuthHeaders());
+  }
+
+  getSavedJobs(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/favorites/me`, this.getAuthHeaders());
+  }
+
+  searchJobs(query: string): Observable<any[]> {
+    const options = {
+      params: { query }
+    };
+    return this.http.get<any[]>(`${this.apiUrl}/search-jobs`, options);
+  }
+
+  getJobsByCategory(category: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/jobs/category/${category}`);
   }
 
   getApplicationsByJobSeekerId(jobSeekerId: number): Observable<any[]> {
@@ -126,6 +131,7 @@ export class JobService {
       this.getAuthHeaders()
     );
   }
+
   submitApplication(formData: FormData) {
     return this.http.post(
       `${this.apiUrl}/applications/submit`,

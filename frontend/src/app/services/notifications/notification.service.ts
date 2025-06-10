@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {Notification} from '../../../models/notification.model';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Notification } from '../../../models/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +9,27 @@ import {Notification} from '../../../models/notification.model';
 export class NotificationService {
 
   private apiUrl = 'http://127.0.0.1:8000/api';
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient) {}
+
+  private getAuthHeaders(): { headers: HttpHeaders } | {} {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      };
+    }
+    return {};
   }
 
   getAllNotifications(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/notifications`);
+    return this.http.get<any[]>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
   }
 
-
-
   markAsRead(id: number) {
-    return this.http.post(`${this.apiUrl}/notifications/${id}/mark-as-read`, {});
+    return this.http.post(`${this.apiUrl}/notifications/${id}/mark-as-read`, {}, this.getAuthHeaders());
   }
 
   private drawerVisible = new BehaviorSubject<boolean>(false);
@@ -28,5 +38,4 @@ export class NotificationService {
   toggleDrawer() {
     this.drawerVisible.next(!this.drawerVisible.getValue());
   }
-
 }
