@@ -162,13 +162,13 @@ export class EditProfilePageComponent implements OnInit {
   
   cancel(): void {
     switch (this.userRole) {
-      case 'Job Seeker':
+      case 'job-seeker':
         this.router.navigate(['/jobseeker-profile']);
         break;
-      case 'Employer':
+      case 'employer':
         this.router.navigate(['/employer-profile']);
         break;
-      case 'Admin':
+      case 'admin':
         this.router.navigate(['/admin-profile']);
         break;
       default:

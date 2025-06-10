@@ -24,36 +24,51 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|min:6',
-            'role_id' => 'required|exists:roles,id',
-            'company_name' => 'nullable|string',
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role_id' => $request->role_id,
-        ]);
-
-        if ($user->role_id == 2) {
-            JobSeeker::create([
-                'user_id' => $user->id,
+        try {
+            $request->validate([
+                'name' => 'required|string',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|min:6',
+                'role_id' => 'required|exists:roles,id',
+                'company_name' => 'nullable|string',
             ]);
-        } elseif ($user->role_id == 1) {
-            Employer::create([
-                'user_id' => $user->id,
-                'company_name' => $request->company_name ?? 'underfund',
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role_id' => $request->role_id,
             ]);
+
+            if ($user->role_id == 2) {
+                JobSeeker::create([
+                    'user_id' => $user->id,
+                ]);
+            } elseif ($user->role_id == 1) {
+                Employer::create([
+                    'user_id' => $user->id,
+                    'company_name' => $request->company_name ?? 'underfund',
+                ]);
+            }
+
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'status' => true,
+                'message' => 'User registered successfully.',
+                'user_id' => $user->id,
+                'access_token' => $token,
+                'token_type' => 'Bearer',
+                'user' => $user->load('role'),
+            ], 201);
+            
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Error during registration',
+                'error' => $e->getMessage(),
+            ], 500);
         }
-
-        return response()->json([
-            'message' => 'User registered successfully.',
-            'user_id' => $user->id,
-        ], 201);
     }
 
     public function verifyCode(Request $request)

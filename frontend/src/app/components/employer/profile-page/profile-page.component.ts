@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { JobCardComponent } from '../job-card/job-card.component';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
+import { JobService } from '../../../services/jobs/job.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -22,55 +23,20 @@ export class EmployerProfilePageComponent implements OnInit {
   email = '';
   location = '';
   aboutMe = '';
-  profilePictureUrl = 'assets/account-avatar.png'; // Default avatar
+  profilePictureUrl = 'assets/account-avatar.png';
   loading = true;
   error = false;
-
-  jobs = [
-    {
-      image: 'assets/adham.jpg',
-      title: 'Full-Stack Developer',
-      description: 'Responsible for developing both front-end and back-end systems.',
-      salary: '$800 - $1000 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'UI/UX Designer',
-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
-      salary: '$700 - $900 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'Mobile App Developer',
-      description: 'Build and maintain cross-platform mobile applications.',
-      salary: '$750 - $950 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'Data Analyst',
-      description: 'Analyze data trends and create reports.',
-      salary: '$850 - $1050 Salary/Month',
-      status: 'open'
-    },
-    {
-      image: 'assets/adham.jpg',
-      title: 'UI Designer',
-      description: 'Focus on crafting intuitive and visually appealing user interfaces.',
-      salary: '$700 - $900 Salary/Month',
-      status: 'closed'
-    },
-  ];
+  jobs: any[] = [];
 
   constructor(
     private authService: AuthService,
+    private jobService: JobService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadProfileData();
+    this.loadJobs();
   }
 
   loadProfileData(): void {
@@ -87,13 +53,11 @@ export class EmployerProfilePageComponent implements OnInit {
           console.log('Employer profile data extracted:', data);
           console.log('Profile picture URL:', data.user?.profile_picture_url);
 
-          // Basic user info
           this.name = data.user?.name || '';
           this.email = data.user?.email || '';
           this.location = data.user?.location || 'No location specified';
           this.aboutMe = data.user?.summary || 'No summary provided';
           
-          // Profile picture - use uploaded picture if available, otherwise default
           this.profilePictureUrl = data.user?.profile_picture_url || 'assets/account-avatar.png';
 
           console.log('Final employer component data:', {
@@ -119,11 +83,40 @@ export class EmployerProfilePageComponent implements OnInit {
     });
   }
 
+  loadJobs(): void {
+    this.jobService.getEmployerByUser().subscribe({
+      next: (employerData) => {
+        const employerId = employerData.id;
+        this.jobService.getJobsByEmployer(employerId).subscribe({
+          next: (data) => {
+            this.jobs = data.data || [];
+            console.log('Employer profile jobs:', this.jobs);
+          },
+          error: (err) => {
+            console.error('Failed to load jobs for employer profile:', err);
+          }
+        });
+      },
+      error: (err) => {
+        console.error('Failed to load employer info for job listings:', err);
+      }
+    });
+  }
+
   navigateToEditProfile(): void {
     this.router.navigate(['/edit-profile']);
   }
 
-  closeJob(job: any) {
-    job.status = 'closed';
+  closeJob(job: any): void {
+    job.isOpened = false;
+    this.jobService.updateJobStatus(job.id, false).subscribe({
+      next: () => {
+        console.log('Job closed successfully');
+      },
+      error: (err) => {
+        console.error('Error closing job:', err);
+        job.isOpened = true;
+      }
+    });
   }
 }
