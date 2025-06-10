@@ -18,9 +18,6 @@ class NotificationController extends Controller
         ]);
     }
 
-    /**
-     * Get unread notifications
-     */
     public function unread(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
@@ -30,9 +27,6 @@ class NotificationController extends Controller
         ]);
     }
 
-    /**
-     * Mark a notification as read
-     */
     public function markAsRead(Request $request,$id): \Illuminate\Http\JsonResponse
     {
         $notification = Notification::where('id', $id)
@@ -46,9 +40,6 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification marked as read.']);
     }
 
-    /**
-     * Create notification for seeker when application is accepted/rejected
-     */
     public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
     {
         $message = $status === 'accepted'
@@ -65,9 +56,7 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification sent to seeker.']);
     }
 
-    /**
-     * Create notification for employer when seeker applies or favorites a job
-     */
+
     public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
     {
         $message = '';
@@ -89,9 +78,6 @@ class NotificationController extends Controller
     }
 
 
-    /**
-     * Return all user notifications with redirect_url
-     */
 
     public function getUserNotifications(Request $request): \Illuminate\Http\JsonResponse
     {
@@ -106,7 +92,7 @@ class NotificationController extends Controller
     });
 
 
-        return response()->json($notifications);
+        return response()->json(['notifications' => $notifications]);
     }
 
     private function generatedRedirectUrl( Notification $notification): string

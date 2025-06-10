@@ -1,63 +1,201 @@
-
 <div class="container mt-4">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="header-dark-red mb-0">Resume Details</h2>
-    <div>
-      <button class="btn btn-dark-red me-2">Save Changes</button>
-      <button class="btn btn-dark-red" (click)="uploadResume()">Upload Resume</button>
-    </div>
+  <div *ngIf="loading" class="text-center my-5">
+    <p>Loading profile data...</p>
   </div>
-
-  <div class="section">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="section-header">Professional Experience</h4>
-      <button class="btn btn-dark-red" (click)="addExperience()">Add Experience</button>
-    </div>
-    <div *ngFor="let exp of experiences; let i = index" class="d-flex align-items-center mb-2 gap-2 flex-wrap">
-      <label>Company:</label>
-      <input type="text" [(ngModel)]="exp.company">
-      <label>Position:</label>
-      <input type="text" [(ngModel)]="exp.position">
-      <label>From:</label>
-      <input type="text" class="input-small" [(ngModel)]="exp.from">
-      <label>To:</label>
-      <input type="text" class="input-small" [(ngModel)]="exp.to">
-      <button class="btn btn-delete" (click)="deleteExperience(i)">Delete</button>
-    </div>
-  </div>
-
-  <div class="section mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="section-header">Education</h4>
-      <button class="btn btn-dark-red" (click)="addEducation()">Add Education</button>
-    </div>
-    <div *ngFor="let edu of education; let i = index" class="d-flex align-items-center mb-2 gap-2 flex-wrap">
-      <label>Degree:</label>
-      <input type="text" [(ngModel)]="edu.degree">
-      <label>Field:</label>
-      <input type="text" [(ngModel)]="edu.field">
-      <label>Institution:</label>
-      <input type="text" [(ngModel)]="edu.institution">
-      <label>Year:</label>
-      <input type="text" class="input-small" [(ngModel)]="edu.year">
-      <button class="btn btn-delete" (click)="deleteEducation(i)">Delete</button>
-    </div>
-  </div>
-
-  <div class="section mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-      <h4 class="section-header">Skills</h4>
-      <button class="btn btn-dark-red" (click)="addStrength()">Add Skill</button>
-    </div>
-    <div *ngFor="let s of skills; let i = index" class="d-flex align-items-center mb-2 gap-2 flex-wrap">
-      <label>Skill:</label>
-      <input type="text" [(ngModel)]="skills[i]">
-      <button class="btn btn-delete" (click)="deleteStrength(i)">Delete</button>
-    </div>
-  </div>
-
   
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+  
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  
+  <div *ngIf="!loading">
+    <!-- Profile information section -->
+    <div class="profile-section mb-4">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="header-dark-red mb-0">Profile Information</h2>
+      </div>
+      
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label for="name" class="form-label">Name:</label>
+          <input
+            id="name"
+            type="text"
+            class="form-control"
+            placeholder="Your full name"
+            [(ngModel)]="name"
+            name="name"
+          >
+        </div>
+        
+        <div class="col-md-6">
+          <label for="email" class="form-label">Email:</label>
+          <input
+            id="email"
+            type="email"
+            class="form-control"
+            [(ngModel)]="email"
+            name="email"
+            disabled
+          >
+        </div>
+        
+        <div class="col-md-6">
+          <label for="location" class="form-label">Location:</label>
+          <input
+            id="location"
+            type="text"
+            class="form-control"
+            placeholder="Your location"
+            [(ngModel)]="location"
+            name="location"
+          >
+        </div>
+        
+        <div class="col-12">
+          <label for="aboutMe" class="form-label">About me:</label>
+          <textarea
+            id="aboutMe"
+            class="form-control"
+            rows="3"
+            placeholder="Brief description about yourself"
+            [(ngModel)]="aboutMe"
+            name="aboutMe"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resume details section -->
+    <div class="resume-section">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="header-dark-red mb-0">Resume Details</h2>
+        <div>
+          <button class="btn btn-dark-red me-2" [disabled]="saving" (click)="saveChanges()">
+            {{ saving ? 'Saving...' : 'Save Changes' }}
+          </button>
+          <button class="btn btn-dark-red" (click)="uploadResume()">Upload Resume</button>
+        </div>
+      </div>
+
+      <!-- Resume file display if available -->
+      <div class="mb-4" *ngIf="resumeUrl">
+        <h5>Current Resume Document</h5>
+        <a [href]="resumeUrl" target="_blank" class="btn btn-outline-dark-red">
+          <i class="bi bi-file-earmark-pdf"></i> View Current Resume
+        </a>
+      </div>
+
+      <!-- Experience section -->
+      <div class="section">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="section-header">Professional Experience</h4>
+          <button class="btn btn-dark-red" (click)="addExperience()">Add Experience</button>
+        </div>
+        <div *ngIf="experiences.length === 0" class="text-muted mb-3">
+          No professional experience added yet. Click 'Add Experience' to get started.
+        </div>
+        <div *ngFor="let exp of experiences; let i = index" class="experience-item mb-3 p-3 border rounded">
+          <div class="d-flex justify-content-between mb-2">
+            <h5 class="mb-0">Experience #{{i+1}}</h5>
+            <button class="btn btn-delete" (click)="deleteExperience(i)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label>Company:</label>
+              <input type="text" class="form-control" placeholder="Company name" [(ngModel)]="exp.company">
+            </div>
+            <div class="col-md-6">
+              <label>Position:</label>
+              <input type="text" class="form-control" placeholder="Your position" [(ngModel)]="exp.position">
+            </div>
+            <div class="col-md-6">
+              <label>From:</label>
+              <input type="text" class="form-control" placeholder="Start year" [(ngModel)]="exp.from">
+            </div>
+            <div class="col-md-6">
+              <label>To:</label>
+              <input type="text" class="form-control" placeholder="End year or Present" [(ngModel)]="exp.to">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education section -->
+      <div class="section mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="section-header">Education</h4>
+          <button class="btn btn-dark-red" (click)="addEducation()">Add Education</button>
+        </div>
+        <div *ngIf="education.length === 0" class="text-muted mb-3">
+          No education details added yet. Click 'Add Education' to get started.
+        </div>
+        <div *ngFor="let edu of education; let i = index" class="education-item mb-3 p-3 border rounded">
+          <div class="d-flex justify-content-between mb-2">
+            <h5 class="mb-0">Education #{{i+1}}</h5>
+            <button class="btn btn-delete" (click)="deleteEducation(i)">
+              <i class="bi bi-trash"></i> Delete
+            </button>
+          </div>
+          <div class="row g-2">
+            <div class="col-md-6">
+              <label>Degree:</label>
+              <input type="text" class="form-control" placeholder="Degree type" [(ngModel)]="edu.degree">
+            </div>
+            <div class="col-md-6">
+              <label>Field:</label>
+              <input type="text" class="form-control" placeholder="Field of study" [(ngModel)]="edu.field">
+            </div>
+            <div class="col-md-6">
+              <label>Institution:</label>
+              <input type="text" class="form-control" placeholder="School/University" [(ngModel)]="edu.institution">
+            </div>
+            <div class="col-md-6">
+              <label>Year:</label>
+              <input type="text" class="form-control" placeholder="Graduation year" [(ngModel)]="edu.year">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills section -->
+      <div class="section mt-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="section-header">Skills</h4>
+          <button class="btn btn-dark-red" (click)="addStrength()">Add Skill</button>
+        </div>
+        <div *ngIf="skills.length === 0" class="text-muted mb-3">
+          No skills added yet. Click 'Add Skill' to get started.
+        </div>
+        <div class="row g-2">
+          <div *ngFor="let s of skills; let i = index; trackBy: trackByIndex" class="col-md-6">
+            <div class="d-flex align-items-center mb-2 gap-2">
+              <input type="text" class="form-control" placeholder="Enter a skill" [(ngModel)]="skills[i]">
+              <button class="btn btn-delete" (click)="deleteStrength(i)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Action buttons -->
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-dark-red me-2" [disabled]="saving" (click)="saveChanges()">
+          {{ saving ? 'Saving...' : 'Save All Changes' }}
+        </button>
+        <button class="btn btn-secondary" (click)="navigateToProfile()">Back to Profile</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Resume upload modal -->
 <div class="modal-backdrop" *ngIf="showResumeModal">
   <div class="modal-content">
     <h3>Upload Resume</h3>
@@ -65,10 +203,16 @@
       <img src="assets/picture-vector.png" alt="Upload Icon" class="upload-icon">
       <p>Drag your resume here or click to upload</p>
       <p class="text-muted">Acceptable file types: PDF, DOCX (5MB max)</p>
-      <input type="file" #fileInput class="d-none" (change)="handleFileUpload($event)" />
+      <input type="file" #fileInput class="d-none" (change)="handleFileUpload($event)" 
+             accept=".pdf,.doc,.docx" />
+    </div>
+    <div *ngIf="uploadedResumeFile" class="mt-2">
+      Selected file: {{ uploadedResumeFile.name }}
     </div>
     <div class="modal-actions mt-3 d-flex justify-content-end gap-2">
-      <button class="btn btn-dark-red" (click)="saveResume()">Save</button>
+      <button class="btn btn-dark-red" [disabled]="saving" (click)="saveResume()">
+        {{ saving ? 'Uploading...' : 'Save' }}
+      </button>
       <button class="btn btn-delete" (click)="cancelResumeUpload()">Cancel</button>
     </div>
   </div>

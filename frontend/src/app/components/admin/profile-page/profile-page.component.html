@@ -1,15 +1,48 @@
-
 <div class="container profile-container">
-  <div class="profile-header d-flex justify-content-between align-items-start mt-4">
-    <div class="d-flex align-items-center">
-      <img src="assets/account-avatar.png" class="me-3">
-      <div class="profile-info">
-        <h2 class="profile-name">{{ name }}</h2>
-        <p>Email: {{ email }}.</p>
-        <p>Location: {{ location }}.</p>
-        <p>About me: {{ aboutMe }}.</p>
+  <div *ngIf="loading" class="text-center my-5">
+    <p>Loading profile data...</p>
+  </div>
+  
+  <div *ngIf="error" class="alert alert-danger">
+    <p>Error loading profile. Please try again later.</p>
+  </div>
+  
+  <div *ngIf="!loading && !error" class="profile-content">
+    <div class="profile-header d-flex justify-content-between align-items-start mt-4">
+      <div class="d-flex align-items-center">
+        <img [src]="profilePictureUrl" 
+             alt="Profile Picture" 
+             class="me-3 profile-avatar"
+             (error)="profilePictureUrl='assets/account-avatar.png'">
+        <div class="profile-info">
+          <h2 class="profile-name">{{ name }}</h2>
+          <p>Email: {{ email }}</p>
+          <p>Location: {{ location }}</p>
+          <p>About me: {{ aboutMe }}</p>
+        </div>
+      </div>
+      <button class="btn edit-profile-btn" (click)="navigateToEditProfile()">Edit profile</button>
+    </div>
+
+    <div class="admin-info-section mt-5">
+      <div class="admin-header d-flex justify-content-between align-items-center mb-4">
+        <h2 class="section-title mb-0">Admin Information</h2>
+      </div>
+      
+      <div class="subsection mt-3">
+        <h5>Role</h5>
+        <p>System Administrator</p>
+      </div>
+
+      <div class="subsection mt-3">
+        <h5>Permissions</h5>
+        <ul>
+          <li>User Management</li>
+          <li>Job Listing Management</li>
+          <li>System Reports</li>
+          <li>Application Management</li>
+        </ul>
       </div>
     </div>
-    <button class="btn edit-profile-btn">Edit profile</button>
   </div>
 </div>

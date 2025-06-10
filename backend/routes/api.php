@@ -1,4 +1,5 @@
 <?php
+
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ReportsController;
 use Illuminate\Http\Request;
@@ -10,6 +11,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteJobController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -24,23 +26,66 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/favorites', [FavoriteJobController::class, 'store']);
     Route::delete('/favorites/job/{jobId}', [FavoriteJobController::class, 'destroyByJobId']);
     Route::get('/employer', [JobListingController::class, 'getEmployerByUser']);
+    Route::get('/user/profile', [ProfileController::class, 'getProfile']);
+    Route::post('/user/profile', [ProfileController::class, 'updateProfile']);
+    Route::put('/seeker/profile/basic', [ProfileController::class, 'updateBasicInfo']);
+    Route::put('/seeker/profile/resume', [ProfileController::class, 'updateResumeInfo']);
+    Route::post('/user/profile/picture', [ProfileController::class, 'uploadProfilePicture']);
+    Route::post('/user/resume', [ProfileController::class, 'uploadResume']);
+    Route::get('/job-seekers/{id}', [ProfileController::class, 'getJobSeekerProfile']);
+    Route::get('/job-seekers/{id}/resume', [ProfileController::class, 'downloadResume']);
+    Route::post('/user/update-password', [ProfileController::class, 'updatePassword']);
+});
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::get('/roles', [AuthController::class, 'getRoles']);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/verify-code', [AuthController::class, 'verifyCode']);
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
+Route::post('/verify-forgot-code', [AuthController::class, 'verifyForgotCode']);
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+Route::get('/applications', [ApplicationController::class, 'index']);
+Route::get('/applications/{id}', [ApplicationController::class, 'show']);
+Route::post('/applications', [ApplicationController::class, 'store']);
+Route::put('/applications/{id}', [ApplicationController::class, 'update']);
+Route::delete('/applications/{id}', [ApplicationController::class, 'destroy']);
+Route::put('/categories/{id}', [CategoryController::class, 'update']);
+Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
+Route::get('/categories/{id}', [CategoryController::class, 'show']);
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/categories', [CategoryController::class, 'store']);
+Route::get('/favorites', [FavoriteJobController::class, 'index']);
+Route::post('/favorites', [FavoriteJobController::class, 'store']);
+Route::delete('/favorites/{id}', [FavoriteJobController::class, 'destroy']);
+Route::get('/favorites/job-seeker/{jobSeekerId}', [FavoriteJobController::class, 'getByJobSeeker']);
+Route::get('/jobs', [JobListingController::class, 'getAll']);
+Route::get('/jobs/{id}', [JobListingController::class, 'getById']);
+Route::middleware('auth:sanctum')->get('/employer', [JobListingController::class, 'getEmployerByUser']);
+Route::middleware('auth:sanctum')->group(function () {
     Route::get('/employer/{employerId}/jobs', [JobListingController::class, 'getByEmployer']);
     Route::post('/jobs', [JobListingController::class, 'create']);
     Route::put('/jobs/{id}', [JobListingController::class, 'update']);
     Route::put('/jobs/{id}/status', [JobListingController::class, 'updateStatus']);
     Route::delete('/jobs/{id}', [JobListingController::class, 'delete']);
-    Route::get('/notifications', [NotificationController::class, 'index']);
     Route::get('/notifications/unread', [NotificationController::class, 'unread']);
     Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
     Route::post('/notifications/seeker/{seekerId}/{status}', [NotificationController::class, 'notifySeekerApplicationStatus']);
     Route::post('/notifications/employer/{employerId}/{type}', [NotificationController::class, 'notifyEmployerActivity']);
-    Route::get('/reports/employer-stats/{id}', [ReportsController::class, 'getEmployerStats']);
-    Route::get('/reports/employer-Line-chart/{id}', [ReportsController::class, 'getEmployerLineChartData']);
+    Route::get('/notifications', [NotificationController::class, 'getUserNotifications']);
+    Route::get('/notifications/unread', [NotificationController::class, 'unread']);
+    Route::post('/notifications/mark-as-read/{id}', [NotificationController::class, 'markAsRead']);
+    Route::get('/reports/employer-stats', [ReportsController::class, 'getEmployerStats']);
+    Route::get('/reports/employer-Line-chart', [ReportsController::class, 'getEmployerLineChartData']);
     Route::post('/applications/upload-cv-and-cover-letter', [ApplicationController::class, 'uploadCVAndCoverLetter']);
     //Route::get('/jobs/recommended', [JobListingController::class, 'getRecommendedJobs']);
     Route::get('/jobs/recommended', [JobListingController::class, 'getRecommendedJobsForSeeker']);
 });
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
+    Route::get('/reports/admin-stats', [ReportsController::class, 'getAdminStats']);
+    Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);
     Route::get('/admin/users', [AdminController::class, 'allUsers']);
     Route::post('/admin/users', [AdminController::class, 'addUser']);
     Route::put('/admin/users/{id}', [AdminController::class, 'updateUser']);
@@ -65,12 +110,6 @@ Route::get('/jobs/recommended-public', [JobListingController::class, 'getPublicR
 
 Route::get('/search-jobs', [JobListingController::class, 'advancedSearch']);
 Route::get('/jobs/category/{category}', [JobListingController::class, 'getJobsByCategory']);
-Route::get('/roles', [AuthController::class, 'getRoles']);
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/verify-code', [AuthController::class, 'verifyCode']);
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/verify-forgot-code', [AuthController::class, 'verifyForgotCode']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 Route::get('/applications', [ApplicationController::class, 'index']);
 Route::get('/applications/{id}', [ApplicationController::class, 'show']);
@@ -94,5 +133,3 @@ Route::get('/job-form-options', [JobListingController::class, 'getJobFormOptions
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
-Route::get('/reports/admin-stats', [ReportsController::class, 'getAdminStats']);
-Route::get('/reports/admin-bar-chart', [ReportsController::class, 'getAdminBarchartData']);

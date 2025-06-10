@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="">
+    <list default="true" id="10df1363-6ad7-49af-b9e1-42b0429a0d72" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/ReportsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-drawer/notification-drawer.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,19 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;RazanQaddomi&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HidayaAwwad4/ojps-web2.git&quot;,
-    &quot;accountId&quot;: &quot;71cccf18-9fd6-415a-9995-35e27f499948&quot;
-  }
-}</component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\wamp64\bin\php\php8.3.14\php.exe">
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\Users\lenovo\.config\herd-lite\bin\php.exe">
     <include_path>
       <path value="$PROJECT_DIR$/backend/vendor/phpoption/phpoption" />
       <path value="$PROJECT_DIR$/backend/vendor/ralouphie/getallheaders" />
@@ -151,42 +146,30 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2xLFPjQOHyJSoSFLfTh74D9Immn" />
+  <component name="ProjectId" id="2yGBuPNp6AuB5Q5QViGIPal4vgX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;razan.back&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/USER/Documents/GitHub/ojps-web2/frontend/src&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\USER\\Documents\\GitHub\\ojps-web2\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "haneeen",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "C:\\study\\ojps-web2\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;mysql&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
     ]
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\USER\Documents\GitHub\ojps-web2\frontend\src" />
-      <recent name="C:\Users\USER\Documents\GitHub\ojps-web2\backend\routes" />
-      <recent name="C:\Users\USER\Documents\GitHub\ojps-web2\frontend\src\app\services" />
-      <recent name="C:\Users\USER\Documents\GitHub\ojps-web2\frontend\src\app\components" />
-      <recent name="C:\Users\USER\Documents\GitHub\ojps-web2\backend\app\Http" />
-    </key>
-  </component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
       <TestRunner configuration_file="$PROJECT_DIR$/backend/phpunit.xml" scope="XML" use_alternative_configuration_file="true" />
@@ -196,46 +179,20 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-fdfe4dae3a2d-intellij.indexing.shared.core-IU-243.22562.218" />
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-IU-243.22562.218" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23339.11" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23339.11" />
       </set>
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="98a22726-058b-4ad3-b602-1740dd5bbf0f" name="Changes" comment="" />
-      <created>1747709426684</created>
+      <changelist id="10df1363-6ad7-49af-b9e1-42b0429a0d72" name="Changes" comment="" />
+      <created>1749451254504</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1747709426684</updated>
-      <workItem from="1747709429207" duration="875000" />
-      <workItem from="1747710330640" duration="25497000" />
-      <workItem from="1747751665623" duration="16047000" />
-      <workItem from="1747840486801" duration="1110000" />
-      <workItem from="1747847996709" duration="6153000" />
-      <workItem from="1747893601178" duration="293000" />
-      <workItem from="1747905938771" duration="962000" />
-      <workItem from="1747909173560" duration="9020000" />
-      <workItem from="1748010180945" duration="4922000" />
-      <workItem from="1748053257571" duration="8693000" />
-      <workItem from="1748093289005" duration="346000" />
-      <workItem from="1748164171602" duration="12379000" />
-      <workItem from="1748215364247" duration="118000" />
-      <workItem from="1748247181192" duration="2719000" />
-      <workItem from="1748262040795" duration="2160000" />
-      <workItem from="1748273007836" duration="1091000" />
-      <workItem from="1748330423963" duration="12533000" />
-      <workItem from="1748410200367" duration="982000" />
-      <workItem from="1748445268940" duration="3914000" />
-      <workItem from="1748458710132" duration="439000" />
-      <workItem from="1748512018871" duration="2326000" />
-      <workItem from="1748515080019" duration="4801000" />
-      <workItem from="1748530984946" duration="952000" />
-      <workItem from="1748542423675" duration="4008000" />
-      <workItem from="1748614844121" duration="62000" />
-      <workItem from="1748615043978" duration="2852000" />
-      <workItem from="1749305880010" duration="46664000" />
+      <updated>1749451254504</updated>
+      <workItem from="1749451257235" duration="5277000" />
     </task>
     <servers />
   </component>

@@ -66,8 +66,12 @@ export class SignUpComponent implements OnInit {
     };
 
     this.authService.register(registerData).subscribe({
-      next: (res) => {
+      next: (res: any) => {
         console.log('Registered successfully:', res);
+
+        localStorage.setItem('token', res.access_token);
+        localStorage.setItem('user', JSON.stringify(res.user));
+        localStorage.setItem('role', res.user.role.name);
 
         if (this.userType === 'employer') {
           this.router.navigate(['/employer-home']);

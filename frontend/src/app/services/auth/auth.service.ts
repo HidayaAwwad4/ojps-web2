@@ -27,6 +27,7 @@ export class AuthService {
       })
     };
   }
+
   getRoles() {
     return this.http.get(`${this.apiUrl}/roles`);
   }
@@ -85,8 +86,9 @@ export class AuthService {
     return this.http.get(`${this.apiUrl}/job-seekers/${id}/resume`, {
       ...this.getAuthHeaders(),
       responseType: 'blob'
-    });
+    }) as Observable<Blob>;
   }
+
 
   logout() {
     return this.http.post(`${this.apiUrl}/logout`, {}, this.getAuthHeaders());
@@ -111,18 +113,21 @@ export class AuthService {
   verifyCode(user_id: number, verification_code: string) {
     return this.http.post(`${this.apiUrl}/verify-code`, { user_id, verification_code });
   }
+
   isLoggedIn(): boolean {
     if (isPlatformBrowser(this.platformId)) {
       return !!localStorage.getItem('token');
     }
     return false;
   }
+
   getToken(): string | null {
     if (isPlatformBrowser(this.platformId)) {
       return localStorage.getItem('token');
     }
     return null;
   }
+
   setToken(token: string): void {
     if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('token', token);
@@ -135,3 +140,4 @@ export class AuthService {
     }
   }
 }
+

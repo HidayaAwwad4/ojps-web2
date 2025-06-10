@@ -46,7 +46,6 @@ export class AppComponent implements OnInit {
     return 'guest';
   }
 
-
     getUserType(): 'job-seeker' | 'employer' | null {
     const role = this.getRole();
     return role === 'job-seeker' || role === 'employer' ? role : null;

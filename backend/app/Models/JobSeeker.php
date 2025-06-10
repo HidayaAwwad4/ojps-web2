@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class JobSeeker extends Model
 {
     use HasFactory;
+    
     protected $fillable = [
         'user_id',
         'resume_path',
@@ -18,13 +19,8 @@ class JobSeeker extends Model
         'skills',
         'category'
     ];
-    protected $casts = [
-        'experience' => 'array',
-        'education' => 'array',
-        'skills' => 'array',
-    ];
 
-    public function user():BelongsTo
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
