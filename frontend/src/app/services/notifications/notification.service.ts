@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map } from 'rxjs/operators';
+import { Notification } from '../../../models/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +24,8 @@ export class NotificationService {
     return {};
   }
 
-  getAllNotifications(): Observable<any[]> {
-    return this.http.get<any>(`${this.apiUrl}/notifications`, this.getAuthHeaders()).pipe(
-      map(response => {
-        if (response && Array.isArray(response.notifications)) {
-          return response.notifications;
-        } else {
-          console.error('Expected notifications to be an array but got:', response);
-          return [];
-        }
-      }),
-      catchError(error => {
-        console.error('Error fetching notifications:', error);
-        return of([]);
-      })
-    );
+  getAllNotifications(): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
   }
 
   markAsRead(id: number) {

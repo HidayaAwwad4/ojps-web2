@@ -20,12 +20,14 @@ export class AuthService {
     if (isPlatformBrowser(this.platformId)) {
       token = localStorage.getItem('token') || '';
     }
-
+    console.log('Token:', token);
     return {
       headers: new HttpHeaders({
         'Authorization': `Bearer ${token}`
       })
     };
+
+
   }
 
   getRoles() {
@@ -139,5 +141,14 @@ export class AuthService {
       localStorage.removeItem('token');
     }
   }
-}
 
+  updateCategory(categoryName: string): Observable<any> {
+    const body = { category: categoryName };
+    return this.http.post(`${this.apiUrl}/job-seeker/category`, body, this.getAuthHeaders());
+  }
+
+
+
+
+
+}
