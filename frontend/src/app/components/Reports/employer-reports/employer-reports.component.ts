@@ -1,4 +1,4 @@
-import {Component, inject, PLATFORM_ID, ViewChild, ViewContainerRef} from '@angular/core';
+        import {Component, inject, PLATFORM_ID, ViewChild, ViewContainerRef} from '@angular/core';
 import {StatsBoxComponent} from '../stats-box/stats-box.component';
 import { Location } from '@angular/common';
 import {isPlatformBrowser} from '@angular/common';
@@ -39,12 +39,19 @@ export class EmployerReportsComponent {
 
 
 
-  fetchStats(){
-    this.reportsService.getEmployerStats().subscribe(data => {
-      this.applicationsReceived = data.applicationsReceived;
-      this.applicationsSaved = data.applicationsSaved;
-    })
+  fetchStats() {
+    this.reportsService.getEmployerStats().subscribe({
+      next: (res) => {
+        const stats = res.data ?? res;
+        this.applicationsReceived = stats.applicationsReceived ?? 0;
+        this.applicationsSaved = stats.applicationsSaved ?? 0;
+      },
+      error: (err) => {
+        console.error('Error fetching stats:', err);
+      }
+    });
   }
+
   goBack() {
     this.location.back();
   }
