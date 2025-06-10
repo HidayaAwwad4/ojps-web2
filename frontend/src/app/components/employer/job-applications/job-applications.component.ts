@@ -40,11 +40,31 @@ export class JobApplicationsComponent implements OnInit {
       next: (data) => {
         this.profiles = data;
         this.filteredProfiles = [...this.profiles];
+        console.log('Loaded applications:', this.profiles);
       },
       error: (err) => {
         console.error('Failed to load applications', err);
       }
     });
+  }
+
+  getProfilePictureUrl(profile: any): string {
+    // Check if the API returns profile_picture_url
+    if (profile.job_seeker?.user?.profile_picture_url) {
+      return profile.job_seeker.user.profile_picture_url;
+    }
+    
+    // If there's a profile_picture field, construct the URL
+    if (profile.job_seeker?.user?.profile_picture) {
+      return `http://localhost:8000/storage/${profile.job_seeker.user.profile_picture}`;
+    }
+    
+    // Default fallback
+    return 'assets/account-avatar.png';
+  }
+
+  handleImageError(event: any): void {
+    event.target.src = 'assets/account-avatar.png';
   }
 
   filterProfiles(status: string) {
