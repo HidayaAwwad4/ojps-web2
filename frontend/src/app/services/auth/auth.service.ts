@@ -28,7 +28,7 @@ export class AuthService {
     };
 
 
-}
+  }
 
   getRoles() {
     return this.http.get(`${this.apiUrl}/roles`);
@@ -152,4 +152,3 @@ export class AuthService {
 
 
 }
-

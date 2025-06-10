@@ -4,6 +4,8 @@ import { NgClass, NgForOf, NgStyle, CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from '../../navbar/navbar.component';
 import { JobService } from '../../../services/jobs/job.service';
+import { AuthService } from '../../../services/auth/auth.service';
+
 @Component({
   selector: 'app-categories-page',
   standalone: true,
@@ -29,7 +31,9 @@ export class CategoriesPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private jobService: JobService
+    private jobService: JobService,
+    private authService: AuthService
+
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +54,22 @@ export class CategoriesPageComponent implements OnInit {
 
   toggleSave(event: Event, job: any) {
     event.stopPropagation();
-    job.saved = !job.saved;
+
+    if (job.saved) {
+      this.jobService.removeSavedJob(job.id).subscribe({
+        next: () => {
+          job.saved = false;
+        },
+        error: err => console.error('Error removing saved job:', err)
+      });
+    } else {
+      this.jobService.saveJob(job.id).subscribe({
+        next: () => {
+          job.saved = true;
+        },
+        error: err => console.error('Error saving job:', err)
+      });
+    }
   }
 
   goBack() {
@@ -58,9 +77,21 @@ export class CategoriesPageComponent implements OnInit {
   }
 
   applyJob(job: any) {
+    if (!this.authService.isLoggedIn()) {
+      const confirmLogin = confirm('You need to log in first to apply for this job. Would you like to log in now?');
+
+      if (confirmLogin) {
+        this.router.navigate(['/login']);
+      }
+
+      return;
+    }
+
+
     console.log('Applying for job:', job.title);
     this.router.navigate(['/application-review'], {
       queryParams: { jobId: job.id }
     });
   }
+
 }

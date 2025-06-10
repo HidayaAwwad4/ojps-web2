@@ -49,7 +49,7 @@ export class LoginComponent {
         }
 
 
-        if (user.role.name === 'employer' && user.is_approved === false) {
+        if (user.role.name === 'employer' && user.is_approved != 1) {
           this.formInvalidMessage = 'Your employer account is not approved yet. Please wait for admin approval.';
           return;
         }
@@ -79,5 +79,3 @@ export class LoginComponent {
   }
 
 }
-
-

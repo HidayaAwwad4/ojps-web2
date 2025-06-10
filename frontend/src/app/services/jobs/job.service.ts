@@ -52,8 +52,8 @@ export class JobService {
   }
 
   getJobById(jobId: number): Observable<any> {
-      return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
-    }
+    return this.http.get(`${this.apiUrl}/jobs/${jobId}`);
+  }
 
   createJob(jobData: any): Observable<any> {
     const token = localStorage.getItem('token');
