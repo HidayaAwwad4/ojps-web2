@@ -64,7 +64,9 @@ export class HomepageComponent implements OnInit {
   }
 
   selectJob(job: any) {
-    this.router.navigate(['/job-details', job.id]);
+    this.router.navigate(['/job-details', job.id], {
+      queryParams: { role: 'job-seeker' }
+    });
     this.searchResults = [];
     this.searchText = job.title;
   }

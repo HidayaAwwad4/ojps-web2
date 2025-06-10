@@ -13,6 +13,13 @@ use App\Models\JobSeeker;
 
 class JobListingController extends Controller
 {
+    public function getPublicRecommendedJobs()
+    {
+        $jobs = JobListing::where('isOpened', 1)->get();
+
+        return response()->json($jobs);
+    }
+
   public function getRecommendedJobsForSeeker(Request $request)
   {
       $user = $request->user();

@@ -71,7 +71,6 @@ class ApplicationController extends Controller
             return response()->json(['message' => 'Application submitted successfully']);
         }
 
-    // ✅ تحديث الطلب
     public function update(Request $request, $id)
     {
         $application = Application::find($id);
@@ -91,7 +90,6 @@ class ApplicationController extends Controller
         return response()->json($application);
     }
 
-    // ✅ حذف الطلب
     public function destroy($id)
     {
         $application = Application::find($id);
@@ -103,7 +101,6 @@ class ApplicationController extends Controller
         return response()->json(['message' => 'Application deleted successfully']);
     }
 
-    // ✅ استرجاع الطلبات حسب الوظيفة
     public function getApplicantsByJobId($jobId)
     {
         $applications = Application::with(['jobSeeker.user'])
@@ -117,7 +114,6 @@ class ApplicationController extends Controller
         return response()->json($applications);
     }
 
-    // ✅ استرجاع الطلبات حسب الباحث عن عمل
     public function getApplicationsByJobSeekerId($jobSeekerId)
     {
         $user = auth()->user();
@@ -133,7 +129,6 @@ class ApplicationController extends Controller
         return response()->json($applications);
     }
 
-    // ✅ استرجاع طلب واحد مع المستخدم المرتبط
     public function getApplicationById($applicationId)
     {
         $application = Application::with(['jobSeeker.user'])

@@ -61,6 +61,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::get('/admin/job-overview-table', [AdminController::class, 'jobOverviewTable']);
     Route::get('/admin/applications-stats', [AdminController::class, 'getApplicationsStats']);
 });
+Route::get('/jobs/recommended-public', [JobListingController::class, 'getPublicRecommendedJobs']);
+
 Route::get('/search-jobs', [JobListingController::class, 'advancedSearch']);
 Route::get('/jobs/category/{category}', [JobListingController::class, 'getJobsByCategory']);
 Route::get('/roles', [AuthController::class, 'getRoles']);
