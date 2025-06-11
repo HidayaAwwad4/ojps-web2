@@ -13,8 +13,9 @@ import {ReportsService} from '../../../services/Reports/reports.service';
   styleUrl: './line-chart-employer.component.css'
 })
 export class LineChartEmployerComponent implements OnInit {
-  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-  private reportsService = inject(ReportsService);
+  private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  private readonly reportsService = inject(ReportsService);
+
   public lineChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
     datasets: [
@@ -29,18 +30,24 @@ export class LineChartEmployerComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    if (this.isBrowser) {
-      this.reportsService.getEmployeeLineChartData().subscribe((response) => {
+    if (!this.isBrowser) return;
+
+    this.reportsService.getEmployeeLineChartData().subscribe({
+      next: (response: { month: string; total: number }[]) => {
         const labels: string[] = [];
         const data: number[] = [];
-        response.forEach((item: { month: string; total: number }) => {
+
+        response.forEach((item) => {
           labels.push(item.month);
           data.push(item.total);
         });
+
         this.lineChartData.labels = labels;
         this.lineChartData.datasets[0].data = data;
-
-      });
-    }
+      },
+      error: (error) => {
+        console.error('Error fetching line chart data for employer:', error);
+      }
+    });
   }
 }

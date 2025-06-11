@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4a4c3d09-7af4-448a-b275-a6b8ed3c0609" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Http/Controllers/NotificationController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app/Models/Notification.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/Models/Notification.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/backend/database/migrations/2025_05_08_150641_create_notifications_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/database/migrations/2025_06_11_181127_add_redirect_url_to_notifications_table.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-item/notification-item.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Notification/notification-item/notification-item.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/notifications/notification.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/models/notification.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/models/notification.model.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/admin-reports/admin-reports.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/bar-chart-admin/bar-chart-admin.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/employer-reports/employer-reports.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/components/Reports/line-chart-employer/line-chart-employer.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -199,7 +193,7 @@
       <updated>1749563409386</updated>
       <workItem from="1749563411886" duration="7078000" />
       <workItem from="1749673834361" duration="3202000" />
-      <workItem from="1749677422029" duration="4028000" />
+      <workItem from="1749677422029" duration="6351000" />
     </task>
     <servers />
   </component>
