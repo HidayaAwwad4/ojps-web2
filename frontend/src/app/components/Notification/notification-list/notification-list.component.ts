@@ -3,6 +3,7 @@ import {NgClass, NgForOf} from '@angular/common';
 import {NotificationItemComponent} from '../notification-item/notification-item.component';
 import {NotificationService} from '../../../services/notifications/notification.service';
 import {Router} from '@angular/router';
+import {response} from 'express';
 
 
 
@@ -30,10 +31,13 @@ export class NotificationListComponent implements OnInit{
   }
 
   private loadNotifications() {
-    this.notificationService.getAllNotifications().subscribe((notifications: any[]) => {
-      this.groupNotifications(notifications);
+    this.notificationService.getAllNotifications().subscribe((response: { notifications: any[] }) => {
+      this.groupNotifications(response.notifications);
     });
   }
+
+
+
   private groupNotifications(notifications: any[]) {
     const today = new Date();
     const isSameDay = (d1: Date, d2: Date) =>

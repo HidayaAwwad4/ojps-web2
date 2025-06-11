@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Notification } from '../../../models/notification.model';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,30 @@ export class NotificationService {
     return {};
   }
 
-  getAllNotifications(): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
+  getAllNotifications(): Observable<{ notifications: any[] }> {
+    return this.http.get<{ notifications: any[] }>(`${this.apiUrl}/notifications`, this.getAuthHeaders());
   }
 
+
+
   markAsRead(id: number) {
-    return this.http.post(`${this.apiUrl}/notifications/${id}/mark-as-read`, {}, this.getAuthHeaders());
+    return this.http.post(`${this.apiUrl}/notifications/mark-as-read/${id}`, {}, this.getAuthHeaders());
   }
+
+
+  getUnreadNotifications(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/notifications/unread`, this.getAuthHeaders());
+  }
+
+
+  notifyEmployerActivity(employerId: number, type: string) {
+    return this.http.post(`${this.apiUrl}/notifications/employer/${employerId}/${type}`, {}, this.getAuthHeaders());
+  }
+
+  notifySeekerApplicationStatus(seekerId: number, status: string) {
+    return this.http.post(`${this.apiUrl}/notifications/seeker/${seekerId}/${status}`, {}, this.getAuthHeaders());
+  }
+
 
   private drawerVisible = new BehaviorSubject<boolean>(false);
   drawerVisible$ = this.drawerVisible.asObservable();

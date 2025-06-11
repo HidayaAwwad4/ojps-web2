@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReportsService {
-private apiUrl = '/api/reports';
+  private apiUrl = 'http://127.0.0.1:8000/api';
   constructor(private http: HttpClient) { }
 
+  private getAuthHeaders(): { headers: HttpHeaders } | {} {
+    const token = localStorage.getItem('token');
+    if (token) {
+      return {
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${token}`,
+        }),
+      };
+    }
+    return {};
+  }
+
   getAdminStats(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/admin-stats`);
+    return this.http.get<any>(`${this.apiUrl}/reports/admin-stats`, this.getAuthHeaders());
   }
 
   getEmployerStats(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/employer-stats`);
+    return this.http.get<any>(`${this.apiUrl}/reports/employer-stats`, this.getAuthHeaders());
   }
 
   getAdminBarchartData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/admin-bar-chart`);
+    return this.http.get<any>(`${this.apiUrl}/reports/admin-bar-chart`, this.getAuthHeaders());
   }
 
   getEmployeeLineChartData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/employer-Line-chart`);
+    return this.http.get<any>(`${this.apiUrl}/reports/employer-Line-chart`, this.getAuthHeaders());
   }
 }

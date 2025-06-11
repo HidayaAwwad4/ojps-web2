@@ -40,8 +40,10 @@ class NotificationController extends Controller
         return response()->json(['message' => 'Notification marked as read.']);
     }
 
-    public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
+    public function notifySeekerApplicationStatus(Request $request, $seekerId, $status): \Illuminate\Http\JsonResponse
     {
+        $employer = $request->user();
+
         $message = $status === 'accepted'
             ? 'Your application has been accepted. Please contact the company for an interview.'
             : 'Your application has been rejected. Better luck next time.';
@@ -50,15 +52,19 @@ class NotificationController extends Controller
             'user_id' => $seekerId,
             'message' => $message,
             'type' => 'application_status',
-            'is_read' => false
+            'is_read' => false,
+            'avatar' => $employer->avatar ?: 'default-avatar',
         ]);
 
         return response()->json(['message' => 'Notification sent to seeker.']);
     }
 
 
-    public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
+
+    public function notifyEmployerActivity(Request $request, $employerId, $type): \Illuminate\Http\JsonResponse
     {
+        $seeker = $request->user();
+
         $message = '';
 
         if ($type === 'applied') {
@@ -71,11 +77,13 @@ class NotificationController extends Controller
             'user_id' => $employerId,
             'message' => $message,
             'type' => 'seeker_activity',
-            'is_read' => false
+            'is_read' => false,
+            'avatar' => $seeker->avatar ?: 'default-avatar',
         ]);
 
         return response()->json(['message' => 'Notification sent to employer.']);
     }
+
 
 
 
@@ -100,10 +108,10 @@ class NotificationController extends Controller
     {
         switch ($notification->type) {
             case 'application_status':
-                return '/seeker/applications-status';
+                return 'jobs/{id}/status';
 
                 case 'seeker_activity':
-                    return '/employer/job-applications';
+                    return '/applications/{id}';
 
                     default:
                         return '/';

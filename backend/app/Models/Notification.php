@@ -13,7 +13,8 @@ class Notification extends Model
         'type',
         'is_read',
         'created_at',
-        'avatar'
+        'avatar',
+        'redirect_url'
     ];
 
     public function user(): BelongsTo

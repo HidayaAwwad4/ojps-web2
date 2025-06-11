@@ -3,7 +3,7 @@
 
 
 
-    <img [src]="notification.user.profile_picture || '/assets/avatar2.jpg' " class="rounded-circle me-3" width="50" height="50" alt="Avatar" />
+    <img [src]="getAvatarUrl(notification.user.profile_picture)" class="rounded-circle me-3" width="50" height="50" alt="Avatar" />
     <div>
       <h6 class="mb-1">{{ notification.user.name }}</h6>
       <p class="mb-0 text-muted small">{{ notification.message }}</p>
