@@ -11,4 +11,5 @@ export interface Notification {
   created_at: string;
   user: User;
   redirect_url?: string;
+  sender_name?: string;
 }

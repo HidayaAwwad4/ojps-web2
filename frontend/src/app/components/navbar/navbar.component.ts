@@ -52,7 +52,7 @@ export class NavbarComponent implements OnInit {
         localStorage.removeItem('token');
         localStorage.removeItem('role');
         localStorage.removeItem('user');
-        
+
         this.router.navigate(['/login']);
       },
       error: (error) => {

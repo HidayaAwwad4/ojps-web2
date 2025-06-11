@@ -11,18 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('notifications', function (Blueprint $table) {
-            $table->id();
-
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+        Schema::table('notifications', function (Blueprint $table) {
             $table->string('sender_name')->after('type');
-            $table->string('message');
-            $table->string('type');
-            $table->boolean('is_read')->default(false);
-            $table->string('avatar')->nullable();
-            $table->timestamps();
         });
-
     }
 
     /**
@@ -31,6 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('notifications', function (Blueprint $table) {
-            $table->dropColumn(['sender_name']);
-        });    }
+            $table->dropColumn('sender_name');
+        });
+    }
 };

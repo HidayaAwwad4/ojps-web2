@@ -17,6 +17,7 @@ class NotificationController extends Controller
             'notifications' => $user->notifications()->latest()->get()
         ]);
     }
+
     public function unread(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = $request->user();
@@ -25,6 +26,7 @@ class NotificationController extends Controller
             'notifications' => $user->notifications()->where('is_read', false)->latest()->get()
         ]);
     }
+
     public function markAsRead(Request $request,$id): \Illuminate\Http\JsonResponse
     {
         $notification = Notification::where('id', $id)
@@ -37,23 +39,33 @@ class NotificationController extends Controller
 
         return response()->json(['message' => 'Notification marked as read.']);
     }
-    public function notifySeekerApplicationStatus($seekerId, $status): \Illuminate\Http\JsonResponse
+
+    public function notifySeekerApplicationStatus(Request $request, $seekerId, $status): \Illuminate\Http\JsonResponse
     {
+        $employer = $request->user();
+
         $message = $status === 'accepted'
             ? 'Your application has been accepted. Please contact the company for an interview.'
             : 'Your application has been rejected. Better luck next time.';
 
         Notification::create([
             'user_id' => $seekerId,
+            'sender_name' => $employer->name,
             'message' => $message,
             'type' => 'application_status',
-            'is_read' => false
+            'is_read' => false,
+            'avatar' => $employer->avatar ?: 'default-avatar',
         ]);
 
         return response()->json(['message' => 'Notification sent to seeker.']);
     }
-    public function notifyEmployerActivity($employerId, $type): \Illuminate\Http\JsonResponse
+
+
+
+    public function notifyEmployerActivity(Request $request, $employerId, $type): \Illuminate\Http\JsonResponse
     {
+        $seeker = $request->user();
+
         $message = '';
 
         if ($type === 'applied') {
@@ -64,40 +76,48 @@ class NotificationController extends Controller
 
         Notification::create([
             'user_id' => $employerId,
+            'sender_name' => $seeker->name,
             'message' => $message,
             'type' => 'seeker_activity',
-            'is_read' => false
+            'is_read' => false,
+            'avatar' => $seeker->avatar ?: 'default-avatar',
         ]);
 
         return response()->json(['message' => 'Notification sent to employer.']);
     }
+
+
+
+
     public function getUserNotifications(Request $request): \Illuminate\Http\JsonResponse
     {
         $notifications = Notification::with('user')
-            -> where('user_id', auth()->id())
+        -> where('user_id', auth()->id())
             ->orderBy('created_at', 'desc')
             ->get()
-            ->map(function ($notification) {
-                return array_merge($notification->toArray(), [
-                    'redirect_url' => $this->generatedRedirectUrl($notification)
-                ]);
-            });
+        ->map(function ($notification) {
+            return array_merge($notification->toArray(), [
+                'redirect_url' => $this->generatedRedirectUrl($notification),
+                'sender_name' => $notification->sender_name,
+            ]);
+    });
 
 
         return response()->json(['notifications' => $notifications]);
     }
+
     private function generatedRedirectUrl( Notification $notification): string
 
     {
         switch ($notification->type) {
             case 'application_status':
-                return '/seeker/applications-status';
+                return '/applications-status';
 
-            case 'seeker_activity':
-                return '/employer/job-applications';
+                case 'seeker_activity':
+                    return '/employer/job-applications';
 
-            default:
-                return '/';
+                    default:
+                        return '/';
 
         }
     }

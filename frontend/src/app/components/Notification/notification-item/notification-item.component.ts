@@ -14,4 +14,10 @@ import {Notification} from '../../../../models/notification.model';
 export class NotificationItemComponent {
   @Input() notification!: Notification;
   @Input() isNew: boolean = false;
+
+  getAvatarUrl(avatar?: string): string {
+    return avatar === 'default-avatar' || !avatar
+      ? 'assets/account-avatar.png'
+      : avatar;
+  }
 }
