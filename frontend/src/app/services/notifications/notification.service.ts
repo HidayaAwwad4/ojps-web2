@@ -36,19 +36,6 @@ export class NotificationService {
   }
 
 
-  getUnreadNotifications(): Observable<any> {
-    return this.http.get(`${this.apiUrl}/notifications/unread`, this.getAuthHeaders());
-  }
-
-
-  notifyEmployerActivity(employerId: number, type: string) {
-    return this.http.post(`${this.apiUrl}/notifications/employer/${employerId}/${type}`, {}, this.getAuthHeaders());
-  }
-
-  notifySeekerApplicationStatus(seekerId: number, status: string) {
-    return this.http.post(`${this.apiUrl}/notifications/seeker/${seekerId}/${status}`, {}, this.getAuthHeaders());
-  }
-
 
   private drawerVisible = new BehaviorSubject<boolean>(false);
   drawerVisible$ = this.drawerVisible.asObservable();

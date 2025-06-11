@@ -9,12 +9,12 @@ class Notification extends Model
 {
     protected $fillable = [
         'user_id',
+        'sender_name',
         'message',
         'type',
         'is_read',
         'created_at',
         'avatar',
-        'redirect_url'
     ];
 
     public function user(): BelongsTo

@@ -50,6 +50,7 @@ class NotificationController extends Controller
 
         Notification::create([
             'user_id' => $seekerId,
+            'sender_name' => $employer->name,
             'message' => $message,
             'type' => 'application_status',
             'is_read' => false,
@@ -75,6 +76,7 @@ class NotificationController extends Controller
 
         Notification::create([
             'user_id' => $employerId,
+            'sender_name' => $seeker->name,
             'message' => $message,
             'type' => 'seeker_activity',
             'is_read' => false,
@@ -95,7 +97,8 @@ class NotificationController extends Controller
             ->get()
         ->map(function ($notification) {
             return array_merge($notification->toArray(), [
-                'redirect_url' => $this->generatedRedirectUrl($notification)
+                'redirect_url' => $this->generatedRedirectUrl($notification),
+                'sender_name' => $notification->sender_name,
             ]);
     });
 
@@ -108,10 +111,10 @@ class NotificationController extends Controller
     {
         switch ($notification->type) {
             case 'application_status':
-                return 'jobs/{id}/status';
+                return '/applications-status';
 
                 case 'seeker_activity':
-                    return '/applications/{id}';
+                    return '/employer/job-applications';
 
                     default:
                         return '/';

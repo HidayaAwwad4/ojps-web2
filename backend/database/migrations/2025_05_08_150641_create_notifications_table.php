@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
 
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('sender_name')->after('type');
             $table->string('message');
             $table->string('type');
             $table->boolean('is_read')->default(false);
@@ -29,6 +30,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('notifications');
-    }
+        Schema::table('notifications', function (Blueprint $table) {
+            $table->dropColumn(['sender_name']);
+        });    }
 };
