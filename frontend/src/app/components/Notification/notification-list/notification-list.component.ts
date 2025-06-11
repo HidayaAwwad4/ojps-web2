@@ -55,15 +55,15 @@ export class NotificationListComponent implements OnInit{
   }
 
   onOpenNotification(notification: any) {
-   if (!notification.is_read) {
-     this.notificationService.markAsRead(notification.id).subscribe(() => {
-       notification.is_read = true;
-       this.navigateTo(notification.redirect_url || '/');
-       this.loadNotifications();
-     });
-   }else {
-     this.navigateTo(notification.redirect_url || '/');
-   }
+    if (!notification.is_read) {
+      this.notificationService.markAsRead(notification.id).subscribe(() => {
+        notification.is_read = true;
+        this.navigateTo(notification.redirect_url || '/');
+        this.loadNotifications();
+      });
+    }else {
+      this.navigateTo(notification.redirect_url || '/');
+    }
   }
   private navigateTo(url: string) {
     this.router.navigateByUrl(url);

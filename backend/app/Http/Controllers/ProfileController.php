@@ -21,7 +21,16 @@ class ProfileController extends Controller
 
         if (is_string($field) && !empty($field)) {
             try {
+                // First try to decode once
                 $decoded = json_decode($field, true);
+                
+                // If the decoded result is a string and looks like JSON, try decoding again
+                // This handles double-encoded JSON
+                if (is_string($decoded) && !empty($decoded) && 
+                    (str_starts_with(trim($decoded), '[') || str_starts_with(trim($decoded), '{'))) {
+                    $decoded = json_decode($decoded, true);
+                }
+                
                 Log::info('JSON decode result:', [
                     'decoded' => $decoded,
                     'json_error' => json_last_error_msg(),
@@ -37,7 +46,7 @@ class ProfileController extends Controller
         Log::info('Field is not a non-empty string, returning empty array');
         return [];
     }
-
+    
     public function getProfile(Request $request)
     {
         try {
@@ -84,12 +93,12 @@ class ProfileController extends Controller
                             }
                         }
                         break;
-                        
+
                     case 'employer':
                         Log::info('User is an Employer');
                         // Employer-specific data can be added here if needed
                         break;
-                        
+
                     case 'admin':
 
                     case 'Employer':
@@ -129,7 +138,7 @@ class ProfileController extends Controller
             ], 500);
         }
     }
-
+    
     public function updateProfile(Request $request)
     {
         try {
@@ -172,12 +181,13 @@ class ProfileController extends Controller
             Log::info('User data saved successfully');
 
             // Handle JobSeeker data if user is a job-seeker
-            if ($user->role && $user->role->name === 'job-Seeker') {
+            if ($user->role && $user->role->name === 'job-seeker') {
                 Log::info('Processing job-seeker data...');
 
-                $jobSeeker = JobSeeker::where('user_id', $user->id)->first();
-
-                if (!$jobSeeker) {
+                // Get the job seeker record directly from DB to avoid model accessors/mutators
+                $jobSeekerId = DB::table('job_seekers')->where('user_id', $user->id)->value('id');
+                
+                if (!$jobSeekerId) {
                     Log::error('JobSeeker record not found for user:', ['user_id' => $user->id]);
                     return response()->json([
                         'status' => false,
@@ -185,16 +195,11 @@ class ProfileController extends Controller
                     ], 404);
                 }
 
-                Log::info('JobSeeker found:', ['job_seeker_id' => $jobSeeker->id]);
+                Log::info('JobSeeker found:', ['job_seeker_id' => $jobSeekerId]);
 
-                // Log data before update
-                Log::info('JobSeeker BEFORE update:', [
-                    'experience' => $jobSeeker->experience,
-                    'education' => $jobSeeker->education,
-                    'skills' => $jobSeeker->skills
-                ]);
-
-                // Save JSON data to the database
+                // Prepare updates
+                $updates = [];
+                
                 if ($request->has('experience')) {
                     $encoded = json_encode($request->experience);
                     Log::info('Encoding experience:', [
@@ -202,7 +207,7 @@ class ProfileController extends Controller
                         'encoded' => $encoded,
                         'json_error' => json_last_error_msg()
                     ]);
-                    $jobSeeker->experience = $encoded;
+                    $updates['experience'] = $encoded;
                 }
 
                 if ($request->has('education')) {
@@ -212,7 +217,7 @@ class ProfileController extends Controller
                         'encoded' => $encoded,
                         'json_error' => json_last_error_msg()
                     ]);
-                    $jobSeeker->education = $encoded;
+                    $updates['education'] = $encoded;
                 }
 
                 if ($request->has('skills')) {
@@ -222,22 +227,21 @@ class ProfileController extends Controller
                         'encoded' => $encoded,
                         'json_error' => json_last_error_msg()
                     ]);
-                    $jobSeeker->skills = $encoded;
+                    $updates['skills'] = $encoded;
                 }
 
-                // Log data BEFORE save
-                Log::info('JobSeeker data prepared for save:', [
-                    'experience' => $jobSeeker->experience,
-                    'education' => $jobSeeker->education,
-                    'skills' => $jobSeeker->skills
-                ]);
+                // Log data before save
+                Log::info('JobSeeker data prepared for save:', $updates);
 
-                // Save JobSeeker changes
-                $saveResult = $jobSeeker->save();
-                Log::info('JobSeeker save result:', ['success' => $saveResult]);
+                // Update using DB query builder to bypass model accessors/mutators
+                $updateResult = DB::table('job_seekers')
+                    ->where('id', $jobSeekerId)
+                    ->update($updates);
+                    
+                Log::info('JobSeeker update result:', ['success' => $updateResult]);
 
                 // Verify the save by checking the database directly
-                $rawData = DB::table('job_seekers')->where('id', $jobSeeker->id)->first();
+                $rawData = DB::table('job_seekers')->where('id', $jobSeekerId)->first();
                 Log::info('Database verification after save:', [
                     'experience' => $rawData->experience ?? 'null',
                     'education' => $rawData->education ?? 'null',
@@ -268,7 +272,8 @@ class ProfileController extends Controller
             ], 500);
         }
     }
-
+    
+    // Other methods remain unchanged...
     public function updateBasicInfo(Request $request) {
         $user = Auth::user();
         $jobSeeker = $user->jobSeeker;
@@ -281,7 +286,7 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Basic info updated successfully']);
     }
-
+    
     public function updateResumeInfo(Request $request) {
         $user = Auth::user();
         $jobSeeker = $user->jobSeeker;
@@ -294,7 +299,7 @@ class ProfileController extends Controller
 
         return response()->json(['message' => 'Resume info updated successfully']);
     }
-
+    
     public function uploadProfilePicture(Request $request)
     {
         $request->validate([
@@ -319,7 +324,7 @@ class ProfileController extends Controller
             ]
         ]);
     }
-
+    
     public function uploadResume(Request $request)
     {
         $request->validate([
@@ -346,24 +351,90 @@ class ProfileController extends Controller
             ]
         ]);
     }
-
+    
     public function getJobSeekerProfile($id)
     {
-        $jobSeeker = JobSeeker::with('user')->findOrFail($id);
+        try {
+            Log::info('=== GET JOB SEEKER PROFILE START ===');
+            Log::info('Job seeker ID:', ['id' => $id]);
 
-        return response()->json([
-            'status' => true,
-            'message' => 'Job seeker profile retrieved successfully',
-            'data' => [
-                'user' => $jobSeeker->user,
-                'experience' => $jobSeeker->experience ?? [],
-                'education' => $jobSeeker->education ?? [],
-                'skills' => $jobSeeker->skills ?? [],
-                'resume_path' => $jobSeeker->resume_path ? url('storage/' . $jobSeeker->resume_path) : null
-            ]
-        ]);
+            // Use DB query builder directly to avoid model accessors/mutators
+            $jobSeeker = DB::table('job_seekers')->where('id', $id)->first();
+
+            if (!$jobSeeker) {
+                Log::error('Job seeker not found:', ['id' => $id]);
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Job seeker not found'
+                ], 404);
+            }
+
+            Log::info('Job seeker found:', ['job_seeker_id' => $jobSeeker->id]);
+
+            // Get user data
+            $user = DB::table('users')->where('id', $jobSeeker->user_id)->first();
+            
+            if (!$user) {
+                Log::error('User not found for job seeker:', ['job_seeker_id' => $jobSeeker->id, 'user_id' => $jobSeeker->user_id]);
+                return response()->json([
+                    'status' => false,
+                    'message' => 'User not found for this job seeker'
+                ], 404);
+            }
+
+            Log::info('User found:', ['user_id' => $user->id]);
+
+            // Add profile picture URL to user data
+            $userData = (array) $user;
+            if ($user->profile_picture) {
+                $userData['profile_picture_url'] = url('storage/' . $user->profile_picture);
+            } else {
+                $userData['profile_picture_url'] = null;
+            }
+
+            // Decode JSON fields
+            $experience = $this->decodeJsonField($jobSeeker->experience);
+            $education = $this->decodeJsonField($jobSeeker->education);
+            $skills = $this->decodeJsonField($jobSeeker->skills);
+
+            Log::info('Decoded profile data:', [
+                'experience' => $experience,
+                'education' => $education,
+                'skills' => $skills
+            ]);
+
+            $responseData = [
+                'status' => true,
+                'message' => 'Job seeker profile retrieved successfully',
+                'data' => [
+                    'user' => $userData,
+                    'experience' => $experience,
+                    'education' => $education,
+                    'skills' => $skills,
+                    'resume_path' => $jobSeeker->resume_path ? url('storage/' . $jobSeeker->resume_path) : null
+                ]
+            ];
+
+            Log::info('Response data prepared:', $responseData);
+            Log::info('=== GET JOB SEEKER PROFILE END ===');
+
+            return response()->json($responseData);
+
+        } catch (\Exception $e) {
+            Log::error('Error in getJobSeekerProfile:', [
+                'message' => $e->getMessage(),
+                'file' => $e->getFile(),
+                'line' => $e->getLine(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'status' => false,
+                'message' => 'Error retrieving job seeker profile: ' . $e->getMessage()
+            ], 500);
+        }
     }
-
+    
     public function downloadResume($id)
     {
         $jobSeeker = JobSeeker::findOrFail($id);
@@ -377,7 +448,7 @@ class ProfileController extends Controller
 
         return Storage::disk('public')->download($jobSeeker->resume_path);
     }
-
+    
     public function updatePassword(Request $request)
     {
         $request->validate([
@@ -401,7 +472,7 @@ class ProfileController extends Controller
             'message' => 'Password updated successfully'
         ]);
     }
-
+    
     public function getJobSeekerIdByUserId($userId): \Illuminate\Http\JsonResponse
     {
         $jobSeeker = JobSeeker::where('user_id', $userId)->first();

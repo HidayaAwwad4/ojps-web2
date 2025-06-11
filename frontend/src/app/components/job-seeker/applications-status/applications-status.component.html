@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-auto job-card-container" *ngFor="let app of filteredJobs" (click)="onJobClick(app)" style="cursor: pointer;">
-            <div class="card job-card">
+            <div class="card job-card" >
                 <div
                         class="status-badge"
                         [ngClass]="{
@@ -38,7 +38,7 @@
                 <img [src]="app.job.company_logo || 'assets/default-logo.png'" alt="Company_Logo" class="job-image" />
                 <div class="card-body">
                     <h6 class="card-title fw-bold">{{ app.job.title }}</h6>
-                    <p class="card-text small text-muted">{{ app.job.description }}</p>
+                    <p class="card-text small text-muted job-desc">{{ app.job.description }}</p>
                 </div>
                 <div class="card-footer custom-rate-text">
                     ${{ app.job.salary }} per hour

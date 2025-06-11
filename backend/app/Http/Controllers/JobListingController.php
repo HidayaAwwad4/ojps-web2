@@ -150,6 +150,7 @@ class JobListingController extends Controller
             ], 500);
         }
     }
+
     public function updateStatus(Request $request, $id): JsonResponse
     {
         try {
@@ -228,6 +229,13 @@ class JobListingController extends Controller
                     });
             })
             ->get();
+
+        return response()->json($jobs);
+    }
+
+    public function getPublicRecommendedJobs(): JsonResponse
+    {
+        $jobs = JobListing::all();
 
         return response()->json($jobs);
     }

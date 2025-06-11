@@ -279,10 +279,6 @@ class ApplicationController extends Controller
     {
         $user = auth()->user();
 
-        if ($user->role->name !== 'admin' && $user->id != $jobSeekerId) {
-            return response()->json(['message' => 'Unauthorized'], 403);
-        }
-
         $applications = Application::with(['job', 'jobSeeker'])
             ->where('job_seeker_id', $jobSeekerId)
             ->get();

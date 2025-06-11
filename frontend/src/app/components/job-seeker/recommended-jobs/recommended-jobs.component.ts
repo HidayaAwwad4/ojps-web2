@@ -14,7 +14,7 @@ import {RouterLink} from '@angular/router';
   standalone: true
 })
 export class RecommendedJobsComponent implements OnInit {
-   jobs: any[] = [];
+  jobs: any[] = [];
 
   @Output() jobClicked = new EventEmitter<any>();
   @ViewChild('carousel', { static: true }) carousel!: ElementRef;

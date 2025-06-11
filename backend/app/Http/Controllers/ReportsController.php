@@ -35,7 +35,6 @@ class ReportsController extends Controller
             ]
         ], $hasData ? 200 : 404);
     }
-
     public function getEmployerStats(): JsonResponse
     {
         $user = auth()->user();
@@ -72,7 +71,6 @@ class ReportsController extends Controller
             ]
         ], $hasData ? 200 : 404);
     }
-
     public function getAdminBarchartData(): JsonResponse
     {
         $data = JobListing::select('category', DB::raw('count(*) as total'))
@@ -84,7 +82,6 @@ class ReportsController extends Controller
             'data' => $data->isEmpty() ? [] : $data
         ], $data->isEmpty() ? 404 : 200);
     }
-
     public function getEmployerLineChartData(): JsonResponse
     {
         $user = auth()->user();
