@@ -67,7 +67,7 @@ class ApplicationController extends Controller
                 Notification::create([
                     'user_id' => $employerUserId,
                     'sender_name' => $user->name,
-                    'avatar' => $user->profile_picture ?? 'default_avatar.png',
+                    'avatar' => $user->profile_picture ?? 'account-avatar.png',
                     'message' => 'A job seeker has applied to your job: ' . $job->title,
                     'type' => 'application_received',
                     'redirect_url' => '/employer/job-applications',
@@ -101,7 +101,7 @@ class ApplicationController extends Controller
                 \App\Models\Notification::create([
                     'user_id' => $userId,
                     'sender_name' => auth()->user()->name ?? 'System',
-                    'avatar' => auth()->user()->profile_picture ?? 'default_avatar.png',
+                    'avatar' => auth()->user()->profile_picture ?? 'account-avatar.png',
                     'message' => 'Your application has been ' . $request->status . '.',
                     'type' => 'application_' . $request->status,
                     'redirect_url' => '/seeker/applications-status',
