@@ -78,6 +78,7 @@ class ApplicationController extends Controller
 
         return response()->json(['message' => 'Application submitted successfully']);
     }
+
     public function update(Request $request, $id)
     {
         $application = Application::find($id);
