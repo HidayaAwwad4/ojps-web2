@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/jobs/{id}', [JobListingController::class, 'delete']);
     Route::put('/jobs/{id}/status', [JobListingController::class, 'updateStatus']);
     Route::get('/employer', [JobListingController::class, 'getEmployerByUser']);
+    Route::get('/seeker', [JobListingController::class, 'getSeekerByUser']);
     Route::get('/employer/{employerId}/jobs', [JobListingController::class, 'getByEmployer']);
     Route::get('/jobs/recommended', [JobListingController::class, 'getRecommendedJobsForSeeker']);
     //NotificationController
@@ -46,13 +47,23 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/applications/by-job-seeker/{jobSeekerId}', [ApplicationController::class, 'getApplicationsByJobSeekerId']);
     Route::post('/applications/upload-cv-and-cover-letter', [ApplicationController::class, 'uploadCVAndCoverLetter']);
     //AdminController
+    Route::get('/admin/users', [AdminController::class, 'allUsers']);
+    Route::post('/admin/users', [AdminController::class, 'addUser']);
+    Route::put('/admin/users/{id}', [AdminController::class, 'updateUser']);
+    Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
+    Route::get('admin/employers/pending', [AdminController::class, 'pendingEmployerRequests']);
+    Route::post('admin/employers/{id}/approve', [AdminController::class, 'approveEmployer']);
+    Route::post('admin/employers/{id}/reject', [AdminController::class, 'rejectEmployer']);
+    Route::get('/admin/job-stats', [AdminController::class, 'jobDemandStats']);
+    Route::get('/admin/job-listings', [AdminController::class, 'allJobListings']);
+    Route::delete('/admin/job-listings/{id}', [AdminController::class, 'deleteJobListing']);
     Route::get('/admin/user-count', [AdminController::class, 'userCount']);
     Route::get('/admin/employer-count', [AdminController::class, 'employerCount']);
-    Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListings']);
     Route::get('/admin/job-seeker-count', [AdminController::class, 'jobSeekerCount']);
     Route::get('/admin/job-listing-count', [AdminController::class, 'jobListingCount']);
     Route::get('/admin/accepted-applications', [AdminController::class, 'acceptedApplicationsCount']);
     Route::get('/admin/rejected-applications', [AdminController::class, 'rejectedApplicationsCount']);
+    Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListings']);
     Route::get('/admin/job-overview-table', [AdminController::class, 'jobOverviewTable']);
     Route::get('/admin/applications-stats', [AdminController::class, 'getApplicationsStats']);
     //ProfileController
@@ -76,6 +87,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/verify-forgot-code', [AuthController::class, 'verifyForgotCode']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+Route::get('/job-seekers/user/{user_id}', [ProfileController::class, 'getJobSeekerIdByUser']);
+
 //JobListingController
 Route::get('/jobs', [JobListingController::class, 'getAll']);
 Route::get('/jobs/{id}', [JobListingController::class, 'getById']);
@@ -96,24 +109,7 @@ Route::get('/favorites', [FavoriteJobController::class, 'index']);
 Route::post('/favorites', [FavoriteJobController::class, 'store']);
 Route::delete('/favorites/{id}', [FavoriteJobController::class, 'destroy']);
 Route::get('/favorites/job-seeker/{jobSeekerId}', [FavoriteJobController::class, 'getByJobSeeker']);
-//AdminController
-Route::get('/admin/users', [AdminController::class, 'allUsers']);
-Route::post('/admin/users', [AdminController::class, 'addUser']);
-Route::put('/admin/users/{id}', [AdminController::class, 'updateUser']);
-Route::delete('/admin/users/{id}', [AdminController::class, 'deleteUser']);
-Route::get('admin/employers/pending', [AdminController::class, 'pendingEmployerRequests']);
-Route::post('admin/employers/{id}/approve', [AdminController::class, 'approveEmployer']);
-Route::post('admin/employers/{id}/reject', [AdminController::class, 'rejectEmployer']);
-Route::get('/admin/job-stats', [AdminController::class, 'jobDemandStats']);
-Route::get('/admin/job-listings', [AdminController::class, 'allJobListings']);
-Route::delete('/admin/job-listings/{id}', [AdminController::class, 'deleteJobListing']);
-Route::get('/admin/user-count', [AdminController::class, 'userCount']);
-Route::get('/admin/employer-count', [AdminController::class, 'employerCount']);
-Route::get('/admin/job-seeker-count', [AdminController::class, 'jobSeekerCount']);
-Route::get('/admin/job-listing-count', [AdminController::class, 'jobListingCount']);
-Route::get('/admin/accepted-applications', [AdminController::class, 'acceptedApplicationsCount']);
-Route::get('/admin/rejected-applications', [AdminController::class, 'rejectedApplicationsCount']);
-Route::get('/admin/latest-jobs', [AdminController::class, 'latestJobListing']);
+
 //ApplicationController
 Route::get('/applications', [ApplicationController::class, 'index']);
 Route::get('/applications/{id}', [ApplicationController::class, 'show']);

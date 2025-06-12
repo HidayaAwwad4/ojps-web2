@@ -1,4 +1,4 @@
-import {Component, inject, PLATFORM_ID, ViewChild, ViewContainerRef} from '@angular/core';
+import {AfterViewInit, Component, inject, PLATFORM_ID, ViewChild, ViewContainerRef} from '@angular/core';
 import {StatsBoxComponent} from '../stats-box/stats-box.component';
 import { Location } from '@angular/common';
 import {isPlatformBrowser} from '@angular/common';
@@ -10,9 +10,10 @@ import {ReportsService} from '../../../services/Reports/reports.service';
     StatsBoxComponent,
   ],
   templateUrl: './admin-reports.component.html',
+  standalone: true,
   styleUrl: './admin-reports.component.css'
 })
-export class AdminReportsComponent {
+export class AdminReportsComponent implements AfterViewInit {
   @ViewChild('chartContainer', { read: ViewContainerRef }) container!: ViewContainerRef;
 
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
@@ -37,17 +38,24 @@ export class AdminReportsComponent {
   }
 
 
-  fetchStats(){
-    this.reportsService.getAdminStats().subscribe(data => {
-      this.totalApplications = data.totalApplications;
-      this.totalSeekers = data.totalSeekers;
-      this.totalEmployers = data.totalEmployers;
-
-    })
+  fetchStats(): void {
+    this.reportsService.getAdminStats().subscribe({
+      next: (response) => {
+        const stats = response.data;
+        this.totalApplications = stats.totalApplications;
+        this.totalSeekers = stats.totalSeekers;
+        this.totalEmployers = stats.totalEmployers;
+      },
+      error: (error) => {
+        console.error('Error fetching stats:', error);
+      }
+    });
   }
 
+
+
   goBack() {
-   this.location.back();
+    this.location.back();
   }
 
 }

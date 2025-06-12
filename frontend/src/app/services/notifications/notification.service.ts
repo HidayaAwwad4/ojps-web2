@@ -32,8 +32,10 @@ export class NotificationService {
 
 
   markAsRead(id: number) {
-    return this.http.post(`${this.apiUrl}/notifications/${id}/mark-as-read`, {}, this.getAuthHeaders());
+    return this.http.post(`${this.apiUrl}/notifications/mark-as-read/${id}`, {}, this.getAuthHeaders());
   }
+
+
 
   private drawerVisible = new BehaviorSubject<boolean>(false);
   drawerVisible$ = this.drawerVisible.asObservable();

@@ -18,33 +18,27 @@ export class ApplicationsStatusComponent implements OnInit {
   constructor(private jobService: JobService) {}
 
   ngOnInit(): void {
-    const userJson = localStorage.getItem('user');
-    if (!userJson) {
-      console.error('User data not found in localStorage');
-      return;
-    }
+    this.jobService.getSeekerByUser().subscribe({
+      next: (seeker) => {
+        const jobSeekerId = seeker.id;
 
-    const user = JSON.parse(userJson);
-    const jobSeekerId = user.job_seeker_id ?? user.id;
-
-    if (!jobSeekerId) {
-      console.error('Job Seeker ID not found in user data');
-      return;
-    }
-
-    this.jobService.getApplicationsByJobSeekerId(1).subscribe(applications => {
-      this.underReviewJobs = applications.filter(app =>
-        ['pending', 'shortlisted'].includes(app.status?.toLowerCase())
-      );
-      this.acceptedJobs = applications.filter(app =>
-        app.status?.toLowerCase() === 'accepted'
-      );
-      this.rejectedJobs = applications.filter(app =>
-        app.status?.toLowerCase() === 'rejected'
-      );
+        this.jobService.getApplicationsByJobSeekerId(jobSeekerId).subscribe(applications => {
+          this.underReviewJobs = applications.filter(app =>
+            ['pending', 'shortlisted'].includes(app.status?.toLowerCase())
+          );
+          this.acceptedJobs = applications.filter(app =>
+            app.status?.toLowerCase() === 'accepted'
+          );
+          this.rejectedJobs = applications.filter(app =>
+            app.status?.toLowerCase() === 'rejected'
+          );
+        });
+      },
+      error: (err) => {
+        console.error('Error fetching job seeker:', err);
+      }
     });
   }
-
 
   get filteredJobs(): any[] {
     if (this.selectedTab === 'under_review') return this.underReviewJobs;

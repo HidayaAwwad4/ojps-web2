@@ -134,6 +134,7 @@ class ApplicationController extends Controller
 
 namespace App\Http\Controllers;
 use App\Models\Application;
+use App\Models\Employer;
 use App\Models\JobListing;
 use App\Models\JobSeeker;
 use App\Models\Notification;
@@ -172,6 +173,7 @@ class ApplicationController extends Controller
         if (!$jobSeeker) {
             return response()->json(['error' => 'Job seeker not found'], 404);
         }
+
         if ($request->hasFile('cv_file')) {
             if ($jobSeeker->resume_path) {
                 Storage::disk('public')->delete($jobSeeker->resume_path);
@@ -180,6 +182,7 @@ class ApplicationController extends Controller
             $jobSeeker->resume_path = $path;
             $jobSeeker->save();
         }
+
         $application = new Application();
         $application->job_id = $request->job_id;
         $application->job_seeker_id = $jobSeeker->id;
@@ -190,18 +193,24 @@ class ApplicationController extends Controller
 
         $job = JobListing::find($request->job_id);
         if ($job && $job->employer_id) {
-            Notification::create([
-                'user_id' => $job->employer_id,
-                'message' => 'A job seeker has applied to your job: ' . $job->title,
-                'type' => 'application_received',
-                'redirect_url' => '/employer/job-applications',
-                'is_read' => false,
-            ]);
+            $employer = Employer::find($job->employer_id);
+            $employerUserId = $employer?->user_id;
+
+            if ($employerUserId) {
+                Notification::create([
+                    'user_id' => $employerUserId,
+                    'sender_name' => $user->name,
+                    'avatar' => $user->profile_picture ?? 'default_avatar.png',
+                    'message' => 'A job seeker has applied to your job: ' . $job->title,
+                    'type' => 'application_received',
+                    'redirect_url' => '/employer/job-applications',
+                    'is_read' => false,
+                ]);
+            }
         }
 
         return response()->json(['message' => 'Application submitted successfully']);
     }
-
     public function update(Request $request, $id)
     {
         $application = Application::find($id);
@@ -223,11 +232,14 @@ class ApplicationController extends Controller
             if ($userId) {
                 \App\Models\Notification::create([
                     'user_id' => $userId,
+                    'sender_name' => auth()->user()->name ?? 'System',
+                    'avatar' => auth()->user()->profile_picture ?? 'default_avatar.png',
                     'message' => 'Your application has been ' . $request->status . '.',
                     'type' => 'application_' . $request->status,
                     'redirect_url' => '/seeker/applications-status',
                     'is_read' => false,
                 ]);
+
             }
         }
 
