@@ -4,6 +4,7 @@ import {Component, Input} from '@angular/core';
   selector: 'app-stats-box',
   imports: [],
   templateUrl: './stats-box.component.html',
+  standalone: true,
   styleUrl: './stats-box.component.css'
 })
 export class StatsBoxComponent {

@@ -49,6 +49,12 @@ export class JobService {
     return this.http.get<any>(`${this.apiUrl}/employer`, { headers });
   }
 
+  getSeekerByUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/seeker`, { headers });
+  }
+
   getJobsByEmployer(employerId: number, page: number = 1): Observable<PaginatedResponse<any>> {
     const token = localStorage.getItem('token');
     return this.http.get<PaginatedResponse<any>>(`${this.apiUrl}/employer/${employerId}/jobs?page=${page}`, {

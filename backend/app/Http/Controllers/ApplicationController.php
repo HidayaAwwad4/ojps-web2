@@ -1,139 +1,7 @@
 <?php
-/*
-namespace App\Http\Controllers;
-
-use App\Models\Application;
-use Illuminate\Http\Request;
-
-class ApplicationController extends Controller
-{
-    public function index()
-    {
-        $applications = Application::with(['job', 'jobSeeker'])->get();
-        return response()->json($applications);
-    }
-
-    public function show($id)
-    {
-        $application = Application::with(['job', 'jobSeeker'])->find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-        return response()->json($application);
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'job_id' => 'required|integer',
-            'job_seeker_id' => 'required|integer',
-            'cover_letter' => 'nullable|string',
-            'status' => 'nullable|string',
-            'appliedAt' => 'required|date',
-        ]);
-
-        $application = Application::create([
-            'job_id' => $request->job_id,
-            'job_seeker_id' => $request->job_seeker_id,
-            'cover_letter' => $request->cover_letter,
-            'status' => $request->status ?? 'pending',
-            'appliedAt' => $request->appliedAt,
-        ]);
-
-        $job = \App\Models\JobListing::find($request->job_id);
-
-        if ($job && $job->employer_id) {
-            \App\Models\Notification::create([
-                'user_id' => $job->employer_id,
-                'message' => 'A job seeker has applied to your job: ' . $job->title,
-                'type' => 'application_received',
-                'redirect_url' => '/employer/job-applications',
-                'is_read' => false,
-            ]);
-        }
-
-        return response()->json($application, 201);
-
-    }
-
-    public function update(Request $request, $id)
-    {
-        $application = Application::find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        $request->validate([
-            'cover_letter' => 'nullable|string',
-            'status' => 'nullable|string',
-            'appliedAt' => 'nullable|date',
-        ]);
-
-        $application->update($request->only(['cover_letter', 'status', 'appliedAt']));
-
-        if ($request->has('status') && in_array($request->status, ['accepted', 'rejected'])) {
-            $userId = $application->jobSeeker->user->id ?? null;
-
-            if ($userId) {
-                \App\Models\Notification::create([
-                    'user_id' => $userId,
-                    'message' => 'Your application has been ' . $request->status . '.',
-                    'type' => 'application_' . $request->status,
-                    'redirect_url' => '/seeker/applications-status',
-                    'is_read' => false,
-                ]);
-            }
-        }
-
-
-        $application->load('jobSeeker.user');
-
-        return response()->json($application);
-    }
-
-    public function destroy($id)
-    {
-        $application = Application::find($id);
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        $application->delete();
-
-        return response()->json(['message' => 'Application deleted successfully']);
-    }
-
-    public function getApplicantsByJobId($jobId)
-    {
-        $applications = Application::with(['jobSeeker.user'])
-            ->where('job_id', $jobId)
-            ->get();
-
-        if ($applications->isEmpty()) {
-            return response()->json(['message' => 'No applications found for this job'], 404);
-        }
-
-        return response()->json($applications);
-    }
-
-    public function getApplicationById($applicationId)
-    {
-        $application = Application::with(['jobSeeker.user'])
-            ->where('id', $applicationId)
-            ->first();
-
-        if (!$application) {
-            return response()->json(['message' => 'Application not found'], 404);
-        }
-
-        return response()->json($application);
-    }
-
-}
-*/
-
 namespace App\Http\Controllers;
 use App\Models\Application;
+use App\Models\Employer;
 use App\Models\JobListing;
 use App\Models\JobSeeker;
 use App\Models\Notification;
@@ -172,6 +40,7 @@ class ApplicationController extends Controller
         if (!$jobSeeker) {
             return response()->json(['error' => 'Job seeker not found'], 404);
         }
+
         if ($request->hasFile('cv_file')) {
             if ($jobSeeker->resume_path) {
                 Storage::disk('public')->delete($jobSeeker->resume_path);
@@ -180,6 +49,7 @@ class ApplicationController extends Controller
             $jobSeeker->resume_path = $path;
             $jobSeeker->save();
         }
+
         $application = new Application();
         $application->job_id = $request->job_id;
         $application->job_seeker_id = $jobSeeker->id;
@@ -190,13 +60,20 @@ class ApplicationController extends Controller
 
         $job = JobListing::find($request->job_id);
         if ($job && $job->employer_id) {
-            Notification::create([
-                'user_id' => $job->employer_id,
-                'message' => 'A job seeker has applied to your job: ' . $job->title,
-                'type' => 'application_received',
-                'redirect_url' => '/employer/job-applications',
-                'is_read' => false,
-            ]);
+            $employer = Employer::find($job->employer_id);
+            $employerUserId = $employer?->user_id;
+
+            if ($employerUserId) {
+                Notification::create([
+                    'user_id' => $employerUserId,
+                    'sender_name' => $user->name,
+                    'avatar' => $user->profile_picture ?? 'account-avatar.png',
+                    'message' => 'A job seeker has applied to your job: ' . $job->title,
+                    'type' => 'application_received',
+                    'redirect_url' => '/employer/job-applications',
+                    'is_read' => false,
+                ]);
+            }
         }
 
         return response()->json(['message' => 'Application submitted successfully']);
@@ -223,11 +100,14 @@ class ApplicationController extends Controller
             if ($userId) {
                 \App\Models\Notification::create([
                     'user_id' => $userId,
+                    'sender_name' => auth()->user()->name ?? 'System',
+                    'avatar' => auth()->user()->profile_picture ?? 'account-avatar.png',
                     'message' => 'Your application has been ' . $request->status . '.',
                     'type' => 'application_' . $request->status,
                     'redirect_url' => '/seeker/applications-status',
                     'is_read' => false,
                 ]);
+
             }
         }
 

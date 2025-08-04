@@ -3,6 +3,12 @@ import {isPlatformBrowser, NgIf} from '@angular/common';
 import {BaseChartDirective} from 'ng2-charts';
 import {ReportsService} from '../../../services/Reports/reports.service';
 
+
+interface BarChartItem {
+  category: string;
+  total: number;
+}
+
 @Component({
   selector: 'app-bar-chart-admin',
   imports: [
@@ -12,38 +18,9 @@ import {ReportsService} from '../../../services/Reports/reports.service';
   templateUrl: './bar-chart-admin.component.html',
   styleUrl: './bar-chart-admin.component.css'
 })
-export class BarChartAdminComponent implements OnInit{
+export class BarChartAdminComponent implements OnInit {
   isBrowser: boolean;
   private reportsService = inject(ReportsService);
-
-  public barChartOptions = {
-    responsive: true,
-  };
-  constructor() {
-    const platformId = inject(PLATFORM_ID);
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
-
-  ngOnInit(): void {
-    if (this.isBrowser) {
-      this.reportsService.getAdminBarchartData().subscribe(
-        (response) => {
-          if (response && Array.isArray(response)) {
-            const sorted = response.sort((a: any , b: any ) => b.total - a.total);
-
-            this.barChartLabels = sorted.map(item => item.category);
-            this.barChartData.labels = this.barChartLabels
-            this.barChartData.datasets[0].data = sorted.map(item => item.total);
-          } else {
-            console.warn('No valid bar chart data received');
-          }
-        },
-        (error) => {
-          console.error('Failed to load bar char data',error);
-        }
-      );
-    }
-  }
 
   public barChartLabels: string[] = [];
 
@@ -59,4 +36,34 @@ export class BarChartAdminComponent implements OnInit{
       }
     ]
   };
+
+  public barChartOptions = {
+    responsive: true,
+  };
+
+  constructor() {
+    const platformId = inject(PLATFORM_ID);
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngOnInit(): void {
+    if (this.isBrowser) {
+      this.reportsService.getAdminBarchartData().subscribe({
+        next: (response: BarChartItem[]) => {
+          if (response && Array.isArray(response)) {
+            const sorted = response.sort((a, b) => b.total - a.total);
+
+            this.barChartLabels = sorted.map((item) => item.category);
+            this.barChartData.labels = this.barChartLabels;
+            this.barChartData.datasets[0].data = sorted.map((item) => item.total);
+          } else {
+            console.warn('No valid bar chart data received');
+          }
+        },
+        error: (error) => {
+          console.error('Failed to load bar chart data', error);
+        }
+      });
+    }
+  }
 }

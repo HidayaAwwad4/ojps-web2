@@ -6,7 +6,7 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ReportsService {
-private apiUrl = '/api/reports';
+  private apiUrl = 'http://127.0.0.1:8000/api';
   constructor(private http: HttpClient) { }
 
   private getAuthHeaders(): { headers: HttpHeaders } | {} {
@@ -22,18 +22,18 @@ private apiUrl = '/api/reports';
   }
 
   getAdminStats(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/admin-stats`, this.getAuthHeaders());
+    return this.http.get<any>(`${this.apiUrl}/reports/admin-stats`, this.getAuthHeaders());
   }
 
   getEmployerStats(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/employer-stats`, this.getAuthHeaders());
+    return this.http.get<any>(`${this.apiUrl}/reports/employer-stats`, this.getAuthHeaders());
   }
 
   getAdminBarchartData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/admin-bar-chart`, this.getAuthHeaders());
+    return this.http.get<any>(`${this.apiUrl}/reports/admin-bar-chart`, this.getAuthHeaders());
   }
 
   getEmployeeLineChartData(): Observable<any>{
-    return this.http.get<any>(`${this.apiUrl}/employer-Line-chart`, this.getAuthHeaders());
+    return this.http.get<any>(`${this.apiUrl}/reports/employer-Line-chart`, this.getAuthHeaders());
   }
 }

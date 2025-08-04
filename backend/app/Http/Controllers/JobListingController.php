@@ -71,6 +71,19 @@ class JobListingController extends Controller
         }
     }
 
+    public function getSeekerByUser(): JsonResponse
+    {
+        try {
+            $userId = Auth::id();
+            $jobseeker = JobSeeker::where('user_id', $userId)->firstOrFail();
+            return response()->json([
+                'id' => $jobseeker->id,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'seeker not found'], 404);
+        }
+    }
+
     public function getById($id): JsonResponse
     {
         try {
